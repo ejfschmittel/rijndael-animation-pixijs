@@ -36,7 +36,7 @@ class AnimationController{
         this.pagesByID = {}
         this.pageNames = {}
 
-        this.tl = gsap.timeline({paused: true})
+        this.tl = gsap.timeline({paused: true, onComplete: () => this.pause()})
 
         this.currentPage = null;
 

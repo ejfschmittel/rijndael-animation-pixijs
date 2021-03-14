@@ -6,6 +6,7 @@ import {gsap} from "gsap"
 import AnimationController from "./core/AnimationController"
 import Page1 from "./pages/page1/Page1"
 import Page7 from "./pages/page7/Page"
+import Page8 from "./pages/page8/Page"
 
 import * as PIXI from "pixi.js";
 
@@ -18,9 +19,10 @@ window.addEventListener("load",function(){
     const animationController = new AnimationController("rijndael-animation-container")
     animationController.registerPage(Page1, "page-1", "Page 1 - Intro")
     animationController.registerPage(Page7, "page-7", "Page 7 - SubBytes")
+    animationController.registerPage(Page8, "page-8", "Page 8 - SubBytes")
 
     animationController.createTimeline();
-    animationController.playFrom("page-7-animation-main");
+    animationController.playFrom("page-8-animation-main");
   
 },false);
 

@@ -14,3 +14,8 @@ export function debounce(func, wait, immediate) {
         if (callNow) func.apply(context, args);
     };
 };
+
+export const shiftArray = (array, places) =>{
+    const arrayCopy = [...array];
+    return arrayCopy.concat(arrayCopy.splice(0, places)) 
+}

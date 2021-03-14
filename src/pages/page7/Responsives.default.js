@@ -101,27 +101,7 @@ class Page7DefaultResponsives extends AnimationPageResponsives{
 
 
 
-    getBounds(elem){
-        const bounds  = elem.getBounds();
-        return {x: bounds.x, y: bounds.y, width: bounds.width, height: bounds.height}
-    }
 
-
-    moveGroup(movables, landings, settings={}){
-        const tl = gsap.timeline();
-
-        tl.to(movables[0], {pixi: {...this.getBounds(landings[0]), zIndex: 10}, ...settings}, "move-group")
-
-        for(let i = 1; i < movables.length; i++){
-            const movable = movables[i]
-            const landingBounds = this.getBounds(landings[i])
-            tl.to(movable, {pixi: {...landingBounds, zIndex: 10}, ...settings}, "move-group+=0")
-        }
-
-        tl.set(movables, {zIndex: 1})
-    
-        return tl;
-    }
 
     createPreFadeIn(){
         const { 

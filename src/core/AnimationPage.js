@@ -119,6 +119,11 @@ class AnimationPage extends PIXI.Container{
 
     draw(){}
     setDataBindings(){}
+
+    positionComponent(component, componentDefines){
+        const defines = {x: 0, y: 0, anchorX: 0, anchorY: 0, ...componentDefines}
+        component.positionComponent(defines.x, defines.y, defines.anchorX, defines.anchorY)
+    }
 }
 
 export default AnimationPage
