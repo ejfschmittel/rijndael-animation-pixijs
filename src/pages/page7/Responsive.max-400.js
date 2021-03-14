@@ -11,8 +11,6 @@ class ResponsiveMax800 extends AnimationPageResponsives{
     }
 
     evoke(animationDimensions){
-       
-        console.log(animationDimensions.width)
         if(animationDimensions.width < 400) return true;
         return false;
     }

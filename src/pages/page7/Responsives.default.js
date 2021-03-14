@@ -112,18 +112,47 @@ class Page7DefaultResponsives extends AnimationPageResponsives{
 
         tl.to(movables[0], {pixi: {...this.getBounds(landings[0]), zIndex: 10}, ...settings}, "move-group")
 
-       
-
         for(let i = 1; i < movables.length; i++){
-            console.log(i)
             const movable = movables[i]
             const landingBounds = this.getBounds(landings[i])
-            console.log(movable)
             tl.to(movable, {pixi: {...landingBounds, zIndex: 10}, ...settings}, "move-group+=0")
         }
 
         tl.set(movables, {zIndex: 1})
     
+        return tl;
+    }
+
+    createPreFadeIn(){
+        const { 
+            resultMovableComponents,
+            animatableBackgroundComponent
+        } = this.getPageComponents();
+
+        const obj = {val: 0}
+        const tl = gsap.timeline()
+        tl.to(obj, {val: 1, duration: .0001})
+        tl.set(resultMovableComponents.movables, {pixi: {alpha: 0}})
+
+        tl.set(animatableBackgroundComponent, {pixi: {y: animatableBackgroundComponent.height}})
+        tl.set([
+            animatableBackgroundComponent.barComponent,
+            animatableBackgroundComponent.textComponent,
+        ], {pixi: {alpha: 0}})
+
+        return tl;
+    }
+
+    createAnimationIn(){
+        const { 
+            resultMovableComponents,
+            animatableBackgroundComponent
+        } = this.getPageComponents();
+        const tl = gsap.timeline();
+
+        tl.to(animatableBackgroundComponent, {pixi: {y: 0}})
+        tl.to(animatableBackgroundComponent.barComponent, {pixi: {alpha: 1}})
+        tl.to(animatableBackgroundComponent.textComponent, {pixi: {alpha: 1}})
         return tl;
     }
 

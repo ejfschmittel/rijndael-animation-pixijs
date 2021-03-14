@@ -9,11 +9,131 @@
     width: 80%;
     max-width: 1080px;
     margin: 0 auto;
-    margin-top: 1rem;
+
+
+    @media screen and (max-width: 800px) {
+            width: 100%;
+            padding: 0 1rem;
+    }
 }
 
 .rijndael-animation{
     width: 100%;
-    min-height: 30rem;
+    height: 100vh;
+        /*min-height: 30rem;*/
+    background: #ddd;
+    min-height: 28rem;
 
+    display: flex;
+    flex-direction: column;
+
+    &__container{
+        flex: 1;
+        min-height: 20rem;
+    }
+
+    &__play-btn{
+      
+        margin-right: 1rem;
+        border: 0;
+        justify-self: flex-start;
+       
+        background: transparent;
+        box-sizing: border-box;
+        width: 0;
+        height: 1rem;
+
+        border-color: transparent transparent transparent #202020;
+        transition: 100ms all ease;
+        cursor: pointer;
+
+        border-style: solid;
+        border-width: .5rem 0 .5rem .8rem;
+
+
+        outline: none;
+
+        &--paused{
+            border-style: double;
+            border-width: 0px 0 0px .8rem;
+        }
+
+
+    }
+
+
+    &__menu{
+        padding: 1rem 2rem;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+       
+
+        @media screen and (max-width: 800px) {
+            padding: .5rem 1rem;
+            justify-content: flex-start;
+         }
+    }
+
+    &__menu > *{
+        display: flex;
+        flex: 1;
+        justify-content: center;   
+
+        @media screen and (max-width: 800px) {
+            flex: 0;
+      
+         }
+    }
+
+    &__navigation{
+     
+
+        &--desktop{
+            display: flex;
+            align-items: center;   
+            justify-content: center;
+      
+
+            @media screen and (max-width: 800px) {
+                display: none;
+            }
+        }
+
+        &--mobile{
+            
+            flex: 1;
+            padding: .8rem 0;
+
+            @media screen and (min-width: 800px) {
+               display: none;
+            }
+        }
+
+        @media screen and (max-width: 800px) {
+            flex: 1;
+         }
+    }
+
+    &__nav-item{
+        margin: 0 .2rem;
+        width: 1rem;
+        height: 1rem;
+        background: orange;
+        cursor: pointer;
+        box-shadow: inset 0 0 0 rgba(0,0,0,.5), 0 .1rem .3rem rgba(0,0,0,.3);
+        transition: all .3s;
+        &:hover{
+            box-shadow: inset 0 .1rem .3rem rgba(0,0,0,.5);
+        }
+
+        &:active{
+            filter: brightness(50%);
+        }
+
+        &--current{
+            box-shadow: inset 0 .1rem .3rem rgba(0,0,0,.5);
+        }
+    }
 }

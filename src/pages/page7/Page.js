@@ -138,7 +138,8 @@ class Page7 extends AnimationPage{
             resultMovableComponents,
             leftAddGrid,
             rightAddGrid,
-            resultGrid
+            resultGrid,
+            animatableBackgroundComponent
         })
 
         this.addChild(
@@ -156,6 +157,9 @@ class Page7 extends AnimationPage{
 
         
         this.sortableChildren = true
+
+
+        gsap.set(resultMovableComponents.movables, {alpha: 0})
   
     }
 }

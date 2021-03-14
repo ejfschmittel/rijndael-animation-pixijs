@@ -11,8 +11,6 @@ class ResponsiveMax800 extends AnimationPageResponsives{
     }
 
     evoke(animationDimensions){
-       
-        console.log(animationDimensions.width)
         if(animationDimensions.width < 600) return true;
         return false;
     }
@@ -20,8 +18,6 @@ class ResponsiveMax800 extends AnimationPageResponsives{
     
     getDefines(defaultDefines){
 
-
-        console.log("800 deifnes")
 
 
         defaultDefines.animatableBackgroundText = {

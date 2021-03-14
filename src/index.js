@@ -20,7 +20,7 @@ window.addEventListener("load",function(){
     animationController.registerPage(Page7, "page-7", "Page 7 - SubBytes")
 
     animationController.createTimeline();
-    animationController.tl.play("page-7-animation-main");
+    animationController.playFrom("page-7-animation-main");
   
 },false);
 
