@@ -9,7 +9,7 @@ class AnimationPageResponsives{
         this.page = page;
 
 
-        this.FADE_OUT_DELAY = 5;
+        this.FADE_OUT_DELAY = 3;
         this.FADE_OUT_DURATION = .0001;
         this.FADE_IN_DURATION = .0001;
     }
@@ -47,8 +47,8 @@ class AnimationPageResponsives{
         return tl;
     }
 
-    getPageComponents(){
-        return this.page.renderedComponents;
+    getGlobalComponents(){
+        return this.page.globalComponents;
     }
 
     getBounds(elem){

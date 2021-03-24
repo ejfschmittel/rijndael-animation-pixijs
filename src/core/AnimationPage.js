@@ -3,8 +3,24 @@
 import * as PIXI from "pixi.js"
 
 import {ANIMATION_DIMENSIONS} from "../core/AnimationController"
+import SpriteBackground from "../components/SpriteBackground"
 
 
+/*
+    new Page();
+
+
+    init():
+        - create 
+        - redraw();
+
+    redraw():
+        - remove recreated
+        - get defines
+        - redraw();
+        
+
+*/
 
 
 
@@ -15,11 +31,35 @@ class AnimationPage extends PIXI.Container{
  
         this.renderedComponents = {}
 
+
+
+        this.permanentComponents = []
+        this.temporaryComponents = []
+        this.globalComponents = {}
+
+        // this.globalComponents
+        // this.addPermanent()
+        // this.addTemporary()
+
         this.DEFAULT_RESPONSIVE_LABEL = "default"
 
         this.responsives = []
         this.responsivesByLabel = {}
       
+    }
+
+    addPermanent(obj){
+        const objArray = Object.keys(obj).map(key => obj[key])
+        this.addChild(...objArray)
+        this.permanentComponents = [...this.permanentComponents, ...objArray]
+        this.addToGlobalComponents(obj)       
+    }
+
+    addTemporary(obj){
+        const objArray = Object.keys(obj).map(key => obj[key])
+        this.addChild(...objArray)
+        this.temporaryComponents = [...this.temporaryComponents, ...objArray]
+        this.addToGlobalComponents(obj)
     }
 
 
@@ -28,25 +68,40 @@ class AnimationPage extends PIXI.Container{
         this.responsivesByLabel[label] = new AnimationPageResponsive(label, this)
     }
 
+
+    init(){
+        this.removeChildren();
+        const defines = this.getDefines();
+        this.create(defines)
+        this.drawPage(defines)
+    }
+
+    drawPage(defines){}
+
+
     redraw(){
-        this.removeChildren(0, this.children.length)
+        console.log("redraw")
+        console.log(...this.temporaryComponents)
+
+        this.removeChild(...this.temporaryComponents)
+        this.temporaryComponents = []
 
         const defines = this.getDefines();
 
-        this.draw(defines)
-        this.setDataBindings();
+        this.drawPage(defines)
     }
 
     addToRenderedComponents(obj){
         this.renderedComponents = {...this.renderedComponents, ...obj}
     }
 
+    addToGlobalComponents(obj){
+        this.globalComponents = {...this.globalComponents, ...obj}
+    }
+
     
-    drawBackground(color){
-        const background = new PIXI.Graphics();
-        background.beginFill(color)
-        background.drawRect(0,0,ANIMATION_DIMENSIONS.width, ANIMATION_DIMENSIONS.height)
-        background.endFill();
+    createBackground(color){
+        const background = new SpriteBackground();
         return background;
     }
 
@@ -81,8 +136,10 @@ class AnimationPage extends PIXI.Container{
             }
         }
 
-        console.log(defaultDefines)
-        return defines ? defines: defaultDefines;
+
+        const d =  defines ? defines: defaultDefines;
+
+        return {...d, animationDimensions: ANIMATION_DIMENSIONS}
     }
 
 
@@ -117,8 +174,7 @@ class AnimationPage extends PIXI.Container{
 
   
 
-    draw(){}
-    setDataBindings(){}
+
 
     positionComponent(component, componentDefines){
         const defines = {x: 0, y: 0, anchorX: 0, anchorY: 0, ...componentDefines}

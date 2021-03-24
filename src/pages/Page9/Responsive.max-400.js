@@ -4,7 +4,6 @@ import {gsap} from "gsap"
 
 
 import DefaultResponsive from "./Responsives.default"
-import { TimeLimiter } from "pixi.js";
 
 class ResponsiveMax800 extends AnimationPageResponsives{
     constructor(label, page){
@@ -74,9 +73,7 @@ class ResponsiveMax800 extends AnimationPageResponsives{
         return {x: bounds.x, y: bounds.y, width: bounds.width, height: bounds.height}
     }
 
-    createAnimationMain(){
-        //main
-    }
+    createAnimationMain(){ }
 }
 
 export default ResponsiveMax800

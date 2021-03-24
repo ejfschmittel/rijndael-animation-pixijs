@@ -4,7 +4,6 @@ import {gsap} from "gsap"
 
 
 import DefaultResponsive from "./Responsives.default"
-import { TimeLimiter } from "pixi.js";
 
 class ResponsiveMax800 extends AnimationPageResponsives{
     constructor(label, page){
@@ -12,7 +11,7 @@ class ResponsiveMax800 extends AnimationPageResponsives{
     }
 
     evoke(animationDimensions){
-        if(animationDimensions.width < 400) return true;
+        if(animationDimensions.width < 600) return true;
         return false;
     }
 
@@ -20,9 +19,10 @@ class ResponsiveMax800 extends AnimationPageResponsives{
     getDefines(defaultDefines){
 
 
+
         defaultDefines.animatableBackgroundText = {
             ...defaultDefines.animatableBackgroundText,
-            fontSize: this.getWidth(8),
+            fontSize: this.getWidth(6),
             x: this.getWidth(96),
             y: this.getWidth(1),
         }
@@ -30,38 +30,46 @@ class ResponsiveMax800 extends AnimationPageResponsives{
         
         defaultDefines.animatableBackgroundBar = {
             ...defaultDefines.animatableBackgroundBar,
-            height: this.getWidth(10),
+            height: this.getWidth(7),
             y: defaultDefines.animatableBackgroundText.fontSize + 2 * this.getWidth(2),
         }
 
 
 
+
+
+
         defaultDefines.defaultCellSize = {
-            width: this.getWidth(12),
-            height: this.getWidth(12),
+            width: this.getWidth(10),
+            height: this.getWidth(8),
+        }
+
+        defaultDefines.equationPos = {
+            x: this.getWidth(50),
+            y: this.getHeight(38),
+            anchorX: .5,
+            anchorY: .5,
         }
 
         defaultDefines.stateGrid = {
-            x: this.getWidth(2),
+            x: this.getWidth(6),
             y: this.getHeight(75),
             anchorX: 0,
             anchorY: .5,
         }
 
-        defaultDefines.text1 = {
-            x: this.getWidth(60),
-            y: this.getHeight(75) - defaultDefines.defaultCellSize.height * .5,
+        defaultDefines.roundKeyCell = {
+            fill: 0xC1C0C1,
+            x: this.getWidth(94),
+            y: this.getHeight(75),
+            anchorX: 1,
+            anchorY: .5,
         }
-        defaultDefines.text2 = {
-            x: this.getWidth(60),
-            y: this.getHeight(75) + defaultDefines.defaultCellSize.height * .5,
-        }
-        defaultDefines.text3 = {
-            x: this.getWidth(60),
-            y: this.getHeight(75) + defaultDefines.defaultCellSize.height * 1.5,
-        }
+
       
-    
+
+
+        
 
         return defaultDefines;
     }
@@ -74,9 +82,7 @@ class ResponsiveMax800 extends AnimationPageResponsives{
         return {x: bounds.x, y: bounds.y, width: bounds.width, height: bounds.height}
     }
 
-    createAnimationMain(){
-        //main
-    }
+    createAnimationMain(){ }
 }
 
 export default ResponsiveMax800

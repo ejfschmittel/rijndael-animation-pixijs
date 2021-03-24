@@ -4,6 +4,7 @@ import * as PIXI from "pixi.js"
 
 import Grid from "../../components/Grid"
 
+import HexadecimalGrid from "../../components/HexadecimalGrid"
 
 import AnimatableBackground from "../../components/AnimatableBackground"
 
@@ -61,19 +62,21 @@ class Page8 extends AnimationPage{
             ...defaultCellSize
         }
 
-        const background = this.drawBackground(0xaaaaaa)
+        const background = this.drawBackground(0x0061D2)
 
 
         const animatableBackgroundComponent = new AnimatableBackground(animatableBackground, animatableBackgroundBar, animatableBackgroundText)
 
-
+     
+  
       
-        const stateGridComponent = new Grid(4,4, {...defaultLanding, ...stateGrid}, {})
+        const stateGridComponent = new HexadecimalGrid(4,4, {...defaultLanding, ...stateGrid}, {})
         this.positionComponent(stateGridComponent, stateGrid)
+        
 
         const stateGridMovableComponents = stateGridComponent.createMovables({...defaultMovables, ...stateGridMovables})
         DataController.subscribe("dummyGrid", stateGridMovableComponents.movables)
-
+  
 
 
 

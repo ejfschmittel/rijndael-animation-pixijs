@@ -44,9 +44,6 @@ class DataController{
             ...this.subscriptions,
             [key]: [...oldSubscriptions, elements]
         }
-
-        console.log(elements)
-
         // set data for just subscribed elements
         this.setSubscriberData(this.getData(key), elements)
     }
@@ -90,7 +87,7 @@ class DataController{
             this.updateStore(key, value)
         })
 
-        console.log(this.store)
+
     }
     
 

@@ -64,8 +64,10 @@ class AnimationController{
         console.log("current page: " + pageID)
         this.currentPage = pageID;
 
-        // update menues ()
+        this.updateAfterCurrentPageUpdate(pageID);      
+    }
 
+    updateAfterCurrentPageUpdate = debounce((pageID) => {
         const desktopMenuContainer = document.getElementById("rijndael-animation-menu-desktop")
         const mobileMenuContainer = document.getElementById("rijndael-animation-menu-mobile")
 
@@ -74,29 +76,23 @@ class AnimationController{
         const currentIndex = this.pages.indexOf(pageID)
 
         menuItems.forEach((menuItem, idx) => {
+                if(idx == currentIndex){
+                    menuItem.classList.add("rijndael-animation__nav-item--current")
+                }else{
+                    menuItem.classList.remove("rijndael-animation__nav-item--current")
+                }
+            })
+
+            const mobileMenuItems = mobileMenuContainer.querySelectorAll("option")
+            mobileMenuItems.forEach((menuItem, idx) => {
             if(idx == currentIndex){
-                menuItem.classList.add("rijndael-animation__nav-item--current")
+                menuItem.defaultSelected = true;
             }else{
-                menuItem.classList.remove("rijndael-animation__nav-item--current")
+            menuItem.defaultSelected = false;
             }
         })
+    }, 100)
 
-        const mobileMenuItems = mobileMenuContainer.querySelectorAll("option")
-        mobileMenuItems.forEach((menuItem, idx) => {
-        if(idx == currentIndex){
-            menuItem.defaultSelected = true;
-        }else{
-           menuItem.defaultSelected = false;
-        }
-    })
-
-
-
-
-  
-
-
-    }
 
 
     init(){
@@ -139,16 +135,19 @@ class AnimationController{
         this.app.renderer.resize(ANIMATION_DIMENSIONS.width, ANIMATION_DIMENSIONS.height)
       
 
-      
+        console.time("pre-resize")
         if(!this.resizeStore){
             this.prepResize();
         }
+        console.timeEnd("pre-resize")
+        // resize current page
+        console.log(this.currentPage)
 
-        this.pages.forEach(pageID => {
-            this.pagesByID[pageID].redraw();
-        })
-     
-       this.onAfterResize();
+        console.time("redraw")
+        this.pagesByID[this.currentPage].redraw();
+        console.timeEnd("redraw")
+
+        this.onAfterResize();
     }
 
     prepResize(){      
@@ -192,7 +191,13 @@ class AnimationController{
 
     onAfterResize = debounce(() => {
 
-        console.log("on after resize")
+         console.time("after-resize")
+        
+        this.pages.forEach(pageID => {
+            if(pageID !== this.currentPage)
+                this.pagesByID[pageID].redraw();
+        })
+       
         this.createTimeline();
     
         console.log(this.resizeStore)
@@ -203,6 +208,7 @@ class AnimationController{
         }
         this.resizeStore = null;
         this.isResizing = false;
+        console.timeEnd("after-resize")
     }, 500)
 
 
@@ -214,7 +220,7 @@ class AnimationController{
         this.pageNames[pageID] = pageName
 
 
-        page.redraw();
+        page.init();
         // hide page
         gsap.set(page, {pixi: {alpha: 0}})
         this.app.stage.addChild(page)

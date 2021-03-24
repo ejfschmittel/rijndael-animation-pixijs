@@ -30,8 +30,9 @@ class CircledText extends Component{
         const textComponent = new PIXI.Text(displayedText, textStyle);
 
         const circleComponent = new PIXI.Graphics();
+        console.log(cs)
         if(cs.borderWidth > 0) circleComponent.lineStyle(cs.borderWidth, cs.borderColor, 1, 0)
-        circleComponent.beginFill(cs.fill);
+       
         circleComponent.drawCircle(0,0, cs.radius);
         circleComponent.endFill();
 
