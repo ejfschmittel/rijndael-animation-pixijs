@@ -1,14 +1,13 @@
 import AnimationPageResponsives from "../../core/AnimationPageResponsives"
 
 import {gsap} from "gsap"
-import { ANIMATION_DIMENSIONS } from "../../core/AnimationController";
-class Page7DefaultResponsives extends AnimationPageResponsives{
+
+class Page1DefaultResponsives extends AnimationPageResponsives{
     constructor(label, page){
         super(label, page);
     }
 
     getDefines(){
-
         const defines = {}
 
         defines.baseTextStyles = {
@@ -29,14 +28,24 @@ class Page7DefaultResponsives extends AnimationPageResponsives{
            anchorY: .5,
        }
 
-     
-
-
         return defines;
     }
 
 
 
+    createPreFadeIn(){
+        const {
+            textRijndael,
+            textCipher
+        } = this.getGlobalComponents()
+
+        const obj = {val: 0}
+        const tl = gsap.timeline()
+        tl.to(obj, {val: 1, duration: .0001})
+        tl.set([...textRijndael.chars, ...textCipher.chars], {pixi: {alpha: 0}})
+
+        return tl;
+    }
 
     createAnimationMain(){
 
@@ -46,33 +55,14 @@ class Page7DefaultResponsives extends AnimationPageResponsives{
         } = this.getGlobalComponents()
 
         const tl = gsap.timeline();
-        tl.set([...textRijndael.chars, ...textCipher.chars], {pixi: {
+        tl.to([...textRijndael.chars, ...textCipher.chars], {pixi: {
             scale: 3,
-            alpha: 0,
-        }})
+         
+        }, duration: .001,})
         tl.to(textRijndael.chars, { stagger: .2, pixi: { alpha: 1, scaleX: 1, scaleY: 1}});
         tl.to(textCipher.chars, { stagger: .2, pixi: { alpha: 1, scaleX: 1, scaleY: 1}})
         return tl;
-
-        /*const { 
-            textRijndael,
-            textCipher,
-        } = this.getPageComponents();
-        const tl = gsap.timeline();
-
-        tl.set([...textRijndael.chars, ...textCipher.chars], {pixi: {
-            scale: 3,
-            alpha: 0,
-        }})
-        tl.to(textRijndael.chars, { stagger: .2, pixi: { alpha: 1, scaleX: 1, scaleY: 1}});
-        tl.to(textCipher.chars, { stagger: .2, pixi: { alpha: 1, scaleX: 1, scaleY: 1}})
-     
-        return tl;*/
     }
-
-
-
-  
 }
 
-export default Page7DefaultResponsives
+export default Page1DefaultResponsives

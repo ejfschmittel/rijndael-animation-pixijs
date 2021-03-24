@@ -46,6 +46,20 @@ class Page7DefaultResponsives extends AnimationPageResponsives{
             fill: 0x000000,
             borderWidth: 3,
             borderColor: 0xfffffff,
+            width: this.getWidth(10),
+            height: this.getHeight(20),
+        }
+
+        defines.arrowFontStyles = {
+            fill: 0xffffff,
+            fontSize: 18,
+            text: "1001010"
+        }
+
+        defines.arrowLeftStyles = {
+            ...defines.arrowStyles,
+            width: this.getWidth(16),
+            height: this.getHeight(10),
         }
 
 

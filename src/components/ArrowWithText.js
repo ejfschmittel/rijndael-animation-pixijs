@@ -28,11 +28,11 @@ class ArrowWithText extends Component{
         const {text, ...textStyles} = this.textStyles
         const textStyle = new PIXI.TextStyle(textStyles)
         this.text = new PIXI.Text(text, textStyle)
-        this.text.anchor.set(.5)
+        this.text.anchor.set(.5, .5)
         this.text.position.set(this.arrow.width/2, this.arrow.height/2)
 
         if(this.arrowStyles.orientation == ARROW_ORIENTATION.UP || this.arrowStyles.orientation == ARROW_ORIENTATION.DOWN){
-            this.text.rotation = 1.5708
+            this.text.rotation = 1.5708 // 90 degrees in radians
         }
 
         this.addChild(this.arrow, this.text)

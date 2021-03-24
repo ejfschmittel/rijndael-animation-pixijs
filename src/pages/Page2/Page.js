@@ -34,7 +34,8 @@ class Page2 extends AnimationPage{
 
         const centerBox = new TextBox("Rijndael\nEncryptor", {
             fill: 0xffffff,
-            align: "center"
+            align: "center",
+            fontSize: 50,
         })
 
         this.addPermanent({background, centerBox})
@@ -42,7 +43,7 @@ class Page2 extends AnimationPage{
     }
 
     drawPage(defines){
-        const {backgroundStyles, textBoxStyles, arrowStyles} = defines
+        const {backgroundStyles, textBoxStyles, arrowStyles, arrowFontStyles, arrowLeftStyles} = defines
         const {background, centerBox} = this.globalComponents;
 
         background.redraw(backgroundStyles)
@@ -59,12 +60,12 @@ class Page2 extends AnimationPage{
 
         // create text + arrow
         const text = new PIXI.Text("Plaintext",{fill: 0xffffff})
-        const arrowTop = new ArrowWithText({orientation: ARROW_ORIENTATION.DOWN, ...arrowStyles},{text: "101010", fill: 0xff0000})
+        const arrowTop = new ArrowWithText({orientation: ARROW_ORIENTATION.DOWN, ...arrowStyles},arrowFontStyles)
 
         // set arrow + text positions
         text.anchor.set(.5, 0)
         text.position.set(arrowTop.width / 2, 0 )
-        arrowTop.position.set(0, text.height)
+        arrowTop.position.set(0, text.height + 10)
 
         // add to contaienr
         arrowTopContainer.addChild(text, arrowTop)
@@ -79,8 +80,8 @@ class Page2 extends AnimationPage{
         const arrowBotContainer = new PIXI.Container();
 
         // create text + arrow
-        const textBot = new PIXI.Text("Plaintext",{fill: 0xffffff})
-        const arrowBot = new ArrowWithText({orientation: ARROW_ORIENTATION.DOWN, ...arrowStyles},{text: "101010", fill: 0xff0000})
+        const textBot = new PIXI.Text("Ciphertext",{fill: 0xD49136})
+        const arrowBot = new ArrowWithText({orientation: ARROW_ORIENTATION.DOWN, ...arrowStyles},{...arrowFontStyles, fill: 0xD49136})
 
         // set arrow + text positions
         textBot.anchor.set(.5, 0)
@@ -99,13 +100,13 @@ class Page2 extends AnimationPage{
         const arrowLeftContainer = new PIXI.Container();
 
         // create text + arrow
-        const textLeft = new PIXI.Text("Plaintext",{fill: 0xffffff})
-        const arrowLeft = new ArrowWithText({orientation: ARROW_ORIENTATION.RIGHT, ...arrowStyles},{text: "101010", fill: 0xffffff})
+        const textLeft = new PIXI.Text("Cipher Key",{fill: 0xffffff})
+        const arrowLeft = new ArrowWithText({orientation: ARROW_ORIENTATION.RIGHT, ...arrowLeftStyles},arrowFontStyles)
 
         // set arrow + text positions
         
     
-        arrowLeft.position.set(0, textLeft.height - 10)
+        arrowLeft.position.set(0, textLeft.height +10 )
 
         // add to contaienr
         arrowLeftContainer.addChild(textLeft, arrowLeft)

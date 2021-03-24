@@ -55,7 +55,7 @@ window.addEventListener("load",function(){
     //animationController.registerPage(Page9, "page-9", "Page 9 - MixColumns")
    // animationController.registerPage(Page10, "page-10", "Page 10 - AddRoundkey")
     animationController.createTimeline();
-    animationController.goToPage("page-2");
+    animationController.goToPage("page-3");
   
 },false);
 

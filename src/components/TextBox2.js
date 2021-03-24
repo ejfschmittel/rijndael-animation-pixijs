@@ -14,7 +14,7 @@ class TextBox extends PIXI.Container{
         this.text = null;
     
         if(text){
-            this.text = new PIXI.Text(text)
+            this.text = new PIXI.Text(text, baseTextStyles)
             this.addChild(this.text)
         }
     }

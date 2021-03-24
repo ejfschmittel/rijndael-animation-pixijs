@@ -1,11 +1,14 @@
 import AnimationPage from "../../core/AnimationPage.js"
 import * as PIXI from "pixi.js"
-import HexadecimalGrid from "../../components/HexadecimalGrid"
-import Component from "../../components/Component"
-import AnimatableText from "../../components/AnimatableText"
+
 import Arrow, {ARROW_ORIENTATION} from "../../components/Arrow"
-import CircledText from "../../components/CircledText"
+
 import Grid2 from "../../components/Grid2"
+
+import CircledText from "../../components/CircledText";
+
+
+
 import {gsap} from "gsap"
 
 import DataController from "../../core/DataController"
@@ -46,8 +49,10 @@ class Page1 extends AnimationPage{
         const gridLeft = new Grid2(4,4, {}, {})
         DataController.subscribe("dummyGrid", gridLeft.cells)
 
-        const textLeft = new PIXI.Text("to\nEncryption\nProcess", {fill: 0xffff00, align: "center"})
+        const textLeft = new PIXI.Text("to\nEncryption\nProcess", {fill: 0xD47F00, align: "center", fontWeight: "500"})
         textLeft.anchor.set(.5, 0)
+
+        const leftCircle = new CircledText("A", {fontSize: 30, fill: 0xffffff})
 
 
         /* right side */
@@ -57,17 +62,25 @@ class Page1 extends AnimationPage{
         const gridRight = new Grid2(4,4, {}, {})
         DataController.subscribe("dummyGrid", gridRight.cells)
 
-        const textRight = new PIXI.Text("to\nKey\nSchedule", {fill: 0xffff00, align: "center"})
+        const textRight = new PIXI.Text("to\nKey\nSchedule", {fill: 0x5787E1, align: "center", fontWeight: "500"})
         textRight.anchor.set(.5, 0)
 
+        const rightCircle = new CircledText("B", {fontSize: 30, fill: 0xffffff})
         
-        this.addPermanent({background, title, subtitleLeft, gridLeft, subtitleRight, gridRight, textRight, textLeft})
+        this.addPermanent({background, title, subtitleLeft, gridLeft, subtitleRight, gridRight, textRight, textLeft, leftCircle, rightCircle})
 
        
     }
 
     drawPage(defines){
-        const {background, title, subtitleLeft, gridLeft,gridRight, subtitleRight, textLeft, textRight} = this.globalComponents
+        // get permanent componenents
+        const {
+            background, title, 
+            subtitleLeft, gridLeft,textLeft, leftCircle,
+            gridRight, subtitleRight,  textRight, rightCircle
+        } = this.globalComponents
+
+        // destructure defines
         const {
             
             animationDimensions, backgroundStyles, subtitleRightStyles, gridStyles, rightGridPos, leftGridPos, subtitleLeftStyles,
@@ -96,6 +109,9 @@ class Page1 extends AnimationPage{
 
         textLeft.position.set(textLeftPos.x, leftArrow.y + leftArrow.height + textLeftPos.yDistance)
 
+        leftCircle.redraw({borderColor: 0xffffff, borderWidth: 3.2 }, {})
+        leftCircle.position.set(arrowLeftPos.x, textLeft.y + textLeft.height + leftCircle.height /2 + 10)
+
 
         // right side
         subtitleRight.scale.set(1.2)
@@ -111,6 +127,9 @@ class Page1 extends AnimationPage{
         rightArrow.position.set(arrowRightPos.x, gridRight.y + gridRight.height +arrowRightPos.yDistance)
 
         textRight.position.set(textRightPos.x, rightArrow.y + rightArrow.height + textRightPos.yDistance)
+
+        rightCircle.redraw({borderColor: 0xffffff, borderWidth: 3.2 }, {})
+        rightCircle.position.set(rightArrow.x, textRight.y + textRight.height + rightCircle.height /2 + 10)
 
 
         this.addTemporary({leftArrow, rightArrow})
