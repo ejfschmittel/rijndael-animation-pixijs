@@ -6,7 +6,7 @@ import TextBox from "./TextBox"
 
 import HexTextBox from "./HexadecimalTextBox"
 import HexadecimalGrid from "./HexadecimalGrid"
-import {toHex} from "../utils/conversions"
+import {toHex} from "../utils/hex"
 
 import * as PIXI from "pixi.js"
 /*

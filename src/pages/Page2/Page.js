@@ -130,6 +130,12 @@ class Page2 extends AnimationPage{
 
         this.addTemporary({arrowTopContainer, arrowBotContainer, arrowLeftContainer})
 
+        this.addToGlobalComponents({
+            arrowLeft,
+            arrowTop,
+            arrowBot,
+        })
+
     }
 
 

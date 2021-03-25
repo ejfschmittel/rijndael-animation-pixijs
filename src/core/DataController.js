@@ -10,9 +10,9 @@
     
 */
 
-import {hexStringToInt} from "../utils/conversions"
 
-import {getRandomHexValueList} from "../utils/conversions"
+
+import {getRandomHexValueList, hexStringToInt} from "../utils/hex"
 
 
 const INITIAL_DATA = {
