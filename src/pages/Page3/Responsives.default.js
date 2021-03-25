@@ -10,6 +10,13 @@ class Page7DefaultResponsives extends AnimationPageResponsives{
 
         const defines = {}
 
+        defines.titleStyles = {
+            scale: 1,
+        }
+
+        defines.subtitleStyles = {
+            scale: 1,
+        }
       
         defines.backgroundStyles = {
             width: this.getWidth(100),
@@ -19,7 +26,7 @@ class Page7DefaultResponsives extends AnimationPageResponsives{
         }
 
 
-        defines.gridStlyes = {
+        defines.gridStyles = {
             width: this.getWidth(30),
             height: this.getWidth(20),
         }

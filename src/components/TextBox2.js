@@ -35,12 +35,14 @@ class TextBox extends PIXI.Container{
     }
 
 
-    redraw(bgStyles, textScale=1){
+    redraw(bgStyles, textStyles){
+
+        textStyles = {scale: 1, ...textStyles}
        
         this.background.redraw(bgStyles)
 
         if(this.text){
-            this.text.scale.set(textScale)
+            this.text.scale.set(textStyles.scale)
             this.text.position.set(this.background.width/2, this.background.height/2)
             this.text.anchor.set(.5,.5)
         }

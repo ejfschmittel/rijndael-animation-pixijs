@@ -26,7 +26,7 @@ class Page1 extends AnimationPage{
 
 
       //  this.registerResponsive("max-400", ResponsiveMax400)
-       // this.registerResponsive("max-600", ResponsiveMax600)
+        this.registerResponsive("max-600", ResponsiveMax600)
         this.registerResponsive("default", DefaultResponsives)
 
         
@@ -43,7 +43,7 @@ class Page1 extends AnimationPage{
         title.anchor.set(.5, .5)
 
         /* left side */
-        const subtitleLeft = new PIXI.Text("State", {...textStyle,})
+        const subtitleLeft = new PIXI.Text("State", {...textStyle, fontSize: 36})
         subtitleLeft.anchor.set(.5, .5)
 
         const gridLeft = new Grid2(4,4, {}, {})
@@ -56,7 +56,7 @@ class Page1 extends AnimationPage{
 
 
         /* right side */
-        const subtitleRight = new PIXI.Text("Cipher", {...textStyle,})
+        const subtitleRight = new PIXI.Text("Cipher", {...textStyle, fontSize: 36})
         subtitleRight.anchor.set(.5)
 
         const gridRight = new Grid2(4,4, {}, {})
@@ -82,7 +82,8 @@ class Page1 extends AnimationPage{
 
         // destructure defines
         const {
-            
+            titleStyles,
+            subtitleStyles,
             animationDimensions, backgroundStyles, subtitleRightStyles, gridStyles, rightGridPos, leftGridPos, subtitleLeftStyles,
 
             arrowRightPos, arrowLeftPos, arrowStyles,
@@ -91,15 +92,15 @@ class Page1 extends AnimationPage{
 
         background.redraw(backgroundStyles)
 
-        title.scale.set(1)
+        title.scale.set(titleStyles.scale)
         title.position.set(animationDimensions.width / 2, 50)
 
 
         // left side
-        subtitleLeft.scale.set(1.2)
+        subtitleLeft.scale.set(subtitleStyles.scale)
         subtitleLeft.position.set(subtitleLeftStyles.x, subtitleLeftStyles.y)
 
-        gridLeft.redraw({gridStyles, fill: 0xFFF995})
+        gridLeft.redraw({...gridStyles, fill: 0xFFF995})
         gridLeft.position.set(leftGridPos.x, subtitleLeft.y + subtitleLeft.height + leftGridPos.yDistance)
         gridLeft.pivot.set(gridLeft.width / 2 , 0)
 
@@ -114,10 +115,10 @@ class Page1 extends AnimationPage{
 
 
         // right side
-        subtitleRight.scale.set(1.2)
+        subtitleRight.scale.set(subtitleStyles.scale)
         subtitleRight.position.set(subtitleRightStyles.x, subtitleRightStyles.y)
 
-        gridRight.redraw({gridStyles, fill: 0x008FFF})
+        gridRight.redraw({...gridStyles, fill: 0x008FFF})
         gridRight.position.set(rightGridPos.x, subtitleRight.y + subtitleRight.height + rightGridPos.yDistance)
         gridRight.pivot.set(gridRight.width / 2 , 0)
 

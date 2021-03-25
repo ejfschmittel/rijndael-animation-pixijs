@@ -3,7 +3,7 @@ import AnimationPageResponsives from "../../core/AnimationPageResponsives"
 import {gsap} from "gsap"
 
 
-import DefaultResponsive from "./Responsives.default"
+
 
 class ResponsiveMax800 extends AnimationPageResponsives{
     constructor(label, page){
@@ -16,62 +16,41 @@ class ResponsiveMax800 extends AnimationPageResponsives{
     }
 
     
-    getDefines(defaultDefines){
+    getDefines(defines){
+        defines.textBoxStyles = {
+            ...defines.textBoxStyles,
+            x: this.getWidth(70),
+        }
 
-
-
-        defaultDefines.animatableBackgroundText = {
-            ...defaultDefines.animatableBackgroundText,
-            fontSize: this.getWidth(6),
-            x: this.getWidth(96),
-            y: this.getWidth(1),
+        defines.textBoxTextStyles = {
+            scale: .5,
         }
 
         
-        defaultDefines.animatableBackgroundBar = {
-            ...defaultDefines.animatableBackgroundBar,
-            height: this.getWidth(7),
-            y: defaultDefines.animatableBackgroundText.fontSize + 2 * this.getWidth(2),
+        defines.arrowStyles = {
+            ...defines.arrowStyles,
+            width: this.getWidth(18),
+            height: this.getHeight(20),
         }
 
-
-
-
-
-
-        defaultDefines.defaultCellSize = {
-            width: this.getWidth(10),
-            height: this.getWidth(8),
+        defines.arrowLeftStyles = {
+            ...defines.arrowLeftStyles,
+            width: this.getWidth(30),
+            height: this.getHeight(10),
         }
 
-        defaultDefines.equationPos = {
-            x: this.getWidth(50),
-            y: this.getHeight(38),
-            anchorX: .5,
-            anchorY: .5,
+        defines.arrowFontStyles = {
+            ...defines.arrowFontStyles,
+            fontSize: 14,
         }
 
-        defaultDefines.stateGrid = {
-            x: this.getWidth(6),
-            y: this.getHeight(75),
-            anchorX: 0,
-            anchorY: .5,
+        defines.textStyles = {
+            scale: .7
         }
 
-        defaultDefines.roundKeyCell = {
-            fill: 0xC1C0C1,
-            x: this.getWidth(94),
-            y: this.getHeight(75),
-            anchorX: 1,
-            anchorY: .5,
-        }
+   
 
-      
-
-
-        
-
-        return defaultDefines;
+        return defines;
     }
 
 

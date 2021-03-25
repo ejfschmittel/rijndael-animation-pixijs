@@ -33,7 +33,9 @@ class Page7DefaultResponsives extends AnimationPageResponsives{
             anchorY: .5,
         }
 
-        defines.textBoxTextScale = .8
+        defines.textBoxTextStyles = {
+            scale: .8,
+        }
 
         defines.textBoxTextStyles = {
             text: "Rijndael\nEncryptor", 
@@ -60,6 +62,11 @@ class Page7DefaultResponsives extends AnimationPageResponsives{
             ...defines.arrowStyles,
             width: this.getWidth(16),
             height: this.getHeight(10),
+        }
+
+
+        defines.textStyles = {
+            scale: 1,
         }
 
 

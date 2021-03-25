@@ -23,7 +23,7 @@ class Page2 extends AnimationPage{
 
 
       //  this.registerResponsive("max-400", ResponsiveMax400)
-       // this.registerResponsive("max-600", ResponsiveMax600)
+        this.registerResponsive("max-600", ResponsiveMax600)
         this.registerResponsive("default", DefaultResponsives)
 
         
@@ -43,12 +43,16 @@ class Page2 extends AnimationPage{
     }
 
     drawPage(defines){
-        const {backgroundStyles, textBoxStyles, arrowStyles, arrowFontStyles, arrowLeftStyles} = defines
+        const {
+            backgroundStyles, textBoxStyles, arrowStyles, arrowFontStyles, arrowLeftStyles,
+            textBoxTextStyles,
+            textStyles,
+        } = defines
         const {background, centerBox} = this.globalComponents;
 
         background.redraw(backgroundStyles)
 
-        centerBox.redraw(textBoxStyles, .8)
+        centerBox.redraw(textBoxStyles, textBoxTextStyles)
         centerBox.position.set(textBoxStyles.x, textBoxStyles.y)
         centerBox.pivot.set(centerBox.width /2, centerBox.height/2)
 
@@ -60,6 +64,7 @@ class Page2 extends AnimationPage{
 
         // create text + arrow
         const text = new PIXI.Text("Plaintext",{fill: 0xffffff})
+        text.scale.set(textStyles.scale)
         const arrowTop = new ArrowWithText({orientation: ARROW_ORIENTATION.DOWN, ...arrowStyles},arrowFontStyles)
 
         // set arrow + text positions
@@ -81,6 +86,7 @@ class Page2 extends AnimationPage{
 
         // create text + arrow
         const textBot = new PIXI.Text("Ciphertext",{fill: 0xD49136})
+        textBot.scale.set(textStyles.scale)
         const arrowBot = new ArrowWithText({orientation: ARROW_ORIENTATION.DOWN, ...arrowStyles},{...arrowFontStyles, fill: 0xD49136})
 
         // set arrow + text positions
@@ -101,6 +107,7 @@ class Page2 extends AnimationPage{
 
         // create text + arrow
         const textLeft = new PIXI.Text("Cipher Key",{fill: 0xffffff})
+        textLeft.scale.set(textStyles.scale)
         const arrowLeft = new ArrowWithText({orientation: ARROW_ORIENTATION.RIGHT, ...arrowLeftStyles},arrowFontStyles)
 
         // set arrow + text positions
