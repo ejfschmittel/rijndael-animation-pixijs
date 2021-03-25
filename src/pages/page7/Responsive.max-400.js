@@ -19,25 +19,48 @@ class ResponsiveMax800 extends AnimationPageResponsives{
     getDefines(defaultDefines){
 
 
-       
-        defaultDefines.sBoxCellFontStyles = {
-            fontSize: this.getWidth(3)
+        defaultDefines.animatableBackgroundText = {
+            ...defaultDefines.animatableBackgroundText,
+            fontSize: this.getWidth(8),
+            x: this.getWidth(96),
+            y: this.getWidth(1),
         }
 
-        defaultDefines.sBoxLegendFontStyles = {
-            fontSize: this.getWidth(3)
+        
+        defaultDefines.animatableBackgroundBar = {
+            ...defaultDefines.animatableBackgroundBar,
+            height: this.getWidth(10),
+            y: defaultDefines.animatableBackgroundText.fontSize + 2 * this.getWidth(2),
         }
 
-        defaultDefines.sBoxStyles = {
-            width: this.getWidth(100),
-            height: this.getHeight(50),
-            legendWidth: this.getWidth(8),
-            x: this.getWidth(50),
-            anchorX: .5,
-            y: this.getHeight(100),
-            anchorY: 1,
+
+
+        defaultDefines.defaultCellSize = {
+            width: this.getWidth(12),
+            height: this.getWidth(10),
         }
-      
+
+        defaultDefines.defaultCellStyles = {
+            borderWidth: 1,
+            borderFill: 0x000000,
+            fill: 0xFFF995,
+        }
+
+        defaultDefines.stateGrid = {
+            x: this.getWidth(2),
+            y: this.getHeight(75),
+            anchorX: 0,
+            anchorY: .5,
+        }
+
+        defaultDefines.roundKeyCell = {
+            fill: 0xC1C0C1,
+            x: this.getWidth(98),
+            y: this.getHeight(75),
+            anchorX: 1,
+            anchorY: .5,
+        }
+
       
 
 

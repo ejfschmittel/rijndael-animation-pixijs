@@ -1,7 +1,7 @@
 import AnimationPageResponsives from "../../core/AnimationPageResponsives"
 
 import {gsap} from "gsap"
-class Page7DefaultResponsives extends AnimationPageResponsives{
+class Page6DefaultResponsives extends AnimationPageResponsives{
     constructor(label, page){
         super(label, page);
     }
@@ -11,27 +11,31 @@ class Page7DefaultResponsives extends AnimationPageResponsives{
         const defines = {}
 
 
-        /* animatable background defines */
-
-        defines.sBoxCellFontStyles = {
-            fontSize: this.getWidth(1.5)
+        defines.animatableBackgroundStyles = {
+            width: this.getWidth(100),
+            height: this.getHeight(100),
+            fill: this.COLORS.BG_BLUE,
         }
 
-        defines.sBoxLegendFontStyles = {
-            fontSize: this.getWidth(1.5)
+        defines.animatableBackgroundTitleStyles = {
+            x: this.getWidth(90),
+            y: this.getHeight(4),
         }
 
-        defines.sBoxStyles = {
-            width: this.getWidth(60),
-            height: this.getHeight(50),
-            legendWidth: this.getWidth(4),
-            x: this.getWidth(98),
-            anchorX: 1,
-            y: this.getHeight(98),
-            anchorY: 1,
+        defines.animatableBackgroundBarStyles = {
+            width: this.getWidth(100),
+            height: this.getHeight(5),
+            fill: this.COLORS.BG_WHITE,
         }
       
+        defines.backgroundStyles = {
+            width: this.getWidth(100),
+            height: this.getHeight(100),
+            fill: this.COLORS.BG_WHITE,
+            borderWidth: 0,
+        }
 
+    
 
         return defines;
     }
@@ -40,7 +44,16 @@ class Page7DefaultResponsives extends AnimationPageResponsives{
 
 
 
+    createAnimationIn(){
+        const tl = this.getAnimatableBackgroundTL();
 
+        return tl;
+    }
+
+
+
+
+  
 }
 
-export default Page7DefaultResponsives
+export default Page6DefaultResponsives

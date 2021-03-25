@@ -37,13 +37,7 @@ class ResponsiveMax800 extends AnimationPageResponsives{
 
         defaultDefines.defaultCellSize = {
             width: this.getWidth(12),
-            height: this.getWidth(10),
-        }
-
-        defaultDefines.defaultCellStyles = {
-            borderWidth: 1,
-            borderFill: 0x000000,
-            fill: 0xFFF995,
+            height: this.getWidth(12),
         }
 
         defaultDefines.stateGrid = {
@@ -53,18 +47,20 @@ class ResponsiveMax800 extends AnimationPageResponsives{
             anchorY: .5,
         }
 
-        defaultDefines.roundKeyCell = {
-            fill: 0xC1C0C1,
-            x: this.getWidth(98),
-            y: this.getHeight(75),
-            anchorX: 1,
-            anchorY: .5,
+        defaultDefines.text1 = {
+            x: this.getWidth(60),
+            y: this.getHeight(75) - defaultDefines.defaultCellSize.height * .5,
         }
-
+        defaultDefines.text2 = {
+            x: this.getWidth(60),
+            y: this.getHeight(75) + defaultDefines.defaultCellSize.height * .5,
+        }
+        defaultDefines.text3 = {
+            x: this.getWidth(60),
+            y: this.getHeight(75) + defaultDefines.defaultCellSize.height * 1.5,
+        }
       
-
-
-        
+    
 
         return defaultDefines;
     }

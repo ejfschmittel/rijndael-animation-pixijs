@@ -10,33 +10,29 @@ class Page6DefaultResponsives extends AnimationPageResponsives{
 
         const defines = {}
 
+
+        defines.animatableBackgroundStyles = {
+            width: this.getWidth(100),
+            height: this.getHeight(100),
+            fill: this.COLORS.BG_RED,
+        }
+
+        defines.animatableBackgroundTitleStyles = {
+            x: this.getWidth(90),
+            y: this.getHeight(4),
+        }
+
+        defines.animatableBackgroundBarStyles = {
+            width: this.getWidth(100),
+            height: this.getHeight(5),
+            fill: this.COLORS.BG_WHITE,
+        }
       
         defines.backgroundStyles = {
             width: this.getWidth(100),
             height: this.getHeight(100),
-            fill: 0xffffff,
+            fill: this.COLORS.BG_BLUE,
             borderWidth: 0,
-        }
-
-        defines.titleStyles = {
-            x: this.getWidth(50),
-            y: this.getHeight(30)
-        }
-
-        defines.containerPos = {
-            x: this.getWidth(50),
-        }
-
-        defines.labelStyles = {
-            width: this.getWidth(22), 
-            height: this.getHeight(6),
-            borderWidth: 2,
-            borderFill: 0x000000,
-            borderRadius: 30,
-        }
-
-        defines.labelTextStyles = {
-
         }
 
     
@@ -45,30 +41,15 @@ class Page6DefaultResponsives extends AnimationPageResponsives{
     }
 
 
-    createPreFadeIn(){
 
-   
-        const {container, title} = this.getGlobalComponents();
-        const tl = gsap.timeline();
-        const obj = {val: 0};
-        tl.to(obj, {val: 1, duration: .0001})
-        tl.set([title, container], {pixi: {alpha: 0}})
-    
+
+
+    createAnimationIn(){
+        const tl = this.getAnimatableBackgroundTL();
+
         return tl;
     }
 
-    createAnimationMain(){
-        const {container, title} = this.getGlobalComponents();
-        const tl = gsap.timeline();
-        
-
-
-        tl.set(container, {pixi: {x: container.x-200, scale: .7}})
-        tl.to(container, {pixi: {alpha: 1}, duration: .5})
-        tl.to(container, {pixi: {x: container.x, scale: 1}, duration: 1})
-        tl.to(title, {pixi: {alpha: 1}}, "<")
-        return tl;
-    }
 
 
 

@@ -1,5 +1,8 @@
 
 import {ANIMATION_DIMENSIONS} from "./AnimationController"
+
+import {COLORS} from "../utils/colors"
+
 import {gsap} from "gsap"
 
 class AnimationPageResponsives{
@@ -12,7 +15,12 @@ class AnimationPageResponsives{
         this.FADE_OUT_DELAY = 3;
         this.FADE_OUT_DURATION = .0001;
         this.FADE_IN_DURATION = .0001;
+
+        this.COLORS = COLORS;
     }
+
+
+    
 
     evoke(pageDimensions){   
         return false;
@@ -70,6 +78,31 @@ class AnimationPageResponsives{
 
         tl.set(movables, {zIndex: 1})
     
+        return tl;
+    }
+
+
+    getAnimatableBackgroundTL(){
+        const {animatableBackground} = this.getGlobalComponents()
+        const {title, titleMask, bar} = animatableBackground;
+
+        const tl = gsap.timeline();
+        tl.set([animatableBackground, title, titleMask], {pixi: {alpha: 0}})
+        tl.set(animatableBackground, {pixi: {y: animatableBackground.height}})
+        tl.set(bar, {pixi: {y: 0}})
+
+        // move background up
+        tl.set(animatableBackground, {pixi: {alpha: 1}})
+        tl.to(animatableBackground, {pixi: {y: 0}})
+
+        // move bar down
+        tl.to(bar, {pixi: {y: bar.y}})
+
+        // reveal title
+        tl.set([title, titleMask], {pixi: {alpha: 1}})
+        tl.to(titleMask, {pixi: {x: titleMask.x + titleMask.width}})
+
+
         return tl;
     }
 

@@ -80,9 +80,6 @@ class AnimationPage extends PIXI.Container{
 
 
     redraw(){
-        console.log("redraw")
-        console.log(...this.temporaryComponents)
-
         this.removeChild(...this.temporaryComponents)
         this.temporaryComponents = []
 

@@ -11,47 +11,23 @@ class ResponsiveMax800 extends AnimationPageResponsives{
     }
 
     evoke(animationDimensions){
-        if(animationDimensions.width < 800 || animationDimensions.height < 600) return true;
+        if(animationDimensions.width < 600) return true;
         return false;
     }
 
     
-    getDefines(defaultDefines){
+    getDefines(defines){
 
-
-
-        defaultDefines.sBoxCellFontStyles = {
-            fontSize: this.getWidth(1)
-        }
-
-        defaultDefines.sBoxLegendFontStyles = {
-            fontSize: this.getWidth(.8)
-        }
-
-        defaultDefines.sBoxStyles = {
-            width: this.getWidth(80),
-            height: this.getHeight(50),
-            legendWidth: this.getWidth(4),
+        defines.textStyles = {
             x: this.getWidth(50),
-            anchorX: .5,
-            y: this.getHeight(100),
-            anchorY: 1,
+            yDistance: this.getHeight(4),
+            fontSize: 14,
         }
-      
 
-
-        
-
-        return defaultDefines;
+        return defines;
     }
 
 
-
-
-    getBounds(elem){
-        const bounds  = elem.getBounds();
-        return {x: bounds.x, y: bounds.y, width: bounds.width, height: bounds.height}
-    }
 
     createAnimationMain(){ }
 }

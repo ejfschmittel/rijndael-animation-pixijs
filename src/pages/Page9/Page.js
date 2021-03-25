@@ -1,162 +1,70 @@
 import AnimationPage from "../../core/AnimationPage.js"
 import * as PIXI from "pixi.js"
 
-
-import Grid from "../../components/Grid"
-
-
 import AnimatableBackground from "../../components/AnimatableBackground"
+
 
 import {gsap} from "gsap"
 
-import DataController from "../../core/DataController"
-import Component from "../../components/Component"
-import CircledText from "../../components/CircledText"
+
+
 
 import DefaultResponsives from "./Responsives.default"
-
+//import ResponsiveMax400 from "./Responsive.max-1000"
 import ResponsiveMax600 from "./Responsive.max-600"
 import ResponsiveMax400 from "./Responsive.max-400"
+import HexadecimalTextBox from "../../components/HexadecimalTextBox.js"
 
-class Page9 extends AnimationPage{
+class Page4 extends AnimationPage{
     constructor(id){
         super(id);
 
 
-       // this.registerResponsive("max-400", ResponsiveMax400)
-        //this.registerResponsive("max-600", ResponsiveMax600)
+      //  this.registerResponsive("max-400", ResponsiveMax400)
+      //  this.registerResponsive("max-600", ResponsiveMax600)
         this.registerResponsive("default", DefaultResponsives)
 
         
     }
 
 
-
-
-    draw(defines){
+    create(defines){
+        const background = this.createBackground();
         
+        const animatableBackground = new AnimatableBackground("3 - MixColumns", {})
+      
+        this.addPermanent({background,animatableBackground,})
+       
+    }
 
+    drawPage(defines){
+        // get permanent componenents
         const {
-            stateGrid, 
-            defaultCellStyles, 
-            defaultCellSize,
-            stateGridMovables, 
-            animatableBackground,
-            animatableBackgroundBar,
-            animatableBackgroundText,
-            resultMovables,
-            equationPos,
+            background, animatableBackground
+        } = this.globalComponents
+
+        // background redraw
+        const { backgroundStyles} = defines
+        background.redraw(backgroundStyles)
+
+
+        // animatable background
+        const {
+            animatableBackgroundStyles: abStyles,
+            animatableBackgroundTitleStyles: abTitleStyles,
+            animatableBackgroundBarStyles: abBarStyles,
         } = defines
 
+        animatableBackground.redraw(abStyles,abBarStyles,abTitleStyles)
 
-        const defaultLanding = {
-            ...defaultCellStyles,
-            ...defaultCellSize,
-        }
-
-        const defaultMovables = {
-            ...defaultCellStyles,
-            ...defaultCellSize
-        }
-
-        const background = this.drawBackground(0xFF1900)
-
-
-        const animatableBackgroundComponent = new AnimatableBackground(animatableBackground, animatableBackgroundBar, animatableBackgroundText)
-
-
-      
-        // create grid landings
-        const stateGridComponent = new Grid(4,4, {...defaultLanding, ...stateGrid}, {})
-        this.positionComponent(stateGridComponent, stateGrid)
-
-        // create movables
-        const stateGridMovableComponents = stateGridComponent.createMovables({...defaultMovables, ...stateGridMovables})
-        DataController.subscribe("dummyGrid", stateGridMovableComponents.movables)
-
-        // create result movables
-        const resultGridMovableComponents = stateGridComponent.createMovables({...defaultMovables, ...resultMovables})
-        DataController.subscribe("dummyGrid", resultGridMovableComponents.movables)
-        
-
-
-
- 
-        // create equation
-       
-        const equation = new Component();
 
 
         
-        const galoisFieldGrid = new Grid(4, 4, {...defaultLanding, fill: 0xffffff}, {})
-        DataController.subscribe("galoisField", galoisFieldGrid.cells)
-
-        const addSymbolComponent = new CircledText({fill: 0x000000, radius: 10}, {text: ""})
-        addSymbolComponent.pivot.set(0, addSymbolComponent.height / 2)
-
-
-        const rightAddGrid = new Grid(4, 1, defaultLanding, {})
-
-        const equalsSymbol = new PIXI.Text("=", new PIXI.TextStyle({}))
-        equalsSymbol.anchor.set(0, 1)
-
-        const resultGrid = new Grid(4, 1, defaultLanding, {})
-
-
-        equation.addChild(galoisFieldGrid, addSymbolComponent, rightAddGrid, equalsSymbol, resultGrid)
-
-        let xPos = galoisFieldGrid.width + addSymbolComponent.width;
-        addSymbolComponent.position.set(xPos, equation.height / 2 )
-
-        xPos = xPos + addSymbolComponent.width
-        rightAddGrid.position.set(xPos, 0)
-
-        xPos = xPos + rightAddGrid.width + equalsSymbol.width
-        equalsSymbol.position.set(xPos, equation.height / 2 )
-
-        xPos = xPos + equalsSymbol.width * 2
-        resultGrid.position.set(xPos, 0)
-
-    
-    
-        this.positionComponent(equation, equationPos)
-
-        this.addToRenderedComponents({
-            stateGridComponent,
-            stateGridMovableComponents,
-            resultGridMovableComponents,
-            animatableBackgroundComponent,
-            equation,
-            galoisFieldGrid,
-            rightAddGrid,
-            resultGrid,
-            equalsSymbol,
-            addSymbolComponent
-
-        })
-
-        this.addChild(
-            background, 
-            animatableBackgroundComponent,
-
-            // normal compoents    
-            stateGridComponent,
-            equation,
-
-            // movables
-            ...stateGridMovableComponents.movables, 
-            ...resultGridMovableComponents.movables
-        )
 
         
-        this.sortableChildren = true
-
-        gsap.set(resultGridMovableComponents.movables, {pixi: {alpha: 0}})
-
-        gsap.set([equalsSymbol, addSymbolComponent, galoisFieldGrid], {pixi: {alpha: 0}})
   
     }
 }
 
 
-export default Page9;
+export default Page4;

@@ -22,7 +22,7 @@ class ResponsiveGrid extends PIXI.Container{
     redraw(bgStyles, textStyles){
 
         bgStyles = {width: 300, height: 200, ...bgStyles}
-        console.log(bgStyles)
+
         const cellWidth = bgStyles.width / this.cols;
         const cellHeight = bgStyles.height / this.rows;
 

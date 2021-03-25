@@ -1,8 +1,7 @@
 import AnimationPage from "../../core/AnimationPage.js"
 import * as PIXI from "pixi.js"
 
-import SlowTextBox from "../../components/SlowTextBox"
-
+import AnimatableBackground from "../../components/AnimatableBackground"
 
 
 import {gsap} from "gsap"
@@ -31,60 +30,38 @@ class Page4 extends AnimationPage{
 
     create(defines){
         const background = this.createBackground();
-        // title
-        const title = new PIXI.Text("The 4 types of\ntransformations:", {fill: 0x333333, fontSize: 24, align: "center", fontWeight: "700"})
-        title.anchor.set(.5, .5)
+        
+        const animatableBackground = new AnimatableBackground("2 - Shift Rows", {})
       
-        this.addPermanent({background,title,})
+        this.addPermanent({background,animatableBackground,})
        
     }
 
     drawPage(defines){
         // get permanent componenents
         const {
-            background, title,
+            background, animatableBackground
         } = this.globalComponents
 
-        // destructure defines
-        const {
-            backgroundStyles,
-            circledCharStyles, 
-            titleStyles,
-            textStyles,
-            labelStyles,
-            containerPos,
-        } = defines
-
+        // background redraw
+        const { backgroundStyles} = defines
         background.redraw(backgroundStyles)
 
-      
 
-        title.position.set(titleStyles.x,titleStyles.y)
+        // animatable background
+        const {
+            animatableBackgroundStyles: abStyles,
+            animatableBackgroundTitleStyles: abTitleStyles,
+            animatableBackgroundBarStyles: abBarStyles,
+        } = defines
 
-
-        const container = new PIXI.Container();
-        const labelSubBytes = new SlowTextBox({...labelStyles, fill: 0xB2D7F9},{text: "1-SubBytes"})
-        const labelShiftRows = new SlowTextBox({...labelStyles, fill: 0xFACCC7},{text: "2-ShiftRows"})
-        const labelMixColumns = new SlowTextBox({...labelStyles, fill: 0xEFEAC1},{text: "3-MixColumns"})
-        const labelAddRoundKey = new SlowTextBox({...labelStyles, fill: 0xA2C1B7},{text: "4-AddRoundKey"})
-
-        const labelMargin = 20;
-        labelShiftRows.position.set(0, labelSubBytes.y + labelSubBytes.height + labelMargin)
-        labelMixColumns.position.set(0, labelShiftRows.y + labelShiftRows.height + labelMargin)
-        labelAddRoundKey.position.set(0, labelMixColumns.y + labelMixColumns.height + labelMargin)
-
-
-        
-
-        container.addChild(labelSubBytes, labelShiftRows, labelMixColumns, labelAddRoundKey)
-        container.pivot.set(container.width / 2, 0)
-        container.position.set(containerPos.x, title.position.y + title.height + 20)
+        animatableBackground.redraw(abStyles,abBarStyles,abTitleStyles)
 
 
 
         
 
-        this.addTemporary({container})
+        
   
     }
 }

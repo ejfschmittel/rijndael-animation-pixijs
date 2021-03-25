@@ -75,22 +75,14 @@ class Page4 extends AnimationPage{
         } = defines
 
         background.redraw(backgroundStyles)
-
-        
+     
         circledChar.redraw({radius: 30, borderColor: 0xffffff}, 1)
         circledChar.position.set(circledCharStyles.x, circledCharStyles.y)
 
         title.position.set(titleStyles.x, circledChar.y + circledChar.height + titleStyles.yDistance)
 
-
-        console.log(textStyles.fontSize)
-        console.time("resize-font")
         text.style.fontSize = textStyles.fontSize
-        console.timeEnd("resize-font")
-        text.position.set(textStyles.x, title.position.y + title.height + textStyles.yDistance)
-        
-
-        
+        text.position.set(textStyles.x, title.position.y + title.height + textStyles.yDistance)     
     }
 }
 
