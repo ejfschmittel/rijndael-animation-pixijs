@@ -2,7 +2,7 @@
 
 import * as PIXI from "pixi.js"
 
-import TextBox from "./TextBox"
+import TextBox from "./SlowTextBox"
 
 import Component from "./Component"
 

@@ -2,7 +2,7 @@
 
 import Grid from "./Grid"
 import Component from "./Component"
-import TextBox from "./TextBox"
+import TextBox from "./SlowTextBox"
 
 import HexTextBox from "./HexadecimalTextBox"
 import HexadecimalGrid from "./HexadecimalGrid"
