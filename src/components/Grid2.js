@@ -2,6 +2,8 @@ import * as PIXI from "pixi.js"
 
 import TextBox from "./TextBox2.js"
 
+import MovablesCollector from "../core/MovablesCollector"
+
 class ResponsiveGrid extends PIXI.Container{
 
     constructor(rows, cols, bgStyles, textStyles){
@@ -30,13 +32,39 @@ class ResponsiveGrid extends PIXI.Container{
             for(let c = 0; c < this.cols; c++){
                 const cell = this.cells[r * this.cols + c];
                 cell.redraw({...bgStyles, width: cellWidth, height: cellHeight}, textStyles)
-                cell.position.set(cellWidth * r, cellHeight * c)
+                cell.position.set(cellWidth * c, cellHeight * r)
             }
         }
   
     }
 
+    createMovables(cellBackgroundStyle, cellTextStyle={}){
+        const movableCells = []
+        this.cells.forEach(cell => {
+            const cellBounds = cell.getBounds()
+            const movableCell = new TextBox(cellBackgroundStyle, cellTextStyle) 
+            movableCell.position.set(cellBounds.x, cellBounds.y)
+            movableCells.push(movableCell)
+        })
+
+        return new MovablesCollector(movableCells, this.rows, this.cols)
+    }
+
     // get col etc
+
+    getRow(rowIndex){
+        return this.cells.slice(rowIndex * this.cols, rowIndex * this.cols + this.cols)
+    }
+
+    getCol(colIndex){
+        return this.cells.reduce((colArray, cell, idx) => {
+            return idx % this.cols == colIndex ? [...colArray, cell] : colArray;
+        }, [])
+    }
+
+    get(rowIndex, colIndex){
+        return this.cells[rowIndex * this.cols + colIndex];
+    }
 
 
 }
