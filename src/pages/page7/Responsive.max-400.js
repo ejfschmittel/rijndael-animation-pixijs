@@ -11,73 +11,59 @@ class ResponsiveMax800 extends AnimationPageResponsives{
     }
 
     evoke(animationDimensions){
-        if(animationDimensions.width < 400) return true;
+        if(animationDimensions.width < 550) return true;
         return false;
     }
 
     
-    getDefines(defaultDefines){
+    getDefines(defines){
+
+        
+        defines.gridStyles = {
+            width: this.getWidth(50),
+            height: this.getWidth(34),
+            x: this.getWidth(50),
+            y: this.getHeight(30),
+        }
+
+        defines.sBoxStyles = {
+            width: this.getWidth(100),
+            height: this.getHeight(50),
+            legendWidth: 30,
+        }
+
+        defines.sBoxPos = {
+            x: this.getWidth(100),
+            y: this.getHeight(100)
+        }
 
 
-        defaultDefines.animatableBackgroundText = {
-            ...defaultDefines.animatableBackgroundText,
-            fontSize: this.getWidth(8),
-            x: this.getWidth(96),
-            y: this.getWidth(1),
+        
+        defines.sboxLegendStyles = {
+            scale: .4
+        }
+        
+        defines.sBoxTextStyles = {
+            scale: .4,
         }
 
         
-        defaultDefines.animatableBackgroundBar = {
-            ...defaultDefines.animatableBackgroundBar,
-            height: this.getWidth(10),
-            y: defaultDefines.animatableBackgroundText.fontSize + 2 * this.getWidth(2),
+        defines.textBoxStyle = {
+            width: this.getWidth(16),
+            height: this.getWidth(12),
         }
-
-
-
-        defaultDefines.defaultCellSize = {
-            width: this.getWidth(12),
-            height: this.getWidth(10),
-        }
-
-        defaultDefines.defaultCellStyles = {
-            borderWidth: 1,
-            borderFill: 0x000000,
-            fill: 0xFFF995,
-        }
-
-        defaultDefines.stateGrid = {
-            x: this.getWidth(2),
-            y: this.getHeight(75),
-            anchorX: 0,
-            anchorY: .5,
-        }
-
-        defaultDefines.roundKeyCell = {
-            fill: 0xC1C0C1,
-            x: this.getWidth(98),
-            y: this.getHeight(75),
-            anchorX: 1,
-            anchorY: .5,
-        }
-
+       
       
 
 
         
 
-        return defaultDefines;
+        return defines;
     }
 
 
 
 
-    getBounds(elem){
-        const bounds  = elem.getBounds();
-        return {x: bounds.x, y: bounds.y, width: bounds.width, height: bounds.height}
-    }
-
-    createAnimationMain(){ }
 }
 
 export default ResponsiveMax800

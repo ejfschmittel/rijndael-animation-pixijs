@@ -61,13 +61,10 @@ window.addEventListener("load",function(){
     animationController.registerPage(Page8, "page-8", "Page 8 - SubBytes")
     animationController.registerPage(Page9, "page-9", "Page 9 - SubBytes")
     animationController.registerPage(Page10, "page-10", "Page 10 - SubBytes")
-    //animationController.registerPage(Page7, "page-7", "Page 7 - SubBytes")
-    //animationController.registerPage(Page8, "page-8", "Page 8 - SubBytes")
-    //animationController.registerPage(Page9, "page-9", "Page 9 - MixColumns")
-   // animationController.registerPage(Page10, "page-10", "Page 10 - AddRoundkey")
+
    animationController.registerPage(Page13, "page-13", "Page 13 - SubBytes")
     animationController.createTimeline();
-    animationController.goToPage("page-9");
+    animationController.goToPage("page-7");
   
 },false);
 

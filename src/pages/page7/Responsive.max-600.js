@@ -11,17 +11,31 @@ class ResponsiveMax800 extends AnimationPageResponsives{
     }
 
     evoke(animationDimensions){
-        if(animationDimensions.width < 600) return true;
+        if(animationDimensions.width < 800) return true;
         return false;
     }
 
     
     getDefines(defines){
 
-        defines.textStyles = {
-            x: this.getWidth(50),
-            yDistance: this.getHeight(4),
-            fontSize: 14,
+        defines.gridStyles = {
+            width: this.getWidth(24),
+            height: this.getWidth(16),
+            x: this.getWidth(15),
+            y: this.getHeight(60)
+        }
+
+        defines.sBoxStyles = {
+            width: this.getWidth(60),
+            height: this.getHeight(50)
+        }
+
+        defines.sboxLegendStyles = {
+            scale: .4
+        }
+        
+        defines.sBoxTextStyles = {
+            scale: .4,
         }
 
         return defines;

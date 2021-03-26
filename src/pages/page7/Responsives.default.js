@@ -35,6 +35,44 @@ class Page6DefaultResponsives extends AnimationPageResponsives{
             borderWidth: 0,
         }
 
+
+        defines.sBoxStyles = {
+            width: this.getWidth(50),
+            height: this.getHeight(50)
+        }
+
+        defines.sboxLegendStyles = {
+            scale: .5
+        }
+        
+        defines.sBoxTextStyles = {
+            scale: .5,
+        }
+
+        defines.sBoxPos = {
+            x: this.getWidth(96),
+            y: this.getHeight(96)
+        }
+
+        defines.gridStyles = {
+            width: this.getWidth(24),
+            height: this.getWidth(16),
+            x: this.getWidth(25),
+            y: this.getHeight(50)
+        }
+
+        defines.stateMovableStyles = {
+            fill: this.COLORS.CELL_BG_YELLOW
+        }
+
+        defines.resultMovablesStyles = {
+            fill: this.COLORS.CELL_BG_DARK_YELLOW
+        }
+
+        defines.textBoxStyle = {
+            width: this.getWidth(6),
+            height: this.getWidth(4),
+        }
     
 
         return defines;
