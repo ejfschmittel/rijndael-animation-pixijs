@@ -22,6 +22,7 @@ class AnimatableBackground extends Component{
         this.title.anchor.set(1, 0)
 
         this.titleMask = new SpriteBackground();
+        this.titleMask.alpha = 0;
        
 
 
@@ -36,12 +37,17 @@ class AnimatableBackground extends Component{
         barStyles = {...barStyleDefaults, ...barStyles}
         textStyles = {...textStyleDefaults, ...textStyles}
 
+        console.log(textStyles)
         this.background.redraw(backgroundStyles);
         this.bar.redraw({...barStyles});
 
         // position text
         this.title.position.set(textStyles.x, textStyles.y)
         this.title.style.fontSize = textStyles.fontSize
+  
+       this.addChild(this.title)
+
+
 
         this.bar.position.set(0, this.title.y * 2 + this.title.height)
 
