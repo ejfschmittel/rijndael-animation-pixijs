@@ -47,6 +47,10 @@ class TextBox extends PIXI.Container{
             this.text.anchor.set(.5,.5)
         }
     }
+
+    getBackground(){
+        return this.background.foreground;
+    }
 }
 
 export default TextBox;
