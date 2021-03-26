@@ -11,73 +11,49 @@ class ResponsiveMax800 extends AnimationPageResponsives{
     }
 
     evoke(animationDimensions){
-        if(animationDimensions.width < 400) return true;
+        if(animationDimensions.width < 500) return true;
         return false;
     }
 
     
-    getDefines(defaultDefines){
+    getDefines(defines){
 
 
-        defaultDefines.animatableBackgroundText = {
-            ...defaultDefines.animatableBackgroundText,
-            fontSize: this.getWidth(8),
-            x: this.getWidth(96),
-            y: this.getWidth(1),
+        defines.gridStyles = {
+            width: this.getWidth(40),
+            height: this.getWidth(30),
         }
 
-        
-        defaultDefines.animatableBackgroundBar = {
-            ...defaultDefines.animatableBackgroundBar,
-            height: this.getWidth(10),
-            y: defaultDefines.animatableBackgroundText.fontSize + 2 * this.getWidth(2),
+        defines.gridTextStyles = {
+            scale: .6,
         }
 
-
-
-        defaultDefines.defaultCellSize = {
-            width: this.getWidth(12),
-            height: this.getWidth(10),
+        defines.columnStyles = {
+            width: defines.gridStyles.width / 4,
+            height: defines.gridStyles.height,
         }
 
-        defaultDefines.defaultCellStyles = {
-            borderWidth: 1,
-            borderFill: 0x000000,
-            fill: 0xFFF995,
+        defines.equationPos = {
+            x: this.getWidth(50),
+            y: this.getHeight(40),
         }
-
-        defaultDefines.stateGrid = {
-            x: this.getWidth(2),
-            y: this.getHeight(75),
-            anchorX: 0,
-            anchorY: .5,
-        }
-
-        defaultDefines.roundKeyCell = {
-            fill: 0xC1C0C1,
-            x: this.getWidth(98),
-            y: this.getHeight(75),
-            anchorX: 1,
-            anchorY: .5,
-        }
-
       
 
+        defines.stateGridPos = {
+            x: this.getWidth(25),
+            y: this.getHeight(75)
+        }
+
+        defines.roundKeyGridPos = {
+            x: this.getWidth(75),
+            y: this.getHeight(75)
+        }
+
 
         
 
-        return defaultDefines;
+        return defines;
     }
-
-
-
-
-    getBounds(elem){
-        const bounds  = elem.getBounds();
-        return {x: bounds.x, y: bounds.y, width: bounds.width, height: bounds.height}
-    }
-
-    createAnimationMain(){ }
 }
 
 export default ResponsiveMax800
