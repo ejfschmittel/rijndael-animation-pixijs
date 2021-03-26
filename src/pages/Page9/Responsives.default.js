@@ -35,6 +35,44 @@ class Page6DefaultResponsives extends AnimationPageResponsives{
             borderWidth: 0,
         }
 
+
+        defines.gridStyles = {
+            width: this.getWidth(26),
+            height: this.getWidth(20),
+        }
+
+        defines.gridTextStyles = {
+            scale:1,
+        }
+
+        defines.gridLandingPos = {
+            x: this.getWidth(20),
+            y: this.getHeight(70)
+        }
+
+
+
+        defines.equationPos = {
+            x: this.getWidth(40),
+            y: this.getHeight(30)
+        }
+
+        defines.columnStyles = {
+            width: defines.gridStyles.width / 4,
+            height: defines.gridStyles.height
+        }
+
+        defines.stateGridStyle = {
+            fill: this.COLORS.CELL_BG_YELLOW,
+        }
+
+        defines.resultGridStyle = {
+            fill: this.COLORS.CELL_BG_PINK,
+        }
+
+        defines.columnLandingPos = {}
+        defines.resultLandingPos = {}
+
     
 
         return defines;

@@ -22,6 +22,7 @@ class AnimatableBackground extends Component{
         this.title.anchor.set(1, 0)
 
         this.titleMask = new SpriteBackground();
+       
 
 
         this.addChild(this.background, this.bar, this.title, this.titleMask)

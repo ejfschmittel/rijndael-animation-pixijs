@@ -18,6 +18,8 @@ class ResponsiveGrid extends PIXI.Container{
             this.addChild(cell)
             return cell;
         })
+
+        
     }
 
 

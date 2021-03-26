@@ -67,7 +67,7 @@ window.addEventListener("load",function(){
    // animationController.registerPage(Page10, "page-10", "Page 10 - AddRoundkey")
    animationController.registerPage(Page13, "page-13", "Page 13 - SubBytes")
     animationController.createTimeline();
-    animationController.goToPage("page-8");
+    animationController.goToPage("page-10");
   
 },false);
 

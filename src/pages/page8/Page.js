@@ -67,7 +67,7 @@ class Page4 extends AnimationPage{
         this.addChild(...movables.movables)
         this.addToGlobalComponents({movablesCollector: movables})
 
-       
+        this.sortableChildren = true;
     }
 
     drawPage(defines){
