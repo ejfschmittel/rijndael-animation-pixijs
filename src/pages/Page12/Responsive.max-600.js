@@ -18,29 +18,11 @@ class ResponsiveMax800 extends AnimationPageResponsives{
     
     getDefines(defines){
 
-        
-        defines.rowStyles = {
-            width: this.getWidth(100),
-            height: this.getHeight(15),
-            margin: this.getHeight(1),
-            x: this.getWidth(2),
-            y: this.getHeight(10),
-            gap: 3,
-            titleSpace: 16,
+        defines.textStyles = {
+            x: this.getWidth(50),
+            yDistance: this.getHeight(4),
+            fontSize: 14,
         }
-
-        defines.rowTitleStyles = {
-            scale: .5,
-            rotation: -1.5708,
-        }
-
-
-        defines.titleStyles = {
-            y: this.getHeight(5),
-            scale: .35,
-        }
-
-        
 
         return defines;
     }

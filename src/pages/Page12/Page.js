@@ -55,21 +55,20 @@ class Page11 extends AnimationPage{
        
         const titles = [title1, title2, title3, title4, title5]
         
-        const inputRow = new GridRow("input")
-        const row1 = new GridRow("round1")
-        const row2 = new GridRow("round2")
-        const row3 = new GridRow("round3")
-        const row4 = new GridRow("round4")
-        const row5 = new GridRow("round5")
+        const row6 = new GridRow("round6")
+        const row7 = new GridRow("round7")
+        const row8 = new GridRow("round8")
+        const row9 = new GridRow("round9")
+        const row10 = new GridRow("round10")
+       
+        row10.addGridStyles(3, {fill: 0xCDCBCD})
 
 
-        inputRow.addGridStyles(1, {fill: 0xCDCBCD})
-        inputRow.addGridStyles(2, {fill: 0xCDCBCD})
-        inputRow.addGridStyles(3, {fill: 0xCDCBCD})
-        inputRow.addGridStyles(4, {fill: 0x0090FF})
+        //inputRow.addGridStyles(1, {fill: 0xCDCBCD})
+       
        
      
-        const rows = [inputRow, row1, row2, row3, row4, row5]
+        const rows = [row6, row7, row8, row9, row10]
 
 
         rows.forEach((row, r) => {
@@ -87,7 +86,7 @@ class Page11 extends AnimationPage{
         })
 
         
-        this.addPermanent({background, row1, row2, row3, row4, row5, title1, title2, title3, title4, title5, inputRow})
+        this.addPermanent({background,row6, row7, row8, row9, row10, title1, title2, title3, title4, title5})
 
         this.addToGlobalComponents({rows, titles})
      
@@ -99,8 +98,7 @@ class Page11 extends AnimationPage{
     drawPage(defines){
         // get permanent componenents
         const {
-            background, row1, row2, row3, row4, row5,
-            title1, title2, title3, title4, title5,
+            background, row6, 
             titles, rows,
         } = this.globalComponents
 
@@ -128,7 +126,7 @@ class Page11 extends AnimationPage{
         console.time("redraw-titles")
         titles.forEach((title, idx) => {
             title.scale.set(titleStyles.scale)
-            title.position.set(row1.grids[idx].x + row1.grids[idx].width / 2, titleStyles.y)
+            title.position.set(row6.grids[idx].x + row6.grids[idx].width / 2, titleStyles.y)
         })
         console.timeEnd("redraw-titles")
 

@@ -21,7 +21,7 @@ import Page8 from "./pages/Page8/Page"
 import Page9 from "./pages/Page9/Page"
 import Page10 from "./pages/Page10/Page"
 import Page11 from "./pages/Page11/Page"
-
+import Page12 from "./pages/Page12/Page"
 import Page13 from "./pages/Page13/Page"
 
 import * as PIXI from "pixi.js";
@@ -64,11 +64,12 @@ window.addEventListener("load",function(){
     animationController.registerPage(Page9, "page-9", "Page 9 - SubBytes")
     animationController.registerPage(Page10, "page-10", "Page 10 - SubBytes")
     animationController.registerPage(Page11, "page-11", "Page 11 - SubBytes")
-   animationController.registerPage(Page13, "page-13", "Page 13 - SubBytes")
+    animationController.registerPage(Page12, "page-12", "Page 12 - SubBytes")
+    animationController.registerPage(Page13, "page-13", "Page 13 - SubBytes")
     animationController.createTimeline();
 
  
-    animationController.goToPage("page-10");
+    animationController.goToPage("page-12");
     animationController.getCurrentPage();
 
 
@@ -84,7 +85,7 @@ window.addEventListener("load",function(){
         `
     }, 500);
 
-    console.log(Page5.drawPage)
+  
 
    // animationController.tl.seek(54)
   

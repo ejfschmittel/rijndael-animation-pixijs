@@ -15,6 +15,10 @@ const defaultGridStyles = {
     fill: COLORS.CELL_BG_YELLOW
 }
 
+const lastColStyles = {
+    fill: 0xC6C4C6,
+}
+
 class GridRow extends Component{
     constructor(title){
         super();
@@ -24,7 +28,8 @@ class GridRow extends Component{
         this.addSymbol = new CircledText("+", {fill: 0x333333, fontSize: 30, align: "center"})
         this.equalsSymbol = new PIXI.Text("=", {})
 
-        
+        this.gridStyles = {}
+
         this.grids = []
         for(let i = 0; i < 5; i++){
             const grid = new Grid(4,4, {},{})
@@ -36,11 +41,22 @@ class GridRow extends Component{
 
     }
 
+    addGridStyles(idx, styles){
+        this.gridStyles[idx] = styles;
+    }
+
     getGridStyles(idx){
-        if(this.gridStyles[idx]){
-            return {...this.defaultGridStyles, ...this.gridStyles[idx]}
+        let gridStyles = defaultGridStyles;
+
+        if(idx == 4) {
+            gridStyles = {...gridStyles, ...lastColStyles}
         }
-        return this.defaultGridStyles
+
+        if(this.gridStyles[idx]){
+            gridStyles = {...defaultGridStyles, ...this.gridStyles[idx]}
+        }
+     
+        return gridStyles
     }
 
     redraw(rowStyles, titleStyles, fontStyles){
@@ -51,7 +67,15 @@ class GridRow extends Component{
             titleSpace: 140,
             ...rowStyles
         }
+
+        titleStyles = {scale: 1, rotation: 0, ...titleStyles}
+        fontStyles = {scale: .5, ...fontStyles}
+
         const {grids, title, addSymbol, equalsSymbol} = this
+
+
+        title.scale.set(titleStyles.scale)
+        title.rotation = titleStyles.rotation
 
         // calculate space for grid
         const addSymbolGap = addSymbol.width * 2;
@@ -60,11 +84,16 @@ class GridRow extends Component{
         const gridWidth = openSpace / 5;
 
         // redraw
-        grids.forEach(grid => {
-            grid.redraw({width: gridWidth, height: rowStyles.height - rowStyles.margin});
+        grids.forEach((grid, idx) => {
+            const styles = this.getGridStyles(idx)
+            grid.redraw({width: gridWidth, height: rowStyles.height - rowStyles.margin, ...styles}, {scale: .3});
         })
         addSymbol.redraw({radius: 12, borderWidth: 1, borderColor: 0x333333},1)
-        equalsSymbol.anchor.set(.5)
+        addSymbol.scale.set(.5)
+
+        equalsSymbol.anchor.set(.4)
+        equalsSymbol.scale.set(.4)
+        
 
         title.anchor.set(.5,.5)
 

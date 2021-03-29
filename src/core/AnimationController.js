@@ -228,13 +228,7 @@ class AnimationController{
             if(pageID !== this.currentPage){
                 this.pagesByID[pageID].redraw();
                 this.pagesByID[pageID].hide();
-            }
-               // console.log(`redraw ${pageID}`)
-                //console.log(this.pagesByID)
-                //console.time(`redraw-page-${pageID}`)
-                
-                
-                //console.timeEnd(`redraw-page-${pageID}`)
+            }       
         })
         console.timeEnd("redraw-pages")
        
