@@ -63,22 +63,6 @@ class Page5Path extends Component{
 
 
 
-
-        /*// first segment
-        if (heightPecent <= pathOne / height){
-            return (height * heightPecent) / totalLength;
-        }
-
-        if(heightPecent <= pathTwo / height){
-            // second segment 
-
-            const first = (height * heightPecent) / totalLength;
-
-
-            return []
-        }*/
-
-
     }
 
 
@@ -101,7 +85,7 @@ class Page5Path extends Component{
 
 
         const getSegment = (y, length, prev) => {
-            console.log(prev)
+
             return {
                 y,
                 length,
@@ -146,7 +130,7 @@ class Page5Path extends Component{
         
 
         this.svg = graphic;
-        console.log(this.svg.currentPath)
+
         this.path = this.svg.currentPath;
 
         this.addChild(this.svg)

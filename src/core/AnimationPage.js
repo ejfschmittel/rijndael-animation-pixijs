@@ -5,7 +5,7 @@ import * as PIXI from "pixi.js"
 import {ANIMATION_DIMENSIONS} from "../core/AnimationController"
 import SpriteBackground from "../components/SpriteBackground"
 
-
+import {gsap} from "gsap";
 /*
     new Page();
 
@@ -170,7 +170,9 @@ class AnimationPage extends PIXI.Container{
     }
 
   
-
+    hide(){
+      //  gsap.set(this, {pixi: {visible: false, alpha: 0}})
+    }
 
 
     positionComponent(component, componentDefines){

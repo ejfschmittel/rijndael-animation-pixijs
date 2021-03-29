@@ -69,13 +69,16 @@ class AnimationController{
 
     // update ui after page change
     updateAfterCurrentPageUpdate = debounce((pageID) => {
+
         const desktopMenuContainer = document.getElementById("rijndael-animation-menu-desktop")
         const mobileMenuContainer = document.getElementById("rijndael-animation-menu-mobile")
 
         const menuItems = desktopMenuContainer.querySelectorAll(".rijndael-animation__nav-item")
 
         const currentIndex = this.pages.indexOf(pageID)
-
+        console.log(pageID)
+        console.log(this.tl.labels)
+        console.log(this.tl.totalTime())
         menuItems.forEach((menuItem, idx) => {
                 if(idx == currentIndex){
                     menuItem.classList.add("rijndael-animation__nav-item--current")
@@ -129,33 +132,32 @@ class AnimationController{
 
     onResize = () => {
         this.updateAnimationDimensions();
-        console.log(ANIMATION_DIMENSIONS)
+  
         this.app.renderer.resize(ANIMATION_DIMENSIONS.width, ANIMATION_DIMENSIONS.height)
       
 
-        console.time("pre-resize")
+      
         if(!this.resizeStore){
             this.prepResize();
         }
-        console.timeEnd("pre-resize")
+       
         // resize current page
-        console.log(this.currentPage)
+    
 
-        console.time("redraw")
         this.pagesByID[this.currentPage].redraw();
       
-        console.timeEnd("redraw")
+ 
 
         this.onAfterResize();
     }
 
     prepResize(){      
-        const time = this.tl.totalTime();
+       const time = this.tl.totalTime();
         const paused = this.tl.paused();
         this.isResizing = true;
 
         this.pause();
-        let labelTimes = []
+         /*let labelTimes = []
 
         // get label times of direct children
         const directLabelTimes = Object.keys(this.tl.labels).map(key => {
@@ -174,15 +176,19 @@ class AnimationController{
                 closestLabelTime = labelTimes[i]
             }
             
-        }
+        }*/
+        const label = this.tl.currentLabel();
+        
 
         // go to last safe reset point
-        this.tl.seek(closestLabelTime, false)
+        this.tl.seek(label, false)
 
+        console.log(`reset label ${label}`)
         // store data
         this.resizeStore = {
+            label,
             time,
-            resetTime: closestLabelTime,
+            resetTime: this.tl.labels[label],
             paused,
         }
     
@@ -219,19 +225,25 @@ class AnimationController{
 
         console.time("redraw-pages")
         this.pages.forEach(pageID => {
-            if(pageID !== this.currentPage)
+            if(pageID !== this.currentPage){
+                this.pagesByID[pageID].redraw();
+                this.pagesByID[pageID].hide();
+            }
                // console.log(`redraw ${pageID}`)
                 //console.log(this.pagesByID)
                 //console.time(`redraw-page-${pageID}`)
-                this.pagesByID[pageID].redraw();
+                
+                
                 //console.timeEnd(`redraw-page-${pageID}`)
         })
         console.timeEnd("redraw-pages")
        
+        console.time("recreate-timeline")
         this.createTimeline();
+        console.timeEnd("recreate-timeline")
     
         console.log(this.resizeStore)
-        this.tl.seek(this.resizeStore.resetTime, false)
+        this.tl.seek(this.resizeStore.label, false)
         if(this.resizeStore && this.resizeStore.paused === false) {
             this.resume();
         }

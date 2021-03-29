@@ -163,7 +163,7 @@ class Page6DefaultResponsives extends AnimationPageResponsives{
           // MAIN ROUNDS 1 - 8 
         const mainRoundTL = gsap.timeline({repeat: 7, onRepeat: () => {
             console.log("on repeat")
-            tl.timeScale(3)
+
         }})
         mainRoundTL.add(this.getMainRoundTL(svgData))
 

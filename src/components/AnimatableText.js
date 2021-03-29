@@ -20,7 +20,7 @@ class AnimatableText extends Component{
     }
 
     redraw(textStyles){
-        console.time("rescale-font")
+
         textStyles = {scale: 1, letterspacing: 0, fontSize: 60, ...textStyles}
 
         this.chars.forEach((char, idx) => {
@@ -30,7 +30,7 @@ class AnimatableText extends Component{
             if(char.style.fontSize != textStyles.fontSize)
                 char.style.fontSize = textStyles.fontSize;
         })    
-        console.timeEnd("rescale-font")
+
     }
 }
 
