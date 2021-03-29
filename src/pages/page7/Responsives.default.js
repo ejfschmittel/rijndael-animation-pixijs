@@ -106,7 +106,7 @@ class Page6DefaultResponsives extends AnimationPageResponsives{
         const firstCellHex = DataController.getData("dummyGrid")[0]
         const cellX = hexStringToInt(firstCellHex[0])
         const cellY = hexStringToInt(firstCellHex[1])
-        console.log(cellX, cellY)
+  
         const sBoxCell = sbox.grid.get(cellX, cellY)
        
 
@@ -141,7 +141,6 @@ class Page6DefaultResponsives extends AnimationPageResponsives{
             const cellX = hexStringToInt(cell.text.text[0])
             const cellY = hexStringToInt(cell.text.text[1])
 
-            console.log(cellX, cellY)
             const sBoxCell = sbox.grid.get(cellX, cellY)
 
             tl.to(sBoxCell.getBackground(), {pixi: {tint: 0xff0000}, duration: .2, delay: .3} )

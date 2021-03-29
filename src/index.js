@@ -14,6 +14,7 @@ import Page1 from "./pages/Page1/Page"
 import Page2 from "./pages/Page2/Page"
 import Page3 from "./pages/Page3/Page"
 import Page4 from "./pages/Page4/Page"
+import Page5 from "./pages/Page5/Page"
 import Page6 from "./pages/Page6/Page"
 import Page7 from "./pages/Page7/Page"
 import Page8 from "./pages/Page8/Page"
@@ -56,6 +57,7 @@ window.addEventListener("load",function(){
     animationController.registerPage(Page2, "page-2", "Page 2 - SubBytes")
     animationController.registerPage(Page3, "page-3", "Page 3 - SubBytes")
     animationController.registerPage(Page4, "page-4", "Page 4 - SubBytes")
+    animationController.registerPage(Page5, "page-5", "Page 5 - SubBytes")
     animationController.registerPage(Page6, "page-6", "Page 6 - SubBytes")
     animationController.registerPage(Page7, "page-7", "Page 7 - SubBytes")
     animationController.registerPage(Page8, "page-8", "Page 8 - SubBytes")
@@ -64,7 +66,27 @@ window.addEventListener("load",function(){
 
    animationController.registerPage(Page13, "page-13", "Page 13 - SubBytes")
     animationController.createTimeline();
-    animationController.goToPage("page-7");
+
+ 
+    animationController.goToPage("page-5");
+    animationController.getCurrentPage();
+
+
+    const debug = document.createElement("div");
+    debug.classList.add("debug-screen");
+    document.querySelector("body").appendChild(debug)
+
+
+    setInterval(() => {
+        debug.innerHTML = `
+            <div>currentPage: ${animationController.currentPage}</div>
+            <div>isRecalculating: ${animationController.currentPage}</div>
+        `
+    }, 500);
+
+    console.log(Page5.drawPage)
+
+   // animationController.tl.seek(54)
   
 },false);
 

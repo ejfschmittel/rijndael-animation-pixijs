@@ -61,12 +61,13 @@ class AnimationController{
 
 
     updateCurrentPage(pageID){
-        console.log("current page: " + pageID)
+       // console.log("current page: " + pageID)
         this.currentPage = pageID;
-
         this.updateAfterCurrentPageUpdate(pageID);      
     }
 
+
+    // update ui after page change
     updateAfterCurrentPageUpdate = debounce((pageID) => {
         const desktopMenuContainer = document.getElementById("rijndael-animation-menu-desktop")
         const mobileMenuContainer = document.getElementById("rijndael-animation-menu-mobile")
@@ -116,9 +117,6 @@ class AnimationController{
 
         // add on resize event listener
         window.addEventListener("resize", this.onResize)
-        
-      
-
     }
 
     updateAnimationDimensions = () => {
@@ -145,6 +143,7 @@ class AnimationController{
 
         console.time("redraw")
         this.pagesByID[this.currentPage].redraw();
+      
         console.timeEnd("redraw")
 
         this.onAfterResize();
@@ -189,21 +188,51 @@ class AnimationController{
     
     }
 
+
+    getCurrentPage = () => {
+        // keeping current page consistent ????
+        const labelsObj = this.tl.labels;
+        const tlCurrentTime = this.tl.totalTime();
+
+        let closestTime = null;
+        let closestLabel = null;
+        let closestTimeDist = 3000 // tl duration
+
+        Object.keys(labelsObj).forEach(label => {
+            const labelTime = labelsObj[label];
+
+            const dist = tlCurrentTime -labelTime;
+            if(dist >= 0 && dist < closestTimeDist){
+                closestTime = labelTime;
+                closestTimeDist = dist;
+                closestLabel = label;
+            }
+        })
+
+        console.log(`closest label is ${closestLabel} with ${closestTime} from ${tlCurrentTime}`)
+    }
+
     onAfterResize = debounce(() => {
 
-         console.time("after-resize")
+        console.time("after-resize")
         
+
+        console.time("redraw-pages")
         this.pages.forEach(pageID => {
             if(pageID !== this.currentPage)
+               // console.log(`redraw ${pageID}`)
+                //console.log(this.pagesByID)
+                //console.time(`redraw-page-${pageID}`)
                 this.pagesByID[pageID].redraw();
+                //console.timeEnd(`redraw-page-${pageID}`)
         })
+        console.timeEnd("redraw-pages")
        
         this.createTimeline();
     
         console.log(this.resizeStore)
         this.tl.seek(this.resizeStore.resetTime, false)
         if(this.resizeStore && this.resizeStore.paused === false) {
-            console.log("resume")
             this.resume();
         }
         this.resizeStore = null;
@@ -229,6 +258,10 @@ class AnimationController{
 
 
     createTimeline(){
+
+        this.tl = null;
+        this.tl = gsap.timeline({paused: true});
+
         this.pages.forEach((pageID, idx) => {
             const page = this.pagesByID[pageID]
             this.tl.call(() => this.updateCurrentPage(pageID))

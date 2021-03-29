@@ -4,29 +4,38 @@ import * as PIXI from "pixi.js"
 
 import Component from "./Component"
 
+
+
+const defaultTextStyles = {scale: 1}
+
 class TextBox extends Component{
 
 
-    constructor(backgroundStyles, textStyles){
+    constructor(text="", baseTextStyles){
         super()
 
      
-        this.backgroundStyles = backgroundStyles;
-        this.textStyles = textStyles
+
+        this.background = null;
+       
+        this.text = new PIXI.Text(text, baseTextStyles);
         
-        this.redraw()
+        //this.redraw()
     }
 
-    redraw(){
-        
-        const {backgroundStyles: bs, textStyles: ts} = this;
+    redraw(backgroundStyles, textStyles){
+
+        this.removeChildren();
+
+
+        const bs = backgroundStyles;
+        const ts = {...defaultTextStyles,...textStyles};
 
         // create text
-        const {text, ...otherTextStyles} = ts;
-        const textContent = text ? text : "";
 
-        const textStyle = new PIXI.TextStyle(otherTextStyles)
-        const textComponent = new PIXI.Text(textContent, textStyle);
+
+    
+ 
 
         // create background
         const background = new PIXI.Graphics()
@@ -34,27 +43,27 @@ class TextBox extends Component{
         // optionally add border
         if(bs.borderWidth > 0) background.lineStyle(bs.borderWidth, bs.borderFill, 1, 0)
 
-        background.beginFill(bs.fill)
+        background.beginFill(0xffffff)
         if(bs.borderRadius > 0){
             background.drawRoundedRect(0, 0, bs.width, bs.height, bs.borderRadius)
         }else{
             background.drawRect(0,0,bs.width,bs.height)
         }
         background.endFill()
-
+        background.tint = bs.fill;
         // position text in center of background
-        textComponent.position.set(bs.width / 2, bs.height / 2)
-        textComponent.anchor.set(0.5)
+        this.text.scale.set(ts.scale)
+        this.text.position.set(bs.width / 2, bs.height / 2)
+        this.text.anchor.set(0.5)
 
-        // create global references
-        this.textComponent = textComponent;
-        this.backgroundComponent = background;
+
+        this.background = background;
 
 
 
         // add to component
         this.addChild(background)
-        this.addChild(textComponent)
+        this.addChild(this.text)
     }
 
     updateContent(text){

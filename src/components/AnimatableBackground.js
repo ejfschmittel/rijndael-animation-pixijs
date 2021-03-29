@@ -37,7 +37,6 @@ class AnimatableBackground extends Component{
         barStyles = {...barStyleDefaults, ...barStyles}
         textStyles = {...textStyleDefaults, ...textStyles}
 
-        console.log(textStyles)
         this.background.redraw(backgroundStyles);
         this.bar.redraw({...barStyles});
 
