@@ -68,6 +68,8 @@ class Page6DefaultResponsives extends AnimationPageResponsives{
             y: defines.gridStyles.y + cellHeight * 3
         }
 
+
+
     
 
         return defines;

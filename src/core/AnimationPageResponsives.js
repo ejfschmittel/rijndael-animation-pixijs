@@ -53,7 +53,7 @@ class AnimationPageResponsives{
     createFadeOut(){
         const tl = gsap.timeline();
         tl.to(this.page, {pixi: {alpha: 0},duration: this.FADE_OUT_DURATION, delay: this.FADE_OUT_DELAY})
-      //  tl.set(this.page, {pixi: {visible: false}})
+        //tl.set(this.page, {pixi: {visible: false}})
         return tl;
     }
 

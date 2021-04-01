@@ -14,11 +14,14 @@
 
 import {getRandomHexValueList, hexStringToInt} from "../utils/hex"
 
+const zeros = [...new Array(30)].map(() => "00")
+
 
 const INITIAL_DATA = {
     "dummyGrid": getRandomHexValueList(16, 2),
     "sbox": getRandomHexValueList(16 * 16, 2),
-    "galoisField": ["02", "03", "01", "01", "01", "02", "03", "01", "01", "01", "02", "03", "03", "01", "01", "02"]
+    "galoisField": ["02", "03", "01", "01", "01", "02", "03", "01", "01", "01", "02", "03", "03", "01", "01", "02"],
+    "rcon": ["01", "02", "04", "08", "10", "20", "40", "80", "1b", "36", ...zeros]
 }
 
 class DataController{

@@ -1,0 +1,13 @@
+{
+    "page-1": {
+        "titlePartOne": "Rijndael",
+        "titlePartTwo": "Cipher",
+        "text": "Animation using a 128 bit size for each the data block and the key"
+    },
+    "page-2": {
+        "boxText": "Rijndael Encryptor",
+        "textleft": "Cipher key",
+        "textbottom": "Ciphertext",
+        "texttop": "Plaintext"
+    }
+}

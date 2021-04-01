@@ -26,11 +26,13 @@ export const ANIMATION_DIMENSIONS = {
 
 class AnimationController{
 
-    constructor(containerID){
+    constructor(containerID, locale){
 
         this.containerID = containerID;
         this.container = document.getElementById(containerID)
 
+
+        this.locale = locale;
 
         this.pages = []
         this.pagesByID = {}
@@ -76,9 +78,7 @@ class AnimationController{
         const menuItems = desktopMenuContainer.querySelectorAll(".rijndael-animation__nav-item")
 
         const currentIndex = this.pages.indexOf(pageID)
-        console.log(pageID)
-        console.log(this.tl.labels)
-        console.log(this.tl.totalTime())
+
         menuItems.forEach((menuItem, idx) => {
                 if(idx == currentIndex){
                     menuItem.classList.add("rijndael-animation__nav-item--current")
@@ -95,7 +95,7 @@ class AnimationController{
             menuItem.defaultSelected = false;
             }
         })
-    }, 100)
+    }, 50)
 
 
 
@@ -143,9 +143,9 @@ class AnimationController{
        
         // resize current page
     
-
+        console.time("redraw-current-page")
         this.pagesByID[this.currentPage].redraw();
-      
+        console.timeEnd("redraw-current-page")
  
 
         this.onAfterResize();
@@ -183,7 +183,7 @@ class AnimationController{
         // go to last safe reset point
         this.tl.seek(label, false)
 
-        console.log(`reset label ${label}`)
+       
         // store data
         this.resizeStore = {
             label,
@@ -215,7 +215,7 @@ class AnimationController{
             }
         })
 
-        console.log(`closest label is ${closestLabel} with ${closestTime} from ${tlCurrentTime}`)
+        
     }
 
     onAfterResize = debounce(() => {
@@ -249,7 +249,8 @@ class AnimationController{
 
 
     registerPage(PageClass, pageID, pageName){
-        const page = new PageClass(pageID)
+        const pageLocale = this.locale[pageID] || {}
+        const page = new PageClass(pageID, pageLocale)
         this.pagesByID[pageID] = page
         this.pages.push(pageID)
         this.pageNames[pageID] = pageName
@@ -294,7 +295,9 @@ class AnimationController{
               const menuItem = document.createElement("div")
               menuItem.classList.add("rijndael-animation__nav-item")
               menuItem.addEventListener("click", () => {
-                  this.goToPage(pageID)
+                    if(!this.isResizing){
+                     this.goToPage(pageID)
+                    }
               })
               desktopMenuContainer.appendChild(menuItem)
           })
@@ -310,14 +313,17 @@ class AnimationController{
           })
   
           mobileMenuContainer.addEventListener("change", (e) => {
-              const pageID = e.target.value;
-              this.goToPage(pageID)
+              if(!this.isResizing){
+                const pageID = e.target.value;
+                this.goToPage(pageID)
+              }
           })
     }
 
 
 
     goToPage(pageID){
+        console.log("go to page")
         const paused = this.tl.paused();
         this.tl.pause();
    

@@ -23,20 +23,18 @@ import Page10 from "./pages/Page10/Page"
 import Page11 from "./pages/Page11/Page"
 import Page12 from "./pages/Page12/Page"
 import Page13 from "./pages/Page13/Page"
-
+import Page14 from "./pages/Page14/Page"
 import * as PIXI from "pixi.js";
 
 import "./main.scss"
 
 
 
-window.addEventListener("load",function(){
+const createRijndaelAnimation = (locale) => {
     gsap.registerPlugin(MotionPathPlugin, PixiPlugin);
     PixiPlugin.registerPIXI(PIXI);
 
-
-   
-
+  
     /* 
         class Rijndael Animation
 
@@ -47,7 +45,7 @@ window.addEventListener("load",function(){
 
 
   
-    const animationController = new AnimationController("rijndael-animation-container")
+    const animationController = new AnimationController("rijndael-animation-container", locale)
 
     initHexSprites(animationController.app.renderer)
 
@@ -66,10 +64,63 @@ window.addEventListener("load",function(){
     animationController.registerPage(Page11, "page-11", "Page 11 - SubBytes")
     animationController.registerPage(Page12, "page-12", "Page 12 - SubBytes")
     animationController.registerPage(Page13, "page-13", "Page 13 - SubBytes")
+    animationController.registerPage(Page14, "page-14", "Page 14 - SubBytes")
     animationController.createTimeline();
 
  
-    animationController.goToPage("page-12");
+    animationController.goToPage("page-14");
+    animationController.getCurrentPage();
+
+
+
+
+  
+
+}
+
+
+window.addEventListener("load",function(){
+    const lang = document.documentElement.lang
+
+    import(`./languages/${lang}.locale.json`).then(locale => 
+        createRijndaelAnimation(locale.default)
+    );
+  //  createRijndaelAnimation();
+  
+    /* 
+        class Rijndael Animation
+
+            - create Pixi apllication
+            - create animation controller
+    
+    */
+
+
+  
+    /*const animationController = new AnimationController("rijndael-animation-container")
+
+    initHexSprites(animationController.app.renderer)
+
+    initTexture(animationController.app.renderer)
+    
+    animationController.registerPage(Page1, "page-1", "Page 1 - Intro")
+    animationController.registerPage(Page2, "page-2", "Page 2 - SubBytes")
+    animationController.registerPage(Page3, "page-3", "Page 3 - SubBytes")
+    animationController.registerPage(Page4, "page-4", "Page 4 - SubBytes")
+    animationController.registerPage(Page5, "page-5", "Page 5 - SubBytes")
+    animationController.registerPage(Page6, "page-6", "Page 6 - SubBytes")
+    animationController.registerPage(Page7, "page-7", "Page 7 - SubBytes")
+    animationController.registerPage(Page8, "page-8", "Page 8 - SubBytes")
+    animationController.registerPage(Page9, "page-9", "Page 9 - SubBytes")
+    animationController.registerPage(Page10, "page-10", "Page 10 - SubBytes")
+    animationController.registerPage(Page11, "page-11", "Page 11 - SubBytes")
+    animationController.registerPage(Page12, "page-12", "Page 12 - SubBytes")
+    animationController.registerPage(Page13, "page-13", "Page 13 - SubBytes")
+    animationController.registerPage(Page14, "page-14", "Page 14 - SubBytes")
+    animationController.createTimeline();
+
+ 
+    animationController.goToPage("page-14");
     animationController.getCurrentPage();
 
 
@@ -84,7 +135,7 @@ window.addEventListener("load",function(){
             <div>isRecalculating: ${animationController.currentPage}</div>
         `
     }, 500);
-
+*/
   
 
    // animationController.tl.seek(54)

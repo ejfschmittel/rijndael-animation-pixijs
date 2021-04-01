@@ -37,7 +37,8 @@ class Page4 extends AnimationPage{
 
         const sbox = new SBox()
         DataController.subscribe("sbox", sbox.grid.cells)
-
+        const {sBoxPos, sBoxStyles, sboxLegendStyles, sBoxTextStyles} = defines
+        sbox.redraw(sBoxStyles, sboxLegendStyles, sBoxTextStyles);
 
         const textBox = new TextBox()
 
