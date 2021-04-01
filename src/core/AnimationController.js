@@ -250,6 +250,8 @@ class AnimationController{
 
     registerPage(PageClass, pageID, pageName){
         const pageLocale = this.locale[pageID] || {}
+
+      
         const page = new PageClass(pageID, pageLocale)
         this.pagesByID[pageID] = page
         this.pages.push(pageID)

@@ -7,9 +7,8 @@ import AnimatableText from "../../components/AnimatableText"
 import DefaultResponsives from "./Responsives.default"
 
 class Page1 extends AnimationPage{
-    constructor(id){
-        super(id);
-
+    constructor(id, locale){
+        super(id, locale);
         this.registerResponsive("default", DefaultResponsives) 
     }
 
@@ -24,8 +23,8 @@ class Page1 extends AnimationPage{
         // create headline text
         const container = new Component();
 
-        const textRijndael = new AnimatableText({text: "Rijndael", ...baseTextStyles})
-        const textCipher = new AnimatableText({text: "Cipher", ...baseTextStyles})
+        const textRijndael = new AnimatableText({text: this.text("titlePartOne"), ...baseTextStyles})
+        const textCipher = new AnimatableText({text: this.text("titlePartTwo"), ...baseTextStyles})
 
         container.addChild(textRijndael, textCipher)
 

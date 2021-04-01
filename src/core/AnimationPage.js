@@ -25,9 +25,11 @@ import {gsap} from "gsap";
 
 
 class AnimationPage extends PIXI.Container{
-    constructor(id){
+    constructor(id, locale){
         super();
         this.id = id;
+
+        this.locale = locale;
  
         this.renderedComponents = {}
 
@@ -47,6 +49,12 @@ class AnimationPage extends PIXI.Container{
         this.responsivesByLabel = {}
       
     }
+
+
+    text(localeID){
+        return this.locale[localeID]
+    }
+
 
     addPermanent(obj){
         const objArray = Object.keys(obj).map(key => obj[key])
