@@ -137,10 +137,10 @@ class Page7DefaultResponsives extends AnimationPageResponsives{
         const landingsReturn = primaryGrids[Math.floor(resColIdx / 4)].getCol(resColIdx % 4)
 
 
-        console.log(landingsAddOne)
-
- 
      
+
+        console.log("landings")
+        console.log(col1)
     
 
         const tl = gsap.timeline();
@@ -160,6 +160,7 @@ class Page7DefaultResponsives extends AnimationPageResponsives{
         tl.add(this.moveGroup(colRes, landingsAddRes, {duration: .001}))
 
         // move columns down
+        tl.set(col1, {pixi: {alpha: 1}})
         tl.add(this.moveGroup(col1, landingsAddOne,{duration: 1}))
         tl.add(this.moveGroup(col2, landingsAddTwo,{duration: 1}))
 
@@ -233,18 +234,25 @@ class Page7DefaultResponsives extends AnimationPageResponsives{
             cipherKeyText,
             roundOneKeyText,
             roundTwoKeyText,
+            roundThreeKeyText,
+            roundTenKeyText,
             sText, aText, bText, textInitial, textXor,
-            rotWordText
+            rotWordText,
+            sboxText,
+            finalGridMovables,
+            pgFourMovablesOg
         } = this.getGlobalComponents();
         const tl = gsap.timeline();
 
         // hide movables and symbols
-        tl.set([...subBytesMovables.movables,...pgTwoMovablesTranform.movables, ...pgTwoMovablesOg.movables, ...pgThreeMovablesOg.movables, ...pgThreeMovablesTranform.movables], {pixi: {alpha: 0}})
+        tl.set([...pgFourMovablesOg.movables,...finalGridMovables.movables,...subBytesMovables.movables,...pgTwoMovablesTranform.movables, ...pgTwoMovablesOg.movables, ...pgThreeMovablesOg.movables, ...pgThreeMovablesTranform.movables], {pixi: {alpha: 0}})
         tl.set([
             addSymbol, addSymbol2, equalsSymbol, cipherKeyText, sbox, 
             subBytesText, roundOneKeyText, roundTwoKeyText, 
             sText, aText, bText, textInitial, textXor,
-            rotWordText
+            rotWordText, sboxText,
+            roundThreeKeyText,
+            roundTenKeyText,
         ], {pixi: {alpha: 0}})
   
 
@@ -257,27 +265,20 @@ class Page7DefaultResponsives extends AnimationPageResponsives{
     createAnimationMain(){
 
         const {
-            background, 
-            primaryGrids,
-            secondaryGrids,
-            equalsSymbol,
-            rcon,
-            rconText,
-            title,
-            bar,
-            finalGrid,
-            pgOneMovablesOg,
             pgOneMovablesTranform,
             pgTwoMovablesOg,
             pgTwoMovablesTranform,
             pgThreeMovablesOg,
             pgThreeMovablesTranform,
-            rconMovables,
-            addSymbol,
-            addSymbol2,
-            subBytesMovables,
-            sbox,
-            textXor
+            cipherKeyText,
+            roundOneKeyText,
+            roundTwoKeyText,
+            textXor,
+            pgFourMovablesOg,
+            finalGridMovables,
+            roundThreeKeyText,
+            roundTenKeyText,
+            rconMovables
         } = this.getGlobalComponents();
 
         const tl = gsap.timeline();
@@ -299,7 +300,7 @@ class Page7DefaultResponsives extends AnimationPageResponsives{
     
 
 
-        /* COL 5 - 8 */
+    
         
         // first box
         tl.to(textXor,{pixi: {alpha: 1}})
@@ -309,6 +310,29 @@ class Page7DefaultResponsives extends AnimationPageResponsives{
         tl.to(textXor,{pixi: {alpha: 0}})
 
 
+        tl.add(this.createSecondSubTimeline())
+
+
+     //   tl.set(pgTwoMovablesOg.movables, {pixi: {alpha: 1}})
+
+        tl.add(this.moveXL(8, pgTwoMovablesTranform, pgThreeMovablesTranform, pgThreeMovablesOg))
+        tl.add(this.moveXL(9, pgTwoMovablesTranform, pgThreeMovablesTranform, pgThreeMovablesOg))
+        tl.add(this.moveXL(10, pgTwoMovablesTranform, pgThreeMovablesTranform, pgThreeMovablesOg))
+
+
+        // reveal round key labels
+        tl.to([ cipherKeyText,roundOneKeyText,roundTwoKeyText], {pixi: {alpha: 1}})
+
+        // reveal round key 3
+        tl.to([...pgFourMovablesOg.movables, roundThreeKeyText], {pixi: {alpha: 1}});
+        tl.to(rconMovables.getCol(2), {pixi: {alpha: 0}}, "<");
+    
+
+        for(let i = 3; i < 10; i++){
+            tl.to(rconMovables.getCol(i), {pixi: {alpha: 0}, duration: .1, delay: .3});
+        }
+
+        tl.to([...finalGridMovables.movables, roundTenKeyText], {pixi: {alpha: 1}})
 
         
 
@@ -442,6 +466,105 @@ class Page7DefaultResponsives extends AnimationPageResponsives{
 
         // show column underneath result (for moving later)
         tl.set(pgTwoMovablesOg.getCol(0), {pixi: {alpha: 1}})
+
+        // hide equation
+        tl.to([addSymbol, addSymbol2, equalsSymbol], {pixi: {alpha: 0}})
+        tl.to([sText, aText, bText], {pixi: {alpha: 0}})
+        tl.to([...lastColMovables, ...firstColMovables, ...rconColMovables, ...subBytesMovables.movables], {pixi: {alpha: 0}})
+
+        // move last col back
+        tl.add(this.moveGroup(lastColMovables, lastColOgLanding, {duration: .001}))
+        tl.set(lastColMovables, {pixi: {alpha: 1}})
+
+        return tl;
+
+    }
+
+    createSecondSubTimeline(){
+        
+        const {
+            primaryGrids,
+            secondaryGrids,
+            equalsSymbol,
+
+            pgThreeMovablesTranform,
+            pgThreeMovablesOg,
+            pgTwoMovablesTranform,
+            rconMovables,
+            addSymbol,
+            addSymbol2,
+            subBytesMovables,
+            rotWordText,
+            aText,
+            sText,
+            textInitial,
+            bText
+        } = this.getGlobalComponents();
+
+        const tl = gsap.timeline();
+
+        // movables
+        const lastColMovables = pgTwoMovablesTranform.getCol(3);
+        const firstColMovables =  pgTwoMovablesTranform.getCol(0)
+        const rconColMovables = rconMovables.getCol(1)
+        const resultMovables = pgThreeMovablesTranform.getCol(0)
+
+        // landing
+        const lastColOgLanding = primaryGrids[1].getCol(3);
+        const addOneLanding = secondaryGrids[1].getCol(0)
+        const addTwoLanding = secondaryGrids[1].getCol(3)
+        const addThreeLanding = secondaryGrids[2].getCol(2)
+        const resultLanding = secondaryGrids[3].getCol(1)
+        const resultDestinationLanding = primaryGrids[2].getCol(0)
+
+        // hide + move result column to initial result position
+        tl.set([...resultMovables], {pixi: {alpha: 0}})
+        tl.add(this.moveGroup(resultMovables, resultLanding, {duration: .001}))
+
+        // move symbols to positions (hidden)
+        tl.set(addSymbol, {pixi: {...this.getSecondaryGridBounds(6)}})
+        tl.set(addSymbol2, {pixi: {...this.getSecondaryGridBounds(9)}})
+        tl.set(equalsSymbol, {pixi: {...this.getSecondaryGridBounds(12)}})
+        
+
+  
+        
+
+        // move down and shift col
+        const bounds = addTwoLanding[0].getBounds();
+        tl.to(rotWordText, {pixi: {x: bounds.x + 50, y: bounds.y + 30 }, duration: .001, delay: 2} )
+
+        tl.add(this.moveGroup(lastColMovables, addTwoLanding, {duration: 1}))
+        tl.to(rotWordText, {pixi: {alpha: 1}})
+        tl.add(this.shiftColumn(lastColMovables, addTwoLanding, {}))
+        tl.to(rotWordText, {pixi: {alpha: 0}})
+
+        // subbytes
+        tl.add(this.createSubByteTimeline(
+            lastColMovables,
+            subBytesMovables.getRow(1),
+            addTwoLanding
+        ))
+      
+
+        // move adds and reveal equation
+        tl.set(firstColMovables, {pixi: {alpha: 1}})
+        tl.add(this.moveGroup(firstColMovables, addOneLanding, {duration: 1}))
+        tl.to(addSymbol, {pixi: {alpha: 1}})
+
+        tl.add(this.moveGroup(rconColMovables, addThreeLanding, {duration: 1}))
+   
+        tl.to(addSymbol2, {pixi: {alpha: 1}})
+        tl.to(equalsSymbol, {pixi: {alpha: 1}})
+        tl.to(resultMovables, {pixi: {alpha: 1}})
+
+        // move back result
+        tl.add(this.moveGroup(resultMovables, resultDestinationLanding, {duration: 1}))
+
+        // hide / reset equation
+
+        // show column underneath result (for moving later)
+        tl.set(pgThreeMovablesOg.getCol(0), {pixi: {alpha: 1}})
 
         // hide equation
         tl.to([addSymbol, addSymbol2, equalsSymbol], {pixi: {alpha: 0}})

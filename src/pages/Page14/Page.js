@@ -40,17 +40,23 @@ class Page13 extends AnimationPage{
         const addSymbol2 = new CircledText("+");
 
         // grid subtitles
-        const gridSubtitleStyles = {fontSize: 20}
+        const gridSubtitleStyles = {fontSize: 16}
         const cipherKeyText = new PIXI.Text(this.text("cipherKeyLabel"), gridSubtitleStyles)
         const roundOneKeyText = new PIXI.Text(this.text("roundKeyOneLabel"), gridSubtitleStyles)
         const roundTwoKeyText = new PIXI.Text(this.text("roundKeyTwoLabel"), gridSubtitleStyles)
+        const roundThreeKeyText = new PIXI.Text(this.text("roundKeyThreeLabel"), gridSubtitleStyles)
+        const roundTenKeyText = new PIXI.Text(this.text("roundKeyTenLabel"), gridSubtitleStyles)
         cipherKeyText.anchor.set(.5, 0)
         roundOneKeyText.anchor.set(.5, 0)
         roundTwoKeyText.anchor.set(.5, 0)
+        roundThreeKeyText.anchor.set(.5, 0)
+        roundTenKeyText.anchor.set(1.5, 0)
 
 
-        const rotWordText = new PIXI.Text(this.text("RotWordLabel"))
-        const subBytesText = new PIXI.Text(this.text("SubBytesLabel"))
+        const labelStyles = {fill: 0xffffff}
+
+        const rotWordText = new PIXI.Text(this.text("RotWordLabel"), labelStyles)
+        const subBytesText = new PIXI.Text(this.text("SubBytesLabel"), labelStyles)
         const sboxText = new PIXI.Text(this.text("SBoxLabel"))
         subBytesText.anchor.set(1, .5)
 
@@ -106,12 +112,17 @@ class Page13 extends AnimationPage{
         const pgThreeMovablesTranform = primaryGridThree.createMovables();
         DataController.subscribe("dummyGrid", pgThreeMovablesOg.movables)
         DataController.subscribe("dummyGrid", pgThreeMovablesTranform.movables)
+
+        const pgFourMovablesOg = primaryGridFour.createMovables();
+        DataController.subscribe("dummyGrid", pgFourMovablesOg.movables)
         
 
         const subBytesMovables = primaryGridOne.createMovables();
         DataController.subscribe("dummyGrid", subBytesMovables.movables)
         
         const finalGrid = new Grid(4,4, {},{})
+        const finalGridMovables = finalGrid.createMovables();
+        DataController.subscribe("dummyGrid", finalGridMovables.movables)
 
 
         const secondaryGridOne = new Grid(4,4, {},{});
@@ -128,6 +139,7 @@ class Page13 extends AnimationPage{
         const rcon = new Grid(4, 10, {},{})
         const rconText = new PIXI.Text("Rcon", {fill: 0xffffff, fontSize: 30})
         const rconMovables = rcon.createMovables()
+        rcon.alpha = 0;
         DataController.subscribe("rcon", rconMovables.movables)
       
 
@@ -140,7 +152,8 @@ class Page13 extends AnimationPage{
             addSymbol,
             addSymbol2,
             sbox,
-            roundOneKeyText, roundTwoKeyText, cipherKeyText, rotWordText, sboxText,subBytesText,
+            roundOneKeyText, roundTwoKeyText, cipherKeyText, roundThreeKeyText, roundTenKeyText,
+            rotWordText, sboxText,subBytesText,
             textXor,
             textInitial, sText, aText, bText
             
@@ -155,9 +168,16 @@ class Page13 extends AnimationPage{
             ...pgThreeMovablesOg.movables, 
             ...pgThreeMovablesTranform.movables,
             ...rconMovables.movables,
-            ...subBytesMovables.movables
+            ...subBytesMovables.movables,
+            ...finalGridMovables.movables,
+            ...pgFourMovablesOg.movables
         )
-        this.addToGlobalComponents({subBytesMovables, rconMovables, primaryGrids, secondaryGrids, pgOneMovablesTranform, pgOneMovablesOg, pgTwoMovablesOg, pgTwoMovablesTranform, pgThreeMovablesOg, pgThreeMovablesTranform})
+        this.addToGlobalComponents({
+            pgFourMovablesOg,
+            finalGridMovables,
+            subBytesMovables, rconMovables, primaryGrids, secondaryGrids, 
+            pgOneMovablesTranform, pgOneMovablesOg, pgTwoMovablesOg, 
+            pgTwoMovablesTranform, pgThreeMovablesOg, pgThreeMovablesTranform})
     }
 
     drawPage(defines){
@@ -263,6 +283,8 @@ class Page13 extends AnimationPage{
 
         // grid movables
 
+        const {pgFourMovablesOg,finalGridMovables} = this.globalComponents
+
         const {firstGridStyle} = defines
 
         const {gridMovableStyles, gridTextStyle, subbytesMovablesStyles} = defines
@@ -270,7 +292,7 @@ class Page13 extends AnimationPage{
         this.redrawMovables(rconMovables, rcon, {fill: 0xffff00},{scale: .5})
 
         
-        this.redrawMovables(pgOneMovablesOg, primaryGrids[0], {...firstGridStyle},{})
+        this.redrawMovables(pgOneMovablesOg, primaryGrids[0], {...firstGridStyle}, gridTextStyle)
         this.redrawMovables(pgOneMovablesTranform, primaryGrids[0], {...firstGridStyle},gridTextStyle)
         this.redrawMovables(pgTwoMovablesOg, primaryGrids[1], gridMovableStyles,gridTextStyle)
         this.redrawMovables(pgTwoMovablesTranform, primaryGrids[1], gridMovableStyles,gridTextStyle)
@@ -278,6 +300,8 @@ class Page13 extends AnimationPage{
         this.redrawMovables(pgThreeMovablesTranform, primaryGrids[2], gridMovableStyles,gridTextStyle)
 
         this.redrawMovables(subBytesMovables, primaryGrids[0], subbytesMovablesStyles,gridTextStyle)
+        this.redrawMovables(pgFourMovablesOg, primaryGrids[3], gridMovableStyles,gridTextStyle)
+        this.redrawMovables(finalGridMovables, finalGrid, gridMovableStyles,gridTextStyle)
 
 
 
@@ -286,16 +310,20 @@ class Page13 extends AnimationPage{
         this.colorFirstCol(0x868486, pgTwoMovablesTranform)
         this.colorFirstCol(0x868486, pgThreeMovablesOg)
         this.colorFirstCol(0x868486, pgThreeMovablesTranform)
+        this.colorFirstCol(0x868486, pgFourMovablesOg)
+        this.colorFirstCol(0x868486, finalGridMovables)
 
 
         console.timeEnd("draw-page-14")
         // C2C0C2
 
-        const {cipherKeyText, roundOneKeyText, roundTwoKeyText} = this.globalComponents;
+        const {cipherKeyText, roundOneKeyText, roundTwoKeyText, roundThreeKeyText, roundTenKeyText} = this.globalComponents;
         
         cipherKeyText.position.set(primaryGrids[0].x + primaryGrids[0].width / 2, primaryGrids[0].y + primaryGrids[0].height + 10)
         roundOneKeyText.position.set(primaryGrids[1].x + primaryGrids[1].width / 2, primaryGrids[1].y + primaryGrids[1].height + 10)
         roundTwoKeyText.position.set(primaryGrids[2].x + primaryGrids[2].width / 2, primaryGrids[2].y + primaryGrids[2].height + 10)
+        roundThreeKeyText.position.set(primaryGrids[3].x + primaryGrids[3].width / 2, primaryGrids[3].y + primaryGrids[3].height + 10)
+        roundTenKeyText.position.set(finalGrid.x + finalGrid.width / 2, finalGrid.y + finalGrid.height + 10)
           
 
         const {textXor, aText, bText, sText, textInitial} = this.globalComponents
