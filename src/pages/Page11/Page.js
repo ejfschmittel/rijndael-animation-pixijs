@@ -23,8 +23,8 @@ import ResponsiveMax400 from "./Responsive.max-400"
 import HexadecimalTextBox from "../../components/HexadecimalTextBox.js"
 
 class Page11 extends AnimationPage{
-    constructor(id){
-        super(id);
+    constructor(id, locale){
+        super(id, locale);
 
 
         this.registerResponsive("max-400", ResponsiveMax400)
@@ -46,21 +46,21 @@ class Page11 extends AnimationPage{
         const background = this.createBackground();
 
 
-        const title1 = this.createTitle("Start of\nround", {fontSize: 30, align: "center"})
-        const title2 = this.createTitle("After\nSubBytes", {fontSize: 30, align: "center"})
-        const title3 = this.createTitle("After\nShiftRows", {fontSize: 30, align: "center"})
-        const title4 = this.createTitle("After\nMixColumns", {fontSize: 30, align: "center"})
-        const title5 = this.createTitle("Round key", {fontSize: 30, align: "center"})
+        const title1 = this.createTitle(this.text("roundLabel"), {fontSize: 30, align: "center"})
+        const title2 = this.createTitle(this.text("subBytesLabel"), {fontSize: 30, align: "center"})
+        const title3 = this.createTitle(this.text("ShiftRowsLabel"), {fontSize: 30, align: "center"})
+        const title4 = this.createTitle(this.text("MixColumnsLabel"), {fontSize: 30, align: "center"})
+        const title5 = this.createTitle(this.text("RoundKeyLabel"), {fontSize: 30, align: "center"})
 
        
         const titles = [title1, title2, title3, title4, title5]
         
-        const inputRow = new GridRow("input")
-        const row1 = new GridRow("round1")
-        const row2 = new GridRow("round2")
-        const row3 = new GridRow("round3")
-        const row4 = new GridRow("round4")
-        const row5 = new GridRow("round5")
+        const inputRow = new GridRow(this.text("inputLabel"))
+        const row1 = new GridRow(this.text("roundOneLabel"))
+        const row2 = new GridRow(this.text("roundTwoLabel"))
+        const row3 = new GridRow(this.text("roundThreeLabel"))
+        const row4 = new GridRow(this.text("roundFourLabel"))
+        const row5 = new GridRow(this.text("roundFiveLabel"))
 
 
         inputRow.addGridStyles(1, {fill: 0xCDCBCD})

@@ -18,8 +18,8 @@ import ResponsiveMax400 from "./Responsive.max-400"
 import HexadecimalTextBox from "../../components/HexadecimalTextBox.js"
 
 class Page4 extends AnimationPage{
-    constructor(id){
-        super(id);
+    constructor(id, locale){
+        super(id, locale);
 
 
         this.registerResponsive("max-400", ResponsiveMax400)
@@ -33,7 +33,7 @@ class Page4 extends AnimationPage{
     create(defines){
         const background = this.createBackground();
         
-        const animatableBackground = new AnimatableBackground("1 - SubBytes", {})
+        const animatableBackground = new AnimatableBackground(this.text("title"), {})
 
         const sbox = new SBox()
         DataController.subscribe("sbox", sbox.grid.cells)

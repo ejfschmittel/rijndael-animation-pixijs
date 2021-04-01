@@ -21,8 +21,8 @@ import ResponsiveMax400 from "./Responsive.max-400"
 import HexadecimalTextBox from "../../components/HexadecimalTextBox.js"
 
 class Page1 extends AnimationPage{
-    constructor(id){
-        super(id);
+    constructor(id, locale){
+        super(id, locale);
 
 
       //  this.registerResponsive("max-400", ResponsiveMax400)
@@ -39,30 +39,30 @@ class Page1 extends AnimationPage{
         const textStyle = {fill: 0xffffff}
 
         // title
-        const title = new PIXI.Text("Input", {...textStyle, fontSize: 60})
+        const title = new PIXI.Text(this.text("title"), {...textStyle, fontSize: 60})
         title.anchor.set(.5, .5)
 
         /* left side */
-        const subtitleLeft = new PIXI.Text("State", {...textStyle, fontSize: 36})
+        const subtitleLeft = new PIXI.Text(this.text("subtitleLeft"), {...textStyle, fontSize: 36})
         subtitleLeft.anchor.set(.5, .5)
 
         const gridLeft = new Grid2(4,4, {}, {})
         DataController.subscribe("dummyGrid", gridLeft.cells)
 
-        const textLeft = new PIXI.Text("to\nEncryption\nProcess", {fill: 0xD47F00, align: "center", fontWeight: "500"})
+        const textLeft = new PIXI.Text(this.text("textLeft"), {fill: 0xD47F00, align: "center", fontWeight: "500"})
         textLeft.anchor.set(.5, 0)
 
         const leftCircle = new CircledText("A", {fontSize: 30, fill: 0xffffff})
 
 
         /* right side */
-        const subtitleRight = new PIXI.Text("Cipher", {...textStyle, fontSize: 36})
+        const subtitleRight = new PIXI.Text(this.text("subtitleRight"), {...textStyle, fontSize: 36})
         subtitleRight.anchor.set(.5)
 
         const gridRight = new Grid2(4,4, {}, {})
         DataController.subscribe("dummyGrid", gridRight.cells)
 
-        const textRight = new PIXI.Text("to\nKey\nSchedule", {fill: 0x5787E1, align: "center", fontWeight: "500"})
+        const textRight = new PIXI.Text(this.text("textRight"), {fill: 0x5787E1, align: "center", fontWeight: "500"})
         textRight.anchor.set(.5, 0)
 
         const rightCircle = new CircledText("B", {fontSize: 30, fill: 0xffffff})

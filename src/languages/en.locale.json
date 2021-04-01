@@ -6,27 +6,29 @@
     },
     "page-2": {
         "boxText": "Rijndael Encryptor",
-        "textleft": "Cipher key",
-        "textbottom": "Ciphertext",
-        "texttop": "Plaintext"
+        "textLeft": "Cipher key",
+        "textBottom": "Ciphertext",
+        "textTop": "Plaintext"
     },
     "page-3": {
         "title": "Input",
-        "subitlte-left": "State",
-        "subtitle-right": "Cipher key",
-        "explanation-left": "This is a block from the plaintext message to be encrypted",
-        "explanation-right": "Hexadecimal notation (sample):",
-        "text-left": "to Encryption Process",
-        "text-right": "to key Schedule"
+        "subtitleLeft": "State",
+        "subtitleRight": "Cipher key",
+        "explanationLeft": "This is a block from the plaintext message to be encrypted",
+        "explanationRight": "Hexadecimal notation (sample):",
+        "textLeft": "to Encryption Process",
+        "textRight": "to key Schedule"
     },
     "page-4": {
         "title": "Encryption Process",
         "text": "(Performing the encryption of the given plaintext block using 4 diffrent transformation in the initial round, the 9 main rounds and the final round)"
     },
     "page-5": {
+        "title": "Encryption Process",
+
         "titleInitialRound": "initial round",
         "titleMainRounds": "9 main rounds",
-        "finalRound": "final round",
+        "titleFinalRound": "final round",
         "labelInitial": "AddRoundKey",
         "labelMrone": "1-SubBytes",
         "labelMrTwo": "2-ShiftRows",

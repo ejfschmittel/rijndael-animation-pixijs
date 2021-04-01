@@ -18,8 +18,8 @@ import ResponsiveMax600 from "./Responsive.max-600"
 import ResponsiveMax400 from "./Responsive.max-400"
 
 class Page2 extends AnimationPage{
-    constructor(id){
-        super(id);
+    constructor(id, locale){
+        super(id, locale);
 
 
       //  this.registerResponsive("max-400", ResponsiveMax400)
@@ -32,7 +32,7 @@ class Page2 extends AnimationPage{
     create(defines){
         const background = this.createBackground();
 
-        const centerBox = new TextBox("Rijndael\nEncryptor", {
+        const centerBox = new TextBox(this.text("boxText"), {
             fill: 0xffffff,
             align: "center",
             fontSize: 50,
@@ -63,7 +63,7 @@ class Page2 extends AnimationPage{
         const arrowTopContainer = new PIXI.Container();
 
         // create text + arrow
-        const text = new PIXI.Text("Plaintext",{fill: 0xffffff})
+        const text = new PIXI.Text(this.text("textTop"),{fill: 0xffffff})
         text.scale.set(textStyles.scale)
         const arrowTop = new ArrowWithText({orientation: ARROW_ORIENTATION.DOWN, ...arrowStyles},arrowFontStyles)
 
@@ -85,7 +85,7 @@ class Page2 extends AnimationPage{
         const arrowBotContainer = new PIXI.Container();
 
         // create text + arrow
-        const textBot = new PIXI.Text("Ciphertext",{fill: 0xD49136})
+        const textBot = new PIXI.Text(this.text("textBottom"),{fill: 0xD49136})
         textBot.scale.set(textStyles.scale)
         const arrowBot = new ArrowWithText({orientation: ARROW_ORIENTATION.DOWN, ...arrowStyles},{...arrowFontStyles, fill: 0xD49136})
 
@@ -106,7 +106,7 @@ class Page2 extends AnimationPage{
         const arrowLeftContainer = new PIXI.Container();
 
         // create text + arrow
-        const textLeft = new PIXI.Text("Cipher Key",{fill: 0xffffff})
+        const textLeft = new PIXI.Text(this.text("textLeft"),{fill: 0xffffff})
         textLeft.scale.set(textStyles.scale)
         const arrowLeft = new ArrowWithText({orientation: ARROW_ORIENTATION.RIGHT, ...arrowLeftStyles},arrowFontStyles)
 

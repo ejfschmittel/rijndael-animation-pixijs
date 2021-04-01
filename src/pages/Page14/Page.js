@@ -15,8 +15,8 @@ import ResponsiveMax400 from "./Responsive.max-400"
 
 
 class Page13 extends AnimationPage{
-    constructor(id){
-        super(id);
+    constructor(id, locale){
+        super(id, locale);
 
       // this.registerResponsive("max-600", ResponsiveMax600)
         this.registerResponsive("default", DefaultResponsives)
@@ -28,7 +28,7 @@ class Page13 extends AnimationPage{
         const background = this.createBackground();
 
 
-        const title = new PIXI.Text("Key Schedule", {fill: 0xffffff, fontSize: 30})
+        const title = new PIXI.Text(this.text("title"), {fill: 0xffffff, fontSize: 30})
         const bar = new SpriteBackground();
 
 
@@ -41,37 +41,38 @@ class Page13 extends AnimationPage{
 
         // grid subtitles
         const gridSubtitleStyles = {fontSize: 20}
-        const cipherKeyText = new PIXI.Text("Cipher key", gridSubtitleStyles)
-        const roundOneKeyText = new PIXI.Text("Round key 1", gridSubtitleStyles)
-        const roundTwoKeyText = new PIXI.Text("Round key 2", gridSubtitleStyles)
+        const cipherKeyText = new PIXI.Text(this.text("cipherKeyLabel"), gridSubtitleStyles)
+        const roundOneKeyText = new PIXI.Text(this.text("roundKeyOneLabel"), gridSubtitleStyles)
+        const roundTwoKeyText = new PIXI.Text(this.text("roundKeyTwoLabel"), gridSubtitleStyles)
         cipherKeyText.anchor.set(.5, 0)
         roundOneKeyText.anchor.set(.5, 0)
         roundTwoKeyText.anchor.set(.5, 0)
 
 
-        const rotWordText = new PIXI.Text("RotWord")
-        const subBytesText = new PIXI.Text("SubBytes")
-        const sboxText = new PIXI.Text("S-Box")
+        const rotWordText = new PIXI.Text(this.text("RotWordLabel"))
+        const subBytesText = new PIXI.Text(this.text("SubBytesLabel"))
+        const sboxText = new PIXI.Text(this.text("SBoxLabel"))
         subBytesText.anchor.set(1, .5)
 
-        const Rcon4Text = new PIXI.Text("Rcon(4)")
+        const Rcon4Text = new PIXI.Text(this.text("RconFourLabel"))
 
 
-        const initalText = "The expanded key can be seen as an array of 32-bit words (columns), numbered from 0 to 43. The first four columns are filled with the given Cipher key."
-        const textInitial = new PIXI.Text(initalText, { wordWrap: true,wordWrapWidth: 160, fontSize: 14})
+       
+        const textInitial = new PIXI.Text(this.text("textIntro"), { wordWrap: true,wordWrapWidth: 160, fontSize: 14})
         textInitial.anchor.set(1, 0)
 
-        const textA = "Words in positions that are a multiple of 4 (W4, W8, ..., W40) are calculated by: \n a) applying the RotWord and SubBytes transformation to the previous word wi-1."
-        const aText = new PIXI.Text(textA, { wordWrap: true,wordWrapWidth: 160, fontSize: 14})
+
+        const sText = new PIXI.Text(this.text("text"), { wordWrap: true,wordWrapWidth: 160, fontSize: 14})
+        sText.anchor.set(1, 0)
+     
+        const aText = new PIXI.Text(this.text("textA"), { wordWrap: true,wordWrapWidth: 160, fontSize: 14})
         aText.anchor.set(1, 0)
 
-        const textB = "Adding (XOR) this result to the word 4 positions earlier wi-4. plus a round constant Rcon"
-        const bText = new PIXI.Text(textB, { wordWrap: true,wordWrapWidth: 160, fontSize: 14})
+        const bText = new PIXI.Text(this.text("textB"), { wordWrap: true,wordWrapWidth: 160, fontSize: 14})
         bText.anchor.set(1, 0)
 
 
-        const xorText = "The remaining 32-bit words wi, are calculated by adding (XOR) the previous word wi-1, with the word 4 positions earlier wi-4."
-        const textXor = new PIXI.Text(xorText, { wordWrap: true,wordWrapWidth: 160, fontSize: 14})
+        const textXor = new PIXI.Text(this.text("textXOR"), { wordWrap: true,wordWrapWidth: 160, fontSize: 14})
         textXor.anchor.set(1, 0)
 
 

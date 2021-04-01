@@ -23,8 +23,8 @@ import ResponsiveMax400 from "./Responsive.max-400"
 import HexadecimalTextBox from "../../components/HexadecimalTextBox.js"
 
 class Page11 extends AnimationPage{
-    constructor(id){
-        super(id);
+    constructor(id, locale){
+        super(id, locale);
 
 
         this.registerResponsive("max-400", ResponsiveMax400)
@@ -46,20 +46,20 @@ class Page11 extends AnimationPage{
         const background = this.createBackground();
 
 
-        const title1 = this.createTitle("Start of\nround", {fontSize: 30, align: "center"})
-        const title2 = this.createTitle("After\nSubBytes", {fontSize: 30, align: "center"})
-        const title3 = this.createTitle("After\nShiftRows", {fontSize: 30, align: "center"})
-        const title4 = this.createTitle("After\nMixColumns", {fontSize: 30, align: "center"})
-        const title5 = this.createTitle("Round key", {fontSize: 30, align: "center"})
+        const title1 = this.createTitle(this.text("roundLabel"), {fontSize: 30, align: "center"})
+        const title2 = this.createTitle(this.text("subBytesLabel"), {fontSize: 30, align: "center"})
+        const title3 = this.createTitle(this.text("ShiftRowsLabel"), {fontSize: 30, align: "center"})
+        const title4 = this.createTitle(this.text("MixColumnsLabel"), {fontSize: 30, align: "center"})
+        const title5 = this.createTitle(this.text("RoundKeyLabel"), {fontSize: 30, align: "center"})
 
        
         const titles = [title1, title2, title3, title4, title5]
         
-        const row6 = new GridRow("round6")
-        const row7 = new GridRow("round7")
-        const row8 = new GridRow("round8")
-        const row9 = new GridRow("round9")
-        const row10 = new GridRow("round10")
+        const row6 = new GridRow(this.text("roundSixLabel"))
+        const row7 = new GridRow(this.text("roundSevenLabel"))
+        const row8 = new GridRow(this.text("roundEightLabel"))
+        const row9 = new GridRow(this.text("roundNineLabel"))
+        const row10 = new GridRow(this.text("roundTenLabel"))
        
         row10.addGridStyles(3, {fill: 0xCDCBCD})
 

@@ -17,8 +17,8 @@ import ResponsiveMax400 from "./Responsive.max-400"
 import HexadecimalTextBox from "../../components/HexadecimalTextBox.js"
 
 class Page4 extends AnimationPage{
-    constructor(id){
-        super(id);
+    constructor(id, locale){
+        super(id, locale);
 
 
       //  this.registerResponsive("max-400", ResponsiveMax400)
@@ -32,10 +32,10 @@ class Page4 extends AnimationPage{
     create(defines){
         const background = this.createBackground();
         // title
-        const title = new PIXI.Text("The 4 types of\ntransformations:", {fill: 0x333333, fontSize: 24, align: "center", fontWeight: "700"})
+        const title = new PIXI.Text(this.text("title"), {fill: 0x333333, fontSize: 24, align: "center", fontWeight: "700"})
         title.anchor.set(.5, .5)
       
-        this.addPermanent({background,title,})
+        this.addPermanent({background,title})
        
     }
 
@@ -63,10 +63,10 @@ class Page4 extends AnimationPage{
 
 
         const container = new PIXI.Container();
-        const labelSubBytes = new SlowTextBox({...labelStyles, fill: 0xB2D7F9},{text: "1-SubBytes"})
-        const labelShiftRows = new SlowTextBox({...labelStyles, fill: 0xFACCC7},{text: "2-ShiftRows"})
-        const labelMixColumns = new SlowTextBox({...labelStyles, fill: 0xEFEAC1},{text: "3-MixColumns"})
-        const labelAddRoundKey = new SlowTextBox({...labelStyles, fill: 0xA2C1B7},{text: "4-AddRoundKey"})
+        const labelSubBytes = new SlowTextBox({...labelStyles, fill: 0xB2D7F9},{text: this.text("labelOne")})
+        const labelShiftRows = new SlowTextBox({...labelStyles, fill: 0xFACCC7},{text: this.text("labelTwo")})
+        const labelMixColumns = new SlowTextBox({...labelStyles, fill: 0xEFEAC1},{text: this.text("labelThree")})
+        const labelAddRoundKey = new SlowTextBox({...labelStyles, fill: 0xA2C1B7},{text: this.text("labelFour")})
 
         const labelMargin = 20;
         labelShiftRows.position.set(0, labelSubBytes.y + labelSubBytes.height + labelMargin)

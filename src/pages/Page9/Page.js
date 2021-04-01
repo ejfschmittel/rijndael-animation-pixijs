@@ -16,8 +16,8 @@ import ResponsiveMax400 from "./Responsive.max-400"
 import HexadecimalTextBox from "../../components/HexadecimalTextBox.js"
 
 class Page9 extends AnimationPage{
-    constructor(id){
-        super(id);
+    constructor(id, locale){
+        super(id, locale);
 
 
         this.registerResponsive("max-400", ResponsiveMax400)
@@ -33,7 +33,7 @@ class Page9 extends AnimationPage{
 
         const background = this.createBackground();
         
-        const animatableBackground = new AnimatableBackground("3 - MixColumns", {})
+        const animatableBackground = new AnimatableBackground(this.text("title"), {})
 
 
           // grid + movables

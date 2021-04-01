@@ -21,43 +21,29 @@ import ResponsiveMax400 from "./Responsive.max-400"
 import HexadecimalTextBox from "../../components/HexadecimalTextBox.js"
 
 class Page4 extends AnimationPage{
-    constructor(id){
-        super(id);
-
+    constructor(id, locale){
+        super(id, locale);
 
       //  this.registerResponsive("max-400", ResponsiveMax400)
         this.registerResponsive("max-600", ResponsiveMax600)
         this.registerResponsive("default", DefaultResponsives)
-
-        
+   
     }
 
 
     create(defines){
         const background = this.createBackground();
-
-
           
         const circledChar = new CircledText("A", {fontSize: 30, fill: 0xffffff})
 
         // title
-        const title = new PIXI.Text("Encryption\nProcess", {fill: 0xFF9906, fontSize: 40, align: "center"})
+        const title = new PIXI.Text(this.text("title"), {fill: 0xFF9906, fontSize: 40, align: "center"})
         title.anchor.set(.5, .5)
 
-
-        const textString = `(Performing the encryption of the\ngiven plaintext block using 4 different\ntransformations in the initial round,\nthe 9 main rounds and the final round)`
-
-        const text = new PIXI.Text(textString, {fontSize: 18, fill: 0xffffff})
+        const text = new PIXI.Text(this.text("text"), {fontSize: 18, fill: 0xffffff})
         text.anchor.set(.5, .5)
 
-       
-     
-
-
-        
-        this.addPermanent({background, circledChar, title, text})
-
-       
+        this.addPermanent({background, circledChar, title, text})    
     }
 
     drawPage(defines){

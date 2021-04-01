@@ -23,8 +23,8 @@ import TextBox from "../../components/SlowTextBox"
 import SVGPath from "../../components/Page5Path"
 
 class Page5 extends AnimationPage{
-    constructor(id){
-        super(id);
+    constructor(id, locale){
+        super(id, locale);
 
 
         //this.registerResponsive("max-400", ResponsiveMax400)
@@ -43,7 +43,7 @@ class Page5 extends AnimationPage{
         const svg = new SVGPath();
         
         const {abBaseTextStyles} = defines
-        const animatableBackground = new AnimatableBackground("Encryption Process", abBaseTextStyles)
+        const animatableBackground = new AnimatableBackground(this.text("title"), abBaseTextStyles)
 
         // create big labels
 
@@ -54,11 +54,11 @@ class Page5 extends AnimationPage{
         }
         const labelBaseStyle = new PIXI.TextStyle(labelTextBaseStyle)
 
-        const labelInitialRound = new PIXI.Text("initial\nround",  labelBaseStyle);
+        const labelInitialRound = new PIXI.Text(this.text("titleInitialRound"), labelBaseStyle);
 
-        const labelMainRounds = new PIXI.Text("9\nmain\nrounds", labelBaseStyle);
+        const labelMainRounds = new PIXI.Text(this.text("titleMainRounds"), labelBaseStyle);
 
-        const labelFinalRound = new PIXI.Text( "final\nround", labelBaseStyle);
+        const labelFinalRound = new PIXI.Text(this.text("titleFinalRound"), labelBaseStyle);
 
 
         
@@ -70,16 +70,16 @@ class Page5 extends AnimationPage{
 
         // create labels
         const {roundedLabelStyles} = defines
-        const initialAddRoundKey = new SlowTextBox("AddRoundKey")
+        const initialAddRoundKey = new SlowTextBox(this.text("labelInitial"))
 
-        const mrSubBytes = new SlowTextBox("1-SubBytes")
-        const mrShiftRows = new SlowTextBox("2-ShiftRows")
-        const mrMixColumns = new SlowTextBox( "3-MixColumns")
-        const mrAddRoundKey = new SlowTextBox( "4-AddRoundKey")
+        const mrSubBytes = new SlowTextBox(this.text("labelMrone"))
+        const mrShiftRows = new SlowTextBox(this.text("labelMrTwo"))
+        const mrMixColumns = new SlowTextBox(this.text("labelMrThree"))
+        const mrAddRoundKey = new SlowTextBox(this.text("labelMrFour"))
 
-        const frSubBytes = new SlowTextBox( "SubBytes")
-        const frShiftRows = new SlowTextBox("ShiftRows")
-        const frAddRoundKey = new SlowTextBox("AddRoundKey")
+        const frSubBytes = new SlowTextBox(this.text("labelFrOne"))
+        const frShiftRows = new SlowTextBox(this.text("labelFrTwo"))
+        const frAddRoundKey = new SlowTextBox(this.text("labelFrThree"))
 
         //const mrAddRoundKey 
 

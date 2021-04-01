@@ -16,8 +16,8 @@ import ResponsiveMax400 from "./Responsive.max-400"
 import HexadecimalTextBox from "../../components/HexadecimalTextBox.js"
 
 class Page4 extends AnimationPage{
-    constructor(id){
-        super(id);
+    constructor(id, locale){
+        super(id, locale);
 
 
       //  this.registerResponsive("max-400", ResponsiveMax400)
@@ -31,7 +31,7 @@ class Page4 extends AnimationPage{
     create(defines){
         const background = this.createBackground();
         
-        const animatableBackground = new AnimatableBackground("2 - Shift Rows", {})
+        const animatableBackground = new AnimatableBackground(this.text("title"), {})
 
 
    
@@ -49,15 +49,15 @@ class Page4 extends AnimationPage{
 
 
         const textContainer1 = new PIXI.Container();
-        const text1 = new PIXI.Text("rotate over 1 byte", textBaseStyle)
+        const text1 = new PIXI.Text(this.text("rotateTextOne"), textBaseStyle)
         textContainer1.addChild(text1)
 
         const textContainer2 = new PIXI.Container();
-        const text2 = new PIXI.Text("rotate over 2 bytes", textBaseStyle)
+        const text2 = new PIXI.Text(this.text("rotateTextTwo"), textBaseStyle)
         textContainer2.addChild(text2)
 
         const textContainer3 = new PIXI.Container();
-        const text3 = new PIXI.Text("rotate over 3 bytes", textBaseStyle)
+        const text3 = new PIXI.Text(this.text("rotateTextThree"), textBaseStyle)
         textContainer3.addChild(text3)
 
       

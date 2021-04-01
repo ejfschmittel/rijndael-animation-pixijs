@@ -11,8 +11,8 @@ import ResponsiveMax400 from "./Responsive.max-400"
 
 
 class Page13 extends AnimationPage{
-    constructor(id){
-        super(id);
+    constructor(id, locale){
+        super(id, locale);
 
         this.registerResponsive("max-600", ResponsiveMax600)
         this.registerResponsive("default", DefaultResponsives)
@@ -27,12 +27,12 @@ class Page13 extends AnimationPage{
         const circledChar = new CircledText("B", {fontSize: 30, fill: 0xffffff})
 
         // create title
-        const title = new PIXI.Text("Encryption\nProcess", {fill: 0x2184EE, fontSize: 40, align: "center"})
+        const title = new PIXI.Text(this.text("title"), {fill: 0x2184EE, fontSize: 40, align: "center"})
         title.anchor.set(.5, .5)
 
         // create text
-        const textString = `(Expansion of the givenCipher key into\n11 partialkeys, used in the initial round,\n the 9 main rounds and the final round)`
-        const text = new PIXI.Text(textString, {fontSize: 18, fill: 0xffffff})
+      
+        const text = new PIXI.Text(this.text("text"), {fontSize: 18, fill: 0xffffff})
         text.anchor.set(.5, .5)
    
         this.addPermanent({background, circledChar, title, text})
