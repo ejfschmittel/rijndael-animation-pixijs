@@ -89,6 +89,16 @@ class Page7DefaultResponsives extends AnimationPageResponsives{
             x: this.getWidth(96),
             y: this.getHeight(50)
         }
+
+        defines.initialTextPos = {
+            x: this.getWidth(96),
+            y: this.getHeight(50)
+        }
+
+        defines.sTextStylesPos = {
+            x: this.getWidth(96),
+            y: this.getHeight(50)
+        }
     
         return defines;
     }
@@ -222,13 +232,20 @@ class Page7DefaultResponsives extends AnimationPageResponsives{
             subBytesText,
             cipherKeyText,
             roundOneKeyText,
-            roundTwoKeyText
+            roundTwoKeyText,
+            sText, aText, bText, textInitial, textXor,
+            rotWordText
         } = this.getGlobalComponents();
         const tl = gsap.timeline();
 
         // hide movables and symbols
         tl.set([...subBytesMovables.movables,...pgTwoMovablesTranform.movables, ...pgTwoMovablesOg.movables, ...pgThreeMovablesOg.movables, ...pgThreeMovablesTranform.movables], {pixi: {alpha: 0}})
-        tl.set([addSymbol, addSymbol2, equalsSymbol, cipherKeyText, roundOneKeyText, roundTwoKeyText], {pixi: {alpha: 0}})
+        tl.set([
+            addSymbol, addSymbol2, equalsSymbol, cipherKeyText, sbox, 
+            subBytesText, roundOneKeyText, roundTwoKeyText, 
+            sText, aText, bText, textInitial, textXor,
+            rotWordText
+        ], {pixi: {alpha: 0}})
   
 
       
@@ -259,7 +276,8 @@ class Page7DefaultResponsives extends AnimationPageResponsives{
             addSymbol,
             addSymbol2,
             subBytesMovables,
-            sbox
+            sbox,
+            textXor
         } = this.getGlobalComponents();
 
         const tl = gsap.timeline();
@@ -284,10 +302,11 @@ class Page7DefaultResponsives extends AnimationPageResponsives{
         /* COL 5 - 8 */
         
         // first box
+        tl.to(textXor,{pixi: {alpha: 1}})
         tl.add(this.moveXL(4, pgOneMovablesTranform, pgTwoMovablesTranform, pgTwoMovablesOg))
         tl.add(this.moveXL(5, pgOneMovablesTranform, pgTwoMovablesTranform, pgTwoMovablesOg))
         tl.add(this.moveXL(6, pgOneMovablesTranform, pgTwoMovablesTranform, pgTwoMovablesOg))
-        
+        tl.to(textXor,{pixi: {alpha: 0}})
 
 
 
@@ -352,7 +371,12 @@ class Page7DefaultResponsives extends AnimationPageResponsives{
             rconMovables,
             addSymbol,
             addSymbol2,
-            subBytesMovables
+            subBytesMovables,
+            rotWordText,
+            aText,
+            sText,
+            textInitial,
+            bText
         } = this.getGlobalComponents();
 
         const tl = gsap.timeline();
@@ -380,11 +404,18 @@ class Page7DefaultResponsives extends AnimationPageResponsives{
         tl.set(addSymbol2, {pixi: {...this.getSecondaryGridBounds(5)}})
         tl.set(equalsSymbol, {pixi: {...this.getSecondaryGridBounds(8)}})
         
+
+        tl.to(textInitial, {pixi: {alpha: 1}})
         
+
         // move down and shift col
+        const bounds = addTwoLanding[0].getBounds();
+        tl.to(rotWordText, {pixi: {x: bounds.x + 50, y: bounds.y + 30 }, duration: .001, delay: 2} )
+        tl.to(textInitial, {pixi: {alpha: 0}})
         tl.add(this.moveGroup(lastColMovables, addTwoLanding, {duration: 1}))
+        tl.to([rotWordText, aText, sText], {pixi: {alpha: 1}})
         tl.add(this.shiftColumn(lastColMovables, addTwoLanding, {}))
-    
+        tl.to(rotWordText, {pixi: {alpha: 0}})
 
         // subbytes
         tl.add(this.createSubByteTimeline(
@@ -399,6 +430,7 @@ class Page7DefaultResponsives extends AnimationPageResponsives{
         tl.to(addSymbol, {pixi: {alpha: 1}})
 
         tl.add(this.moveGroup(rconColMovables, addThreeLanding, {duration: 1}))
+        tl.to(bText, {pixi: {alpha: 1}})
         tl.to(addSymbol2, {pixi: {alpha: 1}})
         tl.to(equalsSymbol, {pixi: {alpha: 1}})
         tl.to(resultMovables, {pixi: {alpha: 1}})
@@ -413,6 +445,7 @@ class Page7DefaultResponsives extends AnimationPageResponsives{
 
         // hide equation
         tl.to([addSymbol, addSymbol2, equalsSymbol], {pixi: {alpha: 0}})
+        tl.to([sText, aText, bText], {pixi: {alpha: 0}})
         tl.to([...lastColMovables, ...firstColMovables, ...rconColMovables, ...subBytesMovables.movables], {pixi: {alpha: 0}})
 
         // move last col back

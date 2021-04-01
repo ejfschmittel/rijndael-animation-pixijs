@@ -71,7 +71,6 @@ class Page13 extends AnimationPage{
         const bText = new PIXI.Text(this.text("textB"), { wordWrap: true,wordWrapWidth: 160, fontSize: 14})
         bText.anchor.set(1, 0)
 
-
         const textXor = new PIXI.Text(this.text("textXOR"), { wordWrap: true,wordWrapWidth: 160, fontSize: 14})
         textXor.anchor.set(1, 0)
 
@@ -142,7 +141,9 @@ class Page13 extends AnimationPage{
             addSymbol2,
             sbox,
             roundOneKeyText, roundTwoKeyText, cipherKeyText, rotWordText, sboxText,subBytesText,
-            textXor
+            textXor,
+            textInitial, sText, aText, bText
+            
         })
 
 
@@ -297,9 +298,16 @@ class Page13 extends AnimationPage{
         roundTwoKeyText.position.set(primaryGrids[2].x + primaryGrids[2].width / 2, primaryGrids[2].y + primaryGrids[2].height + 10)
           
 
-        const {textXor} = this.globalComponents
-        const {xorTextPos} = defines;
+        const {textXor, aText, bText, sText, textInitial} = this.globalComponents
+        const {xorTextPos, sTextStylesPos, initialTextPos} = defines;
         textXor.position.set(xorTextPos.x, xorTextPos.y)
+
+
+        textInitial.position.set(initialTextPos.x,initialTextPos.y)
+        sText.position.set(sTextStylesPos.x, sTextStylesPos.y)
+        aText.position.set(sText.x, sText.y + sText.height)
+        bText.position.set(sText.x, aText.y + aText.height)
+
     }
 
     colorFirstCol(color, grid){
