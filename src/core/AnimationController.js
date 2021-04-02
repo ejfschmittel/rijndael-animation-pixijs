@@ -32,6 +32,8 @@ class AnimationController{
         this.container = document.getElementById(containerID)
 
 
+        this.isLoading = true;
+
         this.locale = locale;
 
         this.pages = []
@@ -52,10 +54,17 @@ class AnimationController{
         playBtn.addEventListener("click", this.onPlayPause.bind(this))
    
         if(this.tl.paused()){        
-           playBtn.classList.remove("rijndael-animation__play--btn--paused")
-        }else{
            playBtn.classList.add("rijndael-animation__play-btn--paused")
+        }else{
+           playBtn.classList.remove("rijndael-animation__play-btn--paused")
         }
+
+
+        const jumpForwardsButton = document.getElementById("rijndael-animation-jump-forwards")
+        jumpForwardsButton.addEventListener("click", this.jumpForwards.bind(this))
+
+        const jumpBackwardsButton = document.getElementById("rijndael-animation-jump-backwards")
+        jumpBackwardsButton.addEventListener("click", this.jumpBackwards.bind(this))
 
         this.init();
  
@@ -157,32 +166,10 @@ class AnimationController{
         this.isResizing = true;
 
         this.pause();
-         /*let labelTimes = []
-
-        // get label times of direct children
-        const directLabelTimes = Object.keys(this.tl.labels).map(key => {
-            return this.tl.labels[key];
-        })
-
-        labelTimes = labelTimes.concat(...directLabelTimes)
-        
-
-        // get clostest labeled resetpoint
-        let closestLabelTime = 0;
-        
-        for(let i = 0; i < labelTimes.length; i++){
-            const dist = time - labelTimes[i]
-            if(dist >= 0 && dist < time - closestLabelTime){
-                closestLabelTime = labelTimes[i]
-            }
-            
-        }*/
         const label = this.tl.currentLabel();
         
-
         // go to last safe reset point
         this.tl.seek(label, false)
-
        
         // store data
         this.resizeStore = {
@@ -354,23 +341,33 @@ class AnimationController{
 
     playFrom(label=null){
         const playBtn = document.getElementById("rijndael-animation-play") 
-        playBtn.classList.add("rijndael-animation__play-btn--paused")
+        playBtn.classList.remove("rijndael-animation__play-btn--paused")
         this.tl.play(label, false)      
     }
 
 
     resume(){
         const playBtn = document.getElementById("rijndael-animation-play") 
-        playBtn.classList.add("rijndael-animation__play-btn--paused")
+        playBtn.classList.remove("rijndael-animation__play-btn--paused")
         this.tl.resume()
     }
 
     pause(){
         const playBtn = document.getElementById("rijndael-animation-play") 
-        playBtn.classList.remove("rijndael-animation__play-btn--paused")
+        playBtn.classList.add("rijndael-animation__play-btn--paused")
         this.tl.pause()
     }
   
+
+    jumpForwards(){
+        const currentTime = this.tl.totalTime();
+        this.tl.seek(currentTime + .5, false)       
+    }
+
+    jumpBackwards(){
+        const currentTime = this.tl.totalTime();
+        this.tl.seek(currentTime - .5, false)  
+    }
 
 
 
