@@ -41,23 +41,43 @@ class SpriteBackground extends PIXI.Sprite{
       
             this.foreground = new PIXI.Sprite(baseTexture)   
             this.addChild(this.foreground)
+
+            this._height = null;
+            this._width = null;
         
     }
 
     redraw(styles={}){      
         const {fill, width, height, borderWidth, borderColor} = {...defaultStyles, ...styles};
 
-        const scaleFactor = this.getScaleFactor(width, height)
-        this.scale.set(scaleFactor.scaleX, scaleFactor.scaleY)
-        this.tint = borderColor;
+  
+        if(this._height !== height || this._width !== width){
+            this._height = height;
+            this._width = width;
         
-        this.scaleForeGround(width,height,scaleFactor, borderWidth)
-        this.foreground.tint = fill;
+            const scaleFactor = this.getScaleFactor(width, height)
+            this.scale.set(scaleFactor.scaleX, scaleFactor.scaleY)
+            this.tint = borderColor;
+            
+        
+            this.scaleForeGround(width,height,scaleFactor, borderWidth)
+            
+    
+            this.foreground.tint = fill;
+        }
+ 
+
+
+        
+      
     }
 
     scaleForeGround(width, height, scaleFactor, borderWidth){
+       
+   
         const scaleX = (width - 2 * borderWidth) / width;
         const scaleY = (height - 2 * borderWidth) / height;
+       
 
         this.foreground.scale.set(scaleX,scaleY)
         this.foreground.position.set(borderWidth / scaleFactor.scaleX, borderWidth / scaleFactor.scaleY)

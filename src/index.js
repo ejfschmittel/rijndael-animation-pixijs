@@ -47,7 +47,7 @@ const createRijndaelAnimation = (locale) => {
   
     const animationController = new AnimationController("rijndael-animation-container", locale)
 
-    initHexSprites(animationController.app.renderer)
+    //initHexSprites(animationController.app.renderer)
 
     initTexture(animationController.app.renderer)
     

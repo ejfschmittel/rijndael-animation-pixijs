@@ -125,8 +125,7 @@ class Page7DefaultResponsives extends AnimationPageResponsives{
         const col1 = movablesOne.getCol(col1Idx % 4);
         const col2 = movablesTwo.getCol(col2Idx % 4);
 
-        console.log(col1Idx % 4)
-        console.log(col1)
+  
 
         const colRes = movablesTwo.getCol(resColIdx % 4);
 
@@ -139,8 +138,7 @@ class Page7DefaultResponsives extends AnimationPageResponsives{
 
      
 
-        console.log("landings")
-        console.log(col1)
+       
     
 
         const tl = gsap.timeline();

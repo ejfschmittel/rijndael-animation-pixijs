@@ -227,8 +227,10 @@ class AnimationController{
         this.pages.forEach(pageID => {
             if(pageID !== this.currentPage){
                 this.pagesByID[pageID].redraw();
-                this.pagesByID[pageID].hide();
+               // this.pagesByID[pageID].hide();
+       
             }       
+            gsap.set(this.pagesByID[pageID], {pixi: {alpha: 0}})
         })
         console.timeEnd("redraw-pages")
        
@@ -236,13 +238,14 @@ class AnimationController{
         this.createTimeline();
         console.timeEnd("recreate-timeline")
     
-        console.log(this.resizeStore)
+        console.time("seek")
         this.tl.seek(this.resizeStore.label, false)
         if(this.resizeStore && this.resizeStore.paused === false) {
             this.resume();
         }
         this.resizeStore = null;
         this.isResizing = false;
+        console.timeEnd("seek")
         console.timeEnd("after-resize")
     }, 500)
 
@@ -291,9 +294,7 @@ class AnimationController{
 
           // create desktop menu
 
-          this.pages.forEach(pageID => {
-  
-              
+          this.pages.forEach(pageID => {      
               const menuItem = document.createElement("div")
               menuItem.classList.add("rijndael-animation__nav-item")
               menuItem.addEventListener("click", () => {
@@ -330,6 +331,7 @@ class AnimationController{
         this.tl.pause();
    
         this.tl.seek(`${pageID}-animation-main`, false)
+
         this.updateCurrentPage(pageID)
         if(!paused) this.tl.play(null, false);
     }

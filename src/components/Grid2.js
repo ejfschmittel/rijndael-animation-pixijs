@@ -13,6 +13,8 @@ class ResponsiveGrid extends PIXI.Container{
         this.bgStyles = bgStyles;
         this.textStyles = textStyles;
 
+
+
         this.cells = [...new Array(this.cols * this.rows)].map((_,idx) => {
             const cell = new TextBox()
             this.addChild(cell)
@@ -23,21 +25,20 @@ class ResponsiveGrid extends PIXI.Container{
     }
 
 
-    redraw(bgStyles, textStyles){
-
+    redraw(bgStyles, textStyles){       
         bgStyles = {width: 300, height: 200, ...bgStyles}
 
         const cellWidth = bgStyles.width / this.cols;
         const cellHeight = bgStyles.height / this.rows;
-
+      
         for(let r = 0; r < this.rows; r++){
-            for(let c = 0; c < this.cols; c++){
+        
+            for(let c = 0; c < this.cols; c++){        
                 const cell = this.cells[r * this.cols + c];
                 cell.redraw({...bgStyles, width: cellWidth, height: cellHeight}, textStyles)
-                cell.position.set(cellWidth * c, cellHeight * r)
+                cell.position.set(cellWidth * c, cellHeight * r)       
             }
         }
-  
     }
 
     createMovables(cellBackgroundStyle, cellTextStyle={}){

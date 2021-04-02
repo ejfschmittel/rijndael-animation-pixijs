@@ -205,7 +205,6 @@ class Page13 extends AnimationPage{
             subBytesText
         } = this.globalComponents
 
-        console.time("draw-page-14")
         // destructure defines
         const {
             backgroundStyles,
@@ -314,7 +313,7 @@ class Page13 extends AnimationPage{
         this.colorFirstCol(0x868486, finalGridMovables)
 
 
-        console.timeEnd("draw-page-14")
+        
         // C2C0C2
 
         const {cipherKeyText, roundOneKeyText, roundTwoKeyText, roundThreeKeyText, roundTenKeyText} = this.globalComponents;

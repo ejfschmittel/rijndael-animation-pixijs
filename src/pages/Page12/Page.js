@@ -111,13 +111,13 @@ class Page11 extends AnimationPage{
 
         const {rowStyles, rowTitleStyles} = defines
 
+    
 
         rows.forEach((row, idx) => {
             row.redraw(rowStyles, rowTitleStyles);
             const y = idx !== 0 ? rows[idx-1].y + rows[idx-1].height : rowStyles.y;
             row.position.set(0, y + rowStyles.margin) 
         })
-
 
        // const {titles} = this.globalComponents;
         const {titleStyles} = defines

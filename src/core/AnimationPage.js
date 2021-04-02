@@ -79,9 +79,13 @@ class AnimationPage extends PIXI.Container{
 
     init(){
         this.removeChildren();
+     
         const defines = this.getDefines();
+
         this.create(defines)
+
         this.drawPage(defines)
+       
     }
 
     drawPage(defines){}
