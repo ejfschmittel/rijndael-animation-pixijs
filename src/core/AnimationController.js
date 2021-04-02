@@ -18,12 +18,6 @@ export const ANIMATION_DIMENSIONS = {
 
 
 
-
-
-
-
-
-
 class AnimationController{
 
     constructor(containerID, locale){
@@ -122,6 +116,7 @@ class AnimationController{
         const bounds = this.container.getBoundingClientRect();
         this.app.renderer.resize(bounds.width, bounds.height)
    
+
 
 
         // add stage to canvas

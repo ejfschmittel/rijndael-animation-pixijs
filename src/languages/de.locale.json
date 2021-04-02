@@ -20,7 +20,7 @@
         "textRight": "zum Key Schedule"
     },
     "page-4": {
-        "title": "Verschlüsselungsprozess",
+        "title": "Verschlüsselungs-\nprozess",
         "text": "(Durchführen der Verschlüsselung des gegebenen Klartextblocks mit 4 verschiedenen Transformationen in der ersten Runde, den 9 Hauptrunden und der letzten Runde)"
     },
     "page-5": {

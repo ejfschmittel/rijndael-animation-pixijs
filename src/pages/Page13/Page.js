@@ -32,8 +32,8 @@ class Page13 extends AnimationPage{
 
         // create text
       
-        const text = new PIXI.Text(this.text("text"), {fontSize: 18, fill: 0xffffff})
-        text.anchor.set(.5, .5)
+        const text = new PIXI.Text(this.text("text"), {fontSize: 18, fill: 0xffffff,  wordWrap: true,wordWrapWidth: 340,})
+        text.anchor.set(.5, 0)
    
         this.addPermanent({background, circledChar, title, text})
     }
