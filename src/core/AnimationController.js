@@ -294,9 +294,12 @@ class AnimationController{
 
           // create desktop menu
 
-          this.pages.forEach(pageID => {      
-              const menuItem = document.createElement("div")
+   
+          this.pages.forEach((pageID, pageIndex) => {      
+              const menuItem = document.createElement("label")
               menuItem.classList.add("rijndael-animation__nav-item")
+              menuItem.innerHTML = pageIndex + 1;
+              menuItem.title = this.pageNames[pageID]
               menuItem.addEventListener("click", () => {
                     if(!this.isResizing){
                      this.goToPage(pageID)
@@ -321,6 +324,7 @@ class AnimationController{
                 this.goToPage(pageID)
               }
           })
+          
     }
 
 
