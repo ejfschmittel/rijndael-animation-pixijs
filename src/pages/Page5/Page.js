@@ -96,7 +96,9 @@ class Page5 extends AnimationPage{
 
        // this.addToGlobalComponents({runner})
        
-       this.sortChildren = true;
+       this.sortableChildren = true;
+
+     
     }
 
 

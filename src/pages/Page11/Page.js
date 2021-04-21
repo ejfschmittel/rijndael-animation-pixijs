@@ -115,21 +115,26 @@ class Page11 extends AnimationPage{
 
 
   
+     
         rows.forEach((row, idx) => {
             row.redraw(rowStyles, rowTitleStyles);
-            const y = idx !== 0 ? rows[idx-1].y + rows[idx-1].height : rowStyles.y;
+ 
+            const y = idx !== 0 ? rows[idx-1].y + rowStyles.height : rowStyles.y;
             row.position.set(0, y + rowStyles.margin) 
         })
+      
   
 
        // const {titles} = this.globalComponents;
         const {titleStyles} = defines
 
 
+        console.time(`redraw-grids-pos`)
         titles.forEach((title, idx) => {
             title.scale.set(titleStyles.scale)
-            title.position.set(row1.grids[idx].x + row1.grids[idx].width / 2, titleStyles.y)
+            title.position.set(row1.grids[idx].x + rows[0].gridWidth / 2, titleStyles.y)
         })
+        console.timeEnd(`redraw-grids-pos`)
 
 
 

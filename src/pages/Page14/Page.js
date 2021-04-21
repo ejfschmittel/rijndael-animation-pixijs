@@ -84,7 +84,7 @@ class Page13 extends AnimationPage{
         const sbox = new SBox();
         DataController.subscribe("sbox", sbox.grid.cells)
         sbox.redraw({width: 360, height: 240, legendWidth: 20}, {scale: .3}, {scale: .3})
-        sbox.pivot.set(sbox.width, sbox.height / 2)
+        sbox.pivot.set(360, 240 / 2)
 
 
 
@@ -230,7 +230,7 @@ class Page13 extends AnimationPage{
      
        const {sboxStyles} = defines
         sbox.position.set(sboxStyles.x, sboxStyles.y)
-        subBytesText.position.set(sbox.x - sbox.width , sbox.y )
+        subBytesText.position.set(sbox.x - 360, sbox.y )
         
 
         // redraw primary grids
@@ -240,7 +240,7 @@ class Page13 extends AnimationPage{
             grid.redraw({...baseGridStyles})
 
             const prevGrid = idx != 0 ? primaryGrids[idx -1] : null;
-            const primaryGridsX = prevGrid ? prevGrid.x + prevGrid.width : 50;
+            const primaryGridsX = prevGrid ? prevGrid.x + baseGridStyles.width : 50;
             grid.position.set(primaryGridsX, primaryGridsY)
             
         })
@@ -252,7 +252,7 @@ class Page13 extends AnimationPage{
             grid.redraw({...baseGridStyles})
 
             const prevGrid = idx != 0 ? primaryGrids[idx -1] : null;
-            const primaryGridsX = prevGrid ? prevGrid.x + prevGrid.width : 50;
+            const primaryGridsX = prevGrid ? prevGrid.x + baseGridStyles.width : 50;
             grid.position.set(primaryGridsX, secondaryGridsY)
             
         })
@@ -262,16 +262,16 @@ class Page13 extends AnimationPage{
         const {finalGridPos} = defines
         finalGrid.redraw({...baseGridStyles})
         finalGrid.position.set(finalGridPos.x, primaryGridsY)
-        finalGrid.pivot.set(finalGrid.width, 0)
+        finalGrid.pivot.set(baseGridStyles.width, 0)
 
       
         // redraw rcon
         const {rconStyles} = defines;
         rcon.redraw({...rconStyles})
         rcon.position.set(rconStyles.x, rconStyles.y)
-        rcon.pivot.set(rcon.width/2, rcon.height)
+        rcon.pivot.set(rconStyles.width/2, rconStyles.height)
        
-        rconText.position.set(rcon.x + rcon.width / 2 + 20, rcon.y - rcon.height / 2)
+        rconText.position.set(rcon.x + rconStyles.width / 2 + 20, rcon.y - rconStyles.height / 2)
         rconText.anchor.set(0, .5)
    
     
@@ -318,11 +318,11 @@ class Page13 extends AnimationPage{
 
         const {cipherKeyText, roundOneKeyText, roundTwoKeyText, roundThreeKeyText, roundTenKeyText} = this.globalComponents;
         
-        cipherKeyText.position.set(primaryGrids[0].x + primaryGrids[0].width / 2, primaryGrids[0].y + primaryGrids[0].height + 10)
-        roundOneKeyText.position.set(primaryGrids[1].x + primaryGrids[1].width / 2, primaryGrids[1].y + primaryGrids[1].height + 10)
-        roundTwoKeyText.position.set(primaryGrids[2].x + primaryGrids[2].width / 2, primaryGrids[2].y + primaryGrids[2].height + 10)
-        roundThreeKeyText.position.set(primaryGrids[3].x + primaryGrids[3].width / 2, primaryGrids[3].y + primaryGrids[3].height + 10)
-        roundTenKeyText.position.set(finalGrid.x + finalGrid.width / 2, finalGrid.y + finalGrid.height + 10)
+        cipherKeyText.position.set(primaryGrids[0].x + baseGridStyles.width / 2, primaryGrids[0].y + baseGridStyles.height + 10)
+        roundOneKeyText.position.set(primaryGrids[1].x + baseGridStyles.width / 2, primaryGrids[1].y + baseGridStyles.height + 10)
+        roundTwoKeyText.position.set(primaryGrids[2].x + baseGridStyles.width / 2, primaryGrids[2].y + baseGridStyles.height + 10)
+        roundThreeKeyText.position.set(primaryGrids[3].x + baseGridStyles.width / 2, primaryGrids[3].y + baseGridStyles.height + 10)
+        roundTenKeyText.position.set(finalGrid.x + baseGridStyles.width / 2, finalGrid.y + baseGridStyles.height + 10)
           
 
         const {textXor, aText, bText, sText, textInitial} = this.globalComponents

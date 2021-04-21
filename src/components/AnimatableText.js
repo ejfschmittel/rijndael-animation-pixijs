@@ -5,23 +5,37 @@ import Component from "./Component"
 
 
 class AnimatableText extends Component{
-    constructor(baseTextStyles){
+    constructor(text, baseTextStyle={}){
         super();
 
+        this.baseTextStyle = baseTextStyle
 
+        // default styles
+        this._lastDrawStyles = {scale: 1, letterspacing: 0, fontSize: 60}
 
-        const {text, ...baseTextStyle} = baseTextStyles
+        this.createTextElements(text);
 
+        
+    }
+
+    createTextElements(text){
+        this.removeChildren();
         this.chars = [...text].map((char, idx) => {           
-            const charGraphic = new PIXI.Text(char, baseTextStyle);        
+            const charGraphic = new PIXI.Text(char, this.baseTextStyle);        
             this.addChild(charGraphic)
             return charGraphic;
         })
     }
 
-    redraw(textStyles){
+    updateLocaleText(text){
+        this.createTextElements(text)
+        this.redraw();   
+    }
 
-        textStyles = {scale: 1, letterspacing: 0, fontSize: 60, ...textStyles}
+    redraw(textStyles={}){
+
+        textStyles = {...this._lastDrawStyles, ...textStyles}
+        this._lastDrawStyles = textStyles
 
         this.chars.forEach((char, idx) => {
             const x = idx !== 0 ? this.chars[idx-1].x + this.chars[idx-1].width +  textStyles.letterspacing : 0;

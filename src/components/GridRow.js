@@ -70,7 +70,7 @@ class GridRow extends Component{
         }
 
 
-
+      
         titleStyles = {scale: 1, rotation: 0, ...titleStyles}
         fontStyles = {scale: .5, ...fontStyles}
 
@@ -90,13 +90,15 @@ class GridRow extends Component{
         const gridWidth = openSpace / 5;
         const gridHeight = rowStyles.height - rowStyles.margin
    
+        this.gridWidth = gridWidth;
+      
         // redraw
-
+       
         grids.forEach((grid, idx) => {
             const styles = this.getGridStyles(idx)
             grid.redraw({width: gridWidth, height: gridHeight, ...styles}, {scale: .3});
         })
-  
+      
 
         
      

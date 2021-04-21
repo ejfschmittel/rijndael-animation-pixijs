@@ -85,7 +85,6 @@ class Page5Path extends Component{
 
 
         const getSegment = (y, length, prev) => {
-
             return {
                 y,
                 length,

@@ -82,13 +82,19 @@ class Page4 extends AnimationPage{
 
         const {sBoxPos, sBoxStyles, sboxLegendStyles, sBoxTextStyles} = defines
         sbox.redraw(sBoxStyles, sboxLegendStyles, sBoxTextStyles);
-        sbox.pivot.set(sbox.width, sbox.height)
+        console.time("pivot-box")
+        // 50+, 9.3 => .0003
+        sbox.pivot.set(sBoxStyles.width, sBoxStyles.height)
+        console.timeEnd("pivot-box")
         sbox.position.set(sBoxPos.x, sBoxPos.y)
 
 
         const {textBoxStyle} = defines;
         textBox.redraw(textBoxStyle, {})
-        textBox.position.set(sbox.x - sbox.width / 2, sbox.y - sbox.height - textBox.height -10)
+        console.time("position-text")
+        // 8.4 => .06
+        textBox.position.set(sbox.x - sBoxStyles.width / 2, sbox.y - sBoxStyles.height - textBox.height -10)
+        console.timeEnd("position-text")
         textBox.pivot.set(textBox.width/2, 0)
 
 

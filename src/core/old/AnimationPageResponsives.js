@@ -1,7 +1,7 @@
 
-//import {ANIMATION_DIMENSIONS} from "./AnimationController"
+import {ANIMATION_DIMENSIONS} from "./AnimationController"
 
-
+import {COLORS} from "../utils/colors"
 
 import {gsap} from "gsap"
 
@@ -16,12 +16,11 @@ class AnimationPageResponsives{
         this.FADE_OUT_DURATION = .0001;
         this.FADE_IN_DURATION = .0001;
 
-       
+        this.COLORS = COLORS;
     }
 
-    getColor(name){
-        return this.page.getColor(name)
-    }
+
+    
 
     evoke(pageDimensions){   
         return false;
@@ -33,27 +32,13 @@ class AnimationPageResponsives{
     }
 
     getWidth(widthPercent){
-        return this.page.controller.ANIMATION_DIMENSIONS.widthPercent * widthPercent
+        return ANIMATION_DIMENSIONS.widthPercent * widthPercent
     }
 
     getHeight(heightPercent){
-        return this.page.controller.ANIMATION_DIMENSIONS.heightPercent * heightPercent
+        return ANIMATION_DIMENSIONS.heightPercent * heightPercent
     }
 
-    // timeline insert to update currentpage number in 
-    createUpdatePage(prevPageID){
-        const obj = {val:0};
-        const tl = gsap.timeline({
-            onStart: () => {
-                this.controller.setCurrentPage(this.id)
-            },
-            onReverseComplete: () => {
-                if(prevPageID) this.controller.setCurrentPage(prevPageID)
-            }
-        })
-        tl.to(obj, {val: 1, duration: .0001})
-        return tl;
-    }
     createPreFadeIn(){}
     createAnimationIn(){}
     createAnimationOut(){}

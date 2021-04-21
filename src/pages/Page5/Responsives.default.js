@@ -52,18 +52,18 @@ class Page6DefaultResponsives extends AnimationPageResponsives{
 
         defines.label1Pos = {
             x: this.getWidth(90),
-            y: 100,
+            y: this.getHeight(30),
         }
 
         defines.label2Pos = {
             x: this.getWidth(90),
-            y: 300,
+            y: this.getHeight(50),
         }
 
 
         defines.label3Pos = {
             x: this.getWidth(90),
-            y: 500,
+            y: this.getHeight(80),
         }
 
         defines.labelTextStyles = {
@@ -110,6 +110,14 @@ class Page6DefaultResponsives extends AnimationPageResponsives{
     }
 
 
+    createPreFadeIn(){
+        const {runner, svg, container,initialAddRoundKey, mrSubBytes, mrShiftRows, mrMixColumns, mrAddRoundKey,  frSubBytes, frShiftRows, frAddRoundKey,}  = this.getGlobalComponents();
+        const obj = {val: 0};
+        const tl = gsap.timeline()
+        tl.to(obj, {val: 1, duration: .0001})
+        tl.set([initialAddRoundKey, mrSubBytes, runner, mrShiftRows, mrMixColumns, mrAddRoundKey,  frSubBytes, frShiftRows, frAddRoundKey], {pixi: {zIndex: 20}})
+        return tl;
+    }
 
 
 

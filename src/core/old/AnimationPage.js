@@ -1,42 +1,59 @@
 
 
-
-import {gsap} from "gsap"
 import * as PIXI from "pixi.js"
 
+import {ANIMATION_DIMENSIONS} from "../core/AnimationController"
 import SpriteBackground from "../components/SpriteBackground"
 
-//import {dashedStringToCammelCase} from "../utils/utils"
+import {gsap} from "gsap";
+/*
+    new Page();
 
-import {getDimensions}  from "./MovablesController"
+
+    init():
+        - create 
+        - redraw();
+
+    redraw():
+        - remove recreated
+        - get defines
+        - redraw();
+        
+
+*/
+
+
 
 class AnimationPage extends PIXI.Container{
-    constructor(){
+    constructor(id, locale){
         super();
-        this.id = null;
-   
-        this.FADE_IN_DURATION = .0001;
-        this.FADE_OUT_DURATION = .00001;
-        this.FADE_OUT_DELAY = 3;
-        this.autoLabelCounter = 0;
+        this.id = id;
 
-        // body reference for theme colors
-        this.bodyReference = document.querySelector("body")
-
+        this.locale = locale;
+ 
         this.renderedComponents = {}
 
-    
+
+
         this.permanentComponents = []
         this.temporaryComponents = []
         this.globalComponents = {}
 
-        // responsives (define ui sizes for differnt screen dimensions )
+        // this.globalComponents
+        // this.addPermanent()
+        // this.addTemporary()
+
         this.DEFAULT_RESPONSIVE_LABEL = "default"
         this.responsives = []
-        this.responsivesByLabel = {}   
-
-        this.timeline = null;
+        this.responsivesByLabel = {}
+      
     }
+
+
+    text(localeID){
+        return this.locale[localeID]
+    }
+
 
     addPermanent(obj){
         const objArray = Object.keys(obj).map(key => obj[key])
@@ -58,23 +75,20 @@ class AnimationPage extends PIXI.Container{
         this.responsivesByLabel[label] = new AnimationPageResponsive(label, this)
     }
 
-    initPage(pageID, controller){
-        this.id = pageID;
-        this.controller = controller;
 
-        if(!this.timeline) throw new Error(`Animation page ${pageID} is missing timeline`);
-
-     
-
+    init(){
         this.removeChildren();
      
         const defines = this.getDefines();
 
-       
         this.create(defines)
 
         this.drawPage(defines)
+       
     }
+
+    drawPage(defines){}
+
 
     redraw(){
         this.removeChild(...this.temporaryComponents)
@@ -83,10 +97,15 @@ class AnimationPage extends PIXI.Container{
         this.drawPage(defines)
     }
 
-    // override to create graphics
-    create(defines){}
-    drawPage(defines){}
+    addToRenderedComponents(obj){
+        this.renderedComponents = {...this.renderedComponents, ...obj}
+    }
 
+    addToGlobalComponents(obj){
+        this.globalComponents = {...this.globalComponents, ...obj}
+    }
+
+    
     createBackground(color){
         const background = new SpriteBackground();
         return background;
@@ -104,7 +123,6 @@ class AnimationPage extends PIXI.Container{
             // return last as default;
             if(i == this.responsives.length -1) return responsive;
         }
-
     }
 
     getDefines(){
@@ -117,7 +135,7 @@ class AnimationPage extends PIXI.Container{
             const label = this.responsives[i];
             const responsive = this.responsivesByLabel[label]
 
-            if(responsive.evoke(this.controller.ANIMATION_DIMENSIONS)){       
+            if(responsive.evoke(ANIMATION_DIMENSIONS)){       
                 defines =  responsive.getDefines(defaultDefines)
                 if(defines !== undefined) break;
             }
@@ -126,67 +144,53 @@ class AnimationPage extends PIXI.Container{
 
         const d =  defines ? defines: defaultDefines;
 
-        return {...d, animationDimensions: this.controller.ANIMATION_DIMENSIONS}
+        return {...d, animationDimensions: ANIMATION_DIMENSIONS}
     }
 
 
-    /* replace with responsive tl templates ? (kinda unecessary). Splite Animation & responsives aka defines? */
-
-   
 
 
-    addToRenderedComponents(obj){
-        this.renderedComponents = {...this.renderedComponents, ...obj}
+    
+
+    createPageTimeline(globalTimeline, last=false){
+
+        globalTimeline.add(this.getTLMethod((responsive, defaultResponsive) => responsive.createPreFadeIn(defaultResponsive)), `${this.id}-pre-fade-in`)
+        globalTimeline.add(this.getTLMethod((responsive, defaultResponsive) => responsive.createFadeIn(defaultResponsive)), `${this.id}-fade-in`)
+        globalTimeline.add(this.getTLMethod((responsive, defaultResponsive) => responsive.createAnimationIn(defaultResponsive)), `${this.id}-animation-in`)
+        globalTimeline.add(this.getTLMethod((responsive, defaultResponsive) => responsive.createAnimationMain(defaultResponsive)), `${this.id}-animation-main`)
+        globalTimeline.add(this.getTLMethod((responsive, defaultResponsive) => responsive.createAnimationOut(defaultResponsive)), `${this.id}-animation-out`)
+
+
+        if(!last)
+            globalTimeline.add(this.getTLMethod((responsive, defaultResponsive) => responsive.createFadeOut(defaultResponsive)), `${this.id}-fade-out`)
     }
 
-    addToGlobalComponents(obj){
-        this.globalComponents = {...this.globalComponents, ...obj}
+    getTLMethod(createAnimationMethod){
+        const defaultResponsive = this.responsivesByLabel[this.DEFAULT_RESPONSIVE_LABEL];
+
+        for(let i = 0; i < this.responsives.length; i++){
+            const label = this.responsives[i];
+            const responsive = this.responsivesByLabel[label]
+
+            if(responsive.evoke(ANIMATION_DIMENSIONS)){       
+               const tl = createAnimationMethod(responsive, defaultResponsive)
+               if(tl !== undefined) return tl;
+            }
+        }
+
+        return createAnimationMethod(defaultResponsive)
     }
 
-    getAutoLabel(){      
-        this.autoLabelCounter++;
-        return `${this.pageID}-label-${this.autoLabelCounter}`
+  
+    hide(){
+        gsap.set(this, {pixi: {visible: false, alpha: 0}})
     }
 
- 
-
-    bindPageLocale(key,element){
-        this.controller.locale.bindPixiReference(this.id, key, element);
-    }
-
-    getColor(name){
-        return this.controller.theme.getColor(name)
-        //const style = getComputedStyle(this.bodyReference)
-        //return PIXI.utils.string2hex(style.getPropertyValue(name).trim())
-    }
-
-    hide(){  
-        gsap.set(this, {pixi: { alpha: 0}})
-    }
-
-    subscribeTo(key, elements){
-        this.controller.data.subscribe(key, elements)
-    }
 
     positionComponent(component, componentDefines){
         const defines = {x: 0, y: 0, anchorX: 0, anchorY: 0, ...componentDefines}
         component.positionComponent(defines.x, defines.y, defines.anchorX, defines.anchorY)
     }
-
-    updateFontStyle(textElement, styles){
-        const {fontSize, scale, fill, position, anchor} = styles
-
-        if(fontSize) textElement.style.fontSize = fontSize;
-        if(scale) textElement.scale.set(scale)
-        if(fill){
-            let tint = (typeof fill  == "string") ? this.getColor(fill) : fill;
-            textElement.tint = tint
-        }
-        if(position)  textElement.position.set(position.x, position.y)
-        if(anchor) textElement.anchor.set(anchor.x, anchor.y)
-    }
-
 }
-
 
 export default AnimationPage

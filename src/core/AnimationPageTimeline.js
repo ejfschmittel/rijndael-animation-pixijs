@@ -1,35 +1,13 @@
-
-//import {ANIMATION_DIMENSIONS} from "./AnimationController"
-
-
-
 import {gsap} from "gsap"
 
-class AnimationPageResponsives{
+class AnimationPageTimeline{
 
-    constructor(label, page){
-        this.label = label;
+    constructor(page){
         this.page = page;
 
-
-        this.FADE_OUT_DELAY = 3;
-        this.FADE_OUT_DURATION = .0001;
         this.FADE_IN_DURATION = .0001;
-
-       
-    }
-
-    getColor(name){
-        return this.page.getColor(name)
-    }
-
-    evoke(pageDimensions){   
-        return false;
-    }
-
-    getDefines(){
-        // defines.
-        
+        this.FADE_OUT_DURATION = .00001;
+        this.FADE_OUT_DELAY = 3;
     }
 
     getWidth(widthPercent){
@@ -45,10 +23,11 @@ class AnimationPageResponsives{
         const obj = {val:0};
         const tl = gsap.timeline({
             onStart: () => {
-                this.controller.setCurrentPage(this.id)
+                console.log("on start")
+                this.page.controller.setCurrentPage(this.page.id)
             },
             onReverseComplete: () => {
-                if(prevPageID) this.controller.setCurrentPage(prevPageID)
+                if(prevPageID) this.page.controller.setCurrentPage(prevPageID)
             }
         })
         tl.to(obj, {val: 1, duration: .0001})
@@ -59,9 +38,8 @@ class AnimationPageResponsives{
     createAnimationOut(){}
     createAnimationMain(){}
     createFadeIn(){
-  
         const tl = gsap.timeline();
-       // tl.set(this.page, {pixi: {visible: true}})
+        //tl.set(this.page, {pixi: {visible: true}})
         tl.to(this.page, {pixi: {alpha: 1}, duration: this.FADE_IN_DURATION})
         return tl;
     }
@@ -122,10 +100,6 @@ class AnimationPageResponsives{
 
         return tl;
     }
-
-   
-
 }
 
-
-export default AnimationPageResponsives;
+export default AnimationPageTimeline;

@@ -85,6 +85,8 @@ class Page4 extends AnimationPage{
         
 
         this.addTemporary({container})
+
+        this.addToGlobalComponents({labelSubBytes, labelShiftRows, labelMixColumns, labelAddRoundKey})
   
     }
 }

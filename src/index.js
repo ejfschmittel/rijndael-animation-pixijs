@@ -3,15 +3,17 @@ import { PixiPlugin } from "gsap/PixiPlugin";
 
 import {gsap} from "gsap"
 
-
-import {initHexSprites} from "./components/HexadecimalTextBox"
-import AnimationController from "./core/AnimationController"
+import RijndaelAnimation from "./RijndaelAnimation";
 
 
-import {initTexture} from "./components/SpriteBackground"
+//import {initHexSprites} from "./components/HexadecimalTextBox"
+//import AnimationController from "./core/AnimationController"
 
-import Page1 from "./pages/Page1/Page"
-import Page2 from "./pages/Page2/Page"
+
+
+
+//import Page1 from "./pages/Page1/Page"
+/*import Page2 from "./pages/Page2/Page"
 import Page3 from "./pages/Page3/Page"
 import Page4 from "./pages/Page4/Page"
 import Page5 from "./pages/Page5/Page"
@@ -23,10 +25,10 @@ import Page10 from "./pages/Page10/Page"
 import Page11 from "./pages/Page11/Page"
 import Page12 from "./pages/Page12/Page"
 import Page13 from "./pages/Page13/Page"
-import Page14 from "./pages/Page14/Page"
+import Page14 from "./pages/Page14/Page"*/
 import * as PIXI from "pixi.js";
 
-import "./main.scss"
+import "./styles/main.scss"
 
 
 
@@ -34,7 +36,7 @@ const createRijndaelAnimation = (locale) => {
     gsap.registerPlugin(MotionPathPlugin, PixiPlugin);
     PixiPlugin.registerPIXI(PIXI);
 
-  
+   
     /* 
         class Rijndael Animation
 
@@ -45,13 +47,13 @@ const createRijndaelAnimation = (locale) => {
 
 
   
-    const animationController = new AnimationController("rijndael-animation-container", locale)
+   // const animationController = new AnimationController("rijndael-animation-container", locale)
 
     //initHexSprites(animationController.app.renderer)
 
-    initTexture(animationController.app.renderer)
+   // initTexture(animationController.app.renderer)
     
-    animationController.registerPage(Page1, "page-1", "Page 1 - Intro")
+  /*  animationController.registerPage(Page1, "page-1", "Page 1 - Intro")
     animationController.registerPage(Page2, "page-2", "Page 2 - SubBytes")
     animationController.registerPage(Page3, "page-3", "Page 3 - SubBytes")
     animationController.registerPage(Page4, "page-4", "Page 4 - SubBytes")
@@ -68,8 +70,8 @@ const createRijndaelAnimation = (locale) => {
     animationController.createTimeline();
 
  
-    animationController.goToPage("page-14");
-    animationController.getCurrentPage();
+    animationController.goToPage("page-5");
+    animationController.getCurrentPage();*/
 
 
 
@@ -80,11 +82,22 @@ const createRijndaelAnimation = (locale) => {
 
 
 window.addEventListener("load",function(){
-    const lang = document.documentElement.lang
+    gsap.registerPlugin(MotionPathPlugin, PixiPlugin);
+    PixiPlugin.registerPIXI(PIXI);
 
-    import(`./languages/${lang}.locale.json`).then(locale => 
+    
+    const rijndaelAnimation = new RijndaelAnimation();
+   
+
+
+
+   // initTexture(animationController.app.renderer)
+
+    /* const lang = document.documentElement.lang
+
+   import(`./languages/${lang}.locale.json`).then(locale => 
         createRijndaelAnimation(locale.default)
-    );
+    );*/
   //  createRijndaelAnimation();
   
     /* 
