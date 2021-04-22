@@ -4,70 +4,74 @@ import * as PIXI from "pixi.js"
 
 import Component from "./Component"
 
-
+import PIXIText from "./PIXIText"
 
 const defaultTextStyles = {scale: 1}
 
 class TextBox extends Component{
 
 
-    constructor(text="", baseTextStyles){
+    constructor(text="",baseBackgroundStyles={}, baseTextStyles={}){
         super()
 
+        this.textStyles = {...baseTextStyles}
+        this.backgroundStyles = {...baseBackgroundStyles}
      
 
-        this.background = null;
-       
-        this.text = new PIXI.Text(text, baseTextStyles);
+        this.background = new PIXI.Graphics();  
+        this.text = new PIXIText(text, this.textStyles);
+      
         
         //this.redraw()
+        this.addChild(this.background, this.text)
     }
 
     redraw(backgroundStyles, textStyles){
 
-        this.removeChildren();
-
-
-        const bs = backgroundStyles;
-        const ts = {...defaultTextStyles,...textStyles};
-
-        // create text
-
-
-    
+        this.background.clear();
+        this.backgroundStyles = {...this.backgroundStyles,...backgroundStyles}
+        this.textStyles = {...this.textStyles,...textStyles}
  
-
-        // create background
-        const background = new PIXI.Graphics()
+        const {borderWidth, borderFill, borderRadius, width, height, fill} = this.backgroundStyles;
 
         // optionally add border
-        if(bs.borderWidth > 0) background.lineStyle(bs.borderWidth, bs.borderFill, 1, 0)
+        if(borderWidth> 0) this.background.lineStyle(borderWidth, borderFill, 1, 0)
 
-        background.beginFill(0xffffff)
-        if(bs.borderRadius > 0){
-            background.drawRoundedRect(0, 0, bs.width, bs.height, bs.borderRadius)
+        this.background.beginFill(0xffffff)
+        let isScaled = false
+        if(borderRadius > 0){
+            isScaled = true;
+            this.background.drawRoundedRect(0, 0, width, height , borderRadius)
         }else{
-            background.drawRect(0,0,bs.width,bs.height)
+            this.background.drawRect(0,0,width,height)
         }
-        background.endFill()
-        background.tint = bs.fill;
+        this.background.endFill()
+
+       
+        let tint = fill ? fill : 0x000000;
+        this.background.tint = tint;
+
+   
+
         // position text in center of background
-        this.text.scale.set(ts.scale)
-        this.text.position.set(bs.width / 2, bs.height / 2)
-        this.text.anchor.set(0.5)
+        this.text.redraw({
+            ...this.textStyles,
+            position: {
+                x: width / 2, 
+                y: height / 2,
+            },
+            anchor: {
+                x: .5,
+                y: .5
+            }
+        })
 
+     
 
-        this.background = background;
-
-
-
-        // add to component
-        this.addChild(background)
-        this.addChild(this.text)
     }
 
     updateContent(text){
-        this.textComponent.text = text;
+        this.text.text = text;
     }
 
 

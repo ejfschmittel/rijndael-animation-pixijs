@@ -1,7 +1,7 @@
 
 import * as PIXI from "pixi.js"
 
-import {toHex, hexStringToInt} from "../utils/hex"
+import {toHex, hexStringToInt} from "../utils/conversions"
 
 
 let hexTextures = []

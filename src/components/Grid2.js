@@ -57,6 +57,15 @@ class ResponsiveGrid extends PIXI.Container{
 
     // get col etc
 
+    getByColumn(){
+        let cells = [];
+        for(let i = 0; i < this.cols; i++){
+            const colCells = this.getCol(i)
+            cells = [...cells, ...colCells]
+        }
+        return cells;
+    }
+
     getRow(rowIndex){
         return this.cells.slice(rowIndex * this.cols, rowIndex * this.cols + this.cols)
     }

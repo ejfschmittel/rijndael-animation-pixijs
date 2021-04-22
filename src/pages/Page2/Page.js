@@ -4,23 +4,27 @@ import * as PIXI from "pixi.js"
 import Component from "../../components/Component"
 
 
+
 //import TextBox from "../../components/TextBox"
 import TextBox from "../../components/TextBox2"
+import PIXIText from "../../components/PIXIText"
 import Arrow from "../../components/Arrow"
 import ArrowWithText,{ARROW_ORIENTATION} from "../../components/ArrowWithText"
 
 import {gsap} from "gsap"
 
 
+import PageTimeline from "./PageTimeline"
 import DefaultResponsives from "./Responsives.default"
 //import ResponsiveMax400 from "./Responsive.max-1000"
 import ResponsiveMax600 from "./Responsive.max-600"
 import ResponsiveMax400 from "./Responsive.max-400"
 
 class Page2 extends AnimationPage{
-    constructor(id, locale){
-        super(id, locale);
+    constructor(){
+        super();
 
+        this.timeline = new PageTimeline(this)
 
       //  this.registerResponsive("max-400", ResponsiveMax400)
         this.registerResponsive("max-600", ResponsiveMax600)
@@ -32,213 +36,104 @@ class Page2 extends AnimationPage{
     create(defines){
         const background = this.createBackground();
 
-        const centerBox = new TextBox(this.text("boxText"), {
+        const centerBox = new TextBox("Cipher", {
             fill: 0xffffff,
             align: "center",
             fontSize: 50,
         })
+        this.bindPageLocale("boxText", centerBox.text)
 
-        this.addPermanent({background, centerBox})
+
+        // create top arrow and text
+        const arrowTopContainer = new PIXI.Container();
+
+        // create text + arrow
+        const textTop = new PIXIText("text",{fill: 0xffffff})
+        this.bindPageLocale("textTop", textTop)
+        textTop.anchor.set(.5, 0)
+        const arrowTop = new ArrowWithText("010101", {orientation: ARROW_ORIENTATION.DOWN})
+        arrowTopContainer.addChild(textTop, arrowTop)
+
+        // create textLeft + arrow
+        const arrowLeftContainer = new PIXI.Container();
+        const textLeft = new PIXIText("textLeft",{fill: 0xffffff})
+        this.bindPageLocale("textLeft", textLeft)
+        textLeft.anchor.set(.5, 0)
+        const arrowLeft = new ArrowWithText("0101010", {orientation: ARROW_ORIENTATION.RIGHT})
+        arrowLeftContainer.addChild(textLeft, arrowLeft)
+
+        // create textBottom + arrow
+        const arrowBotContainer = new PIXI.Container();
+        const textBottom = new PIXIText("textLeft",{fill: 0xffffff})
+        this.bindPageLocale("textBottom", textBottom)
+        textBottom.anchor.set(.5, 0)
+        const arrowBottom = new ArrowWithText("0101010", {orientation: ARROW_ORIENTATION.DOWN})
+        arrowBotContainer.addChild(arrowBottom,textBottom)
+
+
+
+        this.addPermanent({background, centerBox, arrowTopContainer, arrowLeftContainer, arrowBotContainer})
+        this.addToGlobalComponents({arrowTop, textTop, arrowLeft, textLeft, textBottom, arrowBottom})
 
     }
 
     drawPage(defines){
         const {
-            backgroundStyles, textBoxStyles, arrowStyles, arrowFontStyles, arrowLeftStyles,
-            textBoxTextStyles,
-            textStyles,
+            backgroundStyles, arrowLeftStyles,
         } = defines
         const {background, centerBox} = this.globalComponents;
 
+        // redraw background styles
         background.redraw(backgroundStyles)
+
+
+        // redraw center box styles
+        const {textBoxStyles, textBoxTextStyles} = defines
+
 
         centerBox.redraw(textBoxStyles, textBoxTextStyles)
         centerBox.position.set(textBoxStyles.x, textBoxStyles.y)
-        centerBox.pivot.set(centerBox.width /2, centerBox.height/2)
+        centerBox.pivot.set(textBoxStyles.width /2, textBoxStyles.height/2)
 
 
-       
-        /* ARROW TOP */
-        // create container
-        const arrowTopContainer = new PIXI.Container();
 
-        // create text + arrow
-        const text = new PIXI.Text(this.text("textTop"),{fill: 0xffffff})
-        text.scale.set(textStyles.scale)
-        const arrowTop = new ArrowWithText({orientation: ARROW_ORIENTATION.DOWN, ...arrowStyles},arrowFontStyles)
+        const {arrowStyles, arrowFontStyles} = defines
 
-        // set arrow + text positions
-        text.anchor.set(.5, 0)
-        text.position.set(arrowTop.width / 2, 0 )
-        arrowTop.position.set(0, text.height + 10)
+        // redraw arrow top
+        const {arrowTop, textTop, arrowTopContainer} = this.globalComponents;
+        arrowTop.redraw(arrowStyles, arrowFontStyles)
 
-        // add to contaienr
-        arrowTopContainer.addChild(text, arrowTop)
-
-        // position container
+        textTop.position.set(arrowTop.width / 2, 0 )
+        arrowTop.position.set(0, textTop.height + 10) 
         arrowTopContainer.position.set(textBoxStyles.x,centerBox.y - centerBox.height / 2- arrowTopContainer.height)
         arrowTopContainer.pivot.set(arrowTopContainer.width  * .5,0)
 
+        // redraw arrow left
+        const {arrowLeft, textLeft, arrowLeftContainer} = this.globalComponents;
+        arrowLeft.redraw({...arrowStyles,...arrowLeftStyles}, arrowFontStyles)
 
-        /* ARROW BOTTOM */
-        // create container
-        const arrowBotContainer = new PIXI.Container();
-
-        // create text + arrow
-        const textBot = new PIXI.Text(this.text("textBottom"),{fill: 0xD49136})
-        textBot.scale.set(textStyles.scale)
-        const arrowBot = new ArrowWithText({orientation: ARROW_ORIENTATION.DOWN, ...arrowStyles},{...arrowFontStyles, fill: 0xD49136})
-
-        // set arrow + text positions
-        textBot.anchor.set(.5, 0)
-        textBot.position.set(arrowTop.width / 2, arrowBot.height )
-
-        // add to contaienr
-        arrowBotContainer.addChild(textBot, arrowBot)
-
-        // position container
-        arrowBotContainer.position.set(textBoxStyles.x,centerBox.y + centerBox.height - (centerBox.height / 2))
-        arrowBotContainer.pivot.set(arrowTopContainer.width  * .5,0)
-
-
-            /* ARROW LEFT */
-        // create container
-        const arrowLeftContainer = new PIXI.Container();
-
-        // create text + arrow
-        const textLeft = new PIXI.Text(this.text("textLeft"),{fill: 0xffffff})
-        textLeft.scale.set(textStyles.scale)
-        const arrowLeft = new ArrowWithText({orientation: ARROW_ORIENTATION.RIGHT, ...arrowLeftStyles},arrowFontStyles)
-
-        // set arrow + text positions
-        
-    
-        arrowLeft.position.set(0, textLeft.height +10 )
-
-        // add to contaienr
-        arrowLeftContainer.addChild(textLeft, arrowLeft)
-
-        // position container
+        textLeft.position.set(arrowLeft.width / 2, 0 )
+        arrowLeft.position.set(0, textLeft.height + 10) 
         arrowLeftContainer.position.set(centerBox.x -  centerBox.width /2 -  arrowLeftContainer.width,textBoxStyles.y )
         arrowLeftContainer.pivot.set(0, arrowLeftContainer.height * .5)
 
-
-        textLeft.position.set(arrowLeftContainer.width /2 , 0 )
-        textLeft.anchor.set(.7, 0)
-  
-
-
-        this.addTemporary({arrowTopContainer, arrowBotContainer, arrowLeftContainer})
-
-        this.addToGlobalComponents({
-            arrowLeft,
-            arrowTop,
-            arrowBot,
-        })
-
-    }
+        //redraw arrow bottom
+        const {arrowBottom, textBottom, arrowBotContainer} = this.globalComponents;
+        arrowBottom.redraw(arrowStyles, arrowFontStyles)
 
 
+        arrowBottom.position.set(0, 0)
 
-    draw(defines){
-        const { 
-            textBoxTextStyles,
-            textBoxStyles
-        } = defines
+     
 
-
-        const background = this.drawBackground(0x000000)
-
-  
-
-        const textBox = new TextBox(textBoxStyles,textBoxTextStyles)     
-        this.positionComponent(textBox,textBoxStyles)
-
-        const textBoxBounds = textBox.getBounds();
-
-
-        const textStyle = new PIXI.TextStyle({fill: 0xffffff})
-
-
-
-        /* ARROW TOP */
-        // create container
-        const arrowTopContainer = new PIXI.Container();
-
-        // create text + arrow
-        const text = new PIXI.Text("Plaintext",textStyle)
-        const arrowTop = new ArrowWithText({orientation: ARROW_ORIENTATION.DOWN},{text: "101010", fill: 0xff0000})
-
-        // set arrow + text positions
-        text.anchor.set(.5, 0)
-        text.position.set(arrowTop.width / 2, 0 )
-        arrowTop.position.set(0, text.height)
-
-        // add to contaienr
-        arrowTopContainer.addChild(text, arrowTop)
-
-        // position container
-        arrowTopContainer.position.set(textBoxStyles.x,textBoxBounds.y - arrowTopContainer.height)
-        arrowTopContainer.pivot.set(arrowTopContainer.width  * .5,0)
+        textBottom.position.set(arrowBottom.width / 2, arrowBottom.height + 10 )
+        arrowBotContainer.position.set(textBoxStyles.x,centerBox.y + textBoxStyles.height - (textBoxStyles.height / 2))
+        arrowBotContainer.pivot.set(arrowBotContainer.width  * .5,0)
 
         
-
-        /* ARROW BOTTOM */
-        // create container
-        const arrowBotContainer = new PIXI.Container();
-
-        // create text + arrow
-        const textBot = new PIXI.Text("Plaintext",textStyle)
-        const arrowBot = new ArrowWithText({orientation: ARROW_ORIENTATION.DOWN},{text: "101010", fill: 0xff0000})
-
-        // set arrow + text positions
-        textBot.anchor.set(.5, 0)
-        textBot.position.set(arrowTop.width / 2, arrowBot.height )
-
-        // add to contaienr
-        arrowBotContainer.addChild(textBot, arrowBot)
-
-        // position container
-        arrowBotContainer.position.set(textBoxStyles.x,textBoxBounds.y + textBoxBounds.height)
-        arrowBotContainer.pivot.set(arrowTopContainer.width  * .5,0)
-  
-
-        /* ARROW LEFT */
-        // create container
-        const arrowLeftContainer = new PIXI.Container();
-
-        // create text + arrow
-        const textLeft = new PIXI.Text("Plaintext",textStyle)
-        const arrowLeft = new ArrowWithText({orientation: ARROW_ORIENTATION.RIGHT},{text: "101010", fill: 0xff0000})
-
-        // set arrow + text positions
-        textLeft.anchor.set(0, .5)
-        textLeft.position.set(0, arrowLeft.height / 2 )
-        arrowLeft.position.set(textLeft.width, 0)
-
-        // add to contaienr
-        arrowLeftContainer.addChild(textLeft, arrowLeft)
-
-        // position container
-        arrowLeftContainer.position.set(textBoxBounds.x - arrowLeftContainer.width,textBoxStyles.y )
-        arrowLeftContainer.pivot.set(0, arrowLeftContainer.height * .5)
-  
-    
-    
-
-        this.addToRenderedComponents({
          
-        })
 
-        this.addChild(
-            background,
-            textBox,
-            arrowTopContainer,
-            arrowBotContainer,
-            arrowLeftContainer,
-        )
-
-    
+  
     }
 }
 

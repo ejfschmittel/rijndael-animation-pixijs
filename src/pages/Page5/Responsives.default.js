@@ -13,13 +13,13 @@ class Page6DefaultResponsives extends AnimationPageResponsives{
 
 
         defines.abBaseTextStyles = {
-            fill: this.COLORS.BG_GREY,
+            fill: this.c("--text-dark"),
         }
 
         defines.animatableBackgroundStyles = {
             width: this.getWidth(100),
             height: this.getHeight(100),
-            fill: this.COLORS.BG_WHITE,
+            fill: this.c("--page-background-beta"),
         }
 
         defines.animatableBackgroundTitleStyles = {
@@ -31,14 +31,14 @@ class Page6DefaultResponsives extends AnimationPageResponsives{
         defines.animatableBackgroundBarStyles = {
             width: this.getWidth(100),
             height: this.getHeight(4),
-            fill: this.COLORS.BG_GREY
+            fill: this.c("--bar-background-beta")
  
         }
       
         defines.backgroundStyles = {
             width: this.getWidth(100),
             height: this.getHeight(100),
-            fill: this.COLORS.BG_BLACK,
+            fill: this.c("--page-background-alpha"),
             borderWidth: 0,
         }
 
@@ -74,7 +74,7 @@ class Page6DefaultResponsives extends AnimationPageResponsives{
 
 
         defines.roundedLabelStyles = {
-            width: this.getWidth(16), 
+            width: this.getWidth(20), 
             height: this.getHeight(4),
             fill: 0xff0000,
             borderWidth: 1,
@@ -83,24 +83,53 @@ class Page6DefaultResponsives extends AnimationPageResponsives{
         }
 
         defines.roundLabelTextStyles = {
-            scale: .7
+            fontSize:16
         }
 
 
         defines.addRoundKeyStyles = {
-            fill: this.COLORS.LABEL_BG_GREEN
+            fill: this.c("--label-bg-delta")
         }
 
         defines.subBytesStyles = {
-            fill: this.COLORS.LABEL_BG_BLUE
+            fill: this.c("--label-bg-alpha")
         }
 
         defines.shiftRowsStyles = {
-            fill: this.COLORS.LABEL_BG_RED
+            fill: this.c("--label-bg-beta")
         }
 
         defines.mixColumnsStyles = {
-            fill: this.COLORS.LABEL_BG_YELLOW
+            fill: this.c("--label-bg-gamma")
+        }
+
+
+        defines.sectionTitleStyles = {
+            fill: this.c("--text-grey"),
+            fontSize: 24,
+            anchor: {x: 1, y: 0}
+        }
+
+        defines.initialRoundTitleStyles = {
+            position: {
+                x: this.getWidth(90),
+                y: this.getHeight(30),
+            },
+            
+        }
+
+        defines.mainRoundTitleStyles = {
+            position: {
+                x: this.getWidth(90),
+                y: this.getHeight(50),
+            },
+        }
+
+        defines.finalRoundTitleStyles  = {
+            position: {
+                x: this.getWidth(90),
+                y: this.getHeight(70),
+            },
         }
 
     

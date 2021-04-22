@@ -69,8 +69,7 @@ class DataController{
         elements = Array.isArray(elements) ? elements : [elements]
 
         elements.forEach((element, idx) => {
-            const elementDisplayData = Array.isArray(data) ? data[idx] : data;
-           
+            const elementDisplayData = Array.isArray(data) ? data[idx] : data;  
             element.updateContent(elementDisplayData)
         })
     }

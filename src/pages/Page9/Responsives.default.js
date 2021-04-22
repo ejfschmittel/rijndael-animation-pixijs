@@ -14,7 +14,7 @@ class Page6DefaultResponsives extends AnimationPageResponsives{
         defines.animatableBackgroundStyles = {
             width: this.getWidth(100),
             height: this.getHeight(100),
-            fill: this.COLORS.BG_YELLOW,
+            fill: this.c("--page-background-eta"),
         }
 
         defines.animatableBackgroundTitleStyles = {
@@ -25,13 +25,13 @@ class Page6DefaultResponsives extends AnimationPageResponsives{
         defines.animatableBackgroundBarStyles = {
             width: this.getWidth(100),
             height: this.getHeight(8),
-            fill: this.COLORS.BG_WHITE,
+            fill: this.c("--bar-background-alpha"),
         }
       
         defines.backgroundStyles = {
             width: this.getWidth(100),
             height: this.getHeight(100),
-            fill: this.COLORS.BG_RED,
+            fill: this.c("--bar-background-zeta"),
             borderWidth: 0,
         }
 
@@ -63,11 +63,11 @@ class Page6DefaultResponsives extends AnimationPageResponsives{
         }
 
         defines.stateGridStyle = {
-            fill: this.COLORS.CELL_BG_YELLOW,
+            fill: this.c("--grid-background-alpha"),
         }
 
         defines.resultGridStyle = {
-            fill: this.COLORS.CELL_BG_PINK,
+            fill: this.c("--grid-background-delta"),
         }
 
         defines.columnLandingPos = {}
@@ -82,58 +82,7 @@ class Page6DefaultResponsives extends AnimationPageResponsives{
 
 
 
-    createAnimationIn(){
-        const tl = this.getAnimatableBackgroundTL();
-
-        return tl;
-    }
-
-
-    createAnimationMain(){
-
-        const {
-            grid, gridMovables, gridMovablesResults,
-            equationContainer, 
-            galoisField, 
-            landingCol, 
-            multiplicationSign,
-            equalsSign, 
-            resultCol
-        } = this.getGlobalComponents();
-        const tl =  gsap.timeline();
-
-        // premove
-        tl.set([equationContainer, multiplicationSign, equalsSign, galoisField], {pixi: {alpha: 0}})
-        tl.set(gridMovablesResults.movables, {pixi: {alpha: 0}})
-        tl.add(this.moveGroup(gridMovablesResults.getCol(0), resultCol.cells, {duration: .0001}))
-
-        tl.add(this.moveGroup(gridMovables.getCol(0), landingCol.cells, {duration: 1.5}))
-
-        // reveal equation 
-        tl.to(equationContainer, {pixi: {alpha: 1}})
-        tl.to(galoisField, {pixi: {alpha: 1}})
-        tl.to(multiplicationSign, {pixi: {alpha: 1}})
-
-        tl.to([equalsSign, ...gridMovablesResults.getCol(0)], {pixi: {alpha: 1}})
-
-
-        // move back
-        tl.add(this.moveGroup(gridMovablesResults.getCol(0), grid.getCol(0), {duration: 1.5}))
-
-        // hide equation
-        tl.to([equationContainer, ...gridMovables.getCol(0)], {pixi: {alpha: 0}}, "<")
-    
-
-        // reveal other
-        tl.to(gridMovablesResults.getCol(1), {pixi: {alpha: 1}, duration: .5})
-        tl.to(gridMovablesResults.getCol(2), {pixi: {alpha: 1}, duration: .5})
-        tl.to(gridMovablesResults.getCol(3), {pixi: {alpha: 1}, duration: .5})
-
-        return tl;
-    }
-
-
-
+  
   
 }
 

@@ -18,8 +18,11 @@ class Page7DefaultResponsives extends AnimationPageResponsives{
             borderWidth: 0,
         }
 
-        defines.titleStyles = {
-            x: this.getWidth(50),
+        defines.titleStyles = {     
+            fill: this.c("--text-color-alpha"),
+            position: {
+                x: this.getWidth(50),
+            },
             yDistance: this.getHeight(6)
         }
 

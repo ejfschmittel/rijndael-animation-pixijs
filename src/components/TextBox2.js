@@ -1,14 +1,14 @@
 import * as PIXI from "pixi.js"
 import SpriteBackground from "./SpriteBackground"
-
+import PIXIText from "./PIXIText"
 let counter = 10;
 
 class TextBox extends PIXI.Container{
-    constructor(text, baseTextStyles){
+    constructor(text, baseTextStyles={}){
         super();
 
-        this.baseTextStyles = baseTextStyles;
-        this.textStyles = null;
+
+        this.textStyles = {...baseTextStyles};
 
         this.background = new SpriteBackground();
         this.addChild(this.background)
@@ -16,7 +16,7 @@ class TextBox extends PIXI.Container{
         this.text = null;
     
         if(text){
-            this.text = new PIXI.Text(text, baseTextStyles)
+            this.text = new PIXIText(text, this.textStyles)
             this.text.anchor.set(.5,.5)
             this.addChild(this.text)
         }
@@ -34,24 +34,25 @@ class TextBox extends PIXI.Container{
     }
 
     createText(text){
-        this.text = new PIXI.Text(text)
+        this.text = new PIXIText(text, this.textStyles)
         this.addChild(this.text)
     }
 
 
-    redraw(bgStyles, textStyles){
-       
-        textStyles = {scale: 1, ...textStyles}
+    redraw(bgStyles, textStyles){    
+        this.textStyles = {...this.textStyles,...textStyles}
        
         this.background.redraw(bgStyles)
-     
        
         if(this.text){
-            this.text.scale.set(textStyles.scale)
-            this.text.position.set(this.background.width/2, this.background.height/2)      
+           this.text.redraw({
+                ...this.textStyles,
+                position: {
+                    x: bgStyles.width / 2,
+                    y: bgStyles.height / 2
+                }
+            }) 
         }
-     
-       
     }
 
     getBackground(){

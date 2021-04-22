@@ -28,13 +28,13 @@ class CircledText extends Component{
 
     redraw(circleStyles={}, textStyles={}){
         const cs = {scale: 1, ...circleStyles};
-        const ts = {scale: 1, ...textStyles}
+        const ts = {scale: 1, ...textStyles} 
 
-        console.log(this.circle, this.text)
+    
 
         this.circle.scale.set(this.getCirlceScale(cs.scale))
 
-        this.text.scale.set(ts.scale)
+        this.text.scale.set(ts.scale) 
      
      
     }

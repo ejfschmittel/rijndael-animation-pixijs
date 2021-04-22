@@ -27,7 +27,7 @@ class AnimatableText extends Component{
         })
     }
 
-    updateLocaleText(text){
+    updateContent(text){
         this.createTextElements(text)
         this.redraw();   
     }

@@ -23,7 +23,6 @@ class AnimationPageTimeline{
         const obj = {val:0};
         const tl = gsap.timeline({
             onStart: () => {
-                console.log("on start")
                 this.page.controller.setCurrentPage(this.page.id)
             },
             onReverseComplete: () => {
@@ -59,6 +58,12 @@ class AnimationPageTimeline{
         return {x: bounds.x, y: bounds.y, width: bounds.width, height: bounds.height}
     }
 
+    getPreFadeInTimeline(){
+        const obj = {val: 0}
+        const tl = gsap.timeline();
+        tl.to(obj, {val: 1, duration: .0001})
+        return tl;
+    }
 
     moveGroup(movables, landings, settings={}){
         const tl = gsap.timeline();

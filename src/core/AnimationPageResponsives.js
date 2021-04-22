@@ -23,6 +23,10 @@ class AnimationPageResponsives{
         return this.page.getColor(name)
     }
 
+    c(name){
+        return this.page.getColor(name)
+    }
+
     evoke(pageDimensions){   
         return false;
     }
@@ -54,7 +58,7 @@ class AnimationPageResponsives{
         tl.to(obj, {val: 1, duration: .0001})
         return tl;
     }
-    createPreFadeIn(){}
+  /*  createPreFadeIn(){}
     createAnimationIn(){}
     createAnimationOut(){}
     createAnimationMain(){}
@@ -123,7 +127,7 @@ class AnimationPageResponsives{
         return tl;
     }
 
-   
+   */
 
 }
 

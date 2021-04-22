@@ -48,7 +48,11 @@ $breakpoint-big-desktop: 112.5em; // 1800 px
 
 
     --text-light: var(--white);
-    --text-dark: var(--black);
+    --text-dark: var(--dark-grey);
+    --text-grey: var(--dark-grey-4);
+
+
+    --encryptor-box: var(--dark-grey-3);
 
     --page-background-alpha: var(--black);
     --page-background-beta: var(--white);
@@ -59,6 +63,8 @@ $breakpoint-big-desktop: 112.5em; // 1800 px
     --page-background-eta: var(--yellow-6);
     --page-background-theta: var(--green-1);
 
+    --bar-background-alpha: var(--white);
+    --bar-background-beta: var(--light-grey-3);
 
     /* text */
     --text-color: var(--black);
@@ -68,7 +74,7 @@ $breakpoint-big-desktop: 112.5em; // 1800 px
 
     /* colored labels*/
 
-    --label-bg-alpha: var(--blue-5)
+    --label-bg-alpha: var(--blue-5);
     --label-bg-beta: var(--red-2);
     --label-bg-gamma: var(--yellow-7);
     --label-bg-delta: var(--green-2);

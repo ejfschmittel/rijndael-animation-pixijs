@@ -1,4 +1,5 @@
 import AnimationPage from "../../core/AnimationPage.js"
+import PageTimeline from "./PageTimeline"
 import * as PIXI from "pixi.js"
 
 import AnimatableBackground from "../../components/AnimatableBackground"
@@ -17,11 +18,12 @@ import ResponsiveMax600 from "./Responsive.max-600"
 import ResponsiveMax400 from "./Responsive.max-400"
 import HexadecimalTextBox from "../../components/HexadecimalTextBox.js"
 
-class Page4 extends AnimationPage{
-    constructor(id, locale){
-        super(id, locale);
+class Page7 extends AnimationPage{
+    constructor(){
+        super();
 
 
+        this.timeline = new PageTimeline(this)
         this.registerResponsive("max-400", ResponsiveMax400)
         this.registerResponsive("max-600", ResponsiveMax600)
         this.registerResponsive("default", DefaultResponsives)
@@ -33,10 +35,13 @@ class Page4 extends AnimationPage{
     create(defines){
         const background = this.createBackground();
         
-        const animatableBackground = new AnimatableBackground(this.text("title"), {})
+        const animatableBackground = new AnimatableBackground("title", {})
+
+
+        this.bindPageLocale("title", animatableBackground.title)
 
         const sbox = new SBox()
-        DataController.subscribe("sbox", sbox.grid.cells)
+        this.subscribeTo("sbox", sbox.grid.cells)
         const {sBoxPos, sBoxStyles, sboxLegendStyles, sBoxTextStyles} = defines
         sbox.redraw(sBoxStyles, sboxLegendStyles, sBoxTextStyles);
 
@@ -46,8 +51,9 @@ class Page4 extends AnimationPage{
         const stateMovables = grid.createMovables()
         const resultMovables = grid.createMovables();
 
-        DataController.subscribe("dummyGrid", resultMovables.movables)
-        DataController.subscribe("dummyGrid", stateMovables.movables)
+        
+        this.subscribeTo("after-initial-round", resultMovables.movables)
+        this.subscribeTo("after-sub-bytes-1", stateMovables.movables)
       
         this.addPermanent({background,animatableBackground,sbox, grid, textBox})
 
@@ -81,20 +87,14 @@ class Page4 extends AnimationPage{
 
 
         const {sBoxPos, sBoxStyles, sboxLegendStyles, sBoxTextStyles} = defines
-        sbox.redraw(sBoxStyles, sboxLegendStyles, sBoxTextStyles);
-        console.time("pivot-box")
-        // 50+, 9.3 => .0003
+        sbox.redraw(sBoxStyles, sboxLegendStyles, sBoxTextStyles);    
         sbox.pivot.set(sBoxStyles.width, sBoxStyles.height)
-        console.timeEnd("pivot-box")
         sbox.position.set(sBoxPos.x, sBoxPos.y)
 
 
         const {textBoxStyle} = defines;
         textBox.redraw(textBoxStyle, {})
-        console.time("position-text")
-        // 8.4 => .06
         textBox.position.set(sbox.x - sBoxStyles.width / 2, sbox.y - sBoxStyles.height - textBox.height -10)
-        console.timeEnd("position-text")
         textBox.pivot.set(textBox.width/2, 0)
 
 
@@ -130,4 +130,4 @@ class Page4 extends AnimationPage{
 }
 
 
-export default Page4;
+export default Page7;

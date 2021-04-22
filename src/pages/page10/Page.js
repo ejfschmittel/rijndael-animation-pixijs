@@ -9,6 +9,9 @@ import Grid from "../../components/Grid2"
 
 import DataController from "../../core/DataController"
 import CircledText from "../../components/CircledText"
+
+
+import PageTimeline from "./PageTimline"
 import DefaultResponsives from "./Responsives.default"
 //import ResponsiveMax400 from "./Responsive.max-1000"
 import ResponsiveMax600 from "./Responsive.max-600"
@@ -16,9 +19,10 @@ import ResponsiveMax400 from "./Responsive.max-400"
 import HexadecimalTextBox from "../../components/HexadecimalTextBox.js"
 
 class Page4 extends AnimationPage{
-    constructor(id, locale){
-        super(id, locale);
+    constructor(){
+        super();
 
+        this.timeline = new PageTimeline(this)
 
         this.registerResponsive("max-400", ResponsiveMax400)
         this.registerResponsive("max-600", ResponsiveMax600)
@@ -31,7 +35,8 @@ class Page4 extends AnimationPage{
     create(defines){
         const background = this.createBackground();
         
-        const animatableBackground = new AnimatableBackground(this.text("title"), {})
+        const animatableBackground = new AnimatableBackground("title", {})
+        this.bindPageLocale("title", animatableBackground.title)
 
 
         const stateGrid = new Grid(4,4,{},{})
@@ -42,9 +47,9 @@ class Page4 extends AnimationPage{
         const roundKeyMovables = roundKeyGrid.createMovables();
 
 
-        DataController.subscribe("dummyGrid", stateMovables.movables)
-        DataController.subscribe("dummyGrid", resultMovables.movables)
-        DataController.subscribe("dummyGrid", roundKeyMovables.movables)
+        this.subscribeTo("after-mix-columns-1", stateMovables.movables)
+        this.subscribeTo("after-add-round-key-1", resultMovables.movables)
+        this.subscribeTo("key-1", roundKeyMovables.movables)
 
 
         const equationContainer = new PIXI.Container();

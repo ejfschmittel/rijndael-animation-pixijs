@@ -187,7 +187,7 @@ class AnimationPlayerUI{
                 
             firstChild.addEventListener("click", () => {
                // this.goToPage(pageID)
-               this.controller.timelineController.goToPage(pageID)
+               this.controller.timeline.goToPage(pageID)
             })   
           
             this.navigationContainer.appendChild(firstChild)

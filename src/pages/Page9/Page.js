@@ -9,6 +9,7 @@ import {gsap} from "gsap"
 
 import Grid from "../../components/Grid2"
 
+import PageTimeline from "./PageTimeline"
 import DefaultResponsives from "./Responsives.default"
 //import ResponsiveMax400 from "./Responsive.max-1000"
 import ResponsiveMax600 from "./Responsive.max-600"
@@ -16,10 +17,10 @@ import ResponsiveMax400 from "./Responsive.max-400"
 import HexadecimalTextBox from "../../components/HexadecimalTextBox.js"
 
 class Page9 extends AnimationPage{
-    constructor(id, locale){
-        super(id, locale);
+    constructor(){
+        super();
 
-
+        this.timeline = new PageTimeline(this)
         this.registerResponsive("max-400", ResponsiveMax400)
         this.registerResponsive("max-600", ResponsiveMax600)
         this.registerResponsive("default", DefaultResponsives)
@@ -33,7 +34,8 @@ class Page9 extends AnimationPage{
 
         const background = this.createBackground();
         
-        const animatableBackground = new AnimatableBackground(this.text("title"), {})
+        const animatableBackground = new AnimatableBackground("title", {})
+        this.bindPageLocale("title", animatableBackground.title)
 
 
           // grid + movables
@@ -41,16 +43,16 @@ class Page9 extends AnimationPage{
           const gridMovables = grid.createMovables()
           const gridMovablesResults = grid.createMovables()
 
-          DataController.subscribe("dummyGrid", gridMovables.movables)
-          DataController.subscribe("dummyGrid", gridMovablesResults.movables)
-  
+
+          this.subscribeTo("after-shift-rows-1", gridMovables.movables)
+          this.subscribeTo("after-mix-columns-1", gridMovablesResults.movables)
   
           // equation 
           const equationContainer = new PIXI.Container()
   
   
           const galoisField = new Grid(4,4, {}, {})
-          DataController.subscribe("galoisField", galoisField.cells)
+          this.subscribeTo("galois-field", galoisField.cells)
   
           const landingCol = new Grid(4, 1, {}, {})
           const resultCol = new Grid(4, 1, {}, {})

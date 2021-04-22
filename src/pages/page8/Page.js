@@ -3,23 +3,26 @@ import * as PIXI from "pixi.js"
 
 import AnimatableBackground from "../../components/AnimatableBackground"
 import Grid from "../../components/Grid2"
+import PIXIText from "../../components/PIXIText"
 
 import {gsap} from "gsap"
 
 
 import DataController from "../../core/DataController"
 
+
+import PageTimline from "./PageTimeline"
 import DefaultResponsives from "./Responsives.default"
 //import ResponsiveMax400 from "./Responsive.max-1000"
 import ResponsiveMax600 from "./Responsive.max-600"
 import ResponsiveMax400 from "./Responsive.max-400"
 import HexadecimalTextBox from "../../components/HexadecimalTextBox.js"
 
-class Page4 extends AnimationPage{
-    constructor(id, locale){
-        super(id, locale);
+class Page8 extends AnimationPage{
+    constructor(){
+        super();
 
-
+        this.timeline = new PageTimline(this);
       //  this.registerResponsive("max-400", ResponsiveMax400)
         this.registerResponsive("max-600", ResponsiveMax600)
         this.registerResponsive("default", DefaultResponsives)
@@ -31,39 +34,28 @@ class Page4 extends AnimationPage{
     create(defines){
         const background = this.createBackground();
         
-        const animatableBackground = new AnimatableBackground(this.text("title"), {})
+        // background 
+        const animatableBackground = new AnimatableBackground("title", {})
+        this.bindPageLocale("title", animatableBackground.title)
 
-
-   
+        // grid + movables
         const grid = new Grid(4,4, {},{})
-        
         const movables = grid.createMovables()
-        
-     
-        DataController.subscribe("dummyGrid", movables.movables)
+        this.subscribeTo("after-sub-bytes-1", movables.movables)
 
 
+        // texts
+        const text1 = new PIXIText("rotateTextOne")
+        this.bindPageLocale("rotateTextOne",text1)
 
+        const text2 = new PIXIText("rotateTextTwo")
+        this.bindPageLocale("rotateTextTwo",text2)
 
-        const textBaseStyle = new PIXI.TextStyle({fill: 0xffffff, fontSize: 30})
-
-
-        const textContainer1 = new PIXI.Container();
-        const text1 = new PIXI.Text(this.text("rotateTextOne"), textBaseStyle)
-        textContainer1.addChild(text1)
-
-        const textContainer2 = new PIXI.Container();
-        const text2 = new PIXI.Text(this.text("rotateTextTwo"), textBaseStyle)
-        textContainer2.addChild(text2)
-
-        const textContainer3 = new PIXI.Container();
-        const text3 = new PIXI.Text(this.text("rotateTextThree"), textBaseStyle)
-        textContainer3.addChild(text3)
+        const text3 = new PIXIText("rotateTextThree")
+        this.bindPageLocale("rotateTextThree",text3)
 
       
-      
-        this.addPermanent({background,animatableBackground, grid, textContainer1, textContainer2, textContainer3})
-
+        this.addPermanent({background,animatableBackground, grid, text1, text2, text3})
         this.addChild(...movables.movables)
         this.addToGlobalComponents({movablesCollector: movables})
 
@@ -74,16 +66,13 @@ class Page4 extends AnimationPage{
         // get permanent componenents
         const {
             background, animatableBackground,
-            grid, movablesCollector,
-            textContainer1, textContainer2, textContainer3
         } = this.globalComponents
 
         // background redraw
-        const { backgroundStyles, gridStyles, movablesStyles} = defines
+        const { backgroundStyles,movablesStyles} = defines
         background.redraw(backgroundStyles)
 
-
-        // animatable background
+        // redraw animatable background
         const {
             animatableBackgroundStyles: abStyles,
             animatableBackgroundTitleStyles: abTitleStyles,
@@ -93,10 +82,12 @@ class Page4 extends AnimationPage{
         animatableBackground.redraw(abStyles,abBarStyles,abTitleStyles)
 
 
+        // redraw grid & movables
+        const { grid, movablesCollector} = this.globalComponents;
+        const {gridStyles} = defines;
         grid.redraw(gridStyles, {})
         grid.position.set(gridStyles.x, gridStyles.y)
         grid.pivot.set(grid.width /2, 0)
-
 
 
         movablesCollector.movables.forEach((movable, idx) => {
@@ -106,21 +97,14 @@ class Page4 extends AnimationPage{
         })
 
 
-        const {text1Pos} = defines;
-        textContainer1.position.set(text1Pos.x, text1Pos.y)
-
-        const {text2Pos} = defines;
-        textContainer2.position.set(text2Pos.x, text2Pos.y)
-
-        const {text3Pos} = defines;
-        textContainer3.position.set(text3Pos.x, text3Pos.y)
-
-
-
-
-        
+        // redraw text
+        const {text1Styles,text2Styles,text3Styles} = defines;
+        const {text1, text2, text3} = this.globalComponents;
+        text1.redraw(text1Styles)
+        text2.redraw(text2Styles)
+        text3.redraw(text3Styles)   
     }
 }
 
 
-export default Page4;
+export default Page8;

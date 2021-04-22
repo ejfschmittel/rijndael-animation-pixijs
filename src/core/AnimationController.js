@@ -1,5 +1,6 @@
 import * as PIXI from "pixi.js"
 
+
 import {initTexture} from "../components/SpriteBackground"
 
 import AnimationPlayerUI from "./AnimationPlayerUI.js"
@@ -89,7 +90,10 @@ class AnimationController{
         this.updateAnimationDimensions();
 
         // create pixi & canvas
-        this.app = new PIXI.Application({})
+        this.app = new PIXI.Application({
+            autoDensity: true,
+            resolution: 2
+        })
 
        
         const bounds = this.container.getBoundingClientRect();
@@ -97,9 +101,15 @@ class AnimationController{
         initTexture(this.app.renderer)
 
 
+      
 
         // add stage to canvas
         this.container.appendChild(this.app.view)
+
+
+//        app.stage.addChild(this.viewport)
+
+      
 
         // add on resize event listener
        // window.addEventListener("resize", this.onResize)
@@ -131,7 +141,6 @@ class AnimationController{
    
 
     setCurrentPage(pageID){
-        console.log("set current page")
         this.currentPage = pageID;
         this.ui.updateCurrentPageUI(pageID)
      
@@ -206,6 +215,7 @@ class AnimationController{
 
 
     registerAnimationPage(AnimationPageClass, pageID){
+       
         const animationPage = new AnimationPageClass() 
       
         animationPage.initPage(pageID, this)
@@ -217,7 +227,7 @@ class AnimationController{
 
         
         this.app.stage.addChild(animationPage)
-
+        //this.viewport.addChild(animationPage)
         this.ui.addInfoText(pageID);
 
     }

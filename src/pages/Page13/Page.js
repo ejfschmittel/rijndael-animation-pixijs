@@ -2,18 +2,20 @@ import AnimationPage from "../../core/AnimationPage.js"
 import * as PIXI from "pixi.js"
 
 import CircledText from "../../components/CircledText";
+import PIXIText from "../../components/PIXIText"
 
 import {gsap} from "gsap"
-
+import PageTimeline from "./PageTimline"
 import DefaultResponsives from "./Responsives.default"
 import ResponsiveMax600 from "./Responsive.max-600"
 import ResponsiveMax400 from "./Responsive.max-400"
 
 
 class Page13 extends AnimationPage{
-    constructor(id, locale){
-        super(id, locale);
+    constructor(){
+        super();
 
+        this.timeline = new PageTimeline(this);
         this.registerResponsive("max-600", ResponsiveMax600)
         this.registerResponsive("default", DefaultResponsives)
         
@@ -27,12 +29,14 @@ class Page13 extends AnimationPage{
         const circledChar = new CircledText("B", {fontSize: 30, fill: 0xffffff})
 
         // create title
-        const title = new PIXI.Text(this.text("title"), {fill: 0x2184EE, fontSize: 40, align: "center"})
+        const title = new PIXIText("title", {fill: 0x2184EE, fontSize: 40, align: "center"})
+        this.bindPageLocale("title", title)   
         title.anchor.set(.5, .5)
 
         // create text
       
-        const text = new PIXI.Text(this.text("text"), {fontSize: 18, fill: 0xffffff,  wordWrap: true,wordWrapWidth: 340,})
+        const text = new PIXIText("text", {fontSize: 18, fill: 0xffffff,  wordWrap: true,wordWrapWidth: 340,})
+        this.bindPageLocale("text", text)
         text.anchor.set(.5, 0)
    
         this.addPermanent({background, circledChar, title, text})

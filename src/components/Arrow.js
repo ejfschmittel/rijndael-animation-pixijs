@@ -14,13 +14,13 @@ class Arrow extends PIXI.Graphics{
         super();
         this.arrowSettings = {
             fill: 0xffffff,
-            orientation: ARROW_ORIENTATION.RIGHT,
             width: 200,
             height: 100,
             headToBodyRatio: .2,
             bodyWidthRatio: .5,
             borderWidth: 0,
             borderColor: 0xffffff,
+            orientation: ARROW_ORIENTATION.LEFT,
             ...arrowSettings
         }
 
@@ -28,8 +28,13 @@ class Arrow extends PIXI.Graphics{
     }
 
 
-    redraw(){
-       
+    redraw(arrowStyles={}){
+        this.clear();
+
+        this.arrowSettings = {
+            ...this.arrowSettings,
+            ...arrowStyles,
+        }
 
         switch(this.arrowSettings.orientation){
             case ARROW_ORIENTATION.UP: 

@@ -10,17 +10,20 @@ import {gsap} from "gsap"
 
 
 
+import PageTimeline from "./PageTimeline"
 import DefaultResponsives from "./Responsives.default"
 //import ResponsiveMax400 from "./Responsive.max-1000"
 import ResponsiveMax600 from "./Responsive.max-600"
 import ResponsiveMax400 from "./Responsive.max-400"
 import HexadecimalTextBox from "../../components/HexadecimalTextBox.js"
+import PIXIText from "../../components/PIXIText.js"
 
 class Page4 extends AnimationPage{
-    constructor(id, locale){
-        super(id, locale);
+    constructor(){
+        super();
 
 
+        this.timeline = new PageTimeline(this)
       //  this.registerResponsive("max-400", ResponsiveMax400)
       //  this.registerResponsive("max-600", ResponsiveMax600)
         this.registerResponsive("default", DefaultResponsives)
@@ -32,10 +35,26 @@ class Page4 extends AnimationPage{
     create(defines){
         const background = this.createBackground();
         // title
-        const title = new PIXI.Text(this.text("title"), {fill: 0x333333, fontSize: 24, align: "center", fontWeight: "700"})
+        const title = new PIXIText("title", { fontSize: 24, align: "center", fontWeight: "700", wordWrap: true, wordWrapWidth: 300})
+        this.bindPageLocale("title", title)
         title.anchor.set(.5, .5)
-      
-        this.addPermanent({background,title})
+
+
+        const container = new PIXI.Container();
+        const labelSubBytes = new SlowTextBox("labelOne")
+        const labelShiftRows = new SlowTextBox("labelTwo")
+        const labelMixColumns = new SlowTextBox("labelThree")
+        const labelAddRoundKey = new SlowTextBox("labelFour")
+
+        this.bindPageLocale("labelOne", labelSubBytes.text)
+        this.bindPageLocale("labelTwo", labelShiftRows.text)
+        this.bindPageLocale("labelThree", labelMixColumns.text)
+        this.bindPageLocale("labelFour", labelAddRoundKey.text)
+
+        container.addChild(labelSubBytes, labelShiftRows, labelMixColumns, labelAddRoundKey)
+    
+        this.addPermanent({background,title, container})
+        this.addToGlobalComponents({labelSubBytes, labelShiftRows, labelMixColumns, labelAddRoundKey})
        
     }
 
@@ -48,46 +67,39 @@ class Page4 extends AnimationPage{
         // destructure defines
         const {
             backgroundStyles,
-            circledCharStyles, 
             titleStyles,
             textStyles,
-            labelStyles,
-            containerPos,
         } = defines
 
         background.redraw(backgroundStyles)
 
       
 
-        title.position.set(titleStyles.x,titleStyles.y)
+        title.redraw({...titleStyles})
+        //title.position.set(titleStyles.x,titleStyles.y)
 
 
-        const container = new PIXI.Container();
-        const labelSubBytes = new SlowTextBox({...labelStyles, fill: 0xB2D7F9},{text: this.text("labelOne")})
-        const labelShiftRows = new SlowTextBox({...labelStyles, fill: 0xFACCC7},{text: this.text("labelTwo")})
-        const labelMixColumns = new SlowTextBox({...labelStyles, fill: 0xEFEAC1},{text: this.text("labelThree")})
-        const labelAddRoundKey = new SlowTextBox({...labelStyles, fill: 0xA2C1B7},{text: this.text("labelFour")})
+        const {labelStyles, labelFontStyles, containerPos, subBytesLabelStyles, shiftRowsLabelStyles, mixColumnsLabelStyles, addRoundKeyLabelStyles} = defines
+        const {labelShiftRows, labelMixColumns, labelAddRoundKey, labelSubBytes, container} = this.globalComponents;
+
+
+
+        labelSubBytes.redraw({...labelStyles, ...subBytesLabelStyles},labelFontStyles)
+        labelShiftRows.redraw({...labelStyles, ...shiftRowsLabelStyles},labelFontStyles)
+        labelMixColumns.redraw({...labelStyles, ...mixColumnsLabelStyles},labelFontStyles)
+        labelAddRoundKey.redraw({...labelStyles, ...addRoundKeyLabelStyles},labelFontStyles)
 
         const labelMargin = 20;
-        labelShiftRows.position.set(0, labelSubBytes.y + labelSubBytes.height + labelMargin)
-        labelMixColumns.position.set(0, labelShiftRows.y + labelShiftRows.height + labelMargin)
-        labelAddRoundKey.position.set(0, labelMixColumns.y + labelMixColumns.height + labelMargin)
+        labelShiftRows.position.set(0, labelSubBytes.y + labelStyles.height + labelMargin)
+        labelMixColumns.position.set(0, labelShiftRows.y + labelStyles.height + labelMargin)
+        labelAddRoundKey.position.set(0, labelMixColumns.y + labelStyles.height + labelMargin)
 
 
-        
+        labelShiftRows.text.tint = 0x000000;
 
-        container.addChild(labelSubBytes, labelShiftRows, labelMixColumns, labelAddRoundKey)
+   
         container.pivot.set(container.width / 2, 0)
-        container.position.set(containerPos.x, title.position.y + title.height + 20)
-
-
-
-        
-
-        this.addTemporary({container})
-
-        this.addToGlobalComponents({labelSubBytes, labelShiftRows, labelMixColumns, labelAddRoundKey})
-  
+        container.position.set(containerPos.x, title.position.y + title.height + 20) 
     }
 }
 

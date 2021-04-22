@@ -53,8 +53,8 @@ class LocaleController{
     }
 
     updatePixiElementLocale(element, text){
-        if(element.updateLocaleText){
-            element.updateLocaleText(text)
+        if(element.updateContent){
+            element.updateContent(text)
         }else{
             element.text = text;
         }

@@ -5,7 +5,9 @@ import Component from "./Component";
 import Grid from "./Grid2";
 import TextBox from "./TextBox2"
 
-import {toHex} from "../utils/hex"
+
+
+import {toHex} from "../utils/conversions"
 
 
 const defaultSBoxStyles = {

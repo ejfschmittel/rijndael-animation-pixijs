@@ -72,12 +72,7 @@ class ResponsiveMax800 extends AnimationPageResponsives{
 
 
 
-    getBounds(elem){
-        const bounds  = elem.getBounds();
-        return {x: bounds.x, y: bounds.y, width: bounds.width, height: bounds.height}
-    }
-
-    createAnimationMain(){ }
+ 
 }
 
 export default ResponsiveMax800

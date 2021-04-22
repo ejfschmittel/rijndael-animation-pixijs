@@ -135,7 +135,6 @@ class RijndaelFormController{
             // prepare data for animation
             const preparedInfo = this.prepareRijndaelDataForDisplay(info)
             // call data controller to update
-            console.log("update datacontroller")
             console.log(preparedInfo)
             this.controller.data.updateStoreByObject(preparedInfo)
         }

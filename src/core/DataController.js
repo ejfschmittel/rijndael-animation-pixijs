@@ -43,7 +43,7 @@ class DataController{
 
         elements.forEach((element, idx) => {
             const elementDisplayData = Array.isArray(data) ? data[idx] : data;
-            element.innerHTML = elementDisplayData 
+            element.updateContent(elementDisplayData)
         })
     }
 

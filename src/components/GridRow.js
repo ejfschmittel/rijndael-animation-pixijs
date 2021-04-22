@@ -3,26 +3,21 @@ import Component from "./Component"
 import Grid from "./Grid2"
 import CircledText from "./CircledText"
 import * as PIXI from "pixi.js"
+import PIXIText from "./PIXIText"
 /*
 
     const row = new GridRow(title)
     row.addGridSettings(1, {})
 */
 
-import {COLORS} from "../utils/colors"
 
-const defaultGridStyles = {
-    fill: COLORS.CELL_BG_YELLOW
-}
 
-const lastColStyles = {
-    fill: 0xC6C4C6,
-}
 
 class GridRow extends Component{
-    constructor(title){
+    constructor(title, page){
         super();
-        this.title = new PIXI.Text(title, {})
+        this.page = page;
+        this.title = new PIXIText(title, {})
 
         
         this.addSymbol = new CircledText("+", {fill: 0x333333, fontSize: 30, align: "center"})
@@ -45,21 +40,12 @@ class GridRow extends Component{
         this.gridStyles[idx] = styles;
     }
 
-    getGridStyles(idx){
-        let gridStyles = defaultGridStyles;
-
-        if(idx == 4) {
-            gridStyles = {...gridStyles, ...lastColStyles}
-        }
-
-        if(this.gridStyles[idx]){
-            gridStyles = {...defaultGridStyles, ...this.gridStyles[idx]}
-        }
-     
-        return gridStyles
+    getGridStyles(idx, gridStyles={}){
+        let gridStyle = {...gridStyles.default, ...gridStyles[idx]}
+        return gridStyle
     }
 
-    redraw(rowStyles, titleStyles, fontStyles){
+    redraw(rowStyles, titleStyles, gridStyles, fontStyles){
         
         rowStyles = {
             width: 1000,
@@ -71,15 +57,12 @@ class GridRow extends Component{
 
 
       
-        titleStyles = {scale: 1, rotation: 0, ...titleStyles}
+        titleStyles = { ...titleStyles}
         fontStyles = {scale: .5, ...fontStyles}
 
         const {grids, title, addSymbol, equalsSymbol} = this
-
       
-        title.scale.set(titleStyles.scale)
-       
-        title.rotation = titleStyles.rotation
+        this.title.redraw(titleStyles)
        
 
       
@@ -93,9 +76,10 @@ class GridRow extends Component{
         this.gridWidth = gridWidth;
       
         // redraw
-       
+  
+
         grids.forEach((grid, idx) => {
-            const styles = this.getGridStyles(idx)
+            const styles = this.getGridStyles(idx,gridStyles)
             grid.redraw({width: gridWidth, height: gridHeight, ...styles}, {scale: .3});
         })
       

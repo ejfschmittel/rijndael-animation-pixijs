@@ -12,7 +12,6 @@ class ThemeController{
         this.controller = controller;
         this.themes = themes;
 
-        console.log(themes)
         this.themeContainer = document.querySelector("body");
         this.themeSelect = document.getElementById(THEME_SELECT_ID)
  
@@ -29,9 +28,6 @@ class ThemeController{
     setTheme(themeName){
         if(themeName == this.currentTheme) return;
         if(!this.isValidTheme(themeName)) return;
-
-
-        console.log(this.themesByName)
 
         const oldThemeClass = this.themesByName[this.currentTheme].className;
         this.currentTheme = themeName;
@@ -61,7 +57,6 @@ class ThemeController{
         // insert options
         this.themes.map(({name, localeKey}) => {
             const option = document.createElement("option");
-            console.log(name)
             option.value = name;
             option.innerHTML = this.controller.locale.getLocaleText(localeKey)
             option.dataset.lang = localeKey ;

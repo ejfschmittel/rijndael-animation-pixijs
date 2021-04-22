@@ -17,15 +17,18 @@ import ResponsiveMax600 from "./Responsive.max-600"
 import ResponsiveMax400 from "./Responsive.max-400"
 import HexadecimalTextBox from "../../components/HexadecimalTextBox.js"
 import SpriteBackground from "../../components/SpriteBackground.js"
+import PIXIText from "../../components/PIXIText"
 import TextBox from "../../components/SlowTextBox"
 
 
 import SVGPath from "../../components/Page5Path"
+import PageTimeline from "./PageTimeline.js"
 
 class Page5 extends AnimationPage{
-    constructor(id, locale){
-        super(id, locale);
+    constructor(){
+        super();
 
+        this.timeline = new PageTimeline(this)
 
         //this.registerResponsive("max-400", ResponsiveMax400)
         //this.registerResponsive("max-600", ResponsiveMax600)
@@ -35,6 +38,12 @@ class Page5 extends AnimationPage{
     }
 
 
+    createLabel(localeKey){
+        const label = new SlowTextBox(localeKey)
+        this.bindPageLocale(localeKey, label)
+        return label
+    }
+
     create(defines){
 
         const background = this.createBackground();
@@ -43,7 +52,8 @@ class Page5 extends AnimationPage{
         const svg = new SVGPath();
         
         const {abBaseTextStyles} = defines
-        const animatableBackground = new AnimatableBackground(this.text("title"), abBaseTextStyles)
+        const animatableBackground = new AnimatableBackground("title", abBaseTextStyles)
+        this.bindPageLocale("title", animatableBackground.title)
 
         // create big labels
 
@@ -52,14 +62,14 @@ class Page5 extends AnimationPage{
             fill: 0x666666,
             align: "center"
         }
-        const labelBaseStyle = new PIXI.TextStyle(labelTextBaseStyle)
+      
 
-        const labelInitialRound = new PIXI.Text(this.text("titleInitialRound"), labelBaseStyle);
-
-        const labelMainRounds = new PIXI.Text(this.text("titleMainRounds"), labelBaseStyle);
-
-        const labelFinalRound = new PIXI.Text(this.text("titleFinalRound"), labelBaseStyle);
-
+        const labelInitialRound = new PIXIText("titleInitialRound");
+        this.bindPageLocale("titleInitialRound", labelInitialRound)
+        const labelMainRounds = new PIXIText("titleMainRounds");
+        this.bindPageLocale("titleMainRounds", labelMainRounds)
+        const labelFinalRound = new PIXIText("titleFinalRound");
+        this.bindPageLocale("titleFinalRound", labelFinalRound)
 
         
         //const container = new PIXI.Container();
@@ -70,16 +80,18 @@ class Page5 extends AnimationPage{
 
         // create labels
         const {roundedLabelStyles} = defines
-        const initialAddRoundKey = new SlowTextBox(this.text("labelInitial"))
-
-        const mrSubBytes = new SlowTextBox(this.text("labelMrone"))
-        const mrShiftRows = new SlowTextBox(this.text("labelMrTwo"))
-        const mrMixColumns = new SlowTextBox(this.text("labelMrThree"))
-        const mrAddRoundKey = new SlowTextBox(this.text("labelMrFour"))
-
-        const frSubBytes = new SlowTextBox(this.text("labelFrOne"))
-        const frShiftRows = new SlowTextBox(this.text("labelFrTwo"))
-        const frAddRoundKey = new SlowTextBox(this.text("labelFrThree"))
+        const initialAddRoundKey = this.createLabel("labelInitial")
+     
+        const mrSubBytes = this.createLabel("labelMrone")
+        const mrShiftRows = this.createLabel("labelMrTwo")
+        const mrMixColumns = this.createLabel("labelMrThree")
+        const mrAddRoundKey = this.createLabel("labelMrFour")
+      
+        const frSubBytes = this.createLabel("labelFrOne")
+        const frShiftRows = this.createLabel("labelFrTwo")
+        const frAddRoundKey = this.createLabel("labelFrThree")
+     
+        
 
         //const mrAddRoundKey 
 
@@ -131,7 +143,7 @@ class Page5 extends AnimationPage{
         // get permanent componenents
         const {
             background, animatableBackground,
-            labelInitialRound, labelMainRounds, labelFinalRound,
+
             initialAddRoundKey,
             mrSubBytes, mrShiftRows, mrMixColumns, mrAddRoundKey,
             frSubBytes, frShiftRows, frAddRoundKey,
@@ -163,8 +175,15 @@ class Page5 extends AnimationPage{
         svg.position.set(svgStyles.x,barEnd + 10)
 
 
-        const {label1Pos, label2Pos, label3Pos, labelTextStyles} = defines
-        labelInitialRound.position.set(label1Pos.x, label1Pos.y)
+    //    const {label1Pos, label2Pos, label3Pos, labelTextStyles} = defines
+
+        const {labelInitialRound, labelMainRounds, labelFinalRound} = this.globalComponents
+        const {mainRoundTitleStyles, initialRoundTitleStyles, finalRoundTitleStyles, sectionTitleStyles} = defines
+
+        labelInitialRound.redraw({...sectionTitleStyles,...initialRoundTitleStyles})
+        labelMainRounds.redraw({...sectionTitleStyles,...mainRoundTitleStyles})
+        labelFinalRound.redraw({...sectionTitleStyles,...finalRoundTitleStyles})
+      /*  labelInitialRound.position.set(label1Pos.x, label1Pos.y)
         labelInitialRound.anchor.set(1,0)
         labelInitialRound.scale.set(labelTextStyles.scale)
 
@@ -174,7 +193,7 @@ class Page5 extends AnimationPage{
 
         labelFinalRound.position.set(label3Pos.x, label3Pos.y)
         labelFinalRound.anchor.set(1,0)
-        labelFinalRound.scale.set(labelTextStyles.scale)
+        labelFinalRound.scale.set(labelTextStyles.scale)*/
 
 
         // draw svg labels

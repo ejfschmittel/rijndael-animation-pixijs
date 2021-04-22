@@ -14,17 +14,18 @@ import {gsap} from "gsap"
 import DataController from "../../core/DataController"
 
 
+import PageTimeline from "./PageTimeline"
 import DefaultResponsives from "./Responsives.default"
 //import ResponsiveMax400 from "./Responsive.max-1000"
 import ResponsiveMax600 from "./Responsive.max-600"
 import ResponsiveMax400 from "./Responsive.max-400"
 import HexadecimalTextBox from "../../components/HexadecimalTextBox.js"
 
-class Page1 extends AnimationPage{
-    constructor(id, locale){
-        super(id, locale);
+class Page3 extends AnimationPage{
+    constructor(){
+        super();
 
-
+        this.timeline = new PageTimeline(this)
       //  this.registerResponsive("max-400", ResponsiveMax400)
         this.registerResponsive("max-600", ResponsiveMax600)
         this.registerResponsive("default", DefaultResponsives)
@@ -39,64 +40,64 @@ class Page1 extends AnimationPage{
         const textStyle = {fill: 0xffffff}
 
         // title
-        const title = new PIXI.Text(this.text("title"), {...textStyle, fontSize: 60})
+        const title = new PIXI.Text("title", {...textStyle, fontSize: 60})
+        this.bindPageLocale("title",title)
         title.anchor.set(.5, .5)
 
         /* left side */
-        const subtitleLeft = new PIXI.Text(this.text("subtitleLeft"), {...textStyle, fontSize: 36})
+        const subtitleLeft = new PIXI.Text("subtitleLeft", {...textStyle, fontSize: 36})
+        this.bindPageLocale("subtitleLeft",subtitleLeft)
         subtitleLeft.anchor.set(.5, .5)
 
         const gridLeft = new Grid2(4,4, {}, {})
-        DataController.subscribe("dummyGrid", gridLeft.cells)
+        this.subscribeTo("initial-state", gridLeft.cells)
+     
 
-        const textLeft = new PIXI.Text(this.text("textLeft"), {fill: 0xD47F00, align: "center", fontWeight: "500"})
+        const arrowLeft = new Arrow({orientation: ARROW_ORIENTATION.DOWN})  
+
+        const textLeft = new PIXI.Text("textLeft", {fill: 0xD47F00, align: "center", fontWeight: "500"})
+        this.bindPageLocale("textLeft",textLeft)
         textLeft.anchor.set(.5, 0)
 
-        const leftCircle = new CircledText("A", {fontSize: 30, fill: 0xffffff})
+        const circleLeft = new CircledText("A", {fontSize: 30, fill: 0xffffff})
 
 
         /* right side */
-        const subtitleRight = new PIXI.Text(this.text("subtitleRight"), {...textStyle, fontSize: 36})
+        const subtitleRight = new PIXI.Text("subtitleRight", {...textStyle, fontSize: 36})
+        this.bindPageLocale("subtitleRight",subtitleRight)
         subtitleRight.anchor.set(.5)
 
         const gridRight = new Grid2(4,4, {}, {})
-        DataController.subscribe("dummyGrid", gridRight.cells)
+        this.subscribeTo("key-0", gridRight.cells)
 
-        const textRight = new PIXI.Text(this.text("textRight"), {fill: 0x5787E1, align: "center", fontWeight: "500"})
+        const arrowRight = new Arrow({orientation: ARROW_ORIENTATION.DOWN})  
+
+        const textRight = new PIXI.Text("textRight", {fill: 0x5787E1, align: "center", fontWeight: "500"})
+        this.bindPageLocale("textRight",textRight)
         textRight.anchor.set(.5, 0)
 
-        const rightCircle = new CircledText("B", {fontSize: 30, fill: 0xffffff})
+        const circleRight = new CircledText("B", {fontSize: 30, fill: 0xffffff})
         
-        this.addPermanent({background, title, subtitleLeft, gridLeft, subtitleRight, gridRight, textRight, textLeft, leftCircle, rightCircle})
+        this.addPermanent({background, title, subtitleLeft, gridLeft, subtitleRight, gridRight, arrowLeft, arrowRight, textRight, textLeft, circleLeft, circleRight})
 
        
     }
 
     drawPage(defines){
-        // get permanent componenents
-        const {
-            background, title, 
-            subtitleLeft, gridLeft,textLeft, leftCircle,
-            gridRight, subtitleRight,  textRight, rightCircle
-        } = this.globalComponents
+    
 
-        // destructure defines
-        const {
-            titleStyles,
-            subtitleStyles,
-            animationDimensions, backgroundStyles, subtitleRightStyles, gridStyles, rightGridPos, leftGridPos, subtitleLeftStyles,
-
-            arrowRightPos, arrowLeftPos, arrowStyles,
-            textLeftPos, textRightPos
-        } = defines
-
+        // redraw title & background
+        const { titleStyles, backgroundStyles, animationDimensions} = defines
+        const { background, title, } = this.globalComponents
         background.redraw(backgroundStyles)
 
         title.scale.set(titleStyles.scale)
         title.position.set(animationDimensions.width / 2, 50)
 
-
-        // left side
+        const {subtitleStyles, arrowStyles, gridStyles} = defines;
+        // redraw left side
+        const {textLeftPos, leftGridPos, arrowLeftPos, subtitleLeftStyles} = defines
+        const {subtitleLeft, gridLeft, textLeft, arrowLeft, circleLeft} = this.globalComponents;
         subtitleLeft.scale.set(subtitleStyles.scale)
         subtitleLeft.position.set(subtitleLeftStyles.x, subtitleLeftStyles.y)
 
@@ -104,17 +105,20 @@ class Page1 extends AnimationPage{
         gridLeft.position.set(leftGridPos.x, subtitleLeft.y + subtitleLeft.height + leftGridPos.yDistance)
         gridLeft.pivot.set(gridLeft.width / 2 , 0)
 
-        const leftArrow = new Arrow({orientation: ARROW_ORIENTATION.DOWN, ...arrowStyles})  
-        leftArrow.pivot.set(leftArrow.width/2, 0)    
-        leftArrow.position.set(arrowLeftPos.x, gridLeft.y + gridLeft.height + arrowLeftPos.yDistance)
+        arrowLeft.redraw(arrowStyles)
+        arrowLeft.pivot.set(arrowLeft.width/2, 0)    
+        arrowLeft.position.set(arrowLeftPos.x, gridLeft.y + gridLeft.height + arrowLeftPos.yDistance)
 
-        textLeft.position.set(textLeftPos.x, leftArrow.y + leftArrow.height + textLeftPos.yDistance)
+        textLeft.position.set(textLeftPos.x, arrowLeft.y + arrowLeft.height + textLeftPos.yDistance)
 
-        leftCircle.redraw({borderColor: 0xffffff, borderWidth: 3.2 }, {})
-        leftCircle.position.set(arrowLeftPos.x, textLeft.y + textLeft.height + leftCircle.height /2 + 10)
+        circleLeft.redraw({borderColor: 0xffffff, borderWidth: 3.2 }, {})
+        circleLeft.position.set(arrowLeftPos.x, textLeft.y + textLeft.height + circleLeft.height /2 + 10)
 
 
-        // right side
+
+        // redraw right side
+        const {textRightPos, rightGridPos, arrowRightPos, subtitleRightStyles} = defines
+        const {subtitleRight, gridRight, textRight, arrowRight, circleRight} = this.globalComponents;
         subtitleRight.scale.set(subtitleStyles.scale)
         subtitleRight.position.set(subtitleRightStyles.x, subtitleRightStyles.y)
 
@@ -122,21 +126,21 @@ class Page1 extends AnimationPage{
         gridRight.position.set(rightGridPos.x, subtitleRight.y + subtitleRight.height + rightGridPos.yDistance)
         gridRight.pivot.set(gridRight.width / 2 , 0)
 
+        
+        arrowRight.redraw(arrowStyles)
+        arrowRight.pivot.set(arrowRight.width/2, 0)    
+        arrowRight.position.set(arrowRightPos.x, gridRight.y + gridRight.height +arrowRightPos.yDistance)
 
-        const rightArrow = new Arrow({orientation: ARROW_ORIENTATION.DOWN, ...arrowStyles})  
-        rightArrow.pivot.set(rightArrow.width/2, 0)    
-        rightArrow.position.set(arrowRightPos.x, gridRight.y + gridRight.height +arrowRightPos.yDistance)
+        textRight.position.set(textRightPos.x, arrowRight.y + arrowRight.height + textRightPos.yDistance)
 
-        textRight.position.set(textRightPos.x, rightArrow.y + rightArrow.height + textRightPos.yDistance)
-
-        rightCircle.redraw({borderColor: 0xffffff, borderWidth: 3.2 }, {})
-        rightCircle.position.set(rightArrow.x, textRight.y + textRight.height + rightCircle.height /2 + 10)
+        circleRight.redraw({borderColor: 0xffffff, borderWidth: 3.2 }, {})
+        circleRight.position.set(arrowRight.x, textRight.y + textRight.height + circleRight.height /2 + 10)
 
 
-        this.addTemporary({leftArrow, rightArrow})
+       
         
     }
 }
 
 
-export default Page1;
+export default Page3;

@@ -7,17 +7,20 @@ import DataController from "../../core/DataController"
 import Grid from "../../components/Grid2"
 
 import SBox from "../../components/SBox2"
+import PIXIText from "../../components/PIXIText"
 import {gsap} from "gsap"
+
+import PageTimeline from "./PageTimline"
 
 import DefaultResponsives from "./Responsives.default"
 import ResponsiveMax600 from "./Responsive.max-600"
 import ResponsiveMax400 from "./Responsive.max-400"
 
 
-class Page13 extends AnimationPage{
-    constructor(id, locale){
-        super(id, locale);
-
+class Page14 extends AnimationPage{
+    constructor(){
+        super();
+        this.timeline = new PageTimeline(this);
       // this.registerResponsive("max-600", ResponsiveMax600)
         this.registerResponsive("default", DefaultResponsives)
         
@@ -28,7 +31,9 @@ class Page13 extends AnimationPage{
         const background = this.createBackground();
 
 
-        const title = new PIXI.Text(this.text("title"), {fill: 0xffffff, fontSize: 30})
+        const title = new PIXIText("title", {fill: 0xffffff, fontSize: 30})
+        this.bindPageLocale("title", title)
+
         const bar = new SpriteBackground();
 
 
@@ -39,50 +44,70 @@ class Page13 extends AnimationPage{
         const addSymbol = new CircledText("+");
         const addSymbol2 = new CircledText("+");
 
-        // grid subtitles
+   
+        // round key labels
         const gridSubtitleStyles = {fontSize: 16}
-        const cipherKeyText = new PIXI.Text(this.text("cipherKeyLabel"), gridSubtitleStyles)
-        const roundOneKeyText = new PIXI.Text(this.text("roundKeyOneLabel"), gridSubtitleStyles)
-        const roundTwoKeyText = new PIXI.Text(this.text("roundKeyTwoLabel"), gridSubtitleStyles)
-        const roundThreeKeyText = new PIXI.Text(this.text("roundKeyThreeLabel"), gridSubtitleStyles)
-        const roundTenKeyText = new PIXI.Text(this.text("roundKeyTenLabel"), gridSubtitleStyles)
+
+        const cipherKeyText = new PIXIText("cipherKeyLabel", gridSubtitleStyles)
+        this.bindPageLocale("cipherKeyLabel", cipherKeyText)
         cipherKeyText.anchor.set(.5, 0)
+
+        const roundOneKeyText = new PIXIText("roundKeyOneLabel", gridSubtitleStyles)
+        this.bindPageLocale("roundKeyOneLabel", cipherKeyText)
         roundOneKeyText.anchor.set(.5, 0)
+
+        const roundTwoKeyText = new PIXIText("roundKeyTwoLabel", gridSubtitleStyles)
+        this.bindPageLocale("roundKeyTwoLabel", cipherKeyText)
         roundTwoKeyText.anchor.set(.5, 0)
+
+        const roundThreeKeyText = new PIXIText("roundKeyThreeLabel", gridSubtitleStyles)
+        this.bindPageLocale("roundKeyThreeLabel", cipherKeyText)
         roundThreeKeyText.anchor.set(.5, 0)
+
+        const roundTenKeyText = new PIXIText("roundKeyTenLabel", gridSubtitleStyles)
+        this.bindPageLocale("roundKeyTenLabel", cipherKeyText)
         roundTenKeyText.anchor.set(1.5, 0)
 
 
         const labelStyles = {fill: 0xffffff}
 
-        const rotWordText = new PIXI.Text(this.text("RotWordLabel"), labelStyles)
-        const subBytesText = new PIXI.Text(this.text("SubBytesLabel"), labelStyles)
-        const sboxText = new PIXI.Text(this.text("SBoxLabel"))
-        subBytesText.anchor.set(1, .5)
+        const rotWordText = new PIXI.Text("RotWordLabel", labelStyles)
+        this.bindPageLocale("RotWordLabel", rotWordText)
+        const subBytesText = new PIXI.Text("SubBytesLabel", labelStyles)
+        this.bindPageLocale("SubBytesLabel", subBytesText)
+        const sboxText = new PIXI.Text("SBoxLabel")
+        this.bindPageLocale("SBoxLabel", sboxText)
 
-        const Rcon4Text = new PIXI.Text(this.text("RconFourLabel"))
+
+        subBytesText.anchor.set(1, .5)
+        const Rcon4Text = new PIXI.Text("RconFourLabel")
 
 
        
-        const textInitial = new PIXI.Text(this.text("textIntro"), { wordWrap: true,wordWrapWidth: 160, fontSize: 14})
+        const textInitial = new PIXI.Text("textIntro", { wordWrap: true,wordWrapWidth: 160, fontSize: 14})
+        this.bindPageLocale("textIntro", textInitial)
         textInitial.anchor.set(1, 0)
 
 
-        const sText = new PIXI.Text(this.text("text"), { wordWrap: true,wordWrapWidth: 160, fontSize: 14})
+        const sText = new PIXI.Text("text", { wordWrap: true,wordWrapWidth: 160, fontSize: 14})
+        this.bindPageLocale("text", sText)
         sText.anchor.set(1, 0)
      
-        const aText = new PIXI.Text(this.text("textA"), { wordWrap: true,wordWrapWidth: 160, fontSize: 14})
+        const aText = new PIXI.Text("textA", { wordWrap: true,wordWrapWidth: 160, fontSize: 14})
+        this.bindPageLocale("textA", aText)
         aText.anchor.set(1, 0)
 
-        const bText = new PIXI.Text(this.text("textB"), { wordWrap: true,wordWrapWidth: 160, fontSize: 14})
+        const bText = new PIXI.Text("textB", { wordWrap: true,wordWrapWidth: 160, fontSize: 14})
+        this.bindPageLocale("textB", bText)
         bText.anchor.set(1, 0)
 
-        const textXor = new PIXI.Text(this.text("textXOR"), { wordWrap: true,wordWrapWidth: 160, fontSize: 14})
+        const textXor = new PIXI.Text("textXOR", { wordWrap: true,wordWrapWidth: 160, fontSize: 14})
+        this.bindPageLocale("textXOR", textXor)
         textXor.anchor.set(1, 0)
 
 
         const sbox = new SBox();
-        DataController.subscribe("sbox", sbox.grid.cells)
+        this.subscribeTo("sbox", sbox.grid.cells)
         sbox.redraw({width: 360, height: 240, legendWidth: 20}, {scale: .3}, {scale: .3})
         sbox.pivot.set(360, 240 / 2)
 
@@ -100,29 +125,29 @@ class Page13 extends AnimationPage{
         // create movables
         const pgOneMovablesOg = primaryGridOne.createMovables();
         const pgOneMovablesTranform = primaryGridOne.createMovables();
-        DataController.subscribe("dummyGrid", pgOneMovablesOg.movables)
-        DataController.subscribe("dummyGrid", pgOneMovablesTranform.movables)
+        this.subscribeTo("key-0", pgOneMovablesOg.movables)
+        this.subscribeTo("key-0", pgOneMovablesTranform.movables)
 
         const pgTwoMovablesOg = primaryGridTwo.createMovables();
         const pgTwoMovablesTranform = primaryGridTwo.createMovables();
-        DataController.subscribe("dummyGrid", pgTwoMovablesOg.movables)
-        DataController.subscribe("dummyGrid", pgTwoMovablesTranform.movables)
+        this.subscribeTo("key-1", pgTwoMovablesOg.movables)
+        this.subscribeTo("key-1", pgTwoMovablesTranform.movables)
 
         const pgThreeMovablesOg = primaryGridThree.createMovables();
         const pgThreeMovablesTranform = primaryGridThree.createMovables();
-        DataController.subscribe("dummyGrid", pgThreeMovablesOg.movables)
-        DataController.subscribe("dummyGrid", pgThreeMovablesTranform.movables)
+        this.subscribeTo("key-2", pgThreeMovablesOg.movables)
+        this.subscribeTo("key-2", pgThreeMovablesTranform.movables)
 
         const pgFourMovablesOg = primaryGridFour.createMovables();
-        DataController.subscribe("dummyGrid", pgFourMovablesOg.movables)
+        this.subscribeTo("key-3", pgFourMovablesOg.movables)
         
 
         const subBytesMovables = primaryGridOne.createMovables();
-        DataController.subscribe("dummyGrid", subBytesMovables.movables)
+        this.subscribeTo("dummyGrid", subBytesMovables.movables)
         
         const finalGrid = new Grid(4,4, {},{})
         const finalGridMovables = finalGrid.createMovables();
-        DataController.subscribe("dummyGrid", finalGridMovables.movables)
+        this.subscribeTo("key-10", finalGridMovables.movables)
 
 
         const secondaryGridOne = new Grid(4,4, {},{});
@@ -140,7 +165,7 @@ class Page13 extends AnimationPage{
         const rconText = new PIXI.Text("Rcon", {fill: 0xffffff, fontSize: 30})
         const rconMovables = rcon.createMovables()
         rcon.alpha = 0;
-        DataController.subscribe("rcon", rconMovables.movables)
+        this.subscribeTo("rcon", rconMovables.movables)
       
 
         this.addPermanent({
@@ -234,10 +259,10 @@ class Page13 extends AnimationPage{
         
 
         // redraw primary grids
-        const {baseGridStyles} = defines
+        const {baseGridStyles, baseGridTextStyles} = defines
         const primaryGridsY = bar.y + bar.height + 50;
         primaryGrids.forEach((grid, idx) => {
-            grid.redraw({...baseGridStyles})
+            grid.redraw({...baseGridStyles}, baseGridTextStyles)
 
             const prevGrid = idx != 0 ? primaryGrids[idx -1] : null;
             const primaryGridsX = prevGrid ? prevGrid.x + baseGridStyles.width : 50;
@@ -286,21 +311,21 @@ class Page13 extends AnimationPage{
 
         const {firstGridStyle} = defines
 
-        const {gridMovableStyles, gridTextStyle, subbytesMovablesStyles} = defines
+        const {gridMovableStyles, gridTextStyle, subbytesMovablesStyles, rconMovablesTextStyles, rconMovablesStyles} = defines
 
-        this.redrawMovables(rconMovables, rcon, {fill: 0xffff00},{scale: .5})
+        this.redrawMovables(rconMovables, rcon, rconMovablesStyles,rconMovablesTextStyles)
 
         
-        this.redrawMovables(pgOneMovablesOg, primaryGrids[0], {...firstGridStyle}, gridTextStyle)
-        this.redrawMovables(pgOneMovablesTranform, primaryGrids[0], {...firstGridStyle},gridTextStyle)
-        this.redrawMovables(pgTwoMovablesOg, primaryGrids[1], gridMovableStyles,gridTextStyle)
-        this.redrawMovables(pgTwoMovablesTranform, primaryGrids[1], gridMovableStyles,gridTextStyle)
-        this.redrawMovables(pgThreeMovablesOg, primaryGrids[2], gridMovableStyles,gridTextStyle)
-        this.redrawMovables(pgThreeMovablesTranform, primaryGrids[2], gridMovableStyles,gridTextStyle)
+        this.redrawMovables(pgOneMovablesOg, primaryGrids[0], {...firstGridStyle}, baseGridTextStyles)
+        this.redrawMovables(pgOneMovablesTranform, primaryGrids[0], {...firstGridStyle},baseGridTextStyles)
+        this.redrawMovables(pgTwoMovablesOg, primaryGrids[1], gridMovableStyles,baseGridTextStyles)
+        this.redrawMovables(pgTwoMovablesTranform, primaryGrids[1], gridMovableStyles,baseGridTextStyles)
+        this.redrawMovables(pgThreeMovablesOg, primaryGrids[2], gridMovableStyles,baseGridTextStyles)
+        this.redrawMovables(pgThreeMovablesTranform, primaryGrids[2], gridMovableStyles,baseGridTextStyles)
 
-        this.redrawMovables(subBytesMovables, primaryGrids[0], subbytesMovablesStyles,gridTextStyle)
-        this.redrawMovables(pgFourMovablesOg, primaryGrids[3], gridMovableStyles,gridTextStyle)
-        this.redrawMovables(finalGridMovables, finalGrid, gridMovableStyles,gridTextStyle)
+        this.redrawMovables(subBytesMovables, primaryGrids[0], subbytesMovablesStyles,baseGridTextStyles)
+        this.redrawMovables(pgFourMovablesOg, primaryGrids[3], gridMovableStyles,baseGridTextStyles)
+        this.redrawMovables(finalGridMovables, finalGrid, gridMovableStyles,baseGridTextStyles)
 
 
 
@@ -314,10 +339,13 @@ class Page13 extends AnimationPage{
 
 
         
-        // C2C0C2
+        // redraw lables
+        const {cipherKeyText, roundOneKeyText, roundTwoKeyText, roundThreeKeyText, roundTenKeyText} = this.globalComponents; 
+        const {roundKeyLabelStyles} = defines
 
-        const {cipherKeyText, roundOneKeyText, roundTwoKeyText, roundThreeKeyText, roundTenKeyText} = this.globalComponents;
-        
+
+  
+      
         cipherKeyText.position.set(primaryGrids[0].x + baseGridStyles.width / 2, primaryGrids[0].y + baseGridStyles.height + 10)
         roundOneKeyText.position.set(primaryGrids[1].x + baseGridStyles.width / 2, primaryGrids[1].y + baseGridStyles.height + 10)
         roundTwoKeyText.position.set(primaryGrids[2].x + baseGridStyles.width / 2, primaryGrids[2].y + baseGridStyles.height + 10)
@@ -336,6 +364,16 @@ class Page13 extends AnimationPage{
         bText.position.set(sText.x, aText.y + aText.height)
 
     }
+
+    drawRoundKeyLabel(label, styles, position){
+        label.redraw({
+            ...styles,
+        })
+        label.position.set(position.x, position.y)
+    }
+       
+
+  
 
     colorFirstCol(color, grid){
         grid.getCol(0).map(cell => cell.getBackground().tint = color);
@@ -358,4 +396,4 @@ class Page13 extends AnimationPage{
 }
 
 
-export default Page13;
+export default Page14;

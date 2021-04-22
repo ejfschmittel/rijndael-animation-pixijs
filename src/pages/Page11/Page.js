@@ -13,20 +13,24 @@ import GridRow from "../../components/GridRow"
 
 import {gsap} from "gsap"
 
-import DataController from "../../core/DataController"
 
+
+
+import PageTimeline from "./PageTimline"
 
 import DefaultResponsives from "./Responsives.default"
 //import ResponsiveMax400 from "./Responsive.max-1000"
 import ResponsiveMax600 from "./Responsive.max-600"
 import ResponsiveMax400 from "./Responsive.max-400"
 import HexadecimalTextBox from "../../components/HexadecimalTextBox.js"
+import PIXIText from "../../components/PIXIText"
 
 class Page11 extends AnimationPage{
-    constructor(id, locale){
-        super(id, locale);
+    constructor(){
+        super();
 
 
+        this.timeline = new PageTimeline(this)
         this.registerResponsive("max-400", ResponsiveMax400)
        // this.registerResponsive("max-600", ResponsiveMax600)
         this.registerResponsive("default", DefaultResponsives)
@@ -46,21 +50,49 @@ class Page11 extends AnimationPage{
         const background = this.createBackground();
 
 
-        const title1 = this.createTitle(this.text("roundLabel"), {fontSize: 30, align: "center"})
-        const title2 = this.createTitle(this.text("subBytesLabel"), {fontSize: 30, align: "center"})
-        const title3 = this.createTitle(this.text("ShiftRowsLabel"), {fontSize: 30, align: "center"})
-        const title4 = this.createTitle(this.text("MixColumnsLabel"), {fontSize: 30, align: "center"})
-        const title5 = this.createTitle(this.text("RoundKeyLabel"), {fontSize: 30, align: "center"})
+        // titles
+        const title1 = new PIXIText("roundLabel")
+        this.bindPageLocale("roundLabel", title1)
+
+        const title2 = new PIXIText("subBytesLabel")
+        this.bindPageLocale("subBytesLabel", title2)
+
+        const title3 = new PIXIText("ShiftRowsLabel")
+        this.bindPageLocale("ShiftRowsLabel", title3)
+
+        const title4 = new PIXIText("MixColumnsLabel")
+        this.bindPageLocale("MixColumnsLabel", title4)
+
+        const title5 = new PIXIText("RoundKeyLabel")
+        this.bindPageLocale("RoundKeyLabel", title5)
+      
+
+    /*    const title1 = this.createTitle("roundLabel", {fontSize: 30, align: "center"})
+        const title2 = this.createTitle("subBytesLabel", {fontSize: 30, align: "center"})
+        const title3 = this.createTitle("ShiftRowsLabel", {fontSize: 30, align: "center"})
+        const title4 = this.createTitle("MixColumnsLabel", {fontSize: 30, align: "center"})
+        const title5 = this.createTitle("RoundKeyLabel", {fontSize: 30, align: "center"})*/
 
        
         const titles = [title1, title2, title3, title4, title5]
         
-        const inputRow = new GridRow(this.text("inputLabel"))
-        const row1 = new GridRow(this.text("roundOneLabel"))
-        const row2 = new GridRow(this.text("roundTwoLabel"))
-        const row3 = new GridRow(this.text("roundThreeLabel"))
-        const row4 = new GridRow(this.text("roundFourLabel"))
-        const row5 = new GridRow(this.text("roundFiveLabel"))
+        const inputRow = new GridRow("inputLabel")
+        this.bindPageLocale("inputLabel", inputRow.title)
+
+        const row1 = new GridRow("roundOneLabel")
+        this.bindPageLocale("roundOneLabel", row1.title)
+
+        const row2 = new GridRow("roundTwoLabel")
+        this.bindPageLocale("roundTwoLabel", row2.title)
+
+        const row3 = new GridRow("roundThreeLabel")
+        this.bindPageLocale("roundThreeLabel", row3.title)
+
+        const row4 = new GridRow("roundFourLabel")
+        this.bindPageLocale("roundFourLabel", row4.title)
+
+        const row5 = new GridRow("roundFiveLabel")
+        this.bindPageLocale("roundFiveLabel", row5.title)
 
 
         inputRow.addGridStyles(1, {fill: 0xCDCBCD})
@@ -72,19 +104,24 @@ class Page11 extends AnimationPage{
         const rows = [inputRow, row1, row2, row3, row4, row5]
 
 
-        rows.forEach((row, r) => {
+        this.subscribeTo("initial-state",inputRow.grids[0].cells)
+        this.subscribeTo("key-0",inputRow.grids[4].cells)
 
+        for(let i = 1; i < rows.length; i++){
+            const row = rows[i];
             row.grids.forEach((grid, c) => {
-
-                if(r == 0 && (c == 3 || c == 2 || c == 1)){
-
-                }else{
-                    DataController.subscribe("dummyGrid", grid.cells)
+                switch(c){
+                    case 0: this.subscribeTo(`round-${i}-initial`, grid.cells); break;
+                    case 1: this.subscribeTo(`after-sub-bytes-${i}`, grid.cells); break;
+                    case 2: this.subscribeTo(`after-shift-rows-${i}`, grid.cells); break;
+                    case 3: this.subscribeTo(`after-mix-columns-${i}`, grid.cells); break;
+                    case 4: this.subscribeTo(`key-${i}`, grid.cells); break;
                 }
-                
             })
-           
-        })
+        }
+
+
+     
 
         
         this.addPermanent({background, row1, row2, row3, row4, row5, title1, title2, title3, title4, title5, inputRow})
@@ -99,9 +136,8 @@ class Page11 extends AnimationPage{
     drawPage(defines){
         // get permanent componenents
         const {
-            background, row1, row2, row3, row4, row5,
-            title1, title2, title3, title4, title5,
-            titles, rows,
+            background, row1, 
+            rows,inputRow
         } = this.globalComponents
 
         // destructure defines
@@ -111,34 +147,44 @@ class Page11 extends AnimationPage{
 
         background.redraw(backgroundStyles)
 
-        const {rowStyles, rowTitleStyles} = defines
+       
 
 
   
-     
-        rows.forEach((row, idx) => {
-            row.redraw(rowStyles, rowTitleStyles);
- 
-            const y = idx !== 0 ? rows[idx-1].y + rowStyles.height : rowStyles.y;
-            row.position.set(0, y + rowStyles.margin) 
+        // redraw rows
+        const {rowStyles, rowTitleStyles, defaultGridStyles, emptyGridStyles, highlightGridStyles, lastColGridStyles} = defines
+         
+        inputRow.redraw(rowStyles, rowTitleStyles, {
+            default: emptyGridStyles,
+            0: defaultGridStyles,
+            4: highlightGridStyles
         })
+        
+        inputRow.position.set(0, rowStyles.y + rowStyles.margin) 
       
+        for(let i = 1; i < rows.length; i++){
+            const row = rows[i];
   
-
-       // const {titles} = this.globalComponents;
-        const {titleStyles} = defines
-
-
-        console.time(`redraw-grids-pos`)
-        titles.forEach((title, idx) => {
-            title.scale.set(titleStyles.scale)
-            title.position.set(row1.grids[idx].x + rows[0].gridWidth / 2, titleStyles.y)
-        })
-        console.timeEnd(`redraw-grids-pos`)
-
-
+            row.redraw(rowStyles, rowTitleStyles, {
+                default: defaultGridStyles,
+                4: lastColGridStyles
+            });
+            const y = i !== 0 ? rows[i-1].y + rowStyles.height : rowStyles.y;
+            row.position.set(0, y + rowStyles.margin) 
+        }
 
        
+
+
+
+        // redraw titles
+        const {titleStyles} = defines
+        const {titles} = this.globalComponents
+        titles.forEach((title, idx) => {
+            title.redraw(titleStyles)
+            title.position.set(row1.grids[idx].x + rows[0].gridWidth / 2, titleStyles.y)
+        })
+
     }
 }
 

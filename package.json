@@ -36,6 +36,7 @@
   },
   "dependencies": {
     "gsap": "^3.6.0",
+    "pixi-viewport": "^4.23.1",
     "pixi.js": "^5.3.8"
   }
 }
