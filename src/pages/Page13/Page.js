@@ -1,14 +1,14 @@
 import AnimationPage from "../../core/AnimationPage.js"
-import * as PIXI from "pixi.js"
 
-import CircledText from "../../components/CircledText";
+
+import CircledText from "../../components/CircledText2";
 import PIXIText from "../../components/PIXIText"
 
-import {gsap} from "gsap"
+
 import PageTimeline from "./PageTimline"
 import DefaultResponsives from "./Responsives.default"
-import ResponsiveMax600 from "./Responsive.max-600"
-import ResponsiveMax400 from "./Responsive.max-400"
+import ResponsiveMax768 from "./Responsive.max-768"
+import ResponsiveMax425 from "./Responsive.max-425"
 
 
 class Page13 extends AnimationPage{
@@ -16,8 +16,10 @@ class Page13 extends AnimationPage{
         super();
 
         this.timeline = new PageTimeline(this);
-        this.registerResponsive("max-600", ResponsiveMax600)
         this.registerResponsive("default", DefaultResponsives)
+        this.registerResponsive("max-768", ResponsiveMax768)
+        this.registerResponsive("max-425", ResponsiveMax425)
+   
         
     }
 
@@ -26,16 +28,16 @@ class Page13 extends AnimationPage{
         const background = this.createBackground();
 
         // create circled char
-        const circledChar = new CircledText("B", {fontSize: 30, fill: 0xffffff})
+        const circledChar = new CircledText("B", {fontSize: 30, fill: 0xffffff}, {radius: 30,borderColor: 0xffffff})
 
         // create title
-        const title = new PIXIText("title", {fill: 0x2184EE, fontSize: 40, align: "center"})
+        const title = new PIXIText("title", {align: "center"})
         this.bindPageLocale("title", title)   
         title.anchor.set(.5, .5)
 
         // create text
       
-        const text = new PIXIText("text", {fontSize: 18, fill: 0xffffff,  wordWrap: true,wordWrapWidth: 340,})
+        const text = new PIXIText("text")
         this.bindPageLocale("text", text)
         text.anchor.set(.5, 0)
    
@@ -58,13 +60,15 @@ class Page13 extends AnimationPage{
 
         background.redraw(backgroundStyles)
 
-        circledChar.redraw({radius: 30, borderColor: 0xffffff}, 1)
+        circledChar.redraw()
         circledChar.position.set(circledCharStyles.x, circledCharStyles.y)
 
-        title.position.set(titleStyles.x, circledChar.y + circledChar.height + titleStyles.yDistance)
+        title.redraw(titleStyles)
+        title.position.set(titleStyles.x,circledChar.y + circledChar.height + titleStyles.yDistance)
 
-        text.style.fontSize = textStyles.fontSize
-        text.position.set(textStyles.x, title.position.y + title.height + textStyles.yDistance)
+
+        text.redraw(textStyles)
+        text.position.set(textStyles.x, title.position.y + title.height )    
          
     }
 }

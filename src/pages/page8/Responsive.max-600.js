@@ -27,9 +27,7 @@ class ResponsiveMax800 extends AnimationPageResponsives{
             y: this.getHeight(30)
         }
 
-        defines.movablesStyles = {
-            fill: this.COLORS.CELL_BG_YELLOW
-        }
+     
 
 
         const cellHeight = defines.gridStyles.height / 4;

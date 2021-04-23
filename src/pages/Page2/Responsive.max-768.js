@@ -5,27 +5,28 @@ import {gsap} from "gsap"
 
 
 
-class ResponsiveMax800 extends AnimationPageResponsives{
+class ResponsiveMax768 extends AnimationPageResponsives{
     constructor(label, page){
         super(label, page);
     }
 
     evoke(animationDimensions){
-        if(animationDimensions.width < 600) return true;
+        if(animationDimensions.width <= 768) return true;
         return false;
     }
 
-    
     getDefines(defines){
+        console.log("768")
         defines.textBoxStyles = {
             ...defines.textBoxStyles,
             x: this.getWidth(70),
         }
 
+        
         defines.textBoxTextStyles = {
-            scale: .5,
+            ...defines.textBoxTextStyles,
+            fontSize: 20,
         }
-
         
         defines.arrowStyles = {
             ...defines.arrowStyles,
@@ -44,24 +45,13 @@ class ResponsiveMax800 extends AnimationPageResponsives{
             fontSize: 14,
         }
 
-        defines.textStyles = {
-            scale: .7
-        }
+     
 
+       
    
 
         return defines;
     }
-
-
-
-
-    getBounds(elem){
-        const bounds  = elem.getBounds();
-        return {x: bounds.x, y: bounds.y, width: bounds.width, height: bounds.height}
-    }
-
-    createAnimationMain(){ }
 }
 
-export default ResponsiveMax800
+export default ResponsiveMax768

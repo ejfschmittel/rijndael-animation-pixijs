@@ -31,7 +31,7 @@ class Page2DefaultResponsives extends AnimationPageResponsives{
             height: this.getHeight(40),
             borderWidth: 3,
             borderColor: 0xffffff,
-            fill: this.c("--encryptor-box"),
+            fill: this.c("--page-background-iota"),
             x: this.getWidth(50),
             y: this.getHeight(50),
             anchorX: .5,
@@ -44,10 +44,8 @@ class Page2DefaultResponsives extends AnimationPageResponsives{
         defines.textBoxTextStyles = {
             fill: this.c("--text-light"), 
             align: "center",
-            fontSize: 40
+            fontSize: 30,
         }
-
-
 
 
         defines.arrowStyles = {
@@ -59,7 +57,7 @@ class Page2DefaultResponsives extends AnimationPageResponsives{
         }
 
         defines.arrowFontStyles = {
-            fill: 0xffffff,
+            fill: this.c("--text-light"),
             fontSize: 18,
         }
 
@@ -72,6 +70,15 @@ class Page2DefaultResponsives extends AnimationPageResponsives{
         defines.arrowTextBottomStyles = {
             fill: this.c("--text-color-alpha")
         }
+
+
+        defines.arrowTitleStyles = {
+            fill: this.c("--text-light"),
+            fontSize: 20,
+            anchor: {x: .5, y: 0}
+        }
+
+        
 
 
 

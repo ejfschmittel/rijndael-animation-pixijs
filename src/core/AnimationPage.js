@@ -111,23 +111,25 @@ class AnimationPage extends PIXI.Container{
     getDefines(){
 
         const defaultDefines = this.responsivesByLabel[this.DEFAULT_RESPONSIVE_LABEL].getDefines()
-        let defines = undefined;
+        let defines = {...defaultDefines};
 
         // find correct responsive
         for(let i = 0; i < this.responsives.length; i++){
             const label = this.responsives[i];
+            if(label == this.DEFAULT_RESPONSIVE_LABEL) continue;
+
             const responsive = this.responsivesByLabel[label]
 
             if(responsive.evoke(this.controller.ANIMATION_DIMENSIONS)){       
-                defines =  responsive.getDefines(defaultDefines)
-                if(defines !== undefined) break;
+                defines =  {
+                    ...defines,
+                    ...responsive.getDefines(defines)
+                }
             }
         }
 
 
-        const d =  defines ? defines: defaultDefines;
-
-        return {...d, animationDimensions: this.controller.ANIMATION_DIMENSIONS}
+        return {...defines, animationDimensions: this.controller.ANIMATION_DIMENSIONS}
     }
 
 

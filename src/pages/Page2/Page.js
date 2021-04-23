@@ -17,20 +17,19 @@ import {gsap} from "gsap"
 import PageTimeline from "./PageTimeline"
 import DefaultResponsives from "./Responsives.default"
 //import ResponsiveMax400 from "./Responsive.max-1000"
-import ResponsiveMax600 from "./Responsive.max-600"
-import ResponsiveMax400 from "./Responsive.max-400"
+import ResponsiveMax768 from "./Responsive.max-768"
+import ResponsiveMax425 from "./Responsive.max-425"
+import ResponsiveMax375 from "./Responsive.max-375"
 
 class Page2 extends AnimationPage{
     constructor(){
         super();
 
         this.timeline = new PageTimeline(this)
-
-      //  this.registerResponsive("max-400", ResponsiveMax400)
-        this.registerResponsive("max-600", ResponsiveMax600)
         this.registerResponsive("default", DefaultResponsives)
-
-        
+        this.registerResponsive("max-768", ResponsiveMax768)
+        this.registerResponsive("max-425", ResponsiveMax425)
+        this.registerResponsive("max-375", ResponsiveMax375)
     }
 
     create(defines){
@@ -97,13 +96,19 @@ class Page2 extends AnimationPage{
 
 
 
-        const {arrowStyles, arrowFontStyles} = defines
+        const {arrowStyles, arrowFontStyles, arrowTitleStyles, arrowTextBottomStyles} = defines
 
         // redraw arrow top
         const {arrowTop, textTop, arrowTopContainer} = this.globalComponents;
         arrowTop.redraw(arrowStyles, arrowFontStyles)
 
-        textTop.position.set(arrowTop.width / 2, 0 )
+        textTop.redraw({
+            ...arrowTitleStyles,
+            position: {
+                x: arrowTop.width / 2,
+                y:  0,
+            },
+        })
         arrowTop.position.set(0, textTop.height + 10) 
         arrowTopContainer.position.set(textBoxStyles.x,centerBox.y - centerBox.height / 2- arrowTopContainer.height)
         arrowTopContainer.pivot.set(arrowTopContainer.width  * .5,0)
@@ -111,8 +116,13 @@ class Page2 extends AnimationPage{
         // redraw arrow left
         const {arrowLeft, textLeft, arrowLeftContainer} = this.globalComponents;
         arrowLeft.redraw({...arrowStyles,...arrowLeftStyles}, arrowFontStyles)
-
-        textLeft.position.set(arrowLeft.width / 2, 0 )
+        textLeft.redraw({
+            ...arrowTitleStyles,
+            position: {
+                x: arrowLeft.width / 2,
+                y:  0,
+            },
+        })
         arrowLeft.position.set(0, textLeft.height + 10) 
         arrowLeftContainer.position.set(centerBox.x -  centerBox.width /2 -  arrowLeftContainer.width,textBoxStyles.y )
         arrowLeftContainer.pivot.set(0, arrowLeftContainer.height * .5)
@@ -120,13 +130,16 @@ class Page2 extends AnimationPage{
         //redraw arrow bottom
         const {arrowBottom, textBottom, arrowBotContainer} = this.globalComponents;
         arrowBottom.redraw(arrowStyles, arrowFontStyles)
-
-
         arrowBottom.position.set(0, 0)
 
-     
-
-        textBottom.position.set(arrowBottom.width / 2, arrowBottom.height + 10 )
+        textBottom.redraw({
+            ...arrowTitleStyles,
+            ...arrowTextBottomStyles,
+            position: {
+                x: arrowBottom.width / 2,
+                y: arrowBottom.height + 10,
+            },
+        })
         arrowBotContainer.position.set(textBoxStyles.x,centerBox.y + textBoxStyles.height - (textBoxStyles.height / 2))
         arrowBotContainer.pivot.set(arrowBotContainer.width  * .5,0)
 

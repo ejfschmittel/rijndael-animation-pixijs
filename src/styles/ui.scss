@@ -7,6 +7,7 @@
 
     grid-template-rows: 600px 3rem 16rem 26rem;
     grid-template-columns: 12rem 1fr 8rem;
+    overflow: hidden;
 
     grid-template-areas: 
         "screen screen screen"
@@ -16,7 +17,7 @@
     ; 
 
     @include respond("tab-port"){
-        height: 100vh;
+        height: 100%;
 
 
         grid-template-rows: 1fr 3rem 3rem;

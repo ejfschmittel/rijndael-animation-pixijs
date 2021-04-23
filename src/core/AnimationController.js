@@ -146,6 +146,8 @@ class AnimationController{
      
     }
 
+    
+
 
     redrawPages(){
         this.pageIDs.map(pageID => {

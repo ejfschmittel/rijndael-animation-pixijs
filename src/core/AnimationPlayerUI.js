@@ -1,6 +1,8 @@
 import {debounce, updateContainerLocale} from "../utils/utils"
 
 
+const CONTAINER_ID = "rijndael-animation-ui"
+
 const PLAY_BTN_ID = "rijndael-animation-play-btn";
 const FORWARDS_BTN_ID = "rijndael-animation-jump-forwards";
 const BACKWARDS_BTN_ID = "rijndael-animation-jump-backwards";
@@ -37,6 +39,10 @@ class AnimationPlayerUI{
 
         this.mobileOverlays = document.querySelectorAll(OVERLAY_CLASS);
 
+        this.bodyRef = document.querySelector("body")
+
+        this.container = document.getElementById(CONTAINER_ID)
+
         this.playBtn = document.getElementById(PLAY_BTN_ID);
         this.forwardsBtn = document.getElementById(FORWARDS_BTN_ID);
         this.backwardsBtn = document.getElementById(BACKWARDS_BTN_ID);
@@ -61,6 +67,16 @@ class AnimationPlayerUI{
         this.pageInfoTexts = []
 
         this.createEventListeners()
+    }
+
+
+    resizeUI(){
+      
+        if(uiWidth <= 900){
+            this.container.style.height = document.body.clientHeight + "px"
+        }else{
+            this.container.style.height = "auto"
+        }
     }
 
 

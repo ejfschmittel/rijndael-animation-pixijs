@@ -8,27 +8,24 @@ import Grid2 from "../../components/Grid2"
 import CircledText from "../../components/CircledText";
 
 
-
-import {gsap} from "gsap"
-
-import DataController from "../../core/DataController"
-
-
+import PIXIText from "../../components/PIXIText"
 import PageTimeline from "./PageTimeline"
 import DefaultResponsives from "./Responsives.default"
-//import ResponsiveMax400 from "./Responsive.max-1000"
-import ResponsiveMax600 from "./Responsive.max-600"
-import ResponsiveMax400 from "./Responsive.max-400"
-import HexadecimalTextBox from "../../components/HexadecimalTextBox.js"
+
+import ResponsiveMax768 from "./Responsive.max-768"
+import ResponsiveMax425 from "./Responsive.max-425"
+import ResponsiveMax375 from "./Responsive.max-375"
+
+
 
 class Page3 extends AnimationPage{
     constructor(){
         super();
 
         this.timeline = new PageTimeline(this)
-      //  this.registerResponsive("max-400", ResponsiveMax400)
-        this.registerResponsive("max-600", ResponsiveMax600)
         this.registerResponsive("default", DefaultResponsives)
+        this.registerResponsive("max-768", ResponsiveMax768)
+        this.registerResponsive("max-425", ResponsiveMax425)
 
         
     }
@@ -37,15 +34,15 @@ class Page3 extends AnimationPage{
     create(defines){
         const background = this.createBackground();
 
-        const textStyle = {fill: 0xffffff}
+     
 
         // title
-        const title = new PIXI.Text("title", {...textStyle, fontSize: 60})
+        const title = new PIXIText("title")
         this.bindPageLocale("title",title)
         title.anchor.set(.5, .5)
 
         /* left side */
-        const subtitleLeft = new PIXI.Text("subtitleLeft", {...textStyle, fontSize: 36})
+        const subtitleLeft = new PIXIText("subtitleLeft")
         this.bindPageLocale("subtitleLeft",subtitleLeft)
         subtitleLeft.anchor.set(.5, .5)
 
@@ -55,7 +52,7 @@ class Page3 extends AnimationPage{
 
         const arrowLeft = new Arrow({orientation: ARROW_ORIENTATION.DOWN})  
 
-        const textLeft = new PIXI.Text("textLeft", {fill: 0xD47F00, align: "center", fontWeight: "500"})
+        const textLeft = new PIXIText("textLeft", {align: "center", fontWeight: "500"})
         this.bindPageLocale("textLeft",textLeft)
         textLeft.anchor.set(.5, 0)
 
@@ -63,7 +60,7 @@ class Page3 extends AnimationPage{
 
 
         /* right side */
-        const subtitleRight = new PIXI.Text("subtitleRight", {...textStyle, fontSize: 36})
+        const subtitleRight = new PIXIText("subtitleRight")
         this.bindPageLocale("subtitleRight",subtitleRight)
         subtitleRight.anchor.set(.5)
 
@@ -72,7 +69,7 @@ class Page3 extends AnimationPage{
 
         const arrowRight = new Arrow({orientation: ARROW_ORIENTATION.DOWN})  
 
-        const textRight = new PIXI.Text("textRight", {fill: 0x5787E1, align: "center", fontWeight: "500"})
+        const textRight = new PIXIText("textRight", {align: "center", fontWeight: "500"})
         this.bindPageLocale("textRight",textRight)
         textRight.anchor.set(.5, 0)
 
@@ -91,49 +88,67 @@ class Page3 extends AnimationPage{
         const { background, title, } = this.globalComponents
         background.redraw(backgroundStyles)
 
-        title.scale.set(titleStyles.scale)
-        title.position.set(animationDimensions.width / 2, 50)
+        title.redraw(titleStyles)
 
-        const {subtitleStyles, arrowStyles, gridStyles} = defines;
+
+        // general styles 2
+        const {subtitleStyles, textStyles,gridFontStyles, arrowStyles, gridStyles, circleStyles, circleFontStyles} = defines;
+
+        console.log("gridstyles")
+        console.log(gridStyles)
+
         // redraw left side
-        const {textLeftPos, leftGridPos, arrowLeftPos, subtitleLeftStyles} = defines
+        const {textLeftStyles, leftGridStyles, arrowLeftPos, subtitleLeftStyles} = defines
         const {subtitleLeft, gridLeft, textLeft, arrowLeft, circleLeft} = this.globalComponents;
-        subtitleLeft.scale.set(subtitleStyles.scale)
-        subtitleLeft.position.set(subtitleLeftStyles.x, subtitleLeftStyles.y)
 
-        gridLeft.redraw({...gridStyles, fill: 0xFFF995})
-        gridLeft.position.set(leftGridPos.x, subtitleLeft.y + subtitleLeft.height + leftGridPos.yDistance)
+        subtitleLeft.redraw({
+            ...subtitleStyles,
+            ...subtitleLeftStyles,
+        })
+
+
+        gridLeft.redraw({...gridStyles, ...leftGridStyles}, gridFontStyles)
+        gridLeft.position.set(leftGridStyles.x, subtitleLeft.y + subtitleLeft.height + leftGridStyles.yDistance)
         gridLeft.pivot.set(gridLeft.width / 2 , 0)
 
         arrowLeft.redraw(arrowStyles)
         arrowLeft.pivot.set(arrowLeft.width/2, 0)    
         arrowLeft.position.set(arrowLeftPos.x, gridLeft.y + gridLeft.height + arrowLeftPos.yDistance)
 
-        textLeft.position.set(textLeftPos.x, arrowLeft.y + arrowLeft.height + textLeftPos.yDistance)
+        textLeft.redraw({...textStyles,...textLeftStyles})
+        textLeft.position.set(textLeftStyles.x, arrowLeft.y + arrowLeft.height + textLeftStyles.yDistance)
 
-        circleLeft.redraw({borderColor: 0xffffff, borderWidth: 3.2 }, {})
+        circleLeft.redraw(circleStyles, circleFontStyles)
         circleLeft.position.set(arrowLeftPos.x, textLeft.y + textLeft.height + circleLeft.height /2 + 10)
 
 
 
         // redraw right side
-        const {textRightPos, rightGridPos, arrowRightPos, subtitleRightStyles} = defines
+        const {textRightStyles, rightGridStyles, arrowRightPos, subtitleRightStyles} = defines
         const {subtitleRight, gridRight, textRight, arrowRight, circleRight} = this.globalComponents;
-        subtitleRight.scale.set(subtitleStyles.scale)
-        subtitleRight.position.set(subtitleRightStyles.x, subtitleRightStyles.y)
 
-        gridRight.redraw({...gridStyles, fill: 0x008FFF})
-        gridRight.position.set(rightGridPos.x, subtitleRight.y + subtitleRight.height + rightGridPos.yDistance)
+        // right subtitle
+        subtitleRight.redraw({
+            ...subtitleStyles,
+            ...subtitleRightStyles,
+        })
+
+        // right grid
+        gridRight.redraw({...gridStyles, ...rightGridStyles}, gridFontStyles)
+        gridRight.position.set(rightGridStyles.x, subtitleRight.y + subtitleRight.height + rightGridStyles.yDistance)
         gridRight.pivot.set(gridRight.width / 2 , 0)
 
-        
+        // right arrow
         arrowRight.redraw(arrowStyles)
         arrowRight.pivot.set(arrowRight.width/2, 0)    
         arrowRight.position.set(arrowRightPos.x, gridRight.y + gridRight.height +arrowRightPos.yDistance)
 
-        textRight.position.set(textRightPos.x, arrowRight.y + arrowRight.height + textRightPos.yDistance)
+        // right text 
+        textRight.redraw({...textStyles,...textRightStyles})
+        textRight.position.set(textRightStyles.x, arrowRight.y + arrowRight.height + textRightStyles.yDistance)
 
-        circleRight.redraw({borderColor: 0xffffff, borderWidth: 3.2 }, {})
+        // right circle
+        circleRight.redraw(circleStyles, circleFontStyles)
         circleRight.position.set(arrowRight.x, textRight.y + textRight.height + circleRight.height /2 + 10)
 
 
