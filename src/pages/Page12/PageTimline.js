@@ -13,12 +13,12 @@ class Page12Timline extends AnimationPageTimeline{
 
     createPreFadeIn(){
 
-        const {rows, titles} = this.getGlobalComponents();
+        /*const {rows, titles} = this.getGlobalComponents();
         const obj = {val: 0}
         const tl = gsap.timeline();
         tl.to(obj, {val: 1, duration: .0001})
         tl.set([...rows, ...titles], {pixi: {alpha: 0}})
-        return tl;
+        return tl;*/
     }
 
     createAnimationMain(){

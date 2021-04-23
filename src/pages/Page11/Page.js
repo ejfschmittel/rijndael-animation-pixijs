@@ -1,17 +1,11 @@
 import AnimationPage from "../../core/AnimationPage.js"
 import * as PIXI from "pixi.js"
 
-import Arrow, {ARROW_ORIENTATION} from "../../components/Arrow"
-import Component from "../../components/Component"
-import Grid from "../../components/Grid2"
 
-import CircledText from "../../components/CircledText";
 
 import GridRow from "../../components/GridRow"
 
 
-
-import {gsap} from "gsap"
 
 
 
@@ -19,10 +13,10 @@ import {gsap} from "gsap"
 import PageTimeline from "./PageTimline"
 
 import DefaultResponsives from "./Responsives.default"
+import ResponsiveMax768 from "./Responsive.max-768"
+import ResponsiveMax425 from "./Responsive.max-425"
 //import ResponsiveMax400 from "./Responsive.max-1000"
-import ResponsiveMax600 from "./Responsive.max-600"
-import ResponsiveMax400 from "./Responsive.max-400"
-import HexadecimalTextBox from "../../components/HexadecimalTextBox.js"
+
 import PIXIText from "../../components/PIXIText"
 
 class Page11 extends AnimationPage{
@@ -31,10 +25,9 @@ class Page11 extends AnimationPage{
 
 
         this.timeline = new PageTimeline(this)
-        this.registerResponsive("max-400", ResponsiveMax400)
-       // this.registerResponsive("max-600", ResponsiveMax600)
         this.registerResponsive("default", DefaultResponsives)
-
+        this.registerResponsive("max-768", ResponsiveMax768)
+        this.registerResponsive("max-425", ResponsiveMax425)
         
     }
 
@@ -48,6 +41,11 @@ class Page11 extends AnimationPage{
 
     create(defines){
         const background = this.createBackground();
+
+
+
+        const introText = new PIXIText("text", {})
+        this.bindPageLocale("introText", introText)
 
 
         // titles
@@ -66,12 +64,6 @@ class Page11 extends AnimationPage{
         const title5 = new PIXIText("RoundKeyLabel")
         this.bindPageLocale("RoundKeyLabel", title5)
       
-
-    /*    const title1 = this.createTitle("roundLabel", {fontSize: 30, align: "center"})
-        const title2 = this.createTitle("subBytesLabel", {fontSize: 30, align: "center"})
-        const title3 = this.createTitle("ShiftRowsLabel", {fontSize: 30, align: "center"})
-        const title4 = this.createTitle("MixColumnsLabel", {fontSize: 30, align: "center"})
-        const title5 = this.createTitle("RoundKeyLabel", {fontSize: 30, align: "center"})*/
 
        
         const titles = [title1, title2, title3, title4, title5]
@@ -95,10 +87,7 @@ class Page11 extends AnimationPage{
         this.bindPageLocale("roundFiveLabel", row5.title)
 
 
-        inputRow.addGridStyles(1, {fill: 0xCDCBCD})
-        inputRow.addGridStyles(2, {fill: 0xCDCBCD})
-        inputRow.addGridStyles(3, {fill: 0xCDCBCD})
-        inputRow.addGridStyles(4, {fill: 0x0090FF})
+ 
        
      
         const rows = [inputRow, row1, row2, row3, row4, row5]
@@ -124,7 +113,7 @@ class Page11 extends AnimationPage{
      
 
         
-        this.addPermanent({background, row1, row2, row3, row4, row5, title1, title2, title3, title4, title5, inputRow})
+        this.addPermanent({background, introText, row1, row2, row3, row4, row5, title1, title2, title3, title4, title5, inputRow})
 
         this.addToGlobalComponents({rows, titles})
      
@@ -137,28 +126,29 @@ class Page11 extends AnimationPage{
         // get permanent componenents
         const {
             background, row1, 
-            rows,inputRow
+            rows,inputRow,introText
         } = this.globalComponents
 
         // destructure defines
         const {
-            backgroundStyles,
+            backgroundStyles,introTextStyles
         } = defines
 
         background.redraw(backgroundStyles)
 
        
+        introText.redraw(introTextStyles)
 
 
   
         // redraw rows
-        const {rowStyles, rowTitleStyles, defaultGridStyles, emptyGridStyles, highlightGridStyles, lastColGridStyles} = defines
+        const {rowStyles, rowTitleStyles, defaultGridStyles, emptyGridStyles, highlightGridStyles, lastColGridStyles, gridFontStyles} = defines
          
         inputRow.redraw(rowStyles, rowTitleStyles, {
             default: emptyGridStyles,
             0: defaultGridStyles,
             4: highlightGridStyles
-        })
+        }, gridFontStyles)
         
         inputRow.position.set(0, rowStyles.y + rowStyles.margin) 
       
@@ -168,7 +158,7 @@ class Page11 extends AnimationPage{
             row.redraw(rowStyles, rowTitleStyles, {
                 default: defaultGridStyles,
                 4: lastColGridStyles
-            });
+            }, gridFontStyles);
             const y = i !== 0 ? rows[i-1].y + rowStyles.height : rowStyles.y;
             row.position.set(0, y + rowStyles.margin) 
         }

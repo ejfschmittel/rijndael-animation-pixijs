@@ -11,6 +11,18 @@ class Page7DefaultResponsives extends AnimationPageResponsives{
         const defines = {}
 
       
+        defines.introTextStyles = {
+            fontSize: 30,
+            wordWrap: true,
+            wordWrapWidth: 500,
+            position: {
+                x: this.getWidth(50),
+                y: this.getHeight(50)
+            },
+            anchor: {x: .5, y: .5}
+        }
+
+      
         defines.backgroundStyles = {
             width: this.getWidth(100),
             height: this.getHeight(100),
@@ -21,28 +33,20 @@ class Page7DefaultResponsives extends AnimationPageResponsives{
 
         defines.rowStyles = {
             width: this.getWidth(96),
-            height: this.getHeight(15),
-            margin: this.getHeight(1),
+            height: this.getHeight(14),
+            margin: this.getHeight(.5),
             x: this.getWidth(2),
             y: this.getHeight(10),
             gap: 20,
+            titleSpace: 140,
         }
 
         defines.rowTitleStyles = {
             x: 20,
             fontSize: 20,
+            rotation: 0,
         }
 
-
-        defines.titleStyles = {
-            y: this.getHeight(5),
-            anchor: {
-                x: .5,
-                y: .5
-            },
-            fontSize: 16,
-            fill: this.c("--text-color")
-        }
 
         defines.defaultGridStyles = {
             fill: this.c("--grid-background-alpha")
@@ -58,6 +62,24 @@ class Page7DefaultResponsives extends AnimationPageResponsives{
 
         defines.highlightGridStyles = {
             fill: this.c("--grid-background-beta")
+        }
+
+        defines.gridFontStyles = {
+            fontSize: 14,
+        }
+
+   
+
+
+  
+        defines.titleStyles = {
+            y: this.getHeight(5),
+            anchor: {
+                x: .5,
+                y: .5
+            },
+            fontSize: 16,
+            fill: this.c("--text-color")
         }
 
 

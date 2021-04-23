@@ -1,36 +1,23 @@
 import AnimationPage from "../../core/AnimationPage.js"
 import * as PIXI from "pixi.js"
 
-import Arrow, {ARROW_ORIENTATION} from "../../components/Arrow"
-import Component from "../../components/Component"
-import Grid from "../../components/Grid2"
-
-import CircledText from "../../components/CircledText";
 import PIXIText from "../../components/PIXIText"
 import GridRow from "../../components/GridRow"
 
-
-
-import {gsap} from "gsap"
-
-import DataController from "../../core/DataController"
-
-
+import Grid from "../../components/Grid2"
 import PageTimeline from "./PageTimline"
 import DefaultResponsives from "./Responsives.default"
-//import ResponsiveMax400 from "./Responsive.max-1000"
-import ResponsiveMax600 from "./Responsive.max-600"
-import ResponsiveMax400 from "./Responsive.max-400"
-import HexadecimalTextBox from "../../components/HexadecimalTextBox.js"
+import ResponsiveMax768 from "./Responsive.max-768"
+import ResponsiveMax425 from "./Responsive.max-425"
 
 class Page12 extends AnimationPage{
     constructor(){
         super();
 
         this.timeline = new PageTimeline(this)
-        this.registerResponsive("max-400", ResponsiveMax400)
-       // this.registerResponsive("max-600", ResponsiveMax600)
         this.registerResponsive("default", DefaultResponsives)
+        this.registerResponsive("max-768", ResponsiveMax768)
+        this.registerResponsive("max-425", ResponsiveMax425)
 
         
     }
@@ -86,11 +73,7 @@ class Page12 extends AnimationPage{
         const rows = [row6, row7, row8, row9, row10]
 
 
-        
-        //this.subscribeTo("initial-state",inputRow.grids[0].cells)
-        //this.subscribeTo("key-0",inputRow.grids[4].cells)
-
-        for(let i = 6; i <= 10; i++){
+        for(let i = 6; i <= 9; i++){
             const row = rows[i-6];
             row.grids.forEach((grid, c) => {
                 switch(c){
@@ -103,16 +86,26 @@ class Page12 extends AnimationPage{
             })
         }
 
-
-      
-
         
-        this.addPermanent({background,row6, row7, row8, row9, row10, title1, title2, title3, title4, title5})
+        this.subscribeTo(`round-10-initial`, row10.grids[0].cells); 
+        this.subscribeTo(`after-sub-bytes-10`, row10.grids[1].cells); 
+        this.subscribeTo(`after-shift-rows-10`, row10.grids[2].cells); 
+        this.subscribeTo(`key-10`, row10.grids[4].cells);
+
+
+        const outputGrid = new Grid(4,4)
+        this.subscribeTo("after-add-round-key-10", outputGrid.cells)
+        const cipherText = new PIXIText("ciphertext");
+        this.bindPageLocale("cipherTextLabel", cipherText)
+        const outputText = new PIXIText("output"); 
+        this.bindPageLocale("outputLabel", outputText)
+
+
+
+        this.addPermanent({background,row6, row7, row8, row9, row10, title1, title2, title3, title4, title5, outputGrid, cipherText, outputText})
 
         this.addToGlobalComponents({rows, titles})
      
-
-       
     }
 
 
@@ -134,13 +127,13 @@ class Page12 extends AnimationPage{
     
 
         const {rows, row6} = this.globalComponents;
-        const {rowStyles, rowTitleStyles, defaultGridStyles, emptyGridStyles, highlightGridStyles, lastColGridStyles} = defines
+        const {rowStyles, rowTitleStyles, defaultGridStyles,lastColGridStyles, gridFontStyles} = defines
         for(let i = 0; i < rows.length; i++){
             const row = rows[i];
             row.redraw(rowStyles, rowTitleStyles, {
                 default: defaultGridStyles,
                 4: lastColGridStyles
-            });
+            },gridFontStyles);
             const y = i !== 0 ? rows[i-1].y + rowStyles.height : rowStyles.y;
             row.position.set(0, y + rowStyles.margin) 
         }
@@ -152,10 +145,32 @@ class Page12 extends AnimationPage{
         titles.forEach((title, idx) => {
             title.redraw(titleStyles)
             title.position.set(row6.grids[idx].x + rows[0].gridWidth / 2, titleStyles.y)
-        })
+        },gridFontStyles)
 
 
+        const {outputGrid, cipherText, outputText} = this.globalComponents;
 
+        const gridWidth = row6.gridWidth;
+        const gridHeight = rowStyles.height;
+
+        outputGrid.redraw({
+            width: gridWidth,
+            height: gridHeight,
+            ...defaultGridStyles,
+        },gridFontStyles)
+
+        outputGrid.position.set(rowStyles.titleSpace,rows[rows.length-1].y + rowStyles.height)
+
+        cipherText.redraw({...titleStyles});
+        outputText.redraw({...titleStyles, rotation: -1.5708}); // 90deg
+        cipherText.position.set(rowStyles.titleSpace + gridWidth/ 2, outputGrid.y + gridHeight + 10)
+
+        if(defines.animationDimensions.width <= 768) {
+            outputText.position.set(rowStyles.titleSpace + gridWidth + 10, outputGrid.y + gridHeight /2)
+        }else{
+            outputText.position.set(rowStyles.titleSpace - 20, outputGrid.y + gridHeight /2)
+        }
+        
        
     }
 }

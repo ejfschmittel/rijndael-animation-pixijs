@@ -31,6 +31,9 @@ class GridRow extends Component{
             this.grids.push(grid);
         }
 
+    
+        
+
         this.addChild(this.title, ...this.grids, this.addSymbol, this.equalsSymbol)
 
 
@@ -52,16 +55,18 @@ class GridRow extends Component{
             gap: 10,
             margin: 10,
             titleSpace: 140,
+
             ...rowStyles
         }
 
 
       
         titleStyles = { ...titleStyles}
-        fontStyles = {scale: .5, ...fontStyles}
+        fontStyles = {...fontStyles}
 
         const {grids, title, addSymbol, equalsSymbol} = this
       
+    
         this.title.redraw(titleStyles)
        
 
@@ -69,7 +74,7 @@ class GridRow extends Component{
         // calculate space for grid
         const addSymbolGap = addSymbol.width * 2;
         const equalsSymbolGap = equalsSymbol.width * 2;
-        const openSpace = rowStyles.width - addSymbolGap - equalsSymbolGap - rowStyles.titleSpace - 5 * rowStyles.gap - 2 ;
+        const openSpace = rowStyles.width - addSymbolGap - equalsSymbolGap - rowStyles.titleSpace - 3 * rowStyles.gap  ;
         const gridWidth = openSpace / 5;
         const gridHeight = rowStyles.height - rowStyles.margin
    
@@ -78,9 +83,10 @@ class GridRow extends Component{
         // redraw
   
 
+        
         grids.forEach((grid, idx) => {
             const styles = this.getGridStyles(idx,gridStyles)
-            grid.redraw({width: gridWidth, height: gridHeight, ...styles}, {scale: .3});
+            grid.redraw({width: gridWidth, height: gridHeight, ...styles}, fontStyles);
         })
       
 
@@ -95,10 +101,8 @@ class GridRow extends Component{
         equalsSymbol.scale.set(.4)
         
 
+        title.redraw({...this.titleStyles})
         title.anchor.set(.5,.5)
-
-        // position
-      
         title.position.set(rowStyles.titleSpace / 2, gridHeight/2)
         grids[0].position.set(rowStyles.titleSpace, 0)
         

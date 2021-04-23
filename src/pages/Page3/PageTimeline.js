@@ -11,7 +11,7 @@ class Page3Timline extends AnimationPageTimeline{
 
 
     createPreFadeIn(){
-        /*const {
+        const {
             title, subtitleLeft, gridLeft, subtitleRight, gridRight, arrowLeft, arrowRight, textRight, textLeft, circleLeft, circleRight
         } = this.getGlobalComponents();
 
@@ -21,7 +21,7 @@ class Page3Timline extends AnimationPageTimeline{
         const tl = this.getPreFadeInTimeline();
         tl.set([title, subtitleLeft, subtitleRight, arrowLeft, arrowRight, textRight,textLeft, circleLeft,circleRight,gridLeft, gridRight], {pixi: {alpha: 0}})
         tl.set([...gridLeftTexts, ...gridRightTexts], {pixi: {alpha: 0}})
-        return tl; */
+        return tl; 
     }
 
     createAnimationMain(){

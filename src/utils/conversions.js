@@ -14,6 +14,11 @@ export const generatRandomBinaryStrings = (stringCount=1, length=10) => {
     return binaryStrings
 }
 
+export const degreeToRadians = (degrees) => {
+    const pi = Math.PI;
+    return degrees * (pi/180);
+}
+
 export const getRandomHexValueList = (count=1, length=2) => {
     const hexValueList = []
     for(let i = 0; i < count; i++){

@@ -12,6 +12,7 @@ class Page11Timline extends AnimationPageTimeline{
     
     createPreFadeIn(){
 
+        //const tl = this.getPreFadeInTimeline();
         const {rows, titles} = this.getGlobalComponents();
         const obj = {val: 0}
         const tl = gsap.timeline();
@@ -21,10 +22,11 @@ class Page11Timline extends AnimationPageTimeline{
     }
 
     createAnimationMain(){
-        const {rows, titles} = this.getGlobalComponents();
+        const {rows, titles, introText} = this.getGlobalComponents();
 
         const tl = gsap.timeline(); 
 
+        tl.to(introText, {pixi: {alpha: 0}, delay: 2})
         tl.to(titles, {pixi: {alpha: 1}})
         tl.to(rows[0], {pixi: {alpha: 1}})
         tl.to(rows[1], {pixi: {alpha: 1}})
