@@ -203,7 +203,10 @@ class AnimationPlayerUI{
                 
             firstChild.addEventListener("click", () => {
                // this.goToPage(pageID)
+               
                this.controller.timeline.goToPage(pageID)
+               this.hideAllOverlays();
+               this.higlightButton()
             })   
           
             this.navigationContainer.appendChild(firstChild)
