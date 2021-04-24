@@ -13,16 +13,15 @@ class Page12Timline extends AnimationPageTimeline{
 
     createPreFadeIn(){
 
-        /*const {rows, titles} = this.getGlobalComponents();
-        const obj = {val: 0}
-        const tl = gsap.timeline();
-        tl.to(obj, {val: 1, duration: .0001})
-        tl.set([...rows, ...titles], {pixi: {alpha: 0}})
-        return tl;*/
+
+        const {rows, titles, outputText, cipherText, outputGrid} = this.getGlobalComponents();
+        const tl = this.getPreFadeInTimeline();
+        tl.set([...rows, ...titles, outputText, cipherText, outputGrid], {pixi: {alpha: 0}})
+        return tl;
     }
 
     createAnimationMain(){
-        const {rows, titles} = this.getGlobalComponents();
+        const {rows, titles, outputText, cipherText, outputGrid} = this.getGlobalComponents();
 
         const tl = gsap.timeline(); 
 
@@ -34,6 +33,7 @@ class Page12Timline extends AnimationPageTimeline{
         tl.to(rows[4], {pixi: {alpha: 1}})
         tl.to(rows[5], {pixi: {alpha: 1}})
 
+        tl.to([outputText, cipherText, outputGrid], {pixi: {alpha: 1}})
         return tl;
     }
 

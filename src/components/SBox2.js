@@ -7,7 +7,7 @@ import TextBox from "./TextBox2"
 
 
 
-import {toHex} from "../utils/conversions"
+import {toHexString} from "../utils/conversions"
 
 
 const defaultSBoxStyles = {
@@ -17,18 +17,15 @@ const defaultSBoxStyles = {
 }
 
 
-const sBoxCellStyle = {
-    fill: 0xffffff,
-    borderWidth: 1,
-    borderColor: 0x000000,
-}
 
-class SBox2 extends Component{
+class SBox extends Component{
     constructor(){
         super();
 
 
-        const hexadecimals = [...new Array(16)].map((_, idx) => toHex(idx ))
+        const hexadecimals = [...new Array(16)].map((_, idx) => toHexString(idx ))
+
+
 
         this.title = new TextBox("hex")
 
@@ -56,12 +53,11 @@ class SBox2 extends Component{
 
        
 
-        const {width, height, legendWidth} = sboxStyles
+        const {width, height, legendWidth, legendColor} = sboxStyles
         const hlf = legendWidth / 2
 
 
-        const cellWidth = (width - legendWidth) / 16;
-        const cellHeight = (height - legendWidth) / 16;
+ 
 
         this.title.redraw({width: legendWidth, height: legendWidth}, legendFontStyle)
 
@@ -69,14 +65,14 @@ class SBox2 extends Component{
         this.legendXLabel.redraw({width: hlf, height: height - legendWidth},legendFontStyle)
         this.legendXLabel.position.set(0, legendWidth)
 
-        this.legendX.redraw({width: hlf, height: height - legendWidth}, legendFontStyle)
+        this.legendX.redraw({width: hlf, height: height - legendWidth, fill: legendColor}, legendFontStyle)
         this.legendX.position.set(hlf, legendWidth)
 
 
         this.legendYLabel.redraw({width: width - legendWidth, height: hlf},legendFontStyle)
         this.legendYLabel.position.set(legendWidth, 0)
 
-        this.legendY.redraw({width: width - legendWidth, height: hlf}, legendFontStyle)
+        this.legendY.redraw({width: width - legendWidth, height: hlf, fill: legendColor}, legendFontStyle)
         this.legendY.position.set(legendWidth, hlf)
 
         this.grid.redraw({width: width -legendWidth, height: height - legendWidth },cellFontStyle)
@@ -86,4 +82,4 @@ class SBox2 extends Component{
     }
 }
 
-export default SBox2;
+export default SBox;

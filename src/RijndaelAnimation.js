@@ -50,7 +50,7 @@ class RijndaelAnimation extends AnimationController {
         this.buildTimeline()
 
         this.goToFirstPage();
-        this.timeline.goToPage("page-12")
+        this.timeline.goToPage("page-10")
    
        this.redrawPages()
      

@@ -3,7 +3,7 @@ import AnimationPageResponsives from "../../core/AnimationPageResponsives"
 
 
 import {gsap} from "gsap"
-class Page6DefaultResponsives extends AnimationPageResponsives{
+class Page8DefaultResponsives extends AnimationPageResponsives{
     constructor(label, page){
         super(label, page);
     }
@@ -29,6 +29,10 @@ class Page6DefaultResponsives extends AnimationPageResponsives{
             height: this.getHeight(5),
             fill: this.c("--bar-background-alpha"),
         }
+
+        defines.gridFontStyles = {
+            fontSize: 20
+        }
       
         defines.backgroundStyles = {
             width: this.getWidth(100),
@@ -52,13 +56,18 @@ class Page6DefaultResponsives extends AnimationPageResponsives{
         }
 
 
+
+        defines.baseTextStyles = {
+            fontSize: 24,
+            anchor: {x: 0, y: .5}
+        }
         const cellHeight = defines.gridStyles.height / 4;
 
         defines.text1Styles = {
             fill: this.c("--text-light"),
             position: {
                 x: this.getWidth(50),
-                y: defines.gridStyles.y + cellHeight
+                y: defines.gridStyles.y + cellHeight * 1.5
             }
         }
 
@@ -66,7 +75,7 @@ class Page6DefaultResponsives extends AnimationPageResponsives{
             fill: this.c("--text-light"),
             position: {
                 x: this.getWidth(50),
-                y: defines.gridStyles.y + cellHeight * 2   
+                y: defines.gridStyles.y + cellHeight * 2.5   
             }
         }
 
@@ -74,25 +83,12 @@ class Page6DefaultResponsives extends AnimationPageResponsives{
             fill: this.c("--text-light"),
             position: {
                 x: this.getWidth(50),
-                y: defines.gridStyles.y + cellHeight * 3
+                y: defines.gridStyles.y + cellHeight * 3.5
             }
         }
 
-
-
-    
-
         return defines;
     }
-
-
-
-
-
-    
-
-
-  
 }
 
-export default Page6DefaultResponsives
+export default Page8DefaultResponsives

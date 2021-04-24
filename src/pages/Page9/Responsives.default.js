@@ -36,32 +36,43 @@ class Page6DefaultResponsives extends AnimationPageResponsives{
         }
 
 
+        defines.gridFontStyles = {
+            fontSize: 24
+        }
+
+    
+        // galois field
+        defines.galoisFieldFontStyles = {
+            fontSize: 24
+        }
+
+
+        defines.galoisFieldStyles = {
+            width: this.getWidth(26),
+            height: this.getWidth(20),
+        }
+
+       
         defines.gridStyles = {
             width: this.getWidth(26),
             height: this.getWidth(20),
         }
 
-        defines.gridTextStyles = {
-            scale:1,
-        }
+    
 
         defines.gridLandingPos = {
-            x: this.getWidth(20),
-            y: this.getHeight(70)
+            x: this.getWidth(8),
+            y: this.getHeight(55)
         }
 
 
 
         defines.equationPos = {
             x: this.getWidth(40),
-            y: this.getHeight(30)
+            y: this.getHeight(30),
         }
 
-        defines.columnStyles = {
-            width: defines.gridStyles.width / 4,
-            height: defines.gridStyles.height
-        }
-
+  
         defines.stateGridStyle = {
             fill: this.c("--grid-background-alpha"),
         }
@@ -72,6 +83,19 @@ class Page6DefaultResponsives extends AnimationPageResponsives{
 
         defines.columnLandingPos = {}
         defines.resultLandingPos = {}
+
+
+        defines.textStyles = {
+            fontSize: 20,
+            wordWrap: true,
+            fill: this.c("--text-color"),
+            wordWrapWidth: 400,
+            position: {
+                x: this.getWidth(40),
+                y: this.getHeight(70)
+            }
+        }
+        
 
     
 

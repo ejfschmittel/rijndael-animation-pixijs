@@ -7,16 +7,15 @@ import AnimatableBackground from "../../components/AnimatableBackground"
 import SBox from "../../components/SBox2"
 import Grid from "../../components/Grid2"
 import TextBox from "../../components/TextBox2"
-import {gsap} from "gsap"
-import DataController from "../../core/DataController"
+
 
 
 
 import DefaultResponsives from "./Responsives.default"
-//import ResponsiveMax400 from "./Responsive.max-1000"
-import ResponsiveMax600 from "./Responsive.max-600"
-import ResponsiveMax400 from "./Responsive.max-400"
-import HexadecimalTextBox from "../../components/HexadecimalTextBox.js"
+import ResponsiveMax768 from "./Responsive.max-768";
+import ResponsiveMax425 from "./Responsive.max-425";
+import ResponsiveMax375 from "./Responsive.max-375";
+
 
 class Page7 extends AnimationPage{
     constructor(){
@@ -24,9 +23,10 @@ class Page7 extends AnimationPage{
 
 
         this.timeline = new PageTimeline(this)
-        this.registerResponsive("max-400", ResponsiveMax400)
-        this.registerResponsive("max-600", ResponsiveMax600)
+ 
         this.registerResponsive("default", DefaultResponsives)
+        this.registerResponsive("max-768", ResponsiveMax768)
+        this.registerResponsive("max-425", ResponsiveMax425)
 
         
     }
@@ -42,7 +42,7 @@ class Page7 extends AnimationPage{
 
         const sbox = new SBox()
         this.subscribeTo("sbox", sbox.grid.cells)
-        const {sBoxPos, sBoxStyles, sboxLegendStyles, sBoxTextStyles} = defines
+        const { sBoxStyles, sboxLegendStyles, sBoxTextStyles} = defines
         sbox.redraw(sBoxStyles, sboxLegendStyles, sBoxTextStyles);
 
         const textBox = new TextBox()
@@ -52,8 +52,8 @@ class Page7 extends AnimationPage{
         const resultMovables = grid.createMovables();
 
         
-        this.subscribeTo("after-initial-round", resultMovables.movables)
-        this.subscribeTo("after-sub-bytes-1", stateMovables.movables)
+        this.subscribeTo("after-initial-round", stateMovables.movables)
+        this.subscribeTo("after-sub-bytes-1", resultMovables.movables)
       
         this.addPermanent({background,animatableBackground,sbox, grid, textBox})
 
@@ -98,7 +98,7 @@ class Page7 extends AnimationPage{
         textBox.pivot.set(textBox.width/2, 0)
 
 
-        const {gridStyles} = defines
+        const {gridStyles, gridFontStyles} = defines
         grid.redraw(gridStyles);
         grid.position.set(gridStyles.x, gridStyles.y)
         grid.pivot.set(grid.width/2, grid.height/2)
@@ -108,7 +108,7 @@ class Page7 extends AnimationPage{
         const {stateMovableStyles} = defines
         stateMovables.movables.forEach((movable, idx) => {
             const {x,y,width, height}= grid.cells[idx].getBounds()
-            movable.redraw({width, height, ...stateMovableStyles},{});
+            movable.redraw({width, height, ...stateMovableStyles},gridFontStyles);
             movable.position.set(x, y)
         })
 
@@ -116,7 +116,7 @@ class Page7 extends AnimationPage{
         const {resultMovablesStyles} = defines
         resultMovables.movables.forEach((movable, idx) => {
             const {x,y,width, height}= grid.cells[idx].getBounds()
-            movable.redraw({width, height, ...resultMovablesStyles},{});
+            movable.redraw({width, height, ...resultMovablesStyles},gridFontStyles);
             movable.position.set(x, y)
         })
 

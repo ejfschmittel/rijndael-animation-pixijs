@@ -42,8 +42,8 @@ class Page6DefaultResponsives extends AnimationPageResponsives{
             height: this.getWidth(16),
         }
 
-        defines.gridTextStyles = {
-            scale: 1,
+        defines.gridFontStyles = {
+            fontSize: 24
         }
 
         defines.columnStyles = {
@@ -54,12 +54,12 @@ class Page6DefaultResponsives extends AnimationPageResponsives{
 
         defines.stateGridPos = {
             x: this.getWidth(20),
-            y: this.getHeight(75)
+            y: this.getHeight(70)
         }
 
         defines.roundKeyGridPos = {
             x: this.getWidth(80),
-            y: this.getHeight(75)
+            y: this.getHeight(70)
         }
 
 
@@ -82,6 +82,16 @@ class Page6DefaultResponsives extends AnimationPageResponsives{
         }
 
 
+        defines.roundKeyLabelStyles = {
+            fill: this.c("--text-light"),
+            fontSize: 24,
+        }
+        defines.roundKeyTextStyles = {
+            fill: this.c("--text-light"),
+            fontSize: 16,
+            wordWrap: true,
+            wordWrapWidth: 240,
+        }
     
 
         return defines;

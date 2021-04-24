@@ -9,11 +9,42 @@ class Page8Timline extends AnimationPageTimeline{
      
     }
 
-   /* createAnimationIn(){
-        // const tl = this.getAnimatableBackgroundTL();
- 
-         //return tl;
-     }*/
+    createPreFadeIn(){
+        const {
+            movablesCollector, grid, text1, text2, text3
+        } = this.getGlobalComponents();
+        const tl = this.getPreFadeInTimeline();
+
+        // hide texts
+        tl.set([text1, text2, text3], {pixi: {alpha: 0}})
+
+        const ys = movablesCollector.movables.map(movable => movable.y)
+        tl.set(movablesCollector.movables, {pixi: {
+             alpha: 0, 
+             y: (idx) => ys[idx] - 100
+         }})
+        return tl;
+    }
+
+    createAnimationIn(){
+        const {
+            movablesCollector, grid, text1, text2, text3
+        } = this.getGlobalComponents();
+
+      
+        const tl = this.getAnimatableBackgroundTL();
+
+        // fade in grid
+        const ys = movablesCollector.movables.map(movable => movable.y)
+         tl.to(movablesCollector.movables, {pixi: {
+            alpha: 1, 
+            y: (idx) => ys[idx] 
+        }, duration: .5})
+    
+        return tl;
+     }
+
+
  
  
      createAnimationMain(){
@@ -22,11 +53,9 @@ class Page8Timline extends AnimationPageTimeline{
          } = this.getGlobalComponents();
          const tl = gsap.timeline();
  
-         tl.set([text1, text2, text3], {pixi: {alpha: 0}})
+  
  
-         tl.to(text1, {pixi: {alpha: 1}})
- 
-        // movablesCollector.getCol(1).map(cell => console.log(cell.text.text))
+        tl.to(text1, {pixi: {alpha: 1}, duration: .3, delay: .8})
         tl.add(this.shiftRow(movablesCollector.getRow(1), grid.getRow(1)))
         tl.to(text1, {pixi: {alpha: 0}})
         tl.to(text2, {pixi: {alpha: 1}}, "<")
@@ -78,6 +107,21 @@ class Page8Timline extends AnimationPageTimeline{
         tl.set(movables, {pixi: {zIndex: 1}})   
  
          return tl;
+     }
+
+     createFadeOut(){
+        const {movablesCollector} = this.getGlobalComponents();
+
+        const tl = gsap.timeline();
+
+        // fade in grid
+        const ys = movablesCollector.movables.map(movable => movable.y)
+         tl.to(movablesCollector.movables, {pixi: {
+            alpha: 0, 
+            y: (idx) => ys[idx] + 100 
+        }, duration: .5})
+    
+        return tl;
      }
 }
 

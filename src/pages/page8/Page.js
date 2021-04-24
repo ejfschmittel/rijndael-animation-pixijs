@@ -13,19 +13,18 @@ import DataController from "../../core/DataController"
 
 import PageTimline from "./PageTimeline"
 import DefaultResponsives from "./Responsives.default"
-//import ResponsiveMax400 from "./Responsive.max-1000"
-import ResponsiveMax600 from "./Responsive.max-600"
-import ResponsiveMax400 from "./Responsive.max-400"
-import HexadecimalTextBox from "../../components/HexadecimalTextBox.js"
+import ResponsiveMax768 from "./Responsive.max-768";
+import ResponsiveMax425 from "./Responsive.max-425";
+import ResponsiveMax375 from "./Responsive.max-375";
 
 class Page8 extends AnimationPage{
     constructor(){
         super();
 
         this.timeline = new PageTimline(this);
-      //  this.registerResponsive("max-400", ResponsiveMax400)
-        this.registerResponsive("max-600", ResponsiveMax600)
         this.registerResponsive("default", DefaultResponsives)
+        this.registerResponsive("max-768", ResponsiveMax768)
+        this.registerResponsive("max-425", ResponsiveMax425)
 
         
     }
@@ -84,7 +83,7 @@ class Page8 extends AnimationPage{
 
         // redraw grid & movables
         const { grid, movablesCollector} = this.globalComponents;
-        const {gridStyles} = defines;
+        const {gridStyles, gridFontStyles} = defines;
         grid.redraw(gridStyles, {})
         grid.position.set(gridStyles.x, gridStyles.y)
         grid.pivot.set(grid.width /2, 0)
@@ -92,17 +91,17 @@ class Page8 extends AnimationPage{
 
         movablesCollector.movables.forEach((movable, idx) => {
             const {x,y,width, height}= grid.cells[idx].getBounds()
-            movable.redraw({width, height, ...movablesStyles},{});
+            movable.redraw({width, height, ...movablesStyles},gridFontStyles);
             movable.position.set(x, y)
         })
 
 
         // redraw text
-        const {text1Styles,text2Styles,text3Styles} = defines;
+        const {baseTextStyles, text1Styles,text2Styles,text3Styles} = defines;
         const {text1, text2, text3} = this.globalComponents;
-        text1.redraw(text1Styles)
-        text2.redraw(text2Styles)
-        text3.redraw(text3Styles)   
+        text1.redraw({...baseTextStyles,...text1Styles})
+        text2.redraw({...baseTextStyles,...text2Styles})
+        text3.redraw({...baseTextStyles,...text3Styles})   
     }
 }
 

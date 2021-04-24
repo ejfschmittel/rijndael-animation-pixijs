@@ -9,16 +9,10 @@ class Page6Timline extends AnimationPageTimeline{
      
     }
 
-    createPreFadeIn(){
-
-   
+    createPreFadeIn(){ 
         const {container, title} = this.getGlobalComponents();
-        const tl = gsap.timeline();
-        const obj = {val: 0};
-        tl.to(obj, {val: 1, duration: .0001})
-       tl.set([title, container], {pixi: {alpha: 0}})
-       tl.set(container, {pixi: {x: container.x-200, scale: .7}})
-    
+        const tl = this.getPreFadeInTimeline();
+        tl.set([title, container], {pixi: {alpha: 0}})
         return tl;
     }
 
@@ -28,10 +22,10 @@ class Page6Timline extends AnimationPageTimeline{
         
 
 
-        //tl.set(container, {pixi: {x: container.x-200, scale: .7}})
+        tl.set(container, {pixi: {x: container.x-200, scale: .7}})
         tl.to([labelSubBytes, labelShiftRows, labelMixColumns, labelAddRoundKey], {pixi: {alpha: 1}})
         tl.to(container, {pixi: {alpha: 1}, duration: .5})
-        tl.to(container, {pixi: {x: container.x, scale: 1}, duration: 1})
+        tl.to(container, {pixi: {x: container.x, scale: 1}, duration: 1}, "-=.2")
         tl.to(title, {pixi: {alpha: 1}}, "<")
         return tl;
     }

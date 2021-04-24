@@ -23,19 +23,49 @@ class Page10Timline extends AnimationPageTimeline{
             equationContainer,
             addSign,
             equalsSign,
+            roundKeyLabel, 
+            roundKeyText
         } = this.getGlobalComponents();
-        const obj = {val: 0}
-        const tl = gsap.timeline();
-        tl.to(obj, {val: 1, duration: .0001})
-        tl.set([equationContainer], {pixi: {alpha: 0}})
-
+    
+        const tl = this.getPreFadeInTimeline();  
+        tl.set([equationContainer, roundKeyLabel, roundKeyText], {pixi: {alpha: 0}})
         tl.set([...resultMovables.movables], {pixi: {alpha: 0}})
+        
+
+        // translate state movables up 100
+        const ys = stateMovables.movables.map(movable => movable.y)
+        tl.set(stateMovables.movables, {pixi: {
+            alpha: 0, 
+            y: (idx) => ys[idx] - 100 
+        }})
+
+        const xs = roundKeyMovables.movables.map(movable => movable.x)
+        tl.set(roundKeyMovables.movables, {pixi: {
+            alpha: 0, 
+            x: (idx) => xs[idx] + 100 
+        }})
+
         return tl;
     }
 
     createAnimationIn(){
-
+        const {stateMovables, roundKeyMovables, roundKeyLabel, roundKeyText} = this.getGlobalComponents();
         const tl = this.getAnimatableBackgroundTL();
+
+
+        const ys = stateMovables.movables.map(movable => movable.y)
+        tl.to(stateMovables.movables, {pixi: {
+            alpha: 1, 
+            y: (idx) => ys[idx]
+        }})
+
+        const xs = roundKeyMovables.movables.map(movable => movable.x)
+        tl.to(roundKeyMovables.movables, {pixi: {
+            alpha: 1, 
+            x: (idx) => xs[idx]
+        }})
+
+        tl.to([roundKeyLabel, roundKeyText], {pixi: {alpha: 1}})
 
        
         return tl;
@@ -93,6 +123,22 @@ class Page10Timline extends AnimationPageTimeline{
         tl.to(roundKeyMovables.getCol(3), {pixi: {alpha: 0}, duration: .1, delay: .5})
         tl.to(resultMovables.getCol(3), {pixi: {alpha: 1}, duration: .1}, "<")
         
+
+        return tl;
+    }
+
+
+    createFadeOut(){
+        const {roundKeyLabel, roundKeyText, stateMovables, resultMovables} = this.getGlobalComponents();
+        const tl = gsap.timeline();
+
+        tl.set(stateMovables.movables, {pixi: {alpha: 0}})
+        tl.to([roundKeyLabel, roundKeyText], {pixi: {alpha: 0}})
+        const ys = resultMovables.movables.map(movable => movable.y)
+        tl.to(resultMovables.movables, {pixi: {
+            alpha: 0, 
+            y: (idx) => ys[idx] + 100
+        }})
 
         return tl;
     }

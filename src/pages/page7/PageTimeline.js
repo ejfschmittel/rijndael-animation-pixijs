@@ -16,6 +16,14 @@ class Page7Timline extends AnimationPageTimeline{
 
     
 
+
+    createPreFadeIn(){
+        const {resultMovables} = this.getGlobalComponents();
+        const tl = this.getPreFadeInTimeline();
+        tl.set(resultMovables.movables, {pixi: {alpha: 0}})
+        return tl;
+    }
+
     createAnimationIn(){
         const tl = this.getAnimatableBackgroundTL();
 
@@ -31,35 +39,38 @@ class Page7Timline extends AnimationPageTimeline{
         const tl = gsap.timeline()
 
 
-
-
+        const sboxBackgroundColor = this.page.getColor("--sbox-background")
+        const sboxBackgroundHighlightColor = this.page.getColor("--sbox-highlight-color")
+       
         const firstCellHex = this.page.controller.data.getData("after-initial-round")[0]
         const cellX = hexStringToInt(firstCellHex[0])
         const cellY = hexStringToInt(firstCellHex[1])
   
         const sBoxCell = sbox.grid.get(cellX, cellY)
-       
-
         const sBoxRow = sbox.grid.getRow(cellX).map(cell => cell.getBackground())
         const sBoxCol = sbox.grid.getCol(cellY).map(cell => cell.getBackground())
 
+
+        // hide result movables and move first one
         tl.to(resultMovables.get(0,0), {pixi: {...this.getBounds(sBoxCell), alpha: 0}, duration: .0001})
         tl.set(resultMovables.movables, {pixi: {alpha: 0}})
 
 
         tl.to(stateMovables.get(0,0), {pixi: {...this.getBounds(textBox), zIndex: 10}, duration: 1.5}, "move-group")
         
-        tl.to(sBoxRow, {pixi: {tint: 0xff0000}})
-        tl.to(sBoxCol, {pixi: {tint: 0xff0000}})
+        // highlight sbox row / col
+        tl.to(sBoxRow, {pixi: {tint: sboxBackgroundHighlightColor}})
+        tl.to(sBoxCol, {pixi: {tint: sboxBackgroundHighlightColor}})
 
+        // show movable
+        tl.set(resultMovables.get(0,0), {pixi: {alpha: 1}})
 
-        tl.to(resultMovables.get(0,0), {pixi: {alpha: 1}})
+        // unhighlight row / col
+        tl.to(sBoxRow, {pixi: {tint: sboxBackgroundColor}})
+        tl.to(sBoxCol, {pixi: {tint: sboxBackgroundColor}}, "<")
 
-        tl.to(sBoxRow, {pixi: {tint: 0xffffff}})
-        tl.to(sBoxCol, {pixi: {tint: 0xffffff}}, "<")
-
-        tl.to(resultMovables.get(0,0), {pixi: {scale: .8}})
-
+  
+        // move first substituted element back
         tl.to(resultMovables.get(0,0), {pixi: {scale: 1, ...this.getBounds(grid.get(0,0)), zIndex: 10}, duration: 1.5}, "move-back")
         tl.set(resultMovables.get(0,0), {pixi: {zIndex: 1}})
 
@@ -73,9 +84,9 @@ class Page7Timline extends AnimationPageTimeline{
 
             const sBoxCell = sbox.grid.get(cellX, cellY)
 
-            tl.to(sBoxCell.getBackground(), {pixi: {tint: 0xff0000}, duration: .2, delay: .3} )
-            tl.to(cell, {pixi: {alpha: 1}, duration: .2}, "<")
-            tl.to(sBoxCell.getBackground(), {pixi: {tint: 0xffffff}, duration: .2, delay: .1} )
+            tl.to(sBoxCell.getBackground(), {pixi: {tint: sboxBackgroundHighlightColor}, duration: .1, delay: .5} )
+            tl.to(cell, {pixi: {alpha: 1}, duration: .1}, "<")
+            tl.to(sBoxCell.getBackground(), {pixi: {tint: sboxBackgroundColor}, duration: .1, delay: .3} )
         }
 
         return tl;

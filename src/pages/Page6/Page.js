@@ -12,10 +12,8 @@ import {gsap} from "gsap"
 
 import PageTimeline from "./PageTimeline"
 import DefaultResponsives from "./Responsives.default"
-//import ResponsiveMax400 from "./Responsive.max-1000"
-import ResponsiveMax600 from "./Responsive.max-600"
-import ResponsiveMax400 from "./Responsive.max-400"
-import HexadecimalTextBox from "../../components/HexadecimalTextBox.js"
+import ResponsiveMax768 from "./Responsive.max-768"
+import ResponsiveMax425 from "./Responsive.max-425"
 import PIXIText from "../../components/PIXIText.js"
 
 class Page4 extends AnimationPage{
@@ -24,9 +22,9 @@ class Page4 extends AnimationPage{
 
 
         this.timeline = new PageTimeline(this)
-      //  this.registerResponsive("max-400", ResponsiveMax400)
-      //  this.registerResponsive("max-600", ResponsiveMax600)
         this.registerResponsive("default", DefaultResponsives)
+        this.registerResponsive("max-768", ResponsiveMax768)
+        this.registerResponsive("max-425", ResponsiveMax425)
 
         
     }

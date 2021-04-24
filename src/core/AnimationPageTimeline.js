@@ -93,7 +93,7 @@ class AnimationPageTimeline{
 
         // move background up
         tl.set(animatableBackground, {pixi: {alpha: 1}})
-        tl.to(animatableBackground, {pixi: {y: 0}})
+        tl.to(animatableBackground, {pixi: {y: 0}, duration: .8})
 
         // move bar down
         tl.to(bar, {pixi: {y: bar.y}})

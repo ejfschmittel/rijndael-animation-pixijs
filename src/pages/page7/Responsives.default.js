@@ -38,15 +38,18 @@ class Page7DefaultResponsives extends AnimationPageResponsives{
 
         defines.sBoxStyles = {
             width: this.getWidth(50),
-            height: this.getHeight(50)
+            height: this.getHeight(50),
+            test: "hello",
+            legendColor: this.c("--sbox-legend-background")
         }
 
+     
         defines.sboxLegendStyles = {
-            scale: .5
+            fontSize: 12,
         }
         
         defines.sBoxTextStyles = {
-            scale: .5,
+            fontSize: 12,
         }
 
         defines.sBoxPos = {
@@ -61,12 +64,17 @@ class Page7DefaultResponsives extends AnimationPageResponsives{
             y: this.getHeight(50)
         }
 
+
+        defines.gridFontStyles = {
+            fontSize: 18,
+        }
+
         defines.stateMovableStyles = {
             fill: this.c("--grid-background-alpha")
         }
 
         defines.resultMovablesStyles = {
-            fill: this.c("--grid-background-alpha")
+            fill: this.c("--grid-background-gamma")
         }
 
         defines.textBoxStyle = {

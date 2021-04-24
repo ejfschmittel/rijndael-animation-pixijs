@@ -3,27 +3,27 @@ import * as PIXI from "pixi.js"
 
 import AnimatableBackground from "../../components/AnimatableBackground"
 
-import DataController from "../../core/DataController"
-import {gsap} from "gsap"
+
 
 
 import Grid from "../../components/Grid2"
 
 import PageTimeline from "./PageTimeline"
 import DefaultResponsives from "./Responsives.default"
-//import ResponsiveMax400 from "./Responsive.max-1000"
-import ResponsiveMax600 from "./Responsive.max-600"
-import ResponsiveMax400 from "./Responsive.max-400"
-import HexadecimalTextBox from "../../components/HexadecimalTextBox.js"
+import ResponsiveMax768 from "./Responsive.max-768";
+import ResponsiveMax425 from "./Responsive.max-425";
+import ResponsiveMax375 from "./Responsive.max-375";
+import PIXIText from "../../components/PIXIText.js"
 
 class Page9 extends AnimationPage{
     constructor(){
         super();
 
         this.timeline = new PageTimeline(this)
-        this.registerResponsive("max-400", ResponsiveMax400)
-        this.registerResponsive("max-600", ResponsiveMax600)
         this.registerResponsive("default", DefaultResponsives)
+        this.registerResponsive("max-768", ResponsiveMax768)
+        this.registerResponsive("max-425", ResponsiveMax425)
+        this.registerResponsive("max-375", ResponsiveMax375)
 
         
     }
@@ -67,9 +67,16 @@ class Page9 extends AnimationPage{
   
   
           equationContainer.addChild(galoisField, multiplicationSign, landingCol, equalsSign, resultCol )
+
+
+          const text1 = new PIXIText("text")
+          const text2 = new PIXIText("text2")
+
+          this.bindPageLocale("text", text1)
+          this.bindPageLocale("text2", text2)
   
   
-          this.addPermanent({background,animatableBackground,grid, equationContainer})
+          this.addPermanent({background,animatableBackground,grid, equationContainer, text1, text2})
           this.addChild(...gridMovables.movables, ...gridMovablesResults.movables)
           this.addToGlobalComponents({
               gridMovables,
@@ -108,22 +115,23 @@ class Page9 extends AnimationPage{
 
 
         // grid landings
-        const {gridStyles, gridLandingPos} = defines;
+        const {gridStyles, gridLandingPos, gridFontStyles} = defines;
 
         grid.redraw(gridStyles, {})
         grid.position.set(gridLandingPos.x, gridLandingPos.y)
-        grid.pivot.set(grid.width/2, grid.height/2)
+        //grid.pivot.set(grid.width/2, grid.height/2)
 
 
 
         // equation 
 
-        const {equationPos, columnStyles} = defines;
-        galoisField.redraw(gridStyles, gridTextStyles)
-        landingCol.redraw(columnStyles, {})
-        resultCol.redraw(columnStyles, {})
+        const {equationPos, galoisFieldStyles, galoisFieldFontStyles} = defines;
+        galoisField.redraw(galoisFieldStyles, galoisFieldFontStyles)
+        landingCol.redraw({...galoisFieldStyles, width: galoisFieldStyles.width / 4}, {})
+        resultCol.redraw({...galoisFieldStyles, width: galoisFieldStyles.width / 4}, {})
 
         equationContainer.position.set(equationPos.x, equationPos.y)
+     
         multiplicationSign.position.set(galoisField.width + multiplicationSign.width, equationContainer.height / 2)
         landingCol.position.set(multiplicationSign.x + multiplicationSign.width, 0)
         equalsSign.position.set(landingCol.x + landingCol.width + equalsSign.width, equationContainer.height / 2)
@@ -134,17 +142,22 @@ class Page9 extends AnimationPage{
         const {stateGridStyle} = defines;
         gridMovables.movables.forEach((movable, idx) => {
             const {x,y,width, height}= grid.cells[idx].getBounds()
-            movable.redraw({width, height, ...stateGridStyle},gridTextStyles);
+            movable.redraw({width, height, ...stateGridStyle},gridFontStyles);
             movable.position.set(x, y)
         })
 
         const {resultGridStyle} = defines;
         gridMovablesResults.movables.forEach((movable, idx) => {
             const {x,y,width, height}= grid.cells[idx].getBounds()
-            movable.redraw({width, height, ...resultGridStyle},gridTextStyles);
+            movable.redraw({width, height, ...resultGridStyle},gridFontStyles);
             movable.position.set(x, y)
         })
 
+
+        const {textStyles} = defines;
+        const {text1, text2} = this.globalComponents
+        text1.redraw(textStyles);
+        text2.redraw(textStyles)
 
       
     }

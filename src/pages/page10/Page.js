@@ -13,20 +13,22 @@ import CircledText from "../../components/CircledText"
 
 import PageTimeline from "./PageTimline"
 import DefaultResponsives from "./Responsives.default"
-//import ResponsiveMax400 from "./Responsive.max-1000"
-import ResponsiveMax600 from "./Responsive.max-600"
-import ResponsiveMax400 from "./Responsive.max-400"
-import HexadecimalTextBox from "../../components/HexadecimalTextBox.js"
+import ResponsiveMax768 from "./Responsive.max-768";
+import ResponsiveMax425 from "./Responsive.max-425";
+import ResponsiveMax375 from "./Responsive.max-375";
+import PIXIText from "../../components/PIXIText.js"
 
-class Page4 extends AnimationPage{
+class Page10 extends AnimationPage{
     constructor(){
         super();
 
         this.timeline = new PageTimeline(this)
 
-        this.registerResponsive("max-400", ResponsiveMax400)
-        this.registerResponsive("max-600", ResponsiveMax600)
+
         this.registerResponsive("default", DefaultResponsives)
+        this.registerResponsive("max-768", ResponsiveMax768)
+        this.registerResponsive("max-425", ResponsiveMax425)
+       // this.registerResponsive("max-375", ResponsiveMax375)
 
         
     }
@@ -68,10 +70,14 @@ class Page4 extends AnimationPage{
 
 
 
-        // equation 
+        // label & text
+        const roundKeyLabel = new PIXIText("Round key", {})
+        const roundKeyText = new PIXIText("text", {})
 
+        this.bindPageLocale("roundKeyLabel", roundKeyLabel)
+        this.bindPageLocale("roundKeyText", roundKeyText)
       
-        this.addPermanent({background,animatableBackground, stateGrid, roundKeyGrid, equationContainer})
+        this.addPermanent({background,animatableBackground, stateGrid, roundKeyGrid, equationContainer, roundKeyLabel, roundKeyText})
         this.addChild(...stateMovables.movables, ...resultMovables.movables, ...roundKeyMovables.movables)
         this.addToGlobalComponents({columnLanding1, addSign, columnLanding2, equalsSign, columnResult, stateMovables, roundKeyMovables, resultMovables})
        
@@ -100,13 +106,13 @@ class Page4 extends AnimationPage{
         animatableBackground.redraw(abStyles,abBarStyles,abTitleStyles)
 
 
-        const {gridStyles, gridTextStyles, roundKeyGridPos, stateGridPos} = defines 
+        const {gridStyles, roundKeyGridPos, stateGridPos} = defines 
 
-        stateGrid.redraw(gridStyles, gridTextStyles);
+        stateGrid.redraw(gridStyles, {});
         stateGrid.position.set(stateGridPos.x, stateGridPos.y)
         stateGrid.pivot.set(stateGrid.width/2, stateGrid.height/2)
 
-        roundKeyGrid.redraw(gridStyles, gridTextStyles);
+        roundKeyGrid.redraw(gridStyles, {});
         roundKeyGrid.position.set(roundKeyGridPos.x, roundKeyGridPos.y)
         roundKeyGrid.pivot.set(roundKeyGrid.width/2, roundKeyGrid.height/2)
 
@@ -118,7 +124,7 @@ class Page4 extends AnimationPage{
         columnLanding1.redraw(columnStyles, {})
         columnLanding2.redraw(columnStyles, {})
         columnResult.redraw(columnStyles, {})
-      //  addSign.redraw({radius: 20, borderWidth: 2, borderColor: 0x000000 }, {scale: 1, fill: 0x000000})
+ 
         addSign.redraw({borderColor: 0x333333, borderWidth: 2.81, radius: 16 }, {})
 
         addSign.position.set(columnLanding1.width + addSign.width, columnLanding1.height/2)
@@ -133,10 +139,10 @@ class Page4 extends AnimationPage{
 
         // movables
         const {stateMovables} = this.globalComponents;
-        const {stateGridStyles} = defines;
+        const {stateGridStyles, gridFontStyles} = defines;
         stateMovables.movables.forEach((movable, idx) => {
             const {x,y,width, height} = stateGrid.cells[idx].getBounds()
-            movable.redraw({width, height, ...stateGridStyles},gridTextStyles);
+            movable.redraw({width, height, ...stateGridStyles},gridFontStyles);
             movable.position.set(x, y)
         })
 
@@ -144,7 +150,7 @@ class Page4 extends AnimationPage{
         const {resultGridStyles} = defines
         resultMovables.movables.forEach((movable, idx) => {
             const {x,y,width, height} = stateGrid.cells[idx].getBounds()
-            movable.redraw({width, height, ...resultGridStyles},gridTextStyles);
+            movable.redraw({width, height, ...resultGridStyles},gridFontStyles);
             movable.position.set(x, y)
         })
 
@@ -152,18 +158,25 @@ class Page4 extends AnimationPage{
         const {roundKeyGridStyles} = defines
         roundKeyMovables.movables.forEach((movable, idx) => {
             const {x,y,width, height} = roundKeyGrid.cells[idx].getBounds()
-            movable.redraw({width, height, ...roundKeyGridStyles},gridTextStyles);
+            movable.redraw({width, height, ...roundKeyGridStyles},gridFontStyles);
             movable.position.set(x, y)
         })
 
    
 
-        
+        const {roundKeyLabel, roundKeyText} = this.globalComponents
+        const {roundKeyLabelStyles, roundKeyTextStyles} = defines
+        roundKeyLabel.redraw(roundKeyLabelStyles)
+        roundKeyText.redraw(roundKeyTextStyles)
 
-        
+        console.log(roundKeyGridPos.x, gridStyles.width)
+      
+        roundKeyLabel.position.set(roundKeyGridPos.x - gridStyles.width / 2, roundKeyGridPos.y + gridStyles.height / 2 + 5)
+        roundKeyText.position.set(roundKeyGridPos.x - gridStyles.width / 2, roundKeyGridPos.y + gridStyles.height / 2 + roundKeyLabelStyles.fontSize + 8)
+       
   
     }
 }
 
 
-export default Page4;
+export default Page10;
