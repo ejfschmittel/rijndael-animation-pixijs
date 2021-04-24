@@ -39,7 +39,6 @@ class Page7DefaultResponsives extends AnimationPageResponsives{
         defines.sBoxStyles = {
             width: this.getWidth(50),
             height: this.getHeight(50),
-            test: "hello",
             legendColor: this.c("--sbox-legend-background")
         }
 

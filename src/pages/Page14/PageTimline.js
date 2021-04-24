@@ -188,52 +188,49 @@ class Page14Timline extends AnimationPageTimeline{
 
         const tl = gsap.timeline();
 
-        /* START ANIMATION FIRST RCON COL 4 */
-
-        // define landings + movable columns
-
-
-        // subbytes movables
-
-
-        // movables
 
         tl.add(this.createFirstSubByteTimeline())
-
-
-
-    
-
-
-    
         
         // first box
-        tl.to(textXor,{pixi: {alpha: 1}})
+        console.log(this.page.shouldHide)
+        if(!this.page.shouldHide){
+            tl.to(textXor,{pixi: {alpha: 1}})
+        }
+        
         tl.add(this.moveXL(4, pgOneMovablesTranform, pgTwoMovablesTranform, pgTwoMovablesOg))
         tl.add(this.moveXL(5, pgOneMovablesTranform, pgTwoMovablesTranform, pgTwoMovablesOg))
         tl.add(this.moveXL(6, pgOneMovablesTranform, pgTwoMovablesTranform, pgTwoMovablesOg))
         tl.to(textXor,{pixi: {alpha: 0}})
 
+        // second iteration
+        if(!this.page.shouldHide){
+            tl.add(this.createSecondSubTimeline())
 
-        tl.add(this.createSecondSubTimeline())
+            tl.add(this.moveXL(8, pgTwoMovablesTranform, pgThreeMovablesTranform, pgThreeMovablesOg))
+            tl.add(this.moveXL(9, pgTwoMovablesTranform, pgThreeMovablesTranform, pgThreeMovablesOg))
+            tl.add(this.moveXL(10, pgTwoMovablesTranform, pgThreeMovablesTranform, pgThreeMovablesOg))
+          
 
+        }
 
-     //   tl.set(pgTwoMovablesOg.movables, {pixi: {alpha: 1}})
-
-        tl.add(this.moveXL(8, pgTwoMovablesTranform, pgThreeMovablesTranform, pgThreeMovablesOg))
-        tl.add(this.moveXL(9, pgTwoMovablesTranform, pgThreeMovablesTranform, pgThreeMovablesOg))
-        tl.add(this.moveXL(10, pgTwoMovablesTranform, pgThreeMovablesTranform, pgThreeMovablesOg))
-
-
-        // reveal round key labels
-        tl.to([ cipherKeyText,roundOneKeyText,roundTwoKeyText], {pixi: {alpha: 1}})
+    
+     
 
         // reveal round key 3
-        tl.to([...pgFourMovablesOg.movables, roundThreeKeyText], {pixi: {alpha: 1}});
-        tl.to(rconMovables.getCol(2), {pixi: {alpha: 0}}, "<");
-    
+        if(!this.page.shouldHide){
+            tl.to([ cipherKeyText,roundOneKeyText,roundTwoKeyText], {pixi: {alpha: 1}})
+            tl.to([...pgFourMovablesOg.movables, roundThreeKeyText], {pixi: {alpha: 1}});
+            tl.to(rconMovables.getCol(2), {pixi: {alpha: 0}}, "<");
+        }else{
+            tl.to([ cipherKeyText,roundOneKeyText], {pixi: {alpha: 1}})
+            tl.to([...pgThreeMovablesOg.movables, roundTwoKeyText], {pixi: {alpha: 1}});
+            tl.to(rconMovables.getCol(1), {pixi: {alpha: 0}}, "<");
+        }
 
-        for(let i = 3; i < 10; i++){
+       
+    
+        const startPoint = this.page.shouldHide ? 2 : 3;
+        for(let i = startPoint; i < 10; i++){
             tl.to(rconMovables.getCol(i), {pixi: {alpha: 0}, duration: .1, delay: .3});
         }
         tl.to(rconText, {pixi: {alpha: 0}}, "<")
@@ -260,11 +257,16 @@ class Page14Timline extends AnimationPageTimeline{
 
         // reveal sbox
 
-
-        tl.to([sbox, subBytesText], {pixi: {alpha: 1}})
+        
+        tl.to(sbox, {pixi: {alpha: 1}})
+        if(!this.page.shouldHide){
+            tl.to(subBytesText, {pixi: {alpha: 1}}, "<")
+        }
         
 
 
+        const sboxBackgrooundColor = this.page.getColor("--sbox-background")
+        const sboxHighlightColor = this.page.getColor("--sbox-highlight-color")
         // reveal subbytes from sbox
         for(let i = 0; i < 4; i++){           
             const cellLanding = this.getSubByteCellLanding(shiftedColum[i])
@@ -276,9 +278,9 @@ class Page14Timline extends AnimationPageTimeline{
                 tl.to(cellSub, {pixi: {...this.getBounds(landings[0])}})
             }else{
                 // highlight sbox cell + reveal cell landing
-                tl.to(cellLanding.getBackground(), {pixi: {tint: "0xff0000"}})
+                tl.to(cellLanding.getBackground(), {pixi: {tint: sboxHighlightColor}})
                 tl.to(cellSub, {pixi: {alpha: 1}})
-                tl.to(cellLanding.getBackground(), {pixi: {tint: "0xffffff"}})
+                tl.to(cellLanding.getBackground(), {pixi: {tint: sboxBackgrooundColor}})
             }
         }
 
@@ -334,8 +336,10 @@ class Page14Timline extends AnimationPageTimeline{
         tl.set(addSymbol2, {pixi: {...this.getSecondaryGridBounds(5)}})
         tl.set(equalsSymbol, {pixi: {...this.getSecondaryGridBounds(8)}})
         
-
-        tl.to(textInitial, {pixi: {alpha: 1}})
+        if(!this.page.shouldHide){
+            tl.to(textInitial, {pixi: {alpha: 1}})
+        }
+     
         
 
         // move down and shift col
@@ -343,7 +347,10 @@ class Page14Timline extends AnimationPageTimeline{
         tl.to(rotWordText, {pixi: {x: bounds.x + 50, y: bounds.y + 30 }, duration: .001, delay: 2} )
         tl.to(textInitial, {pixi: {alpha: 0}})
         tl.add(this.moveGroup(lastColMovables, addTwoLanding, {duration: 1}))
-        tl.to([rotWordText, aText, sText], {pixi: {alpha: 1}})
+        tl.to([rotWordText], {pixi: {alpha: 1}})
+        if(!this.page.shouldHide){
+            tl.to([aText, sText], {pixi: {alpha: 1}}, "<")
+        }
         tl.add(this.shiftColumn(lastColMovables, addTwoLanding, {}))
         tl.to(rotWordText, {pixi: {alpha: 0}})
 
@@ -360,7 +367,10 @@ class Page14Timline extends AnimationPageTimeline{
         tl.to(addSymbol, {pixi: {alpha: 1}})
 
         tl.add(this.moveGroup(rconColMovables, addThreeLanding, {duration: 1}))
-        tl.to(bText, {pixi: {alpha: 1}})
+       
+        if(!this.page.shouldHide){
+            tl.to(bText, {pixi: {alpha: 1}})
+        }
         tl.to(addSymbol2, {pixi: {alpha: 1}})
         tl.to(equalsSymbol, {pixi: {alpha: 1}})
         tl.to(resultMovables, {pixi: {alpha: 1}})

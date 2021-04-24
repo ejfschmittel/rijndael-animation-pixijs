@@ -68,6 +68,10 @@ class RijndaelFormController{
                         temp[`key-${i}`] = intToHexStringArray(this.toGridByRow(4,4, slice));
                     }
                     return;
+                case "key-shedule-subbed-bytes":
+                    temp[key] = val;
+                    temp["key-schedule-sub-bytes-grid"] = intToHexStringArray(val.splice(0,16));
+                    return;
 
                 case "sbox":
                     temp[key] = intToHexStringArray(val)

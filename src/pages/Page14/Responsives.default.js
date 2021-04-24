@@ -50,7 +50,19 @@ class Page7DefaultResponsives extends AnimationPageResponsives{
 
         defines.sboxStyles = {
             x: this.getWidth(80),
-            y: this.getHeight(60),
+            y: this.getHeight(54),
+            width: 340,
+            height: 260,
+            legendWidth: 24,
+            legendColor: this.c("--sbox-legend-background")
+        }
+
+        defines.sboxLegendStyles = {
+            fontSize: 10,
+        }
+        
+        defines.sBoxTextStyles = {
+            fontSize: 10,
         }
 
 
@@ -80,8 +92,9 @@ class Page7DefaultResponsives extends AnimationPageResponsives{
             fill: 0xC2C0C2,
         }
 
-        defines.gridTextStyle = {
-            scale: .8,
+        
+        defines.baseGridFontStyle = {
+            fontSize: 16
         }
 
         
@@ -105,6 +118,48 @@ class Page7DefaultResponsives extends AnimationPageResponsives{
             y: this.getHeight(50)
         }
     
+        defines.roundKeyLabelStyles = {
+            fill: 0xffffff,
+            fontSize: 12,
+            
+        }
+
+        defines.primaryGridPos = {
+            x: 50,
+            y: 50,
+        }
+
+        defines.secondaryGridPos = {
+            x: 50,
+            y: 200,
+        }
+
+
+        defines.addSymbolStyles = {
+            radius: 16, 
+            borderColor: this.c("--text-color"),
+        }
+
+        defines.addSymbolFontStyles = {
+            fontSize: 32,
+            fill: this.c("--text-color"),
+        }
+
+        defines.equalSymbolStyles = {
+            fontSize: 50,
+            fill: this.c("--text-color"),
+        }
+
+        defines.rconTextStyles = {
+            fill: this.c("--text-light"),
+            fontSize: 30,
+            distanceX: 20,
+            anchor: {
+                x: 0,
+                y: .5
+            }
+        }
+
         return defines;
     }
 
