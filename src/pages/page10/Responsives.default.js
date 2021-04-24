@@ -19,9 +19,14 @@ class Page6DefaultResponsives extends AnimationPageResponsives{
         }
 
         defines.animatableBackgroundTitleStyles = {
-            x: this.getWidth(90),
-            y: this.getHeight(4),
+            position: {
+                x: this.getWidth(90),
+                y: this.getHeight(4),
+            },
+            fill: this.c("--text-light"),
+            fontSize: 30,
         }
+
 
         defines.animatableBackgroundBarStyles = {
             width: this.getWidth(100),

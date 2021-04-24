@@ -18,6 +18,12 @@ class ResponsiveMax425 extends AnimationPageResponsives{
     getDefines(defines){
 
 
+
+        defines.animatableBackgroundTitleStyles = {
+            ...defines.animatableBackgroundTitleStyles,
+            fontSize: 24,
+        }
+
         defines.gridStyles = {
             ...defines.gridStyles,
             width: this.getWidth(50),

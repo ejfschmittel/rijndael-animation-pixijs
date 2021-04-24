@@ -1,7 +1,7 @@
 import Component from "./Component"
 
 import * as PIXI from "pixi.js"
-
+import PIXIText from "./PIXIText"
 
 import SpriteBackground from "./SpriteBackground"
 
@@ -14,11 +14,11 @@ const textStyleDefaults = {fontSize: 30, x: 0, y: 0,}
 class AnimatableBackground extends Component{
     constructor(text, baseTextStyles){
         super();
-        this.baseTextStyles = {fill: 0xffffff, ...baseTextStyles};
+        this.textStyles = {fill: 0xffffff, ...baseTextStyles};
 
         this.background = new SpriteBackground()
         this.bar = new SpriteBackground()  
-        this.title = new PIXI.Text(text, this.baseTextStyles)
+        this.title = new PIXIText(text, this.textStyles)
         this.title.anchor.set(1, 0)
 
         this.titleMask = new SpriteBackground();
@@ -35,14 +35,15 @@ class AnimatableBackground extends Component{
 
         backgroundStyles = {...backgroundStyleDefaults, ...backgroundStyles};
         barStyles = {...barStyleDefaults, ...barStyles}
-        textStyles = {...textStyleDefaults, ...textStyles}
+        this.textStyles  = {...this.textStyles, ...textStyles}
 
         this.background.redraw(backgroundStyles);
         this.bar.redraw({...barStyles});
 
         // position text
-        this.title.position.set(textStyles.x, textStyles.y)
-        this.title.style.fontSize = textStyles.fontSize
+       // this.title.position.set(textStyles.x, textStyles.y)
+     //   this.title.style.fontSize = textStyles.fontSize
+        this.title.redraw(this.textStyles)
   
        this.addChild(this.title)
 

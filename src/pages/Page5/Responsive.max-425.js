@@ -15,27 +15,33 @@ class ResponsiveMax425 extends AnimationPageResponsives{
         return false;
     }
 
-    getDefines(defines){
+    getDefines(defines){   
+
         defines.animatableBackgroundTitleStyles = {
             ...defines.animatableBackgroundTitleStyles,
             fontSize: 24,
         }
-
-        defines.gridStyles = {
-            ...defines.gridStyles,
-            width: this.getWidth(80),
-            height: this.getHeight(30),
-            x: this.getWidth(50),
-            y: this.getHeight(26)
-        }
-       
-        defines.baseTextStyles = {
-            ...defines.baseTextStyles,
-            fontSize: 26,
+        defines.roundedLabelStyles = {
+            ...defines.roundedLabelStyles,
+            width: 120, 
+            height: 30,
         }
 
-      
+        defines.roundLabelTextStyles = {
+            ...defines.roundLabelTextStyles,
+            fontSize:12
+        }
 
+        defines.svgStyles = {
+            ...defines.svgStyles,
+            width: 100,
+        }
+
+        
+        defines.sectionTitleStyles = {
+            ...defines.sectionTitleStyles, 
+            fontSize: 20,
+        }
 
         return defines;
     }

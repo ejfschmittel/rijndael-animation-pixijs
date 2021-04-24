@@ -16,6 +16,12 @@ class ResponsiveMax425 extends AnimationPageResponsives{
     }
 
     getDefines(defines){
+
+        defines.animatableBackgroundTitleStyles = {
+            ...defines.animatableBackgroundTitleStyles,
+            fontSize: 24,
+        }
+        
         defines.roundKeyLabelStyles = {
             ...defines.roundKeyLabelStyles,
             fontSize: 18,

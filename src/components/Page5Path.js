@@ -14,29 +14,13 @@ class Page5Path extends Component{
     }
 
 
-    createPointsArray(steps=10){
-        const points = this.path.points 
-        const newPoints = []
-        for(let i = 0; i < points.length; i+=2){
-
-            const pointX = points[i]
-            const pointY = points[i+1]
-  
-            if(i!=0){
-                const startX = points[i-2]
-                const startY = points[i-1]
-                const xDist = pointX - startX;
-                const yDist = pointY - startY;
-                for(let i = 1; i < steps; i++){
-                    const x = this.x + startX + xDist * (1/steps) * i;
-                    const y = this.y + startY + yDist * (1/steps) * i;
-                    newPoints.push({x, y})
-                }
-            }
-
-            newPoints.push({x: this.x + points[i], y: this.y + points[i+1] })
+    getPath(){
+        const points = this.path.points
+        const path = []
+        for (let i = 0;i < points.length; i=i+2) {
+            path.push({x: points[i] + this.x, y: points[i+1] + this.y})
         }
-        return newPoints;
+        return path;
     }
 
 

@@ -16,7 +16,11 @@ class ResponsiveMax425 extends AnimationPageResponsives{
     }
 
     getDefines(defines){
-
+        defines.animatableBackgroundTitleStyles = {
+            ...defines.animatableBackgroundTitleStyles,
+            fontSize: 24,
+        }
+        
         defines.equationPos = {
             ...defines.equationPos,
             x: this.getWidth(10),

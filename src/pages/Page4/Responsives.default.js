@@ -1,7 +1,7 @@
 import AnimationPageResponsives from "../../core/AnimationPageResponsives"
 
 
-class Page7DefaultResponsives extends AnimationPageResponsives{
+class Page4DefaultResponsives extends AnimationPageResponsives{
     constructor(label, page){
         super(label, page);
     }
@@ -43,6 +43,8 @@ class Page7DefaultResponsives extends AnimationPageResponsives{
         defines.circleStyles = {}
         defines.circleFontStyles = {}
 
+        
+  
         return defines;
     }
 
@@ -52,4 +54,4 @@ class Page7DefaultResponsives extends AnimationPageResponsives{
   
 }
 
-export default Page7DefaultResponsives
+export default Page4DefaultResponsives
