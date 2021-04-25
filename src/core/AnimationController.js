@@ -87,17 +87,19 @@ class AnimationController{
         this.app.stage.addChild(this.viewport)
 
 
-       // this.app.renderer.plugins.interaction.autoPreventDefault = false;
+        this.app.renderer.plugins.interaction.autoPreventDefault = false;
         this.app.renderer.view.style.touchAction = 'auto';
 
-//        app.stage.addChild(this.viewport)
-            this.viewport.pinch({noDrag: true}).clampZoom({
+     
+           this.viewport.pinch({noDrag: true}).clamp({
+                direction: "all"
+            })
+
+          /*  this.viewport.clampZoom({
                 maxWidth: this.ANIMATION_DIMENSIONS.width,
                 maxHeight: this.ANIMATION_DIMENSIONS.height,
                 maxScale: 2,
-            }).clamp({
-                direction: "all"
-            })
+            })*/
                 
 
         // add on resize event listener
@@ -119,8 +121,15 @@ class AnimationController{
         this.updateAnimationDimensions();
         // resize renderer
         this.app.renderer.resize(this.ANIMATION_DIMENSIONS.width, this.ANIMATION_DIMENSIONS.height)
-        this.viewport.resize(this.ANIMATION_DIMENSIONS.width, this.ANIMATION_DIMENSIONS.height,this.ANIMATION_DIMENSIONS.width, this.ANIMATION_DIMENSIONS.height)
+        console.log(this.ANIMATION_DIMENSIONS)
+        this.viewport.resize(this.ANIMATION_DIMENSIONS.width, this.ANIMATION_DIMENSIONS.height, this.ANIMATION_DIMENSIONS.width, this.ANIMATION_DIMENSIONS.height)
+        this.viewport.fit()
+       /* this.viewport.clampZoom({
 
+            maxWidth: this.ANIMATION_DIMENSIONS.width,
+            maxHeight: this.ANIMATION_DIMENSIONS.height,
+            maxScale: 2,
+        })*/
         // do i need to update clamp 
         
         this.timeline.onResize();
@@ -149,51 +158,6 @@ class AnimationController{
         })
     }
 
-
-  /*  setLocale(localeCode){
-        console.log("set localse")
-        if(this.currentLocaleCode === localeCode) return;
-        if(!Object.keys(LOCALES).includes(localeCode)) throw new Error(`locale code ${localeCode} not supported`)
-
-        this.currentLocaleCode = localeCode
-
-        // update pages text
-        this.pageIDs.forEach(pageID => {
-            const page = this.pagesByID[pageID];
-            page.updateLocaleLanguageTexts()
-        })
-
-
-        console.log("update ui")
-        // update ui text
-        this.uiController.updatePlayerLocale();
-
-
-        // redo timeline (because of into animation)
-        this.timelineController.saveAndRebuildTimeline();
-
-    }
-
-
-    setTheme(newTheme){
-        if(this.currentTheme == newTheme) return;
-        if(!THEME_LIST.includes(newTheme)) throw new Error(`invalid theme ${newTheme}`);
-
-        this.currentTheme = newTheme;
-        this.themeElement.className = "";
-        this.themeElement.classList.add(...THEMES[this.currentTheme])
-
-        // update timeline
-        this.timelineController.saveAndRebuildTimeline();
-    }
-
-    getPageLocale(pageID){
-        return LOCALES[this.currentLocaleCode][pageID];
-    }
-
-    getLocale(){
-        return LOCALES[this.currentLocaleCode]
-    }*/
 
 
     play(){

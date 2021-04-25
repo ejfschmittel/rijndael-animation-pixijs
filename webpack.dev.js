@@ -6,7 +6,7 @@ var HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = merge(common, {
     mode: "development",
     output: {
-        filename: "test.bundle.js",
+        filename: "rijndael.bundle.js",
         path: path.resolve(__dirname, "dist")
     },
     devServer: {
@@ -15,7 +15,12 @@ module.exports = merge(common, {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: "./src/index.html"
+            template: "./src/index.html",
+            inject: false,
+        }),
+        new HtmlWebpackPlugin({
+            filename: "frame.html",
+            template: "./src/frame.html"
         })
     ]
 })

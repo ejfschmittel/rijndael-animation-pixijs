@@ -94,8 +94,6 @@ class Page3 extends AnimationPage{
         // general styles 2
         const {subtitleStyles, textStyles,gridFontStyles, arrowStyles, gridStyles, circleStyles, circleFontStyles} = defines;
 
-        console.log("gridstyles")
-        console.log(gridStyles)
 
         // redraw left side
         const {textLeftStyles, leftGridStyles, arrowLeftPos, subtitleLeftStyles} = defines

@@ -140,8 +140,7 @@ class Page5 extends AnimationPage{
         const {mainRoundTitleStyles, initialRoundTitleStyles, finalRoundTitleStyles, sectionTitleStyles} = defines
 
 
-        console.log(svg.info)
-
+ 
         labelInitialRound.redraw({...sectionTitleStyles,...initialRoundTitleStyles, position: {
             x: initialRoundTitleStyles.position.x,
             y: svg.y + svg.info.segments.one.length / 2,

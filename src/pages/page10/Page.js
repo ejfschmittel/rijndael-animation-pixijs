@@ -169,7 +169,7 @@ class Page10 extends AnimationPage{
         roundKeyLabel.redraw(roundKeyLabelStyles)
         roundKeyText.redraw(roundKeyTextStyles)
 
-        console.log(roundKeyGridPos.x, gridStyles.width)
+
       
         roundKeyLabel.position.set(roundKeyGridPos.x - gridStyles.width / 2, roundKeyGridPos.y + gridStyles.height / 2 + 5)
         roundKeyText.position.set(roundKeyGridPos.x - gridStyles.width / 2, roundKeyGridPos.y + gridStyles.height / 2 + roundKeyLabelStyles.fontSize + 8)
