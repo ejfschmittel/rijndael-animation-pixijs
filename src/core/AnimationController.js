@@ -89,9 +89,8 @@ class AnimationController{
 
 //        app.stage.addChild(this.viewport)
             this.viewport.pinch().clampZoom({
-                minWidth: this.ANIMATION_DIMENSIONS.width,
-                minHeight: this.ANIMATION_DIMENSIONS.height,
-                maxScale: 2,
+                maxWidth: this.ANIMATION_DIMENSIONS.width,
+                maxHeight: this.ANIMATION_DIMENSIONS.height,
             })
                 
 
