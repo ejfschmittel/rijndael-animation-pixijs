@@ -75,7 +75,7 @@ class AnimationController{
 
         // add stage to canvas
         this.container.appendChild(this.app.view)
-
+        this.app.renderer.plugins.interaction.autoPreventDefault = false
         // create viewport
         this.viewport = new Viewport({
             screenWidth: this.ANIMATION_DIMENSIONS.width,
