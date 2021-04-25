@@ -87,7 +87,7 @@ class AnimationController{
         this.app.stage.addChild(this.viewport)
 
 
-        this.app.renderer.plugins.interaction.autoPreventDefault = false;
+       // this.app.renderer.plugins.interaction.autoPreventDefault = false;
         this.app.renderer.view.style.touchAction = 'auto';
 
 //        app.stage.addChild(this.viewport)
