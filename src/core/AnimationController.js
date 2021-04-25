@@ -78,17 +78,21 @@ class AnimationController{
 
         // create viewport
         this.viewport = new Viewport({
-            screenWidth: window.innerWidth,
-            screenHeight: window.innerHeight,
-            worldWidth: 1000,
-            worldHeight: 1000,
+            screenWidth: this.ANIMATION_DIMENSIONS.width,
+            screenHeight: this.ANIMATION_DIMENSIONS.height,
+            worldWidth: this.ANIMATION_DIMENSIONS.width,
+            worldHeight: this.ANIMATION_DIMENSIONS.height,
             interaction: this.app.renderer.plugins.interaction
         });
         this.app.stage.addChild(this.viewport)
 
 
 //        app.stage.addChild(this.viewport)
-            this.viewport.pinch()
+            this.viewport.pinch().clampZoom({
+                minWidth: this.ANIMATION_DIMENSIONS.width,
+                minHeight: this.ANIMATION_DIMENSIONS.height,
+                maxScale: 2,
+            })
                 
 
         // add on resize event listener
