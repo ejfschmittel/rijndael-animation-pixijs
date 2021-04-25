@@ -20,6 +20,7 @@ class ResponsiveMax768 extends AnimationPageResponsives{
         }
 
 
+
         return defines;
     }
 }

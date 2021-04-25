@@ -39,6 +39,8 @@ $breakpoint-big-desktop: 112.5em; // 1800 px
     --red-1: #FF1A01;
     --red-2: #F9CCC7;
 
+    --red-pastel-1: #ff6961;
+
     --pink-1: #FFD1CB;
 
     --screen-bg: var(--black)
@@ -111,6 +113,15 @@ $breakpoint-big-desktop: 112.5em; // 1800 px
 
     --grid-background-alpha: var(--light-grey);
     --grid-background-beta: var(--light-grey);
+
+
+
+    --page-background-delta: var(--blue-4);
+    --page-background-zeta: var(--red-pastel-1);
+    --page-background-eta: var(--yellow-6);
+    --page-background-theta: var(--green-1);
+
+    --grid-background-alpha: var(--red-pastel-1);
 
 
     --text-color-alpha: var(--red-1);

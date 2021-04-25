@@ -18,6 +18,7 @@ class ResponsiveMax425 extends AnimationPageResponsives{
     getDefines(defines){
 
 
+
         defines.titleStyles = {     
             ... defines.titleStyles,
             yDistance: this.getHeight(4),

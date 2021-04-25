@@ -17,6 +17,12 @@ class ResponsiveMax425 extends AnimationPageResponsives{
 
     getDefines(defines){
 
+        
+        defines.introTextStyles = {
+            ...defines.introTextStyles,
+            fontSize: 18,
+            wordWrapWidth: 300,
+        }
 
         defines.rowTitleStyles = {
             ...defines.rowTitleStyles,

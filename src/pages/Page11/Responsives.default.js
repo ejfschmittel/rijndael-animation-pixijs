@@ -81,6 +81,9 @@ class Page7DefaultResponsives extends AnimationPageResponsives{
         }
 
 
+
+
+
         return defines;
     }
 
