@@ -10,30 +10,7 @@ import LocaleController from "./LocaleController"
 import ThemeController from "./ThemeController"
 import FormController from "./RijndaelFormController.js"
 
-//import LOCALES from "../languages"
-
-
-
-/*export const ANIMATION_DIMENSIONS = {
-    width: null,
-    height: null,
-    widthPercent: null,
-    heightPercent: null
-}*/
-
-
-
-//const THEME_DEFAULT = "default";
-//const THEME_TEST = "test"
-
-//const THEME_LIST = [THEME_DEFAULT, THEME_TEST]
-
-
-
-/*const THEMES = {
-    [THEME_DEFAULT]: ["theme"],  
-    [THEME_TEST]: ["theme", "theme--test"],
-}*/
+import {Viewport} from "pixi-viewport"
 
 class AnimationController{
 
@@ -57,13 +34,6 @@ class AnimationController{
         this.currentPage = null;
 
         this.isResizing = false;
-
-        //this.currentLocaleCode = document.documentElement.lang;
-
-     //   this.currentTheme = THEME_DEFAULT;
-       // this.themeElement = document.querySelector("body")
-       
-
 
         this.locale = new LocaleController(this, settings.locale)
         this.theme = new ThemeController(this, settings.themes)
@@ -106,10 +76,20 @@ class AnimationController{
         // add stage to canvas
         this.container.appendChild(this.app.view)
 
+        // create viewport
+        this.viewport = new Viewport({
+            screenWidth: window.innerWidth,
+            screenHeight: window.innerHeight,
+            worldWidth: 1000,
+            worldHeight: 1000,
+            interaction: this.app.renderer.plugins.interaction
+        });
+        this.app.stage.addChild(this.viewport)
+
 
 //        app.stage.addChild(this.viewport)
-
-      
+            this.viewport.pinch()
+                
 
         // add on resize event listener
        // window.addEventListener("resize", this.onResize)
@@ -228,8 +208,8 @@ class AnimationController{
         animationPage.hide();
 
         
-        this.app.stage.addChild(animationPage)
-        //this.viewport.addChild(animationPage)
+        //this.app.stage.addChild(animationPage)
+        this.viewport.addChild(animationPage)
         this.ui.addInfoText(pageID);
 
     }
