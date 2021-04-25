@@ -87,6 +87,9 @@ class AnimationController{
         this.app.stage.addChild(this.viewport)
 
 
+        this.app.renderer.plugins.interaction.autoPreventDefault = false;
+        this.app.renderer.view.style.touchAction = 'auto';
+
 //        app.stage.addChild(this.viewport)
             this.viewport.pinch({noDrag: true}).clampZoom({
                 maxWidth: this.ANIMATION_DIMENSIONS.width,
@@ -114,7 +117,11 @@ class AnimationController{
     onResize(){
         this.isResizing = true;
         this.updateAnimationDimensions();
+        // resize renderer
         this.app.renderer.resize(this.ANIMATION_DIMENSIONS.width, this.ANIMATION_DIMENSIONS.height)
+        this.viewport.resize(this.ANIMATION_DIMENSIONS.width, this.ANIMATION_DIMENSIONS.height,this.ANIMATION_DIMENSIONS.width, this.ANIMATION_DIMENSIONS.height)
+
+        // do i need to update clamp 
         
         this.timeline.onResize();
         this.pagesByID[this.currentPage].redraw();
