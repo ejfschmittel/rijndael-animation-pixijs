@@ -1,1 +1,0 @@
-(self.webpackChunkpixi_gsap_responsive=self.webpackChunkpixi_gsap_responsive||[]).push([[800],{800:(s,e,p)=>{"use strict";p.r(e),p.d(e,{default:()=>t});const t={test:"test"}}}]);
