@@ -24,6 +24,9 @@ class Page3Timline extends AnimationPageTimeline{
         return tl; 
     }
 
+
+
+
     createAnimationMain(){
         const {
             title, subtitleLeft, gridLeft, subtitleRight, gridRight, arrowLeft, arrowRight, textRight, textLeft, circleLeft, circleRight

@@ -51,11 +51,6 @@ class Page5 extends AnimationPage{
 
         // create big labels
 
-        const labelTextBaseStyle = {
-            fontSize: 40,
-            fill: 0x666666,
-            align: "center"
-        }
       
 
         const labelInitialRound = new PIXIText("titleInitialRound");

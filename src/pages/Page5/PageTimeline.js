@@ -10,11 +10,13 @@ class Page5Timline extends AnimationPageTimeline{
     }
 
     createPreFadeIn(){
-        const {runner, svg, container,initialAddRoundKey, mrSubBytes, mrShiftRows, mrMixColumns, mrAddRoundKey,  frSubBytes, frShiftRows, frAddRoundKey,}  = this.getGlobalComponents();
-        const obj = {val: 0};
-        const tl = gsap.timeline()
-        tl.to(obj, {val: 1, duration: .0001})
-        tl.set([initialAddRoundKey, mrSubBytes, runner, mrShiftRows, mrMixColumns, mrAddRoundKey,  frSubBytes, frShiftRows, frAddRoundKey], {pixi: {zIndex: 20}})
+        const {
+            runner, svg,initialAddRoundKey, mrSubBytes, mrShiftRows, mrMixColumns, mrAddRoundKey,  frSubBytes, frShiftRows, frAddRoundKey,
+            labelInitialRound, labelFinalRound, labelMainRounds
+        }  = this.getGlobalComponents();
+        const tl = this.getPreFadeInTimeline();
+        tl.set([initialAddRoundKey, mrSubBytes, runner, mrShiftRows, mrMixColumns, mrAddRoundKey,  frSubBytes, frShiftRows, frAddRoundKey], {pixi: {zIndex: 20, alpha: 0}})
+        tl.set([svg,labelInitialRound, labelFinalRound, labelMainRounds], {pixi: {alpha: 0}})
         return tl;
     }
 
@@ -22,9 +24,15 @@ class Page5Timline extends AnimationPageTimeline{
 
   
     createAnimationIn(){
-
+        const {
+            runner, svg,initialAddRoundKey, mrSubBytes, mrShiftRows, mrMixColumns, mrAddRoundKey,  frSubBytes, frShiftRows, frAddRoundKey,
+            labelInitialRound, labelFinalRound, labelMainRounds
+        }  = this.getGlobalComponents();
         const tl = this.getAnimatableBackgroundTL();
 
+
+        tl.to([initialAddRoundKey, mrSubBytes, runner, mrShiftRows, mrMixColumns, mrAddRoundKey,  frSubBytes, frShiftRows, frAddRoundKey], {pixi: { alpha: 1}})
+        tl.to([svg,labelInitialRound, labelFinalRound, labelMainRounds], {pixi: {alpha: 1}}, "<")
        
         return tl;
     }
@@ -51,14 +59,16 @@ class Page5Timline extends AnimationPageTimeline{
         const tl = gsap.timeline()
 
 
+        tl.to([svg], {pixi: {alpha: 1}, delay: .8})
+
         // INITIAL ROUND
-         const segOneDuration = this.getMotionPathDuration(0, svg.info.segments.two.progress)
+        const segOneDuration = this.getMotionPathDuration(0, svg.info.segments.two.progress)
         tl.to(runner, {motionPath: {
             path: path,
             start: 0,
             end: svg.info.segments.two.progress,
             curviness: 0
-        }, duration: segOneDuration,  ease: "none",}, "segOne")
+        }, duration: segOneDuration,  ease: "none"}, "segOne")
  
         // initial add round key blink
         const labelBgAddRoundKey = this.page.getColor("--label-bg-delta")
