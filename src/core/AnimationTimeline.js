@@ -121,7 +121,7 @@ class AnimationTimeline{
       this.controller.buildTimeline();
 
       // rehide last active page
-      this.controller.hideCurrentPage();
+      this.controller.hideAllPages();
 
       // go to last timeline state
       const { lastActiveLabels } = this.tlStateBeforeResize;

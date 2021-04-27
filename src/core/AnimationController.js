@@ -140,6 +140,13 @@ class AnimationController{
     hideCurrentPage(){
         this.pagesByID[this.currentPage].hide();
     }
+
+    hideAllPages(){
+        this.pageIDs.map(pageID => {
+            const page = this.pagesByID[pageID];
+            page.hide();
+        })
+    }
    
 
     setCurrentPage(pageID){
