@@ -22,7 +22,7 @@ class Page9Timline extends AnimationPageTimeline{
             text2,
         } = this.getGlobalComponents();
         const tl = this.getPreFadeInTimeline();
-        tl.set([equationContainer, multiplicationSign, equalsSign, galoisField, text1, text2], {pixi: {alpha: 0}})
+        tl.set([landingCol, resultCol, multiplicationSign, equalsSign, galoisField, text1, text2], {pixi: {alpha: 0}})
   
         // hide & pre movables
         tl.set(gridMovablesResults.movables, {pixi: {alpha: 0}})

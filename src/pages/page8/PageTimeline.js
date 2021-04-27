@@ -16,7 +16,7 @@ class Page8Timline extends AnimationPageTimeline{
         const tl = this.getPreFadeInTimeline();
 
         // hide texts
-        tl.set([text1, text2, text3], {pixi: {alpha: 0}})
+        tl.set([text1, text2, text3, grid], {pixi: {alpha: 0}})
 
         const ys = movablesCollector.movables.map(movable => movable.y)
         tl.set(movablesCollector.movables, {pixi: {

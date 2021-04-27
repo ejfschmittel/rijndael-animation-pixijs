@@ -7,7 +7,7 @@ class ResponsiveMax375 extends AnimationPageResponsives{
     }
 
     evoke(animationDimensions){
-        if(animationDimensions.width < 375) return true;
+        if(animationDimensions.width <= 375) return true;
         return false;
     }
 
@@ -16,11 +16,11 @@ class ResponsiveMax375 extends AnimationPageResponsives{
         
         defines.textStyles = {
             ...defines.textStyles, 
-            fontSize: 14,
+            fontSize: 12,
             wordWrapWidth: 280,
             position: {
                 x: this.getWidth(10),
-                y: this.getHeight(80)
+                y: this.getHeight(85)
             }
         }
 
@@ -31,11 +31,16 @@ class ResponsiveMax375 extends AnimationPageResponsives{
             height: 100,
         }
 
+        defines.gridFontStyles = {
+            ...defines.gridFontStyles,
+            fontSize: 16
+        }
+
        
         defines.gridStyles = {
             ...defines.gridStyles,
-            width: 160,
-            height: 120,
+            width: 140,
+            height: 110,
         }
 
         defines.gridFontStyles = {

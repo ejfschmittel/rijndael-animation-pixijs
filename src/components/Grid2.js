@@ -31,7 +31,7 @@ class ResponsiveGrid extends PIXI.Container{
         const cellWidth = bgStyles.width / this.cols;
         const cellHeight = bgStyles.height / this.rows;
       
-       
+
         for(let r = 0; r < this.rows; r++){
         
             for(let c = 0; c < this.cols; c++){        

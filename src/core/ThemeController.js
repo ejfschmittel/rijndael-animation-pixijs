@@ -14,6 +14,8 @@ class ThemeController{
 
         this.themeContainer = document.querySelector("body");
         this.themeSelect = document.getElementById(THEME_SELECT_ID)
+
+        this.styles = getComputedStyle(this.themeContainer);;
  
 
         this.currentTheme = themes[0].name
@@ -26,6 +28,7 @@ class ThemeController{
     }
 
     setTheme(themeName){
+        console.log("set theme")
         if(themeName == this.currentTheme) return;
         if(!this.isValidTheme(themeName)) return;
 
@@ -37,15 +40,16 @@ class ThemeController{
         this.themeContainer.classList.add(newThemeClass);
 
 
+        this.styles = getComputedStyle(this.themeContainer);
 
         //redraw & update timeline
-        this.controller.redrawPages();
+        this.controller.timeline.saveAndRebuildTimeline();
 
     }
 
     getColor(name){
-        const style = getComputedStyle(this.themeContainer)
-        return PIXI.utils.string2hex(style.getPropertyValue(name).trim())
+       // const style = getComputedStyle(this.themeContainer)
+        return PIXI.utils.string2hex(this.styles.getPropertyValue(name).trim())
     }
 
     isValidTheme(themeName){

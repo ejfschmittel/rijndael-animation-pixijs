@@ -41,6 +41,8 @@ class TextBox extends PIXI.Container{
 
     redraw(bgStyles, textStyles){    
         this.textStyles = {...this.textStyles,...textStyles}
+
+    
        
         this.background.redraw(bgStyles)
        

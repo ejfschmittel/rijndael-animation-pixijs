@@ -30,6 +30,7 @@ class Page10Timline extends AnimationPageTimeline{
         const tl = this.getPreFadeInTimeline();  
         tl.set([equationContainer, roundKeyLabel, roundKeyText], {pixi: {alpha: 0}})
         tl.set([...resultMovables.movables], {pixi: {alpha: 0}})
+        tl.set([stateGrid, roundKeyGrid], {pixi: {alpha: 0}})
         
 
         // translate state movables up 100

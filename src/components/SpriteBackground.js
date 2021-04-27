@@ -51,7 +51,11 @@ class SpriteBackground extends PIXI.Sprite{
         const {fill, width, height, borderWidth, borderColor} = {...defaultStyles, ...styles};
 
   
-        if(this._height !== height || this._width !== width){
+
+
+            
+   
+        //if(this._height !== height || this._width !== width){
             this._height = height;
             this._width = width;
         
@@ -64,7 +68,7 @@ class SpriteBackground extends PIXI.Sprite{
             
     
             this.foreground.tint = fill;
-        }
+        //}
  
 
 

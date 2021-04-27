@@ -152,6 +152,7 @@ class AnimationController{
 
 
     redrawPages(){
+    
         this.pageIDs.map(pageID => {
             const page = this.pagesByID[pageID];
             page.redraw();
@@ -193,9 +194,8 @@ class AnimationController{
 
 
     buildTimeline(){
-  
         // redraw pages
-
+        this.redrawPages();
         this.timeline.createTimeline();
         this.ui.recreateNavigation()
     }

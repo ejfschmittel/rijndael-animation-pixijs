@@ -27,18 +27,16 @@ class AnimationTimeline{
             this.saveTimelineState();
         }
 
-        // set inner height??
-   
-
         this.onAfterResize()
 
-        // on after resize
     }
 
     saveAndRebuildTimeline(){
         if(!this.tlStateBeforeResize){
             this.saveTimelineState();
         }
+
+        this.controller.redrawPages();
         this.rebuildTimline();
     }
 
@@ -114,9 +112,6 @@ class AnimationTimeline{
 
     onAfterResize = debounce(() => {
         console.time("onafter resize")
-
-        this.controller.redrawPages();
-
         this.rebuildTimline();
         console.timeEnd("onafter resize")
     }, 300)

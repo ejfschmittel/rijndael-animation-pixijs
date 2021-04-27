@@ -68,6 +68,7 @@ class Page8 extends AnimationPage{
         } = this.globalComponents
 
         // background redraw
+       
         const { backgroundStyles,movablesStyles} = defines
         background.redraw(backgroundStyles)
 
@@ -88,7 +89,7 @@ class Page8 extends AnimationPage{
         grid.position.set(gridStyles.x, gridStyles.y)
         grid.pivot.set(grid.width /2, 0)
 
-
+   
         movablesCollector.movables.forEach((movable, idx) => {
             const {x,y,width, height}= grid.cells[idx].getBounds()
             movable.redraw({width, height, ...movablesStyles},gridFontStyles);

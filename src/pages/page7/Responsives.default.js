@@ -14,7 +14,7 @@ class Page7DefaultResponsives extends AnimationPageResponsives{
         defines.animatableBackgroundStyles = {
             width: this.getWidth(100),
             height: this.getHeight(100),
-            fill: this.page.getColor("--page-background-delta"),
+            fill: this.c("--page-background-delta"),
         }
 
         defines.animatableBackgroundTitleStyles = {
@@ -35,7 +35,7 @@ class Page7DefaultResponsives extends AnimationPageResponsives{
         defines.backgroundStyles = {
             width: this.getWidth(100),
             height: this.getHeight(100),
-            fill: this.c("--page-background-alpha"),
+            fill: this.c("--page-background-beta"),
             borderWidth: 0,
         }
 

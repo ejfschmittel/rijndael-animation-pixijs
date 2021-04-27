@@ -91,12 +91,12 @@ class Page3DefaultResponsives extends AnimationPageResponsives{
         defines.textRightStyles = {
             x: this.getWidth(75),
             yDistance: this.getHeight(2),
-            fill: this.c("--text-color-alpha")
+            fill: this.c("--text-color-beta")
         }
         defines.textLeftStyles = {
             x: this.getWidth(25),
             yDistance: this.getHeight(2),
-            fill: this.c("--text-color-beta")
+            fill: this.c("--text-color-alpha")
         }
 
 

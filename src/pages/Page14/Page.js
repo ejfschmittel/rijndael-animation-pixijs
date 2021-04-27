@@ -14,9 +14,8 @@ import PageTimeline from "./PageTimline"
 
 import DefaultResponsives from "./Responsives.default"
 import ResponsiveMax768 from "./Responsive.max-768"
-import ResponsiveMax700 from "./Responsive.max-700"
 import ResponsiveMax425 from "./Responsive.max-425"
-
+import ResponsiveMax375 from "./Responsive.max-375"
 
 class Page14 extends AnimationPage{
     constructor(){
@@ -24,8 +23,8 @@ class Page14 extends AnimationPage{
         this.timeline = new PageTimeline(this);
         this.registerResponsive("default", DefaultResponsives)
         this.registerResponsive("max-768", ResponsiveMax768)
-
         this.registerResponsive("max-425", ResponsiveMax425)
+        this.registerResponsive("max-375", ResponsiveMax375)
    
         
     }

@@ -18,15 +18,17 @@ class Page7Timline extends AnimationPageTimeline{
 
 
     createPreFadeIn(){
-        const {resultMovables} = this.getGlobalComponents();
+        const {resultMovables,sbox, grid, textBox,stateMovables} = this.getGlobalComponents();
         const tl = this.getPreFadeInTimeline();
-        tl.set(resultMovables.movables, {pixi: {alpha: 0}})
+        tl.set([sbox, textBox, grid], {pixi: {alpha: 0}})
+        tl.set([...resultMovables.movables, ...stateMovables.movables], {pixi: {alpha: 0}})
         return tl;
     }
 
     createAnimationIn(){
         const tl = this.getAnimatableBackgroundTL();
-
+        const {stateMovables,sbox} = this.getGlobalComponents();
+        tl.set([...stateMovables.movables,sbox], {pixi: {alpha: 1}})
         return tl;
     }
 

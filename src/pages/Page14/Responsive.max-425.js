@@ -33,6 +33,7 @@ class ResponsiveMax425 extends AnimationPageResponsives{
             legendWidth: 24,
         }
 
+        
         defines.rconStyles = {
             ...defines.rconStyles,
             width: 200,

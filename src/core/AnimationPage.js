@@ -6,9 +6,9 @@ import * as PIXI from "pixi.js"
 
 import SpriteBackground from "../components/SpriteBackground"
 
-//import {dashedStringToCammelCase} from "../utils/utils"
 
-import {getDimensions}  from "./MovablesController"
+
+
 
 class AnimationPage extends PIXI.Container{
     constructor(){
