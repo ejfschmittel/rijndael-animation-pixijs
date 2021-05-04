@@ -1,6 +1,6 @@
 const path = require("path");
 var HtmlWebpackPlugin = require("html-webpack-plugin");
-
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
     entry: {
@@ -15,21 +15,16 @@ module.exports = {
                 loader: 'babel-loader',
             },
             {
-                test: /\.s[ac]ss$/i,
-                use: [
-                  // Creates `style` nodes from JS strings
-                  "style-loader",
-                  // Translates CSS into CommonJS
-                  "css-loader",
-                  // Compiles Sass to CSS
-                  "sass-loader",
-                ],
-              },
-              {
-                test: /\.js$/,
-                enforce: 'pre',
-                use: ['source-map-loader'],
-              },
+              test: /\.s[ac]ss$/i,
+              use: [
+                // Creates `style` nodes from JS strings
+                MiniCssExtractPlugin.loader,
+              'css-loader',
+              'sass-loader',
+              ],
+            },
+
         ]
-    }
+    },
+
 }
