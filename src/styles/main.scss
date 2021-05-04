@@ -1,5 +1,2 @@
-
-@import "./mixins.scss";
-@import "./variables.scss";
-@import "./base.scss";
-@import "./ui.scss";
+@use "./base/base";
+@use "./layout/ui";
