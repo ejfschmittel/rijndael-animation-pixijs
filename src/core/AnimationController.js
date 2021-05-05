@@ -95,7 +95,7 @@ class AnimationController{
                 direction: "all"
             })
 
-          /*  this.viewport.clampZoom({
+            /*this.viewport.clampZoom({
                 maxWidth: this.ANIMATION_DIMENSIONS.width,
                 maxHeight: this.ANIMATION_DIMENSIONS.height,
                 maxScale: 2,
@@ -122,9 +122,9 @@ class AnimationController{
         // resize renderer
         this.app.renderer.resize(this.ANIMATION_DIMENSIONS.width, this.ANIMATION_DIMENSIONS.height)
         console.log(this.ANIMATION_DIMENSIONS)
-        ///this.viewport.resize(this.ANIMATION_DIMENSIONS.width, this.ANIMATION_DIMENSIONS.height, this.ANIMATION_DIMENSIONS.width, this.ANIMATION_DIMENSIONS.height)
+        this.viewport.resize(this.ANIMATION_DIMENSIONS.width, this.ANIMATION_DIMENSIONS.height, this.ANIMATION_DIMENSIONS.width, this.ANIMATION_DIMENSIONS.height)
        // this.viewport.fit()
-       /* this.viewport.clampZoom({
+        /*this.viewport.clampZoom({
 
             maxWidth: this.ANIMATION_DIMENSIONS.width,
             maxHeight: this.ANIMATION_DIMENSIONS.height,
