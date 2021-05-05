@@ -5,119 +5,119 @@ object-assign
 */
 
 /*!
- * @pixi/accessibility - v5.3.8
- * Compiled Sat, 20 Feb 2021 22:28:33 UTC
+ * @pixi/constants - v5.3.9
+ * Compiled Wed, 24 Mar 2021 19:54:16 UTC
  *
- * @pixi/accessibility is licensed under the MIT License.
+ * @pixi/constants is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
  */
 
 /*!
- * @pixi/core - v5.3.8
- * Compiled Sat, 20 Feb 2021 22:28:33 UTC
+ * @pixi/core - v5.3.9
+ * Compiled Wed, 24 Mar 2021 19:54:16 UTC
  *
  * @pixi/core is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
  */
 
 /*!
- * @pixi/display - v5.3.8
- * Compiled Sat, 20 Feb 2021 22:28:33 UTC
+ * @pixi/display - v5.3.9
+ * Compiled Wed, 24 Mar 2021 19:54:16 UTC
  *
  * @pixi/display is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
  */
 
 /*!
- * @pixi/extract - v5.3.8
- * Compiled Sat, 20 Feb 2021 22:28:33 UTC
+ * @pixi/extract - v5.3.9
+ * Compiled Wed, 24 Mar 2021 19:54:16 UTC
  *
  * @pixi/extract is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
  */
 
 /*!
- * @pixi/filter-displacement - v5.3.8
- * Compiled Sat, 20 Feb 2021 22:28:33 UTC
+ * @pixi/filter-displacement - v5.3.9
+ * Compiled Wed, 24 Mar 2021 19:54:16 UTC
  *
  * @pixi/filter-displacement is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
  */
 
 /*!
- * @pixi/loaders - v5.3.8
- * Compiled Sat, 20 Feb 2021 22:28:33 UTC
+ * @pixi/loaders - v5.3.9
+ * Compiled Wed, 24 Mar 2021 19:54:16 UTC
  *
  * @pixi/loaders is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
  */
 
 /*!
- * @pixi/math - v5.3.8
- * Compiled Sat, 20 Feb 2021 22:28:33 UTC
+ * @pixi/math - v5.3.9
+ * Compiled Wed, 24 Mar 2021 19:54:16 UTC
  *
  * @pixi/math is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
  */
 
 /*!
- * @pixi/mesh-extras - v5.3.8
- * Compiled Sat, 20 Feb 2021 22:28:33 UTC
+ * @pixi/mesh-extras - v5.3.9
+ * Compiled Wed, 24 Mar 2021 19:54:16 UTC
  *
  * @pixi/mesh-extras is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
  */
 
 /*!
- * @pixi/mixin-get-child-by-name - v5.3.8
- * Compiled Sat, 20 Feb 2021 22:28:33 UTC
+ * @pixi/mixin-get-child-by-name - v5.3.9
+ * Compiled Wed, 24 Mar 2021 19:54:16 UTC
  *
  * @pixi/mixin-get-child-by-name is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
  */
 
 /*!
- * @pixi/mixin-get-global-position - v5.3.8
- * Compiled Sat, 20 Feb 2021 22:28:33 UTC
+ * @pixi/mixin-get-global-position - v5.3.9
+ * Compiled Wed, 24 Mar 2021 19:54:16 UTC
  *
  * @pixi/mixin-get-global-position is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
  */
 
 /*!
- * @pixi/polyfill - v5.3.8
- * Compiled Sat, 20 Feb 2021 22:28:33 UTC
+ * @pixi/polyfill - v5.3.9
+ * Compiled Wed, 24 Mar 2021 19:54:16 UTC
  *
  * @pixi/polyfill is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
  */
 
 /*!
- * @pixi/prepare - v5.3.8
- * Compiled Sat, 20 Feb 2021 22:28:33 UTC
+ * @pixi/prepare - v5.3.9
+ * Compiled Wed, 24 Mar 2021 19:54:16 UTC
  *
  * @pixi/prepare is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
  */
 
 /*!
- * @pixi/ticker - v5.3.8
- * Compiled Sat, 20 Feb 2021 22:28:33 UTC
+ * @pixi/ticker - v5.3.9
+ * Compiled Wed, 24 Mar 2021 19:54:16 UTC
  *
  * @pixi/ticker is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
  */
 
 /*!
- * @pixi/utils - v5.3.8
- * Compiled Sat, 20 Feb 2021 22:28:33 UTC
+ * @pixi/utils - v5.3.9
+ * Compiled Wed, 24 Mar 2021 19:54:16 UTC
  *
  * @pixi/utils is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
  */
 
 /*!
- * GSAP 3.6.0
+ * GSAP 3.6.1
  * https://greensock.com
  *
  * @license Copyright 2008-2021, GreenSock. All rights reserved.
@@ -127,7 +127,7 @@ object-assign
 */
 
 /*!
- * MotionPathPlugin 3.6.0
+ * MotionPathPlugin 3.6.1
  * https://greensock.com
  *
  * @license Copyright 2008-2021, GreenSock. All rights reserved.
@@ -137,7 +137,7 @@ object-assign
 */
 
 /*!
- * PixiPlugin 3.6.0
+ * PixiPlugin 3.6.1
  * https://greensock.com
  *
  * @license Copyright 2008-2021, GreenSock. All rights reserved.
@@ -147,7 +147,7 @@ object-assign
 */
 
 /*!
- * matrix 3.6.0
+ * matrix 3.6.1
  * https://greensock.com
  *
  * Copyright 2008-2021, GreenSock. All rights reserved.
@@ -157,7 +157,7 @@ object-assign
 */
 
 /*!
- * paths 3.6.0
+ * paths 3.6.1
  * https://greensock.com
  *
  * Copyright 2008-2021, GreenSock. All rights reserved.
@@ -165,6 +165,16 @@ object-assign
  * Club GreenSock members, the agreement issued with that membership.
  * @author: Jack Doyle, jack@greensock.com
 */
+
+/*!
+ * pixi-viewport - v4.30.4
+ * Compiled Wed, 28 Apr 2021 22:02:06 UTC
+ *
+ * pixi-viewport is licensed under the MIT License.
+ * http://www.opensource.org/licenses/mit-license
+ * 
+ * Copyright 2019-2020, David Figatner, All Rights Reserved
+ */
 
 /*!
  * resource-loader - v3.0.1
