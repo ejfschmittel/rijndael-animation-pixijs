@@ -36,6 +36,8 @@ class AnimationPage extends PIXI.Container{
         this.responsivesByLabel = {}   
 
         this.timeline = null;
+
+        this.interactiveChildren = false;
     }
 
     addPermanent(obj){

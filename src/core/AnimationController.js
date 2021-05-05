@@ -122,8 +122,8 @@ class AnimationController{
         // resize renderer
         this.app.renderer.resize(this.ANIMATION_DIMENSIONS.width, this.ANIMATION_DIMENSIONS.height)
         console.log(this.ANIMATION_DIMENSIONS)
-        this.viewport.resize(this.ANIMATION_DIMENSIONS.width, this.ANIMATION_DIMENSIONS.height, this.ANIMATION_DIMENSIONS.width, this.ANIMATION_DIMENSIONS.height)
-        this.viewport.fit()
+        ///this.viewport.resize(this.ANIMATION_DIMENSIONS.width, this.ANIMATION_DIMENSIONS.height, this.ANIMATION_DIMENSIONS.width, this.ANIMATION_DIMENSIONS.height)
+       // this.viewport.fit()
        /* this.viewport.clampZoom({
 
             maxWidth: this.ANIMATION_DIMENSIONS.width,
