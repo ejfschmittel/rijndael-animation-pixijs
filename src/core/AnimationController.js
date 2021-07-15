@@ -1,6 +1,8 @@
 import * as PIXI from "pixi.js"
 
 
+
+
 import {initTexture} from "../components/SpriteBackground"
 
 import AnimationPlayerUI from "./AnimationPlayerUI.js"
@@ -10,7 +12,7 @@ import LocaleController from "./LocaleController"
 import ThemeController from "./ThemeController"
 import FormController from "./RijndaelFormController.js"
 
-import {Viewport} from "pixi-viewport"
+
 
 class AnimationController{
 
@@ -70,36 +72,14 @@ class AnimationController{
         this.app.renderer.resize(bounds.width, bounds.height)
         initTexture(this.app.renderer)
 
-
-      
-
         // add stage to canvas
         this.container.appendChild(this.app.view)
-        //this.app.renderer.plugins.interaction.autoPreventDefault = false
-        // create viewport
-        this.viewport = new Viewport({
-            screenWidth: this.ANIMATION_DIMENSIONS.width,
-            screenHeight: this.ANIMATION_DIMENSIONS.height,
-            worldWidth: this.ANIMATION_DIMENSIONS.width,
-            worldHeight: this.ANIMATION_DIMENSIONS.height,
-            interaction: this.app.renderer.plugins.interaction
-        });
-        this.app.stage.addChild(this.viewport)
 
-
+        // enable touch scaling 
         this.app.renderer.plugins.interaction.autoPreventDefault = false;
         this.app.renderer.view.style.touchAction = 'auto';
 
      
-        /*   this.viewport.pinch({noDrag: true}).clamp({
-                direction: "all"
-            })*/
-
-            /*this.viewport.clampZoom({
-                maxWidth: this.ANIMATION_DIMENSIONS.width,
-                maxHeight: this.ANIMATION_DIMENSIONS.height,
-                maxScale: 2,
-            })*/
                 
 
         // add on resize event listener
@@ -122,16 +102,8 @@ class AnimationController{
         // resize renderer
         this.app.renderer.resize(this.ANIMATION_DIMENSIONS.width, this.ANIMATION_DIMENSIONS.height)
         console.log(this.ANIMATION_DIMENSIONS)
-       // this.viewport.resize(this.ANIMATION_DIMENSIONS.width, this.ANIMATION_DIMENSIONS.height, this.ANIMATION_DIMENSIONS.width, this.ANIMATION_DIMENSIONS.height)
-       // this.viewport.fit()
-        /*this.viewport.clampZoom({
 
-            maxWidth: this.ANIMATION_DIMENSIONS.width,
-            maxHeight: this.ANIMATION_DIMENSIONS.height,
-            maxScale: 2,
-        })*/
-        // do i need to update clamp 
-        
+        // do i need to update clamp      
         this.timeline.onResize();
         this.pagesByID[this.currentPage].redraw();
        
@@ -193,8 +165,7 @@ class AnimationController{
         animationPage.hide();
 
         
-        //this.app.stage.addChild(animationPage)
-        this.viewport.addChild(animationPage)
+        this.app.stage.addChild(animationPage)
         this.ui.addInfoText(pageID);
 
     }

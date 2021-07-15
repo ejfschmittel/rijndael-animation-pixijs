@@ -5,6 +5,11 @@
     "jumpBackwardsTooltip": "Zurück springen",
     "settingsButtonTooltip": "Einstellungen",
 
+    "infoButtLabel": "Info",
+    "navigationButtonLabel": "Navigation",
+    "formButtonLabel": "Eingabe",
+
+
     "settingsTitle": "Einstellungen",
     "settingsThemeLabel": "Theme:",
     "settingsJumpLabel": "Sprungweite (sekunden)",
