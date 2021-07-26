@@ -16,6 +16,7 @@ import Page12 from "./pages/Page12/Page"
 import Page13 from "./pages/Page13/Page"
 import Page14 from "./pages/Page14/Page"
 
+import {logTimer} from "./utils/measure.js"
 
 const SETTINGS = {
     locale: LOCALE,
@@ -51,7 +52,11 @@ class RijndaelAnimation extends AnimationController {
         this.buildTimeline()
 
         this.goToFirstPage();
-        console.timeEnd("create")
+        logTimer();
+   
+
+        
+
 
     }
 }
