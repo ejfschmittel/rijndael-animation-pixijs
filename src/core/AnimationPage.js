@@ -166,7 +166,7 @@ class AnimationPage extends PIXI.Container{
     }
 
     hide(){  
-        gsap.set(this, {pixi: { alpha: 0}})
+        gsap.set(this, {pixi: { alpha: 0, renderable: false}})
     }
 
     subscribeTo(key, elements){

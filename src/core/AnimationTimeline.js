@@ -117,6 +117,7 @@ class AnimationTimeline{
     }, 300)
 
     rebuildTimline(){
+        console.time("rebuildTimeline")
       // recreate timeline completely
       this.controller.buildTimeline();
 
@@ -135,6 +136,8 @@ class AnimationTimeline{
 
       this.tlStateBeforeResize = null;
       this.controller.isResizing = false;
+      console.timeEnd("rebuildTimeline")
+      console.timeEnd("resize")
     }
 
     

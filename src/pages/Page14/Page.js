@@ -48,8 +48,8 @@ class Page14 extends AnimationPage{
         const equalsSymbol = new PIXIText("=")
         equalsSymbol.anchor.set(.5, .5)
 
-        const addSymbol = new CircledText("+");
-        const addSymbol2 = new CircledText("+");
+        const addSymbol = new CircledText("+", {fontSize: 30, fill: 0x000000}, {radius: 20,borderColor: 0x000000});
+        const addSymbol2 = new CircledText("+",  {fontSize: 30, fill: 0x000000}, {radius: 20,borderColor: 0x000000});
 
    
         // round key labels
@@ -165,7 +165,9 @@ class Page14 extends AnimationPage{
         const secondaryGrids = [secondaryGridOne, secondaryGridTwo, secondaryGridThree, secondaryGridFour]
 
 
-     
+        secondaryGrids.forEach(grid => {
+            grid.renderable = false;
+        });
 
      
 

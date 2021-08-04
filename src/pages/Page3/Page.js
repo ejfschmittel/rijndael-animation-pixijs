@@ -41,25 +41,26 @@ class Page3 extends AnimationPage{
         this.bindPageLocale("title",title)
         title.anchor.set(.5, .5)
 
-        /* left side */
+        // left side (state)
         const subtitleLeft = new PIXIText("subtitleLeft")
         this.bindPageLocale("subtitleLeft",subtitleLeft)
         subtitleLeft.anchor.set(.5, .5)
 
+        // left grid
         const gridLeft = new Grid2(4,4, {}, {})
         this.subscribeTo("initial-state", gridLeft.cells)
      
-
+        // left arrow
         const arrowLeft = new Arrow({orientation: ARROW_ORIENTATION.DOWN})  
 
+        // left text
         const textLeft = new PIXIText("textLeft", {align: "center", fontWeight: "500"})
         this.bindPageLocale("textLeft",textLeft)
         textLeft.anchor.set(.5, 0)
 
-        const circleLeft = new CircledText("A", {fontSize: 30, fill: 0xffffff})
+        const circleLeft = new CircledText("A", {fontSize: 30, fill: 0xffffff},  {radius: 30,borderColor: 0xffffff})
 
-
-        /* right side */
+        // right side (key)
         const subtitleRight = new PIXIText("subtitleRight")
         this.bindPageLocale("subtitleRight",subtitleRight)
         subtitleRight.anchor.set(.5)
@@ -73,7 +74,7 @@ class Page3 extends AnimationPage{
         this.bindPageLocale("textRight",textRight)
         textRight.anchor.set(.5, 0)
 
-        const circleRight = new CircledText("B", {fontSize: 30, fill: 0xffffff})
+        const circleRight = new CircledText("B", {fontSize: 30, fill: 0xffffff},  {radius: 30,borderColor: 0xffffff})
         
         this.addPermanent({background, title, subtitleLeft, gridLeft, subtitleRight, gridRight, arrowLeft, arrowRight, textRight, textLeft, circleLeft, circleRight})
 

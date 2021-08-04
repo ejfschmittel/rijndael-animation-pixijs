@@ -1,7 +1,7 @@
 import AnimationPage from "../../core/AnimationPage.js"
 
 
-import CircledText from "../../components/CircledText2";
+import CircledText from "../../components/CircledText";
 import PIXIText from "../../components/PIXIText"
 
 

@@ -136,12 +136,12 @@ class Page7DefaultResponsives extends AnimationPageResponsives{
 
 
         defines.addSymbolStyles = {
-            radius: 16, 
+            scale: 1, 
             borderColor: this.c("--text-color"),
         }
 
         defines.addSymbolFontStyles = {
-            fontSize: 32,
+            scale: 1,
             fill: this.c("--text-color"),
         }
 

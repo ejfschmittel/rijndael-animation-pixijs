@@ -64,9 +64,12 @@ class AnimationController{
         // create pixi & canvas
         this.app = new PIXI.Application({
             autoDensity: true,
-            resolution: 2
+            resolution: window.devicePixelRatio,
         })
 
+        this.app.renderer.autoResize = true;
+
+        console.log(PIXI.settings.RESOLUTION )
        
         const bounds = this.container.getBoundingClientRect();
         this.app.renderer.resize(bounds.width, bounds.height)
@@ -97,6 +100,7 @@ class AnimationController{
 
 
     onResize(){
+        console.time("resize")
         this.isResizing = true;
         this.updateAnimationDimensions();
         // resize renderer

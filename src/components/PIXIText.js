@@ -11,6 +11,7 @@ class PIXIText extends PIXI.Text{
 
     constructor(text, styles={}){
         super(text, {...baseTextStyles, ...styles})
+        this.roundPixels = true;
     }
 
     redraw(styles={}){

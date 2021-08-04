@@ -2,14 +2,9 @@ import AnimationPage from "../../core/AnimationPage.js"
 import * as PIXI from "pixi.js"
 
 import AnimatableBackground from "../../components/AnimatableBackground"
-
-
-import {gsap} from "gsap"
 import Grid from "../../components/Grid2"
 
-import DataController from "../../core/DataController"
 import CircledText from "../../components/CircledText"
-
 
 import PageTimeline from "./PageTimline"
 import DefaultResponsives from "./Responsives.default"
