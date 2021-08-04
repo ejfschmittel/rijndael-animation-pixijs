@@ -3,12 +3,10 @@
  * 
 */
 
-
 import Rijndael from "./aes/rijndael-block.js"
 import Utils from "./aes/utils.js"
 
 import {intToHexStringArray} from "../utils/conversions"
-
 
 const FORM_BTN_ID = "rijndael-form-button"
 const OUTPUT_FIELD_ID = "rijndael-form-ouput"
@@ -17,8 +15,6 @@ const PLAINTEXT_FIELD_ID = "rijndael-form-plaintext-input"
 
 class RijndaelFormController{
 
-    
-
     constructor(controller){
         this.controller = controller
 
@@ -26,10 +22,6 @@ class RijndaelFormController{
         this.outputField = document.getElementById(OUTPUT_FIELD_ID)
         this.KeyField = document.getElementById(KEY_FIELD_ID)
         this.plaintextField = document.getElementById(PLAINTEXT_FIELD_ID)
-
-
-     
-     
 
         this.errors = null;
 
@@ -132,8 +124,8 @@ class RijndaelFormController{
 
 
             // update output field
-            const cipherTextAscii =Utils.intArrayToAsciiString(ciphertext)
-            this.outputField.value = cipherTextAscii;
+            //const cipherTextAscii =Utils.intArrayToAsciiString(ciphertext)
+            this.outputField.value = ciphertext;
 
 
             // prepare data for animation

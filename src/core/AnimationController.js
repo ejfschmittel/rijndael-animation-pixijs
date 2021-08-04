@@ -1,8 +1,5 @@
 import * as PIXI from "pixi.js"
 
-
-
-
 import {initTexture} from "../components/SpriteBackground"
 
 import AnimationPlayerUI from "./AnimationPlayerUI.js"
@@ -11,7 +8,6 @@ import DataController from "./DataController.js"
 import LocaleController from "./LocaleController"
 import ThemeController from "./ThemeController"
 import FormController from "./RijndaelFormController.js"
-
 
 
 class AnimationController{
