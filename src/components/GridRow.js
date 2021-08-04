@@ -1,17 +1,15 @@
 
 import Component from "./Component"
-import Grid from "./Grid2"
+import Grid from "./Grid"
 import CircledText from "./CircledText"
 import * as PIXI from "pixi.js"
 import PIXIText from "./PIXIText"
+
+
 /*
+    Component for pages 12 + 13 to display rows of the AES states
 
-    const row = new GridRow(title)
-    row.addGridSettings(1, {})
 */
-
-
-
 
 class GridRow extends Component{
     constructor(title, page){
@@ -20,7 +18,7 @@ class GridRow extends Component{
         this.title = new PIXIText(title, {})
 
         
-        this.addSymbol = new CircledText("+", {fill: 0x333333, fontSize: 30, align: "center"})
+        this.addSymbol = new CircledText("+", {fill: 0x333333, fontSize: 30, align: "center"}, {radius: 20, borderColor: 0x00000})
         this.equalsSymbol = new PIXI.Text("=", {})
 
         this.gridStyles = {}
@@ -31,12 +29,7 @@ class GridRow extends Component{
             this.grids.push(grid);
         }
 
-    
-        
-
         this.addChild(this.title, ...this.grids, this.addSymbol, this.equalsSymbol)
-
-
     }
 
     addGridStyles(idx, styles){

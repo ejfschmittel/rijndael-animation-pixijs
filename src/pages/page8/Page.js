@@ -1,15 +1,8 @@
 import AnimationPage from "../../core/AnimationPage.js"
-import * as PIXI from "pixi.js"
 
 import AnimatableBackground from "../../components/AnimatableBackground"
-import Grid from "../../components/Grid2"
+import Grid from "../../components/Grid"
 import PIXIText from "../../components/PIXIText"
-
-import {gsap} from "gsap"
-
-
-import DataController from "../../core/DataController"
-
 
 import PageTimline from "./PageTimeline"
 import DefaultResponsives from "./Responsives.default"
@@ -24,9 +17,7 @@ class Page8 extends AnimationPage{
         this.timeline = new PageTimline(this);
         this.registerResponsive("default", DefaultResponsives)
         this.registerResponsive("max-768", ResponsiveMax768)
-        this.registerResponsive("max-425", ResponsiveMax425)
-
-        
+        this.registerResponsive("max-425", ResponsiveMax425)  
     }
 
 

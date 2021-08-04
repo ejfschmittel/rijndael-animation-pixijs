@@ -11,7 +11,7 @@ class Page7DefaultResponsives extends AnimationPageResponsives{
         const defines = {}
 
         defines.introTextStyles = {
-            fontSize: 30,
+            fontSize: 24,
             wordWrap: true,
             wordWrapWidth: 500,
             position: {

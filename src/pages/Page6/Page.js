@@ -3,13 +3,6 @@ import * as PIXI from "pixi.js"
 
 import SlowTextBox from "../../components/SlowTextBox"
 
-
-
-import {gsap} from "gsap"
-
-
-
-
 import PageTimeline from "./PageTimeline"
 import DefaultResponsives from "./Responsives.default"
 import ResponsiveMax768 from "./Responsive.max-768"
@@ -20,13 +13,10 @@ class Page4 extends AnimationPage{
     constructor(){
         super();
 
-
         this.timeline = new PageTimeline(this)
         this.registerResponsive("default", DefaultResponsives)
         this.registerResponsive("max-768", ResponsiveMax768)
-        this.registerResponsive("max-425", ResponsiveMax425)
-
-        
+        this.registerResponsive("max-425", ResponsiveMax425) 
     }
 
 
@@ -36,7 +26,6 @@ class Page4 extends AnimationPage{
         const title = new PIXIText("title", { fontSize: 24, align: "center", fontWeight: "700", wordWrap: true, wordWrapWidth: 300})
         this.bindPageLocale("title", title)
         title.anchor.set(.5, .5)
-
 
         const container = new PIXI.Container();
         const labelSubBytes = new SlowTextBox("labelOne")
@@ -74,28 +63,23 @@ class Page4 extends AnimationPage{
       
 
         title.redraw({...titleStyles})
-        //title.position.set(titleStyles.x,titleStyles.y)
-
-
         const {labelStyles, labelFontStyles, containerPos, subBytesLabelStyles, shiftRowsLabelStyles, mixColumnsLabelStyles, addRoundKeyLabelStyles} = defines
         const {labelShiftRows, labelMixColumns, labelAddRoundKey, labelSubBytes, container} = this.globalComponents;
 
-
-
+        // redraw labels
         labelSubBytes.redraw({...labelStyles, ...subBytesLabelStyles},labelFontStyles)
         labelShiftRows.redraw({...labelStyles, ...shiftRowsLabelStyles},labelFontStyles)
         labelMixColumns.redraw({...labelStyles, ...mixColumnsLabelStyles},labelFontStyles)
         labelAddRoundKey.redraw({...labelStyles, ...addRoundKeyLabelStyles},labelFontStyles)
 
+        // posiiton labels
         const labelMargin = 20;
         labelShiftRows.position.set(0, labelSubBytes.y + labelStyles.height + labelMargin)
         labelMixColumns.position.set(0, labelShiftRows.y + labelStyles.height + labelMargin)
         labelAddRoundKey.position.set(0, labelMixColumns.y + labelStyles.height + labelMargin)
 
-
         labelShiftRows.text.tint = 0x000000;
-
-   
+ 
         container.pivot.set(container.width / 2, 0)
         container.position.set(containerPos.x, title.position.y + title.height + 20) 
     }

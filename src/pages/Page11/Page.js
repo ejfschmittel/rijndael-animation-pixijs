@@ -1,34 +1,26 @@
-import AnimationPage from "../../core/AnimationPage.js"
 import * as PIXI from "pixi.js"
 
-
+import AnimationPage from "../../core/AnimationPage.js"
+import PageTimeline from "./PageTimline"
 
 import GridRow from "../../components/GridRow"
-
-
-
-
-
-
-import PageTimeline from "./PageTimline"
+import PIXIText from "../../components/PIXIText"
 
 import DefaultResponsives from "./Responsives.default"
 import ResponsiveMax768 from "./Responsive.max-768"
 import ResponsiveMax425 from "./Responsive.max-425"
 //import ResponsiveMax400 from "./Responsive.max-1000"
 
-import PIXIText from "../../components/PIXIText"
+
 
 class Page11 extends AnimationPage{
     constructor(){
         super();
 
-
         this.timeline = new PageTimeline(this)
         this.registerResponsive("default", DefaultResponsives)
         this.registerResponsive("max-768", ResponsiveMax768)
         this.registerResponsive("max-425", ResponsiveMax425)
-        
     }
 
 
@@ -40,13 +32,12 @@ class Page11 extends AnimationPage{
     }
 
     create(defines){
+        // background
         const background = this.createBackground();
 
-
-
+        // introtext
         const introText = new PIXIText("text", {})
         this.bindPageLocale("introText", introText)
-
 
         // titles
         const title1 = new PIXIText("roundLabel")
@@ -63,11 +54,10 @@ class Page11 extends AnimationPage{
 
         const title5 = new PIXIText("RoundKeyLabel")
         this.bindPageLocale("RoundKeyLabel", title5)
-      
 
-       
         const titles = [title1, title2, title3, title4, title5]
         
+        // state display rows
         const inputRow = new GridRow("inputLabel")
         this.bindPageLocale("inputLabel", inputRow.title)
 
@@ -85,17 +75,13 @@ class Page11 extends AnimationPage{
 
         const row5 = new GridRow("roundFiveLabel")
         this.bindPageLocale("roundFiveLabel", row5.title)
-
-
- 
-       
-     
         const rows = [inputRow, row1, row2, row3, row4, row5]
 
 
         this.subscribeTo("initial-state",inputRow.grids[0].cells)
         this.subscribeTo("key-0",inputRow.grids[4].cells)
 
+        // bind data to grid rows
         for(let i = 1; i < rows.length; i++){
             const row = rows[i];
             row.grids.forEach((grid, c) => {
@@ -109,16 +95,9 @@ class Page11 extends AnimationPage{
             })
         }
 
-
-     
-
-        
+        // add to page container
         this.addPermanent({background, introText, row1, row2, row3, row4, row5, title1, title2, title3, title4, title5, inputRow})
-
-        this.addToGlobalComponents({rows, titles})
-     
-
-       
+        this.addToGlobalComponents({rows, titles})     
     }
 
 
@@ -135,10 +114,8 @@ class Page11 extends AnimationPage{
         } = defines
 
         background.redraw(backgroundStyles)
-
-       
+ 
         introText.redraw(introTextStyles)
-
 
   
         // redraw rows
@@ -164,9 +141,6 @@ class Page11 extends AnimationPage{
         }
 
        
-
-
-
         // redraw titles
         const {titleStyles} = defines
         const {titles} = this.globalComponents

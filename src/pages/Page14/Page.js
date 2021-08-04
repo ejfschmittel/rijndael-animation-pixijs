@@ -1,17 +1,14 @@
-import AnimationPage from "../../core/AnimationPage.js"
 import * as PIXI from "pixi.js"
+
+import AnimationPage from "../../core/AnimationPage.js"
 
 import CircledText from "../../components/CircledText";
 import SpriteBackground from "../../components/SpriteBackground"
-import DataController from "../../core/DataController"
-import Grid from "../../components/Grid2"
-
-import SBox from "../../components/SBox2"
+import Grid from "../../components/Grid"
+import SBox from "../../components/SBox"
 import PIXIText from "../../components/PIXIText"
-import {gsap} from "gsap"
 
 import PageTimeline from "./PageTimline"
-
 import DefaultResponsives from "./Responsives.default"
 import ResponsiveMax768 from "./Responsive.max-768"
 import ResponsiveMax425 from "./Responsive.max-425"
@@ -25,8 +22,6 @@ class Page14 extends AnimationPage{
         this.registerResponsive("max-768", ResponsiveMax768)
         this.registerResponsive("max-425", ResponsiveMax425)
         this.registerResponsive("max-375", ResponsiveMax375)
-   
-        
     }
 
 
@@ -42,7 +37,6 @@ class Page14 extends AnimationPage{
         this.bindPageLocale("title", title)
 
         const bar = new SpriteBackground();
-
 
         // utils 
         const equalsSymbol = new PIXIText("=")
@@ -76,26 +70,26 @@ class Page14 extends AnimationPage{
         roundTenKeyText.anchor.set(1.5, 0)
 
 
+        // create other labels
         const labelStyles = {fill: 0xffffff}
 
         const rotWordText = new PIXI.Text("RotWordLabel", labelStyles)
         this.bindPageLocale("RotWordLabel", rotWordText)
+
         const subBytesText = new PIXI.Text("SubBytesLabel", labelStyles)
         this.bindPageLocale("SubBytesLabel", subBytesText)
+
         const sboxText = new PIXI.Text("SBoxLabel")
         this.bindPageLocale("SBoxLabel", sboxText)
 
-
         subBytesText.anchor.set(1, .5)
         const Rcon4Text = new PIXI.Text("RconFourLabel")
-
-
        
         const textInitial = new PIXI.Text("textIntro", { wordWrap: true,wordWrapWidth: 160, fontSize: 14})
         this.bindPageLocale("textIntro", textInitial)
         textInitial.anchor.set(1, 0)
 
-
+        // create texts
         const sText = new PIXI.Text("text", { wordWrap: true,wordWrapWidth: 160, fontSize: 14})
         this.bindPageLocale("text", sText)
         sText.anchor.set(1, 0)
@@ -112,25 +106,21 @@ class Page14 extends AnimationPage{
         this.bindPageLocale("textXOR", textXor)
         textXor.anchor.set(1, 0)
 
-
+        // create sbox
         const sbox = new SBox();
         sbox.zIndex = 20;
         this.subscribeTo("sbox", sbox.grid.cells)
         sbox.redraw({width: 360, height: 240, legendWidth: 20}, {scale: .3}, {scale: .3})
         sbox.pivot.set(360, 240 / 2)
-
-
-
-     
-
     
+        // create grid landings (top row)
         const primaryGridOne = new Grid(4,4, {},{});
         const primaryGridTwo = new Grid(4,4, {},{});
         const primaryGridThree = new Grid(4,4, {},{});
         const primaryGridFour = new Grid(4,4, {},{});
         const primaryGrids = [primaryGridOne, primaryGridTwo, primaryGridThree, primaryGridFour]
 
-        // create movables
+        // create movables 2 for each
         const pgOneMovablesOg = primaryGridOne.createMovables();
         const pgOneMovablesTranform = primaryGridOne.createMovables();
         this.subscribeTo("key-0", pgOneMovablesOg.movables)
@@ -157,27 +147,27 @@ class Page14 extends AnimationPage{
         const finalGridMovables = finalGrid.createMovables();
         this.subscribeTo("key-10", finalGridMovables.movables)
 
-
+        // create grid landings (bottom)
         const secondaryGridOne = new Grid(4,4, {},{});
         const secondaryGridTwo = new Grid(4,4, {},{});
         const secondaryGridThree = new Grid(4,4, {},{});
         const secondaryGridFour = new Grid(4,4, {},{});
         const secondaryGrids = [secondaryGridOne, secondaryGridTwo, secondaryGridThree, secondaryGridFour]
 
-
+        // hide lower landings
         secondaryGrids.forEach(grid => {
             grid.renderable = false;
         });
 
      
-
+        // rcon 
         const rcon = new Grid(4, 10, {},{})
         const rconText = new PIXIText("Rcon")
         const rconMovables = rcon.createMovables()
         rcon.alpha = 0;
         this.subscribeTo("rcon", rconMovables.movables)
       
-
+        // add components to page container
         this.addPermanent({
             background, bar, title, 
             primaryGridOne, primaryGridTwo, primaryGridThree, primaryGridFour, 
@@ -193,7 +183,7 @@ class Page14 extends AnimationPage{
             
         })
 
-
+        // add movables to page container
         this.addChild(
             ...pgOneMovablesOg.movables, 
             ...pgOneMovablesTranform.movables,
@@ -279,7 +269,6 @@ class Page14 extends AnimationPage{
         subBytesText.position.set(sbox.x - 360, sbox.y)
 
         
-
         // redraw primary grids
         const {baseGridStyles, baseGridFontStyle, primaryGridPos} = defines
         const primaryGridsY = bar.y + bar.height + primaryGridPos.y;
@@ -340,49 +329,34 @@ class Page14 extends AnimationPage{
                 y:rcon.y - rconStyles.height / 2 ,
             }
         })
-       // rconText.position.set(rcon.x + rconStyles.width / 2 + 20, rcon.y - rconStyles.height / 2)
-        //rconText.anchor.set(0, .5)
-   
-    
-
-      
+     
 
         // redraw movables
 
         // grid movables
-
         const {pgFourMovablesOg,finalGridMovables} = this.globalComponents
-
         const {firstGridStyle} = defines
-
         const {gridMovableStyles, gridTextStyle, subbytesMovablesStyles, rconMovablesTextStyles, rconMovablesStyles} = defines
 
         this.redrawMovables(rconMovables, rcon, rconMovablesStyles,rconMovablesTextStyles)
-
-        
+       
         this.redrawMovables(pgOneMovablesOg, primaryGrids[0], {...firstGridStyle}, baseGridFontStyle)
         this.redrawMovables(pgOneMovablesTranform, primaryGrids[0], {...firstGridStyle},baseGridFontStyle)
         this.redrawMovables(pgTwoMovablesOg, primaryGrids[1], gridMovableStyles,baseGridFontStyle)
         this.redrawMovables(pgTwoMovablesTranform, primaryGrids[1], gridMovableStyles,baseGridFontStyle)
         this.redrawMovables(pgThreeMovablesOg, primaryGrids[2], gridMovableStyles,baseGridFontStyle)
-            this.redrawMovables(pgThreeMovablesTranform, primaryGrids[2], gridMovableStyles,baseGridFontStyle)
-
-       
-    
+        this.redrawMovables(pgThreeMovablesTranform, primaryGrids[2], gridMovableStyles,baseGridFontStyle)
         this.redrawMovables(pgFourMovablesOg, primaryGrids[3], gridMovableStyles,baseGridFontStyle)
         this.redrawMovables(subBytesMovables, primaryGrids[0], subbytesMovablesStyles,baseGridFontStyle)
         this.redrawMovables(finalGridMovables, finalGrid, gridMovableStyles,baseGridFontStyle)
        
-        if(!shouldHide){
-            
+        // hide last grid on small screens
+        if(!shouldHide){         
             pgFourMovablesOg.movables.forEach(movable => movable.alpha = 1)
         }else{
             pgFourMovablesOg.movables.forEach(movable => movable.alpha = 0)
           
         }
-
-
-
 
         this.colorFirstCol(0x868486, pgTwoMovablesOg)
         this.colorFirstCol(0x868486, pgTwoMovablesTranform)
@@ -391,12 +365,9 @@ class Page14 extends AnimationPage{
         this.colorFirstCol(0x868486, pgFourMovablesOg)
         this.colorFirstCol(0x868486, finalGridMovables)
 
-
-        
         // redraw lables
         const {cipherKeyText, roundOneKeyText, roundTwoKeyText, roundThreeKeyText, roundTenKeyText} = this.globalComponents; 
         const {roundKeyLabelStyles} = defines
-
 
         this.redrawRoundKeyLabel(cipherKeyText, roundKeyLabelStyles, primaryGrids[0], baseGridStyles)
         this.redrawRoundKeyLabel(roundOneKeyText, roundKeyLabelStyles, primaryGrids[1], baseGridStyles)
@@ -423,9 +394,6 @@ class Page14 extends AnimationPage{
         sText.position.set(sTextStylesPos.x, sTextStylesPos.y)
         aText.position.set(sText.x, sText.y + sText.height)
         bText.position.set(sText.x, aText.y + aText.height)
-
-        
-
     }
 
     redrawRoundKeyLabel(label, labelStyles, referenceGrid, baseGridStyles){   
@@ -439,8 +407,6 @@ class Page14 extends AnimationPage{
     }
        
 
-  
-
     colorFirstCol(color, grid){
         grid.getCol(0).map(cell => cell.getBackground().tint = color);
     }
@@ -452,13 +418,6 @@ class Page14 extends AnimationPage{
            movable.position.set(x, y)        
        })
     }
-
-
-   
-
-
-
-
 }
 
 

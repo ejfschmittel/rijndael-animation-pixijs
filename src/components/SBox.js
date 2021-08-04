@@ -2,8 +2,8 @@
 
 import * as PIXI from "pixi.js"
 import Component from "./Component";
-import Grid from "./Grid2";
-import TextBox from "./TextBox2"
+import Grid from "./Grid";
+import TextBox from "./TextBox"
 
 
 

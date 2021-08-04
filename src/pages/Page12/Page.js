@@ -1,11 +1,12 @@
-import AnimationPage from "../../core/AnimationPage.js"
 import * as PIXI from "pixi.js"
+
+import AnimationPage from "../../core/AnimationPage.js"
+import PageTimeline from "./PageTimline"
 
 import PIXIText from "../../components/PIXIText"
 import GridRow from "../../components/GridRow"
+import Grid from "../../components/Grid"
 
-import Grid from "../../components/Grid2"
-import PageTimeline from "./PageTimline"
 import DefaultResponsives from "./Responsives.default"
 import ResponsiveMax768 from "./Responsive.max-768"
 import ResponsiveMax425 from "./Responsive.max-425"
@@ -17,9 +18,7 @@ class Page12 extends AnimationPage{
         this.timeline = new PageTimeline(this)
         this.registerResponsive("default", DefaultResponsives)
         this.registerResponsive("max-768", ResponsiveMax768)
-        this.registerResponsive("max-425", ResponsiveMax425)
-
-        
+        this.registerResponsive("max-425", ResponsiveMax425)  
     }
 
 
@@ -32,8 +31,6 @@ class Page12 extends AnimationPage{
 
     create(defines){
         const background = this.createBackground();
-
-
 
         // titles
         const title1 = new PIXIText("roundLabel")
@@ -54,7 +51,7 @@ class Page12 extends AnimationPage{
         const titles = [title1, title2, title3, title4, title5]
         
 
-        // rows
+        // state display rows
         const row6 = new GridRow("roundSixLabel")
         this.bindPageLocale("roundSixLabel", row6.title)
 
@@ -72,7 +69,7 @@ class Page12 extends AnimationPage{
        
         const rows = [row6, row7, row8, row9, row10]
 
-
+        // bind data to state display rows
         for(let i = 6; i <= 9; i++){
             const row = rows[i-6];
             row.grids.forEach((grid, c) => {
@@ -92,7 +89,6 @@ class Page12 extends AnimationPage{
         this.subscribeTo(`after-shift-rows-10`, row10.grids[2].cells); 
         this.subscribeTo(`key-10`, row10.grids[4].cells);
 
-
         const outputGrid = new Grid(4,4)
         this.subscribeTo("after-add-round-key-10", outputGrid.cells)
         const cipherText = new PIXIText("ciphertext");
@@ -100,12 +96,9 @@ class Page12 extends AnimationPage{
         const outputText = new PIXIText("output"); 
         this.bindPageLocale("outputLabel", outputText)
 
-
-
+        // add components to page container
         this.addPermanent({background,row6, row7, row8, row9, row10, title1, title2, title3, title4, title5, outputGrid, cipherText, outputText})
-
-        this.addToGlobalComponents({rows, titles})
-     
+        this.addToGlobalComponents({rows, titles})   
     }
 
 
@@ -121,10 +114,6 @@ class Page12 extends AnimationPage{
         } = defines
 
         background.redraw(backgroundStyles)
-
-       
-
-    
 
         const {rows, row6} = this.globalComponents;
         const {rowStyles, rowTitleStyles, defaultGridStyles,lastColGridStyles, gridFontStyles} = defines
@@ -171,7 +160,6 @@ class Page12 extends AnimationPage{
             outputText.position.set(rowStyles.titleSpace - 20, outputGrid.y + gridHeight /2)
         }
         
-       
     }
 }
 

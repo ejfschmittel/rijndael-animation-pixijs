@@ -2,11 +2,7 @@ import AnimationPage from "../../core/AnimationPage.js"
 import * as PIXI from "pixi.js"
 
 import AnimatableBackground from "../../components/AnimatableBackground"
-
-
-
-
-import Grid from "../../components/Grid2"
+import Grid from "../../components/Grid"
 
 import PageTimeline from "./PageTimeline"
 import DefaultResponsives from "./Responsives.default"
@@ -23,11 +19,8 @@ class Page9 extends AnimationPage{
         this.registerResponsive("default", DefaultResponsives)
         this.registerResponsive("max-768", ResponsiveMax768)
         this.registerResponsive("max-425", ResponsiveMax425)
-        this.registerResponsive("max-375", ResponsiveMax375)
-
-        
+        this.registerResponsive("max-375", ResponsiveMax375)      
     }
-
 
     create(defines){
 
@@ -40,6 +33,7 @@ class Page9 extends AnimationPage{
 
           // grid + movables
           const grid = new Grid(4, 4, {}, {})
+          grid.renderable = false;
           const gridMovables = grid.createMovables()
           const gridMovablesResults = grid.createMovables()
 

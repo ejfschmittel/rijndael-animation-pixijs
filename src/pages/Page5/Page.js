@@ -1,24 +1,17 @@
 import AnimationPage from "../../core/AnimationPage.js"
-import * as PIXI from "pixi.js"
 
 import AnimatableBackground from "../../components/AnimatableBackground"
-
-
-
-import DefaultResponsives from "./Responsives.default"
-
 import SlowTextBox from "../../components/SlowTextBox"
+import PIXIText from "../../components/PIXIText"
+import Grid from "../../components/Grid"
+import SVGPath from "../../components/Page5Path"
+
+import PageTimeline from "./PageTimeline.js"
+import DefaultResponsives from "./Responsives.default"
 //import ResponsiveMax400 from "./Responsive.max-1000"
 import ResponsiveMax768 from "./Responsive.max-768"
 import ResponsiveMax425 from "./Responsive.max-425"
 import ResponsiveMax375 from "./Responsive.max-375"
-
-import PIXIText from "../../components/PIXIText"
-
-import Grid from "../../components/Grid2"
-
-import SVGPath from "../../components/Page5Path"
-import PageTimeline from "./PageTimeline.js"
 
 class Page5 extends AnimationPage{
     constructor(){
@@ -39,19 +32,14 @@ class Page5 extends AnimationPage{
     }
 
     create(defines){
-
         const background = this.createBackground();
-
 
         const svg = new SVGPath();
         
         const {abBaseTextStyles} = defines
         const animatableBackground = new AnimatableBackground("title", abBaseTextStyles)
         this.bindPageLocale("title", animatableBackground.title)
-
         // create big labels
-
-      
 
         const labelInitialRound = new PIXIText("titleInitialRound");
         this.bindPageLocale("titleInitialRound", labelInitialRound)
@@ -86,11 +74,8 @@ class Page5 extends AnimationPage{
             frSubBytes, frShiftRows, frAddRoundKey,
             svg,
         })
-
-       // this.addToGlobalComponents({runner})
        
-       this.sortableChildren = true;
-     
+       this.sortableChildren = true;   
     }
 
 
@@ -130,12 +115,10 @@ class Page5 extends AnimationPage{
         svg.redraw({height, width: svgStyles.width});
         svg.position.set(svgStyles.x,barEnd + 10)
 
-
         const {labelInitialRound, labelMainRounds, labelFinalRound} = this.globalComponents
         const {mainRoundTitleStyles, initialRoundTitleStyles, finalRoundTitleStyles, sectionTitleStyles} = defines
 
 
- 
         labelInitialRound.redraw({...sectionTitleStyles,...initialRoundTitleStyles, position: {
             x: initialRoundTitleStyles.position.x,
             y: svg.y + svg.info.segments.one.length / 2,
@@ -149,7 +132,6 @@ class Page5 extends AnimationPage{
             x: finalRoundTitleStyles.position.x,
             y: svg.y + svg.info.segments.one.length + svg.info.segments.two.length + svg.info.segments.five.length / 2,
         }})
-
 
         // draw svg labels
       
@@ -200,8 +182,6 @@ class Page5 extends AnimationPage{
 
         frAddRoundKey.position.set(svg.position.x, svg.position.y + svg.height * (frStart +  frDist ))
         frAddRoundKey.pivot.set(frAddRoundKey.width /2, frAddRoundKey.height /2)
-
-  
     }
 }
 

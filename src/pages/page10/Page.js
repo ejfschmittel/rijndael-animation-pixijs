@@ -1,17 +1,18 @@
-import AnimationPage from "../../core/AnimationPage.js"
 import * as PIXI from "pixi.js"
 
-import AnimatableBackground from "../../components/AnimatableBackground"
-import Grid from "../../components/Grid2"
-
-import CircledText from "../../components/CircledText"
-
+import AnimationPage from "../../core/AnimationPage.js"
 import PageTimeline from "./PageTimline"
+
+import AnimatableBackground from "../../components/AnimatableBackground"
+import Grid from "../../components/Grid"
+import CircledText from "../../components/CircledText"
+import PIXIText from "../../components/PIXIText.js"
+
 import DefaultResponsives from "./Responsives.default"
 import ResponsiveMax768 from "./Responsive.max-768";
 import ResponsiveMax425 from "./Responsive.max-425";
 import ResponsiveMax375 from "./Responsive.max-375";
-import PIXIText from "../../components/PIXIText.js"
+
 
 class Page10 extends AnimationPage{
     constructor(){
@@ -24,8 +25,6 @@ class Page10 extends AnimationPage{
         this.registerResponsive("max-768", ResponsiveMax768)
         this.registerResponsive("max-425", ResponsiveMax425)
        // this.registerResponsive("max-375", ResponsiveMax375)
-
-        
     }
 
 
@@ -48,22 +47,16 @@ class Page10 extends AnimationPage{
         this.subscribeTo("after-add-round-key-1", resultMovables.movables)
         this.subscribeTo("key-1", roundKeyMovables.movables)
 
-
         const equationContainer = new PIXI.Container();
 
-
         const columnLanding1 = new Grid(4,1, {}, {})
-        const addSign = new CircledText("+", {fontSize: 30, fill: 0x333333, fontWeight: "700"})
+        const addSign = new CircledText("+", {fontSize: 30, fill: 0x333333, fontWeight: "700"}, {radius: 20, borderColor: 0x000000})
         const columnLanding2 = new Grid(4,1, {}, {})
         const equalsSign = new PIXI.Text("=", {fontSize: 30})
         equalsSign.anchor.set(.5,.5)
         const columnResult = new Grid(4,1, {}, {})
 
-
-
         equationContainer.addChild(columnLanding1, addSign, columnLanding2, equalsSign, columnResult)
-
-
 
         // label & text
         const roundKeyLabel = new PIXIText("Round key", {})
@@ -74,8 +67,7 @@ class Page10 extends AnimationPage{
       
         this.addPermanent({background,animatableBackground, stateGrid, roundKeyGrid, equationContainer, roundKeyLabel, roundKeyText})
         this.addChild(...stateMovables.movables, ...resultMovables.movables, ...roundKeyMovables.movables)
-        this.addToGlobalComponents({columnLanding1, addSign, columnLanding2, equalsSign, columnResult, stateMovables, roundKeyMovables, resultMovables})
-       
+        this.addToGlobalComponents({columnLanding1, addSign, columnLanding2, equalsSign, columnResult, stateMovables, roundKeyMovables, resultMovables})     
     }
 
     drawPage(defines){
@@ -89,7 +81,6 @@ class Page10 extends AnimationPage{
         // background redraw
         const { backgroundStyles} = defines
         background.redraw(backgroundStyles)
-
 
         // animatable background
         const {
@@ -111,7 +102,6 @@ class Page10 extends AnimationPage{
         roundKeyGrid.position.set(roundKeyGridPos.x, roundKeyGridPos.y)
         roundKeyGrid.pivot.set(roundKeyGrid.width/2, roundKeyGrid.height/2)
 
-
         // equation redraw
         const {columnLanding1, addSign, columnLanding2, equalsSign, columnResult, equationContainer} = this.globalComponents;
         const {columnStyles, equationPos,} = defines;
@@ -129,8 +119,6 @@ class Page10 extends AnimationPage{
            
         equationContainer.position.set(equationPos.x, equationPos.y)
         equationContainer.pivot.set(equationContainer.width/2, equationContainer.height/2)
-
-
 
         // movables
         const {stateMovables} = this.globalComponents;
@@ -157,19 +145,14 @@ class Page10 extends AnimationPage{
             movable.position.set(x, y)
         })
 
-   
-
         const {roundKeyLabel, roundKeyText} = this.globalComponents
         const {roundKeyLabelStyles, roundKeyTextStyles} = defines
         roundKeyLabel.redraw(roundKeyLabelStyles)
         roundKeyText.redraw(roundKeyTextStyles)
 
-
-      
         roundKeyLabel.position.set(roundKeyGridPos.x - gridStyles.width / 2, roundKeyGridPos.y + gridStyles.height / 2 + 5)
         roundKeyText.position.set(roundKeyGridPos.x - gridStyles.width / 2, roundKeyGridPos.y + gridStyles.height / 2 + roundKeyLabelStyles.fontSize + 8)
        
-  
     }
 }
 

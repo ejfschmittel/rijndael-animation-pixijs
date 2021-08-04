@@ -1,21 +1,16 @@
 import AnimationPage from "../../core/AnimationPage.js"
-import * as PIXI from "pixi.js"
 
 import Arrow, {ARROW_ORIENTATION} from "../../components/Arrow"
-
-import Grid2 from "../../components/Grid2"
-
+import Grid2 from "../../components/Grid"
 import CircledText from "../../components/CircledText";
-
-
 import PIXIText from "../../components/PIXIText"
+
 import PageTimeline from "./PageTimeline"
 import DefaultResponsives from "./Responsives.default"
 
 import ResponsiveMax768 from "./Responsive.max-768"
 import ResponsiveMax425 from "./Responsive.max-425"
 import ResponsiveMax375 from "./Responsive.max-375"
-
 
 
 class Page3 extends AnimationPage{
@@ -26,15 +21,11 @@ class Page3 extends AnimationPage{
         this.registerResponsive("default", DefaultResponsives)
         this.registerResponsive("max-768", ResponsiveMax768)
         this.registerResponsive("max-425", ResponsiveMax425)
-
-        
     }
 
 
     create(defines){
         const background = this.createBackground();
-
-     
 
         // title
         const title = new PIXIText("title")
@@ -76,21 +67,17 @@ class Page3 extends AnimationPage{
 
         const circleRight = new CircledText("B", {fontSize: 30, fill: 0xffffff},  {radius: 30,borderColor: 0xffffff})
         
-        this.addPermanent({background, title, subtitleLeft, gridLeft, subtitleRight, gridRight, arrowLeft, arrowRight, textRight, textLeft, circleLeft, circleRight})
-
-       
+        this.addPermanent({background, title, subtitleLeft, gridLeft, subtitleRight, gridRight, arrowLeft, arrowRight, textRight, textLeft, circleLeft, circleRight})   
     }
 
     drawPage(defines){
     
-
         // redraw title & background
         const { titleStyles, backgroundStyles, animationDimensions} = defines
         const { background, title, } = this.globalComponents
         background.redraw(backgroundStyles)
 
         title.redraw(titleStyles)
-
 
         // general styles 2
         const {subtitleStyles, textStyles,gridFontStyles, arrowStyles, gridStyles, circleStyles, circleFontStyles} = defines;
@@ -121,7 +108,6 @@ class Page3 extends AnimationPage{
         circleLeft.position.set(arrowLeftPos.x, textLeft.y + textLeft.height + circleLeft.height /2 + 10)
 
 
-
         // redraw right side
         const {textRightStyles, rightGridStyles, arrowRightPos, subtitleRightStyles} = defines
         const {subtitleRight, gridRight, textRight, arrowRight, circleRight} = this.globalComponents;
@@ -148,11 +134,7 @@ class Page3 extends AnimationPage{
 
         // right circle
         circleRight.redraw(circleStyles, circleFontStyles)
-        circleRight.position.set(arrowRight.x, textRight.y + textRight.height + circleRight.height /2 + 10)
-
-
-       
-        
+        circleRight.position.set(arrowRight.x, textRight.y + textRight.height + circleRight.height /2 + 10) 
     }
 }
 

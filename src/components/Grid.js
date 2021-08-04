@@ -1,7 +1,5 @@
 import * as PIXI from "pixi.js"
-
-import TextBox from "./TextBox2.js"
-
+import TextBox from "./TextBox.js"
 import MovablesCollector from "../core/MovablesCollector"
 
 class ResponsiveGrid extends PIXI.Container{
@@ -13,8 +11,6 @@ class ResponsiveGrid extends PIXI.Container{
         this.bgStyles = bgStyles;
         this.textStyles = textStyles;
 
-
-
         this.cells = [...new Array(this.cols * this.rows)].map((_,idx) => {
             const cell = new TextBox()
             this.addChild(cell)
@@ -23,7 +19,6 @@ class ResponsiveGrid extends PIXI.Container{
 
         
     }
-
 
     redraw(bgStyles, textStyles){       
         bgStyles = {width: 300, height: 200, ...bgStyles}
@@ -39,8 +34,7 @@ class ResponsiveGrid extends PIXI.Container{
                 cell.redraw({...bgStyles, width: cellWidth, height: cellHeight}, textStyles)
                 cell.position.set(cellWidth * c, cellHeight * r)       
             }
-        }
-      
+        }     
     }
 
     createMovables(cellBackgroundStyle, cellTextStyle={}){
@@ -79,8 +73,6 @@ class ResponsiveGrid extends PIXI.Container{
     get(rowIndex, colIndex){
         return this.cells[rowIndex * this.cols + colIndex];
     }
-
-
 }
 
 export default ResponsiveGrid;

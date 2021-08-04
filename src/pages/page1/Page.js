@@ -4,10 +4,8 @@ import * as PIXI from "pixi.js"
 import Component from "../../components/Component"
 import AnimatableText from "../../components/AnimatableText"
 
-
 import PageTimeline from "./PageTimeline"
 import DefaultResponsives from "./Responsives.default"
-
 
 
 class Page1 extends AnimationPage{
@@ -20,22 +18,12 @@ class Page1 extends AnimationPage{
 
 
     create(defines){
-
         const {baseTextStyles} = defines
 
         const background = this.createBackground();
 
-    
-    
- 
         const subtitle = new PIXI.Text("test", {fill: 0xffffff, wordWrap: true, wordWrapWidth: 320, fontSize: 22})
         this.bindPageLocale("text", subtitle)
-
-
-        
-        
-
-
 
         // create headline text
         const container = new Component();

@@ -3,7 +3,6 @@ import AnimationPage from "../../core/AnimationPage.js"
 import CircledText from "../../components/CircledText";
 import PIXIText from "../../components/PIXIText";
 
-
 import PageTimeline from "./PageTimeline"
 import DefaultResponsives from "./Responsives.default"
 import ResponsiveMax768 from "./Responsive.max-768"

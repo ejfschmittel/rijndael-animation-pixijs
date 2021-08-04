@@ -1,15 +1,10 @@
 import AnimationPage from "../../core/AnimationPage.js"
 import PageTimeline from "./PageTimeline"
-import * as PIXI from "pixi.js"
 
 import AnimatableBackground from "../../components/AnimatableBackground"
-
-import SBox from "../../components/SBox2"
-import Grid from "../../components/Grid2"
-import TextBox from "../../components/TextBox2"
-
-
-
+import SBox from "../../components/SBox"
+import Grid from "../../components/Grid"
+import TextBox from "../../components/TextBox"
 
 import DefaultResponsives from "./Responsives.default"
 import ResponsiveMax768 from "./Responsive.max-768";
@@ -21,14 +16,11 @@ class Page7 extends AnimationPage{
     constructor(){
         super();
 
-
         this.timeline = new PageTimeline(this)
  
         this.registerResponsive("default", DefaultResponsives)
         this.registerResponsive("max-768", ResponsiveMax768)
-        this.registerResponsive("max-425", ResponsiveMax425)
-
-        
+        this.registerResponsive("max-425", ResponsiveMax425) 
     }
 
 
@@ -85,7 +77,6 @@ class Page7 extends AnimationPage{
         animatableBackground.redraw(abStyles,abBarStyles,abTitleStyles)
 
 
-
         const {sBoxPos, sBoxStyles, sboxLegendStyles, sBoxTextStyles} = defines
         sbox.redraw(sBoxStyles, sboxLegendStyles, sBoxTextStyles);    
         sbox.pivot.set(sBoxStyles.width, sBoxStyles.height)
@@ -119,15 +110,7 @@ class Page7 extends AnimationPage{
             movable.redraw({width, height, ...resultMovablesStyles},gridFontStyles);
             movable.position.set(x, y)
         })
-
-
-
-        
-
-        
-  
     }
 }
-
 
 export default Page7;

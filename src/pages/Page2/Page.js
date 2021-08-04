@@ -1,17 +1,10 @@
 import AnimationPage from "../../core/AnimationPage.js"
 import * as PIXI from "pixi.js"
 
-import Component from "../../components/Component"
-
-
-
-//import TextBox from "../../components/TextBox"
-import TextBox from "../../components/TextBox2"
+import TextBox from "../../components/TextBox"
 import PIXIText from "../../components/PIXIText"
-import Arrow from "../../components/Arrow"
 import ArrowWithText,{ARROW_ORIENTATION} from "../../components/ArrowWithText"
 
-import {gsap} from "gsap"
 
 
 import PageTimeline from "./PageTimeline"
@@ -89,12 +82,9 @@ class Page2 extends AnimationPage{
         // redraw center box styles
         const {textBoxStyles, textBoxTextStyles} = defines
 
-
         centerBox.redraw(textBoxStyles, textBoxTextStyles)
         centerBox.position.set(textBoxStyles.x, textBoxStyles.y)
         centerBox.pivot.set(textBoxStyles.width /2, textBoxStyles.height/2)
-
-
 
         const {arrowStyles, arrowFontStyles, arrowTitleStyles, arrowTextBottomStyles} = defines
 
@@ -109,6 +99,7 @@ class Page2 extends AnimationPage{
                 y:  0,
             },
         })
+
         arrowTop.position.set(0, textTop.height + 10) 
         arrowTopContainer.position.set(textBoxStyles.x,centerBox.y - centerBox.height / 2- arrowTopContainer.height)
         arrowTopContainer.pivot.set(arrowTopContainer.width  * .5,0)
@@ -140,12 +131,9 @@ class Page2 extends AnimationPage{
                 y: arrowBottom.height + 10,
             },
         })
+        
         arrowBotContainer.position.set(textBoxStyles.x,centerBox.y + textBoxStyles.height - (textBoxStyles.height / 2))
         arrowBotContainer.pivot.set(arrowBotContainer.width  * .5,0)
-
-        
-         
-
   
     }
 }
