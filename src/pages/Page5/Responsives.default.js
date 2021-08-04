@@ -50,13 +50,6 @@ class Page5DefaultResponsives extends AnimationPageResponsives{
             x: this.getWidth(20),
         }
 
-
-
-
-    
-
-
-
         defines.roundedLabelStyles = {
             width: this.getWidth(20), 
             height: this.getHeight(4),
@@ -123,7 +116,26 @@ class Page5DefaultResponsives extends AnimationPageResponsives{
         }
 
 
-    
+        defines.counterStyles = {
+            width: 50,
+            height: 40,
+            position: {
+                x:  40,
+                y: this.getHeight(90)
+            },
+            fill: this.c("--encryptor-box"),
+        }
+
+        defines.counterDisplayStyles  = {
+            fontSize: 20,
+            fill: this.c("--text-light"),
+
+        }
+
+        defines.counterTextStyles = {
+            fontSize: 20,
+            fill: this.c("--text-dark"),
+        }
     
 
         return defines;

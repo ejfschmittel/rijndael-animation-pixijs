@@ -12,11 +12,14 @@ class Page5Timline extends AnimationPageTimeline{
     createPreFadeIn(){
         const {
             runner, svg,initialAddRoundKey, mrSubBytes, mrShiftRows, mrMixColumns, mrAddRoundKey,  frSubBytes, frShiftRows, frAddRoundKey,
-            labelInitialRound, labelFinalRound, labelMainRounds
+            labelInitialRound, labelFinalRound, labelMainRounds, counter,
         }  = this.getGlobalComponents();
         const tl = this.getPreFadeInTimeline();
         tl.set([initialAddRoundKey, mrSubBytes, runner, mrShiftRows, mrMixColumns, mrAddRoundKey,  frSubBytes, frShiftRows, frAddRoundKey], {pixi: {zIndex: 20, alpha: 0}})
         tl.set([svg,labelInitialRound, labelFinalRound, labelMainRounds], {pixi: {alpha: 0}})
+        tl.call(() => {
+            counter.updateContent("0")
+        })
         return tl;
     }
 
@@ -41,12 +44,12 @@ class Page5Timline extends AnimationPageTimeline{
    
 
 
-    getMotionPathDuration(start, end){
-        return (end - start) * 10;
+    getMotionPathDuration(start, end, multiplier=10){
+        return (end - start) * multiplier;
     }
 
    createAnimationMain(){
-        const {runner, svg, container,  initialAddRoundKey, mrSubBytes, mrShiftRows, mrMixColumns, mrAddRoundKey,  frSubBytes, frShiftRows, frAddRoundKey,}  = this.getGlobalComponents();
+        const {runner, svg, container,counter,  initialAddRoundKey, mrSubBytes, mrShiftRows, mrMixColumns, mrAddRoundKey,  frSubBytes, frShiftRows, frAddRoundKey,}  = this.getGlobalComponents();
 
 
         const path = svg.getPath();
@@ -78,28 +81,35 @@ class Page5Timline extends AnimationPageTimeline{
         tl.to(initialAddRoundKey.background,{pixi: {tint: labelBgAddRoundKey },duration: .001}, `segOne+=${end}`)
       
 
-        // MAIN ROUNDS 1 - 8 
-        const mainRoundTL = gsap.timeline({repeat: 7, onRepeat: () => {
-            console.log("on repeat")
-
-        }})
-        mainRoundTL.add(this.getMainRoundTL(path))
-
-        const segThreeDuration = this.getMotionPathDuration(svg.info.segments.three.progress, svg.info.segments.four.progress)
-        mainRoundTL.set(runner, {pixi: {x: runner.x, y: runner.y}})
-        mainRoundTL.to(runner, {motionPath: {
-            path: path,  
-            start: svg.info.segments.three.progress,
-            end: svg.info.segments.four.progress,
-            curviness: 0,
-        }, duration: segThreeDuration,  ease: "none",})
+        // MAIN ROUNDS 1  
 
 
-        tl.add(mainRoundTL)
+       
+
+         // MAIN ROUNDS 1-8
+        for(let i = 1; i < 9; i++){
+ 
+            const mainRoundTL = gsap.timeline({})
+            tl.call(() => counter.updateContent(i))
+            const duration = i == 1 ? 10 : 1.5;
+            mainRoundTL.add(this.getMainRoundTL(path, duration))
+            const segThreeDuration = this.getMotionPathDuration(svg.info.segments.three.progress, svg.info.segments.four.progress, duration)
+ 
+            mainRoundTL.set(runner, {pixi: {x: runner.x, y: runner.y}})
+            mainRoundTL.to(runner, {motionPath: {
+                path: path,  
+                start: svg.info.segments.three.progress,
+                end: svg.info.segments.four.progress,
+                curviness: 0,
+            }, duration: segThreeDuration ,  ease: "none",})
+
+
+            tl.add(mainRoundTL)
+        }
 
 
           // MAIN ROUND 9 
-        
+        tl.call(() => counter.updateContent("9"))
         tl.add(this.getMainRoundTL(path))
         //tl.call(() => {tl.timeScale(1)})
         // FINAL ROUND
@@ -109,6 +119,7 @@ class Page5Timline extends AnimationPageTimeline{
     
         
         tl.set(runner, {pixi: {x: runner.x, y: runner.y}})
+        tl.call(() => counter.updateContent("10"))
         tl.to(runner, {motionPath: {
             path: path,  
             start: svg.info.segments.five.progress,
@@ -119,7 +130,8 @@ class Page5Timline extends AnimationPageTimeline{
         const finalSegmentY = svg.y + svg.info.segments.five.y;
         const [frsbStart, frsbEnd] = this.getTimes(frSubBytes.y - finalSegmentY, svg.info.segments.five.length, finalRoundDuration)  
 
-
+        // counter.updateContent("1")
+       
         const labelBgSubBytes = this.page.getColor("--label-bg-alpha")
         const labelBgSubBytesHighlight = this.page.getColor("--label-bg-highlight-alpha")
         tl.to(frSubBytes.background,{pixi: {tint: labelBgSubBytesHighlight },duration: .001}, `finalRound+=${frsbStart}`)
@@ -153,12 +165,12 @@ class Page5Timline extends AnimationPageTimeline{
 
 
 
-    getMainRoundTL(svgData){
+    getMainRoundTL(svgData, duration){
         const {runner, svg,mrSubBytes, mrShiftRows, mrMixColumns, mrAddRoundKey} = this.getGlobalComponents();
 
  
 
-        const mainRoundDuration = this.getMotionPathDuration(svg.info.segments.two.progress, svg.info.segments.three.progress)
+        const mainRoundDuration = this.getMotionPathDuration(svg.info.segments.two.progress, svg.info.segments.three.progress, duration)
 
         const tl = gsap.timeline()
         

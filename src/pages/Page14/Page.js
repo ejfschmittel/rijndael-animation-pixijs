@@ -10,7 +10,9 @@ import PIXIText from "../../components/PIXIText"
 
 import PageTimeline from "./PageTimline"
 import DefaultResponsives from "./Responsives.default"
+import ResponsiveMax850 from "./Responsive.max-850"
 import ResponsiveMax768 from "./Responsive.max-768"
+import ResponsiveMax550 from "./Responsive.max-550"
 import ResponsiveMax425 from "./Responsive.max-425"
 import ResponsiveMax375 from "./Responsive.max-375"
 
@@ -19,14 +21,16 @@ class Page14 extends AnimationPage{
         super();
         this.timeline = new PageTimeline(this);
         this.registerResponsive("default", DefaultResponsives)
+        this.registerResponsive("max-850", ResponsiveMax850)
         this.registerResponsive("max-768", ResponsiveMax768)
+        this.registerResponsive("max-550", ResponsiveMax550)
         this.registerResponsive("max-425", ResponsiveMax425)
         this.registerResponsive("max-375", ResponsiveMax375)
     }
 
 
     setShouldHide(animationDimensions){
-        this.shouldHide = animationDimensions.width <= 700;
+        this.shouldHide = animationDimensions.width <= 768;
         return this.shouldHide
     }
 
@@ -265,6 +269,9 @@ class Page14 extends AnimationPage{
         const {sboxStyles, sboxLegendStyles,sBoxTextStyles } = defines
       
         sbox.redraw(sboxStyles,sboxLegendStyles, sBoxTextStyles)
+
+        console.log("set sbox posiiton page 14")
+        console.log(sboxStyles)
         sbox.position.set(sboxStyles.x, sboxStyles.y)
         subBytesText.position.set(sbox.x - 360, sbox.y)
 

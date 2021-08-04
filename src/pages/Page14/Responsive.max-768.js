@@ -17,7 +17,7 @@ class ResponsiveMax768 extends AnimationPageResponsives{
 
         defines.sboxStyles = {
             ...defines.sboxStyles,
-            x: 70 + 340, // width + x of grid rows
+            x: this.getWidth(100) , // width + x of grid rows
             y: this.getHeight(66),
             width: 340,
             height: 260,

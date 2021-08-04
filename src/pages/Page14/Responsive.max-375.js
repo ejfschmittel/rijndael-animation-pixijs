@@ -27,9 +27,9 @@ class ResponsiveMax375 extends AnimationPageResponsives{
         defines.sboxStyles = {
             ...defines.sboxStyles,
             x: this.getWidth(50)+220, // width + x of grid rows
-            y: this.getHeight(74),
-            width: 280,
-            height: 180,
+            y: this.getHeight(70),
+            width: 300,
+            height: 200,
             legendWidth: 20,
         }
 
@@ -39,17 +39,18 @@ class ResponsiveMax375 extends AnimationPageResponsives{
 
         defines.rconStyles = {
             ...defines.rconStyles,
-            width: 125,
-            height: 50,
+            width: 160,
+            height: 60,
             x: this.getWidth(50),
             y: this.getHeight(98),
         }
 
         defines.rconMovablesTextStyles = {
             ...defines.rconMovablesTextStyles,
-            fontSize: 9
+            fontSize: 14
         }
 
+     
 
         return defines;
     }

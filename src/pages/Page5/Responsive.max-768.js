@@ -13,7 +13,16 @@ class ResponsiveMax768 extends AnimationPageResponsives{
 
     getDefines(defines){
        
-      
+        defines.counterStyles = {
+            ... defines.counterStyles,
+            width: 59,
+            height: 40,
+            position: {
+                x:  this.getWidth(80),
+                y: this.getHeight(90)
+            },
+        }
+
 
         return defines;
     }

@@ -26,10 +26,10 @@ class ResponsiveMax425 extends AnimationPageResponsives{
 
         defines.sboxStyles = {
             ...defines.sboxStyles,
-            x: this.getWidth(50)+180, // width + x of grid rows
+            x: this.getWidth(50) + 190, // width + x of grid rows
             y: this.getHeight(66),
             width: 320,
-            height: 260,
+            height: 240,
             legendWidth: 24,
         }
 
@@ -84,6 +84,17 @@ class ResponsiveMax425 extends AnimationPageResponsives{
             fontSize: 20,
             distanceX: 10,
         }
+
+        defines.addSymbolStyles = {
+            scale: .5, 
+            borderColor: this.c("--text-color"),
+        }
+
+        defines.addSymbolFontStyles = {
+            scale: .8,
+            fill: this.c("--text-color"),
+        }
+
         return defines;
     }
 }

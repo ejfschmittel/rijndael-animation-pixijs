@@ -2,6 +2,7 @@ import AnimationPage from "../../core/AnimationPage.js"
 
 import AnimatableBackground from "../../components/AnimatableBackground"
 import SlowTextBox from "../../components/SlowTextBox"
+import TextBox from "../../components/TextBox"
 import PIXIText from "../../components/PIXIText"
 import Grid from "../../components/Grid"
 import SVGPath from "../../components/Page5Path"
@@ -63,6 +64,11 @@ class Page5 extends AnimationPage{
         const frSubBytes = this.createLabel("labelFrOne")
         const frShiftRows = this.createLabel("labelFrTwo")
         const frAddRoundKey = this.createLabel("labelFrThree")
+
+        // counter textbox
+        const counterText = new PIXIText("Round",{})
+        this.bindPageLocale("round", counterText)
+        const counter = new TextBox("0", {}, {})
      
       
         this.addPermanent({
@@ -72,6 +78,7 @@ class Page5 extends AnimationPage{
             initialAddRoundKey,
             mrSubBytes, mrShiftRows, mrMixColumns, mrAddRoundKey,
             frSubBytes, frShiftRows, frAddRoundKey,
+            counter,counterText,
             svg,
         })
        
@@ -89,6 +96,7 @@ class Page5 extends AnimationPage{
             mrSubBytes, mrShiftRows, mrMixColumns, mrAddRoundKey,
             frSubBytes, frShiftRows, frAddRoundKey,
             runner, container, svg,
+            counter,counterText
         } = this.globalComponents
 
         // background redraw
@@ -182,6 +190,16 @@ class Page5 extends AnimationPage{
 
         frAddRoundKey.position.set(svg.position.x, svg.position.y + svg.height * (frStart +  frDist ))
         frAddRoundKey.pivot.set(frAddRoundKey.width /2, frAddRoundKey.height /2)
+
+        // redraw counter
+        const {counterStyles, counterTextStyles, counterDisplayStyles} = defines
+        counter.redraw(counterStyles, counterDisplayStyles)
+        counter.position.set(counterStyles.position.x, counterStyles.position.y)
+        counter.pivot.set(counterStyles.width/2, counterStyles.height/2)
+
+        counterText.redraw(counterTextStyles)
+        counterText.position.set(counterStyles.position.x, counterStyles.position.y - 40)
+        counterText.anchor.set(.5)
     }
 }
 

@@ -76,7 +76,8 @@ class Page7DefaultResponsives extends AnimationPageResponsives{
         }
 
         defines.rconMovablesTextStyles = {
-            fontSize: 12
+            fontSize: 24,
+            scale: .5
         }
 
         defines.rconMovablesStyles = {

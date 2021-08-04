@@ -16,7 +16,27 @@ class ResponsiveMax375 extends AnimationPageResponsives{
     }
 
     getDefines(defines){
-       
+        defines.textStyles = {
+            ...defines.textStyles, 
+            scale: .8,
+            wordWrapWidth: 160,
+        }
+
+        defines.circleStyles = {
+            ...defines.circleStyles,
+            scale: .6
+        }
+
+        defines.circleFontStyles = {
+            scale: .6
+        }
+
+        defines.gridFontStyles = {
+           fontSize: 16
+        }
+        
+
+        return defines;
     }
 }
 
