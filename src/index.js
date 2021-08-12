@@ -10,14 +10,10 @@ import * as PIXI from "pixi.js";
 
 import "./styles/main.scss"
 
-import {startTimer} from "./utils/measure.js"
-
 
 window.addEventListener("load",function(){
-    startTimer()
     gsap.registerPlugin(MotionPathPlugin, PixiPlugin);
     PixiPlugin.registerPIXI(PIXI);
-    const rijndaelAnimation = new RijndaelAnimation();
-   
+    new RijndaelAnimation(); 
 },false);
 
