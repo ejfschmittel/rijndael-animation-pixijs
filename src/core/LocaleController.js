@@ -69,7 +69,6 @@ class LocaleController{
                 const elements = pageLocale[localeKey]
                 if(Array.isArray(elements) && elements.length > 0){
 
-                    //console.log(this.getCurrentLocaleObj()[pageID][localeKey])
                     const localeText = this.getLocalePageText(pageID, localeKey)
 
                     // update text of elements

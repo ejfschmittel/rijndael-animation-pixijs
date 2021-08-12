@@ -122,16 +122,12 @@ class RijndaelFormController{
       
             const [ciphertext, info] = this.excuteRijndaelAES(formData);
 
-
             // update output field
-            //const cipherTextAscii =Utils.intArrayToAsciiString(ciphertext)
             this.outputField.value = ciphertext;
-
 
             // prepare data for animation
             const preparedInfo = this.prepareRijndaelDataForDisplay(info)
             // call data controller to update
-            console.log(preparedInfo)
             this.controller.data.updateStoreByObject(preparedInfo)
             if(update)
                 this.controller.timeline.saveAndRebuildTimeline();

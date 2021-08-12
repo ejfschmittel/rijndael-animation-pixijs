@@ -12,11 +12,11 @@ class Page5Timline extends AnimationPageTimeline{
     createPreFadeIn(){
         const {
             runner, svg,initialAddRoundKey, mrSubBytes, mrShiftRows, mrMixColumns, mrAddRoundKey,  frSubBytes, frShiftRows, frAddRoundKey,
-            labelInitialRound, labelFinalRound, labelMainRounds, counter,
+            labelInitialRound, labelFinalRound, labelMainRounds, counter, counterText
         }  = this.getGlobalComponents();
         const tl = this.getPreFadeInTimeline();
         tl.set([initialAddRoundKey, mrSubBytes, runner, mrShiftRows, mrMixColumns, mrAddRoundKey,  frSubBytes, frShiftRows, frAddRoundKey], {pixi: {zIndex: 20, alpha: 0}})
-        tl.set([svg,labelInitialRound, labelFinalRound, labelMainRounds], {pixi: {alpha: 0}})
+        tl.set([svg,labelInitialRound, labelFinalRound, labelMainRounds, counter, counterText], {pixi: {alpha: 0}})
         tl.call(() => {
             counter.updateContent("0")
         })
@@ -29,13 +29,13 @@ class Page5Timline extends AnimationPageTimeline{
     createAnimationIn(){
         const {
             runner, svg,initialAddRoundKey, mrSubBytes, mrShiftRows, mrMixColumns, mrAddRoundKey,  frSubBytes, frShiftRows, frAddRoundKey,
-            labelInitialRound, labelFinalRound, labelMainRounds
+            labelInitialRound, labelFinalRound, labelMainRounds, counter, counterText
         }  = this.getGlobalComponents();
         const tl = this.getAnimatableBackgroundTL();
 
 
         tl.to([initialAddRoundKey, mrSubBytes, runner, mrShiftRows, mrMixColumns, mrAddRoundKey,  frSubBytes, frShiftRows, frAddRoundKey], {pixi: { alpha: 1}})
-        tl.to([svg,labelInitialRound, labelFinalRound, labelMainRounds], {pixi: {alpha: 1}}, "<")
+        tl.to([svg,labelInitialRound, labelFinalRound, labelMainRounds, counter, counterText], {pixi: {alpha: 1}}, "<")
        
         return tl;
     }

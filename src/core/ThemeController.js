@@ -28,7 +28,6 @@ class ThemeController{
     }
 
     setTheme(themeName){
-        console.log("set theme")
         if(themeName == this.currentTheme) return;
         if(!this.isValidTheme(themeName)) return;
 

@@ -59,8 +59,6 @@ class AnimationTimeline{
             lastActiveLabels: currentLabels,
             paused,
         }
-
-        console.log(this.tlStateBeforeResize)
     }
 
 
@@ -111,13 +109,11 @@ class AnimationTimeline{
     }
 
     onAfterResize = debounce(() => {
-        console.time("onafter resize")
         this.rebuildTimline();
-        console.timeEnd("onafter resize")
-    }, 300)
+    }, 200)
 
     rebuildTimline(){
-        console.time("rebuildTimeline")
+    console.time("rebuildTimeline")
       // recreate timeline completely
       this.controller.buildTimeline();
 
@@ -137,7 +133,7 @@ class AnimationTimeline{
       this.tlStateBeforeResize = null;
       this.controller.isResizing = false;
       console.timeEnd("rebuildTimeline")
-      console.timeEnd("resize")
+     
     }
 
     

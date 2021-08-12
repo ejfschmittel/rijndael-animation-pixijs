@@ -10,8 +10,6 @@ class Page14Timline extends AnimationPageTimeline{
      
     }
 
-    
-
     moveXL(idx=4, movablesOne, movablesTwo, ogMovables){
         const {
             equalsSymbol,
@@ -40,12 +38,6 @@ class Page14Timline extends AnimationPageTimeline{
         const landingsAddTwo = secondaryGrids[Math.floor(col2Idx / 4)].getCol(col2Idx % 4)
         const landingsAddRes = secondaryGrids[Math.floor(col3Idx / 4)].getCol(col3Idx % 4)
         const landingsReturn = primaryGrids[Math.floor(resColIdx / 4)].getCol(resColIdx % 4)
-
-
-     
-
-       
-    
 
         const tl = gsap.timeline();
 
@@ -120,9 +112,6 @@ class Page14Timline extends AnimationPageTimeline{
         return {x: bounds.x, y: bounds.y}
     }
 
-
-
-
     createPreFadeIn(){
         const {
             equalsSymbol,
@@ -192,7 +181,6 @@ class Page14Timline extends AnimationPageTimeline{
         tl.add(this.createFirstSubByteTimeline())
         
         // first box
-        console.log(this.page.shouldHide)
         if(!this.page.shouldHide){
             tl.to(textXor,{pixi: {alpha: 1}})
         }

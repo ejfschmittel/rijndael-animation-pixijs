@@ -40,6 +40,9 @@ class AnimationController{
         this.ui = new AnimationPlayerUI(this);  
         this.form = new FormController(this)
 
+
+        this.iframeContainer = window.parent.document.getElementById(this.settings.iframeContainerID);
+
         // add resize event listener
         const onResize = this.onResize.bind(this)
         window.addEventListener("resize", onResize)
@@ -55,6 +58,7 @@ class AnimationController{
     init(){
         console.log("init")
         // get canvas container dimensions
+        this.resizeIFrameContainer();
         this.updateAnimationDimensions();
 
         // create pixi & canvas
@@ -64,8 +68,6 @@ class AnimationController{
         })
 
         this.app.renderer.autoResize = true;
-
-        console.log(PIXI.settings.RESOLUTION )
        
         const bounds = this.container.getBoundingClientRect();
         this.app.renderer.resize(bounds.width, bounds.height)
@@ -93,15 +95,21 @@ class AnimationController{
         this.ANIMATION_DIMENSIONS.heightPercent = containerBounds.height / 100;
     }
 
-
+    resizeIFrameContainer(){
+        const width = this.iframeContainer.getBoundingClientRect().width;
+        if(width <= 900){
+            this.iframeContainer.style.height = window.parent.innerHeight + "px";
+        }else{
+            this.iframeContainer.style.height = document.body.scrollHeight + "px"
+        }
+    }
 
     onResize(){
-        console.time("resize")
         this.isResizing = true;
+        this.resizeIFrameContainer();
         this.updateAnimationDimensions();
         // resize renderer
         this.app.renderer.resize(this.ANIMATION_DIMENSIONS.width, this.ANIMATION_DIMENSIONS.height)
-        console.log(this.ANIMATION_DIMENSIONS)
 
         // do i need to update clamp      
         this.timeline.onResize();

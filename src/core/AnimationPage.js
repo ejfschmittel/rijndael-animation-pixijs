@@ -72,11 +72,9 @@ class AnimationPage extends PIXI.Container{
      
         const defines = this.getDefines();
 
-       console.time(`create-page-${pageID}`)
         this.create(defines)
 
         this.drawPage(defines)
-        console.timeEnd(`create-page-${pageID}`)
     }
 
     redraw(){

@@ -23,7 +23,8 @@ const SETTINGS = {
     themes: [
         {name: "default", className: "theme--default", localeKey: "themeOptionDefault"},
         {name: "new", className: "theme--new", localeKey: "themeOptionNew"},
-    ]
+    ],
+    iframeContainerID: "test-container"
 }
 
 
@@ -52,7 +53,7 @@ class RijndaelAnimation extends AnimationController {
         this.buildTimeline()
 
         this.goToFirstPage();
-        logTimer();
+        logTimer("Startup Time");
    
 
         

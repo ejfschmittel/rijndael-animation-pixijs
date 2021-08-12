@@ -270,8 +270,6 @@ class Page14 extends AnimationPage{
       
         sbox.redraw(sboxStyles,sboxLegendStyles, sBoxTextStyles)
 
-        console.log("set sbox posiiton page 14")
-        console.log(sboxStyles)
         sbox.position.set(sboxStyles.x, sboxStyles.y)
         subBytesText.position.set(sbox.x - 360, sbox.y)
 
@@ -300,11 +298,6 @@ class Page14 extends AnimationPage{
 
             const prevGrid = idx != 0 ? secondaryGrids[idx -1] : null;
             const primaryGridsX = prevGrid ? prevGrid.x + baseGridStyles.width : secondaryGridPos.x;
-
-            if(idx == 0){
-                console.log(primaryGridsX)
-                console.log(grid)
-            }
 
             grid.position.set(primaryGridsX, secondaryGridsY)
             
