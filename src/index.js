@@ -5,7 +5,6 @@ import {gsap} from "gsap"
 
 import RijndaelAnimation from "./RijndaelAnimation";
 
-
 import * as PIXI from "pixi.js";
 
 import "./styles/main.scss"

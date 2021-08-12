@@ -79,15 +79,14 @@ class Page14Timline extends AnimationPageTimeline{
     shiftColumn(movables, landings, settings={}){
         const tl = gsap.timeline();
 
+        const shiftOffset = window.screen.width <= 800 ? -50 : -100;
 
        const landingBoundsFirst = this.getBounds(landings[0])
        const landingBoundsLast = this.getBounds(landings[3])
       
-
-
        tl.to(movables[0], {pixi: {
            ...landingBoundsLast,
-           x: landingBoundsLast.x - 100,
+           x: landingBoundsLast.x + shiftOffset,
             y: (landingBoundsLast.y + landingBoundsFirst.y) / 2,
            zIndex: 10,
         }, duration: 1}, "shift-col")

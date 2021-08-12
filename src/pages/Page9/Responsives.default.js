@@ -36,7 +36,7 @@ class Page6DefaultResponsives extends AnimationPageResponsives{
         defines.backgroundStyles = {
             width: this.getWidth(100),
             height: this.getHeight(100),
-            fill: this.c("--bar-background-zeta"),
+            fill: this.c("--page-background-zeta"),
             borderWidth: 0,
         }
 
