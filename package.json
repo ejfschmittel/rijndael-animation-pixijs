@@ -12,7 +12,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
-  "author": "",
+  "author": "Elias Schmittel",
   "license": "ISC",
   "devDependencies": {
     "@babel/cli": "^7.12.13",
