@@ -7,9 +7,6 @@ class LocaleController{
         this.controller = controller;
         this.localesSelect = document.getElementById(LOCALE_SELECT_ID);
 
-
-
-
         this.locales = locales;
 
 
@@ -17,9 +14,10 @@ class LocaleController{
         this.pixiLocalesReferences = {}
 
 
-        this.currentLocale = this.getCurrentPageLocale();
-        if(!this.isValidLocaleKey(this.currentLocale)) this.currentLocale = Object.keys(this.locales)[0]
+        // get page locale from html (<html lang="en">)
+        this.currentLocale = this.getCurrentPageLocale(); 
 
+        if(!this.isValidLocaleKey(this.currentLocale)) this.currentLocale = Object.keys(this.locales)[0]
         this.updateHTMLLocale();
         this.initLocalesSelect();
     }
@@ -149,7 +147,7 @@ class LocaleController{
 
 
     getCurrentPageLocale(){
-        return document.documentElement.lang;
+        return parent.document.documentElement.lang;
     }
 }
 

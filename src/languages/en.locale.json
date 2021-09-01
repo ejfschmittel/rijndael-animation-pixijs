@@ -10,7 +10,16 @@
     "formButtonLabel": "Input",
 
 
+    "finishOverlayBackToEncryption": "View encryption process again",
+    "finishOverlayBackToKeySchedule": "View key schedule again",
+    "finishOverlayBackToStart": "Restart animation",
+
+
+
     "settingsTitle": "Settings",
+    "settingsNotice": "If you click on the gear again, you will return to the animation.",
+    "settingsNoticeJump": "Sets the jump distance in the animation timeline for the control buttons \"Jump backwards\" and \"Jump forwards\".",
+    
     "settingsThemeLabel": "Theme:",
     "settingsJumpLabel": "Jump duration (seconds)",
     "settingsLanguageLabel": "Language",
@@ -26,12 +35,12 @@
     "plaintextLabel": "Plaintext",
     "plaintextHexadecimalLabel": "Input (hexadecimal)",
     "keyLabel": "Key",
-    "outputLabel": "Output",
+    "outputLabel": "Output (hexadecimal)",
     "encryptButtonLabel": "Encrypt",
     "formErrorMessage": "Key must be 32 char hexadecimal.",
 
     "page-1-title": "Page 1 - Rijndael Animation Intro",
-    "page-1-info": "<p>This animation gives a high-level overview of the inner workings of the AES Rijndael algorithm. The data entered below will be processed dynamically. The gear wheel takes you to the settings, where you can switch between German and English. It uses a size of 128 bit for both, the data block, and the key. For an in-depth look at the mathematics behind the algorithm please consult the according literature.</p><p>To get started, you can look at: <a href='https://en.wikipedia.org/wiki/Advanced_Encryption_Standard'>https://en.wikipedia.org/wiki/Advanced_Encryption_Standard</a></p><p>Another presentation of AES can be found at: <a href='https://www.cryptool.org/en/cto/aes-step-by-step'>https://www.cryptool.org/en/cto/aes-step-by-step</a></p>",
+    "page-1-info": "<p>This animation gives a high-level overview of the inner workings of the AES Rijndael algorithm. The data entered below will be processed dynamically. The gear wheel takes you to the settings, where you can switch between German and English. It uses a size of 128 bit for both, the data block, and the key. For an in-depth look at the mathematics behind the algorithm please consult the according literature.</p><p>For a start have a look at: <a href='https://en.wikipedia.org/wiki/Advanced_Encryption_Standard'>https://en.wikipedia.org/wiki/Advanced_Encryption_Standard</a></p><p>Another presentation of AES can be found at: <a href='https://www.cryptool.org/en/cto/aes-step-by-step'>https://www.cryptool.org/en/cto/aes-step-by-step</a></p>",
 
     "page-2-title": "Page 2 - Encryption Overview",
     "page-2-info": "<p>The Advanced Encryption Standard (AES) is also known by its original name Rijndael. It is a symmetric block cipher. This page displays the inputs (plaintext and cipher key) and output (ciphertext) of the Rijndael encryption process.</p>",

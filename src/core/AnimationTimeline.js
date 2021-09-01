@@ -2,10 +2,18 @@
 import {gsap} from "gsap"
 import {debounce} from "../utils/utils"
 
+const ANIMATION_COMPLETED_SCREEN_ID = "animation-completed-screen";
+const BACK_TO_ENCRYPTION_ID = "back-to-encryption-process-btn"
+const BACK_TO_KEY_SCHEDULE_ID = "back-to-key-schedule-btn"
+const BACK_TO_START_ID = "back-to-start-btn"
+
+
 class AnimationTimeline{
 
     constructor(controller){
         this.controller = controller;
+
+    
 
         this.tl = this.createEmptyTimeline();
         this.nestedTimelines = {}
@@ -14,12 +22,38 @@ class AnimationTimeline{
 
 
         this.JUMP_STEP = 0.5;
+
+        // create on click buttons
+        this.animationCompletedScreen = document.getElementById(ANIMATION_COMPLETED_SCREEN_ID)
+        this.backToKeyScheduleBtn = document.getElementById(BACK_TO_KEY_SCHEDULE_ID)
+        this.backToStartBtn = document.getElementById(BACK_TO_START_ID)
+        this.backToEncryptionBtn = document.getElementById(BACK_TO_ENCRYPTION_ID)
+
+        this.backToKeyScheduleBtn.addEventListener("click", (e) => {
+            e.preventDefault()
+            this.goToPage("page-13")
+        })
+
+        this.backToEncryptionBtn.addEventListener("click", (e) => {
+            e.preventDefault()
+            this.goToPage("page-4")
+        })
+
+
+        this.backToStartBtn.addEventListener("click", (e) => {
+            e.preventDefault()
+            this.goToPage("page-1")
+        })
     }
 
     createEmptyTimeline(){
         if(this.tl) this.tl.kill();
         this.tl = null; 
-        return gsap.timeline({paused: true, onComplete: () => this.pause()});
+        return gsap.timeline({paused: true, onComplete: () => {
+
+            this.pause()
+         
+        }});
     }
 
     onResize(){
@@ -220,11 +254,16 @@ class AnimationTimeline{
                  this.tl.add(createdNestedTimelines[label], label)
              })
  
- 
- 
+             
+             
+
+           
+             
              this.nestedTimelines = {...this.nestedTimelines, ...createdNestedTimelines}
 
          })
+        // show timeline completed overlay
+        this.tl.to(this.animationCompletedScreen, {delay: 3, display: "flex", duration: .00001})
     }
 
 

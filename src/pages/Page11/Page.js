@@ -21,6 +21,8 @@ class Page11 extends AnimationPage{
         this.registerResponsive("default", DefaultResponsives)
         this.registerResponsive("max-768", ResponsiveMax768)
         this.registerResponsive("max-425", ResponsiveMax425)
+
+        this.FADE_OUT_DELAY = 6;
     }
 
 

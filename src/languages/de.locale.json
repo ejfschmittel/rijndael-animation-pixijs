@@ -11,8 +11,15 @@
 
 
     "settingsTitle": "Einstellungen",
+    "settingsNotice": "Wenn Sie nochmal auf das Zahnrad klicken, kommen Sie zurück in die Animation.",
+    "settingsNoticeJump": "Setzt die Sprungweite in der Animationstimeline für die Steuerungsknöpfe \"Zurück springen\" und \"Vorwärts springen\".",
+
+    "finishOverlayBackToEncryption": "Verschlüsselungsprozess erneut anschauen",
+    "finishOverlayBackToKeySchedule": "Schlüsselplanerstellung erneut anschauen",
+    "finishOverlayBackToStart": "Animation neustarten",
+
     "settingsThemeLabel": "Theme:",
-    "settingsJumpLabel": "Sprungweite (sekunden)",
+    "settingsJumpLabel": "Sprungweite (Sekunden)",
     "settingsLanguageLabel": "Sprache",
 
     "themeOptionDefault": "Standard",
@@ -36,9 +43,9 @@
     "page-1-info": "<p>Diese Animation gibt einen Überblick über die Funktionsweise des AES-Rijndael-Algorithmus. Die unten eingegebenen Daten werden dynamisch verarbeitet. Über das Zahnrad kommen Sie zu den Einstellungen, wo Sie zwischen deutsch und englisch umschalten können. In dieser Animation haben sowohl der Datenblock als auch der Schlüssel eine Länge von 128 bit. Für einen tieferen Einblick in die Mathematik hinter dem Algorithmus konsultieren Sie bitte die entsprechende Literatur.</p><p>Zum Einstieg können Sie sich anschauen: <a href='https://de.wikipedia.org/wiki/Advanced_Encryption_Standard'>https://de.wikipedia.org/wiki/Advanced_Encryption_Standard</a></p><p>Eine weitere Darstellung von AES bietet auch: <a href='https://www.cryptool.org/de/cto/aes-step-by-step'>https://www.cryptool.org/de/cto/aes-step-by-step</a></p>",
 
     "page-2-title": "Seite 2 - Übersicht über die Verschlüsselung",
-    "page-2-info": "<p>Der Advanced Encryption Standard (AES) ist auch unter seinem ursprünglichen Namen Rijndael bekannt. Es handelt sich um eine symmetrische Blockchiffre. Auf dieser Seite werden die Eingaben (Klartext und Chiffrierschlüssel) und die Ausgaben (Chiffretext) des Rijndael-Verschlüsselungsverfahrens angezeigt.</p>",
+    "page-2-info": "<p>Der Advanced Encryption Standard (AES) ist auch unter seinem ursprünglichen Namen Rijndael bekannt. Es handelt sich um eine symmetrische Blockchiffre. Auf dieser Seite werden die Eingaben (Klartext und Hauptschlüssel) und die Ausgaben (Chiffretext) des Rijndael-Verschlüsselungsverfahrens angezeigt.</p>",
 
-    "page-3-title": "Seite 3 - Verschlüsselungsverfahren und Chiffrierschlüssel",
+    "page-3-title": "Seite 3 - Verschlüsselungsverfahren und Hauptschlüssel",
     "page-3-info": "<p>AES ist eine Untermenge der Rijndael-Blockchiffre. Während der Rijndael-Algorithmus eine Reihe von Schlüssel- und Blockgrößen zulässt (128, 160, 192, 224, 256 Bit), ist AES nicht so flexibel. AES hat eine feste Blocklänge von 128 Bit und lässt nur 128, 192 und 256 Bit als Schlüssellänge zu.</p><p>Der Zustand und der Schlüssel können als rechteckiges Feld von Bytes dargestellt werden. Während die Länge des Zustands/Schlüssels geteilt durch 32 die Anzahl der Spalten bestimmt, besteht jede Spalte immer aus 4 Bytes. Die Anzahl der Spalten im Status wird üblicherweise als Nb und die Anzahl der Spalten im Chiffrierschlüssel als Nk bezeichnet. Diese Spalten werden manchmal auch als Wörter bezeichnet.</p><p>Da wir in dieser Animation sowohl für den Zustand als auch für den Schlüssel eine Länge von 128 Bit verwenden, sind Nb und Nk in diesem Fall jeweils 4. Die sich ergebenden Arrays können daher als vier mal vier Tabellen dargestellt werden, wobei die Byte-Werte in hexadezimaler Schreibweise angegeben werden.</p><p>Der Übersichtlichkeit halber werden der Verschlüsselungsvorgang und die Erstellung der Rundenschlüssel in getrennten Abschnitten dargestellt. Da der eigentliche Verschlüsselungsvorgang für die meisten Menschen der interessantere Teil ist, wird dieser zuerst in Teil A behandelt.</p>",
 
     "page-4-title": "Seite 4 - A) Verschlüsselungsprozess",
@@ -68,7 +75,7 @@
     "page-12-title": "Seite 12 - Runden 6 - 10",
     "page-12-info": "<p>Auf dieser Seite werden die Zustände nach jeder Transformation während der Iterationen 1 bis 5 des Verschlüsselungsprozesses angezeigt.</p>",
 
-    "page-13-title": "Seite 13 - B) Chiffrierschlüssel",
+    "page-13-title": "Seite 13 - B) Schlüsselgenerierung",
     "page-13-info": "<p>Der gegebene Chiffrierschlüssel (Hauptschlüssel) wird erweitert, um Rundenschlüssel zu erstellen, die in jeder Iteration des Verschlüsselungs-/Entschlüsselungsprozesses verwendet werden. Die Anzahl der Rundenschlüssel ist gleich der Anzahl der Runden plus eins und ihre Größe hängt von der Länge des Nachrichtenblocks ab.</p>",
 
     "page-14-title": "Seite 14 - Schlüsselplan",

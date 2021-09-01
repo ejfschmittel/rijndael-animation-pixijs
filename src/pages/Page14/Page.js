@@ -58,19 +58,19 @@ class Page14 extends AnimationPage{
         cipherKeyText.anchor.set(.5, 0)
 
         const roundOneKeyText = new PIXIText("roundKeyOneLabel", gridSubtitleStyles)
-        this.bindPageLocale("roundKeyOneLabel", cipherKeyText)
+        this.bindPageLocale("roundKeyOneLabel", roundOneKeyText)
         roundOneKeyText.anchor.set(.5, 0)
 
         const roundTwoKeyText = new PIXIText("roundKeyTwoLabel", gridSubtitleStyles)
-        this.bindPageLocale("roundKeyTwoLabel", cipherKeyText)
+        this.bindPageLocale("roundKeyTwoLabel", roundTwoKeyText)
         roundTwoKeyText.anchor.set(.5, 0)
 
         const roundThreeKeyText = new PIXIText("roundKeyThreeLabel", gridSubtitleStyles)
-        this.bindPageLocale("roundKeyThreeLabel", cipherKeyText)
+        this.bindPageLocale("roundKeyThreeLabel", roundThreeKeyText)
         roundThreeKeyText.anchor.set(.5, 0)
 
-        const roundTenKeyText = new PIXIText("roundKeyTenLabel", gridSubtitleStyles)
-        this.bindPageLocale("roundKeyTenLabel", cipherKeyText)
+        const roundTenKeyText = new PIXIText("Test", gridSubtitleStyles)
+        this.bindPageLocale("roundKeyTenLabel", roundTenKeyText)
         roundTenKeyText.anchor.set(1.5, 0)
 
 

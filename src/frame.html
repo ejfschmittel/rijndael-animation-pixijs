@@ -53,6 +53,32 @@
                 </button>
             </div>
         </div>
+
+
+        <div class="ui__animation-final-overlay finish-screen" id="animation-completed-screen">
+
+            <div class="finish-screen__container" >
+
+                <h3>AES-Rijndael-Animation</h3>
+                <div data-lang="finishOverlayBackToEncryption" class="finish-screen__button finish-screen__button--yellow" id="back-to-encryption-process-btn">
+                    View encryption process again
+                </div>
+
+                <div  data-lang="finishOverlayBackToKeySchedule" class="finish-screen__button finish-screen__button--blue" id="back-to-key-schedule-btn">
+                    View key schedule again
+                </div>
+
+                <div class="finish-screen__button-repeat">
+                    <button class="controlls__btn tooltip tooltip" id="back-to-start-btn">
+                        <div class="tooltiptext" data-lang="finishOverlayBackToStart">Restart animation</div>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512">
+                            <title>Refresh</title>
+                            <path d="M320 146s24.36-12-64-12a160 160 0 10160 160" fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32"/>
+                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M256 58l80 80-80 80"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
     
         <div class="ui__navigations ui-container" id="rijndael-animation-navigation-overlay">
             <div class="navigation" id="rijndael-animation-navigation">
@@ -144,27 +170,36 @@
     
             <div class="settings">
                 <h3 class="settings__title" data-lang="settingsTitle">Settings</h3>
+                <p data-lang="settingsNotice"></p>
                 <div class="settings__section">
+                    <div class="settings__section-input-wrapper">
                     <label  class="settings__section-label" data-lang="settingsThemeLabel">Theme:</label>
               
                     <select  class="settings__section-input"  id="rijndael-animation-theme-select">
                         <!--<option value="default" data-lang="themeOptionStandard">default</option>
                         <option value="test" data-lang="themeOptionTest">test</option>-->
                     </select>
+                    </div>
                 </div>
     
                 <div  class="settings__section">
+                    <div class="settings__section-input-wrapper">
                     <label class="settings__section-label" data-lang="settingsLanguageLabel">Language:</label>
                     <select class="settings__section-input" id="rijndael-animation-lang-select">
                         <!--<option value="en" data-lang="languageOptionEN">English</option>
                         <option value="de" data-lang="languageOptionDE">German</option>-->
                     </select>
+                    </div>
                 </div>
     
                 <div  class="settings__section">
-                    <label class="settings__section-label" data-lang="settingsJumpLabel">Jump duration (seconds):</label>
-                    <input type="number" class="settings__section-input" step=".1" pattern="^\d*(\.\d{0,2})?$" max="10" value="0.5" id="rijndael-animation-jump-step-input"/>
-                      
+
+                    <div class="settings__section-input-wrapper">
+                        <label class="settings__section-label" data-lang="settingsJumpLabel">Jump duration (seconds):</label>
+                        <input type="number" class="settings__section-input" step=".1" pattern="^\d*(\.\d{0,2})?$" max="10" value="0.5" id="rijndael-animation-jump-step-input"/>
+                    </div>
+                    
+                    <p data-lang="settingsNoticeJump"></p>
                 </div>
             </div>
     

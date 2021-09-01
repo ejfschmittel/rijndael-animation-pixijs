@@ -18,7 +18,7 @@ import Page14 from "./pages/Page14/Page"
 
 
 const SETTINGS = {
-    locale: LOCALE,
+    locale: LOCALE, // object containing english and german language texts
     themes: [
         {name: "default", className: "theme--default", localeKey: "themeOptionDefault"},
         {name: "new", className: "theme--new", localeKey: "themeOptionNew"},
