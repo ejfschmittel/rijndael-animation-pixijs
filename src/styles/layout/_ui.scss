@@ -5,7 +5,7 @@
     display: grid;
     background: #888;
 
-    grid-template-rows: 600px 3rem 16rem 26rem;
+    grid-template-rows: 600px 3rem 16rem 1fr;
     grid-template-columns: 12rem 1fr 8rem;
     overflow: hidden;
 
@@ -254,15 +254,12 @@
 }
  
 
-
- 
-
-
 .info-container{
     background: #fff;
     width: 100%;
     height: 100%;
     overflow-y: auto;
+    user-select: auto !important;
 }
 
 

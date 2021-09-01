@@ -12,6 +12,7 @@ const FORM_BTN_ID = "rijndael-form-button"
 const OUTPUT_FIELD_ID = "rijndael-form-ouput"
 const KEY_FIELD_ID = "rijndael-form-key-input"
 const PLAINTEXT_FIELD_ID = "rijndael-form-plaintext-input"
+const PLAINTEXT_HEXADECIMAL_FIELD_ID = "rijndael-form-plaintext-hexadecimal"
 const FORM_ERROR_FIELD = "rijndael-form-error-field"
 
 class RijndaelFormController{
@@ -23,6 +24,7 @@ class RijndaelFormController{
         this.outputField = document.getElementById(OUTPUT_FIELD_ID)
         this.KeyField = document.getElementById(KEY_FIELD_ID)
         this.plaintextField = document.getElementById(PLAINTEXT_FIELD_ID)
+        this.plaintextHexadecimalField = document.getElementById(PLAINTEXT_HEXADECIMAL_FIELD_ID)
         this.errorField = document.getElementById(FORM_ERROR_FIELD)
         this.errors = null;
 
@@ -134,16 +136,39 @@ class RijndaelFormController{
       
             const [ciphertext, info] = this.excuteRijndaelAES(formData);
 
+
+
             // update output field
-            this.outputField.value = ciphertext;
+            const preparedCipherText = this.prepareHexOutputString(ciphertext)
+            this.outputField.value = preparedCipherText;
 
             // prepare data for animation
             const preparedInfo = this.prepareRijndaelDataForDisplay(info)
+
+            // update plaintext hexadecimal
+            const plaintextHexInput = intToHexStringArray(info["plaintext"]).join("")
+            const plaintextHexInputPrepared = this.prepareHexOutputString(plaintextHexInput)
+            this.plaintextHexadecimalField.value = plaintextHexInputPrepared
+
             // call data controller to update
             this.controller.data.updateStoreByObject(preparedInfo)
             if(update)
                 this.controller.timeline.saveAndRebuildTimeline();
         }
+    }
+
+    prepareHexOutputString = (hexString) => {
+        let outputString = ""
+        const blocks = hexString.match(/.{1,32}/g)
+
+        blocks.forEach((block, i) => {
+            const hexadecimals = block.match(/.{1,2}/g)
+            if(i != 0) outputString += " "
+            outputString += hexadecimals.join("")
+          
+        })
+        console.log(outputString)
+        return outputString
     }
 }
 
