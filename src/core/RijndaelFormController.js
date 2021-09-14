@@ -15,6 +15,9 @@ const PLAINTEXT_FIELD_ID = "rijndael-form-plaintext-input"
 const PLAINTEXT_HEXADECIMAL_FIELD_ID = "rijndael-form-plaintext-hexadecimal"
 const FORM_ERROR_FIELD = "rijndael-form-error-field"
 
+const PLAINTEXT_ROW_ID = "rijndael-plaintext-row"
+const PLAINTEXT_HEX_ROW_ID = "rijndael-plaintext-hex-row"
+
 class RijndaelFormController{
 
     constructor(controller){
@@ -26,7 +29,11 @@ class RijndaelFormController{
         this.plaintextField = document.getElementById(PLAINTEXT_FIELD_ID)
         this.plaintextHexadecimalField = document.getElementById(PLAINTEXT_HEXADECIMAL_FIELD_ID)
         this.errorField = document.getElementById(FORM_ERROR_FIELD)
+        this.plaintextRow = document.getElementById(PLAINTEXT_ROW_ID)
+        this.plaintextHexRow = document.getElementById(PLAINTEXT_HEX_ROW_ID)
+        this.radioSelects = document.getElementsByName("asciiorhex")
         this.errors = null;
+        this.mode = "ascii"
 
         // add event listener
         this.formButton.addEventListener("click", (e) => {
@@ -35,6 +42,55 @@ class RijndaelFormController{
         })
 
         // prime store
+        
+        this.radioSelects.forEach((radio) => {
+            radio.addEventListener("change", (e) => {
+                if(e.target.value == "hex"){
+                    // hide first field
+                    this.plaintextRow.style.visibility = "hidden"
+                    // move second field up 
+                    this.plaintextHexRow.style.order = -1
+                    this.plaintextRow.style.order = 1
+                    // enable second field
+                    this.mode = "hex"
+                    this.plaintextHexadecimalField.disabled = false;
+                }else{
+                    // dont hide first field
+                    this.plaintextRow.style.visibility = "visible"
+                    // reorder second field
+                    this.plaintextRow.style.order = 0
+                    this.plaintextHexRow.style.order = 0
+                    // disabled second field
+                    this.mode = "ascii"
+                    this.plaintextHexadecimalField.disabled = true;
+                }
+             
+            })
+        })
+
+        this.plaintextField.addEventListener("keyup", (e) => {
+            const value = e.target.value;
+            // convert to hex and insert into input (hex)
+            const intArray = Utils.toArray(value)
+            const convertedValue = Utils.intArrayToHexString(intArray)
+
+            
+            this.plaintextHexadecimalField.value = this.prepareHexOutputString(convertedValue);
+        })
+
+        this.plaintextHexadecimalField.addEventListener("keyup", (e) => {
+            const value = e.target.value;
+            // convert to ascii and insert into input (ascii)
+            const intArray = Utils.hexStringToArray(value)
+            const convertedValue = Utils.intArrayToAsciiString(intArray)
+
+            this.plaintextField.value = convertedValue;
+        })
+
+
+        const intArray = Utils.toArray(this.plaintextField.value)
+        const convertedValue = Utils.intArrayToHexString(intArray)
+        this.plaintextHexadecimalField.value = this.prepareHexOutputString(convertedValue);
         this.onEcryptClick();
     }
 
@@ -104,27 +160,44 @@ class RijndaelFormController{
 
 
     gatherFormData(){
+
+        const plaintext = this.mode == "hex" ? 
+            Utils.hexStringToArray(this.plaintextHexadecimalField.value.replace(/\s/g, ''))
+        : Utils.toArray(this.plaintextField.value);
+        
+        ;
         return {
-            plaintext: this.plaintextField.value,
+            plaintext,
             key: this.KeyField.value,
         }
     }
 
-    validateFormData(data){
-        console.log(data)
-        // hexadecimal regex
+    isHex(hexString){
         var re = /[0-9A-Fa-f]{6}/g;
-
-        const key = data.key
-        // check if 32 cipher hexadecimal.
-        if(key.length == 32 && re.test(key)) {
-            this.errorField.innerHTML = "" 
-            return true;
-        }
-
-        this.errorField.innerHTML = this.controller.locale.getLocaleText("formErrorMessage")
+        if(hexString.length == 32 && re.test(hexString)) return true
         return false;
     }
+
+    validateFormData(data){
+        this.errorField.innerHTML = ""
+        let errorMessage = "";
+
+        if(!this.isHex(data.key)){
+            errorMessage = this.controller.locale.getLocaleText("formErrorMessage")
+        }
+
+        if(data.key.length == 0){
+            errorMessage = this.controller.locale.getLocaleText("formErrorKeyNotEmpty")
+        }
+
+        if(data.plaintext.length == 0){
+            errorMessage = this.controller.locale.getLocaleText("formErrorPlaintextNotEmpty")
+        }
+
+        this.errorField.innerHTML = errorMessage;
+        return !errorMessage;
+    }
+
 
 
     

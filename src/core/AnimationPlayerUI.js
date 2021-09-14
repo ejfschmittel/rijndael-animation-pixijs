@@ -10,7 +10,7 @@ const SETTINGS_BTN_ID = "rijndael-animation-settings-btn";
 const NAVIGATION_BTN_ID = "rijndael-animation-navigation-btn";
 const INFO_BTN_ID  = "rijndael-animation-info-btn";
 const FORM_BTN_ID = "rijndael-animation-form-btn";
-
+const CLOSE_SETTINGS_BTN_ID = "close-settings-btn"
 
 // overlays
 const SETTINGS_OVERLAY_ID = "rijndael-animation-settings-overlay";
@@ -50,7 +50,7 @@ class AnimationPlayerUI{
         this.infoBtn = document.getElementById(INFO_BTN_ID);
         this.navigationBtn = document.getElementById(NAVIGATION_BTN_ID);
         this.formBtn = document.getElementById(FORM_BTN_ID);
-
+        this.closeSettingsBtn = document.getElementById(CLOSE_SETTINGS_BTN_ID)
 
         this.navigationOverlay = document.getElementById(NAVIGATION_OVERLAY_ID);
         this.infoOverlay = document.getElementById(INFO_OVERLAY_ID)
@@ -127,6 +127,12 @@ class AnimationPlayerUI{
             this.onOverlayBtnPress(this.settingsBtn, this.settingsOverlay) 
         
         });
+
+        this.closeSettingsBtn.addEventListener("click", (e) => {
+            this.settingsOverlay.classList.remove("ui-container--display")
+            this.higlightButton(this.settingsBtn, false)
+
+        })
 
 
 
