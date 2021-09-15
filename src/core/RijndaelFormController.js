@@ -81,7 +81,7 @@ class RijndaelFormController{
         this.plaintextHexadecimalField.addEventListener("keyup", (e) => {
             const value = e.target.value;
             // convert to ascii and insert into input (ascii)
-            const intArray = Utils.hexStringToArray(value)
+            const intArray = Utils.hexStringToArray(value.replace(/\s/g, ''))
             const convertedValue = Utils.intArrayToAsciiString(intArray)
 
             this.plaintextField.value = convertedValue;
@@ -221,7 +221,7 @@ class RijndaelFormController{
             // update plaintext hexadecimal
             const plaintextHexInput = intToHexStringArray(info["plaintext"]).join("")
             const plaintextHexInputPrepared = this.prepareHexOutputString(plaintextHexInput)
-            this.plaintextHexadecimalField.value = plaintextHexInputPrepared
+           // this.plaintextHexadecimalField.value = plaintextHexInputPrepared
 
             // call data controller to update
             this.controller.data.updateStoreByObject(preparedInfo)
