@@ -17,6 +17,7 @@ const FORM_ERROR_FIELD = "rijndael-form-error-field"
 
 const PLAINTEXT_ROW_ID = "rijndael-plaintext-row"
 const PLAINTEXT_HEX_ROW_ID = "rijndael-plaintext-hex-row"
+const PLAINTEXT_HEX_LABEL_ID = "rijndael-plaintext-hex-label"
 
 class RijndaelFormController{
 
@@ -31,6 +32,7 @@ class RijndaelFormController{
         this.errorField = document.getElementById(FORM_ERROR_FIELD)
         this.plaintextRow = document.getElementById(PLAINTEXT_ROW_ID)
         this.plaintextHexRow = document.getElementById(PLAINTEXT_HEX_ROW_ID)
+        this.plaintextHexLabel = document.getElementById(PLAINTEXT_HEX_LABEL_ID)
         this.radioSelects = document.getElementsByName("asciiorhex")
         this.errors = null;
         this.mode = "ascii"
@@ -51,6 +53,8 @@ class RijndaelFormController{
                     // move second field up 
                     this.plaintextHexRow.style.order = -1
                     this.plaintextRow.style.order = 1
+                    //change label
+                    this.plaintextHexLabel.innerHTML =  this.controller.locale.getLocaleText("plaintextHexadecimalLabelTwo")
                     // enable second field
                     this.mode = "hex"
                     this.plaintextHexadecimalField.disabled = false;
@@ -60,6 +64,8 @@ class RijndaelFormController{
                     // reorder second field
                     this.plaintextRow.style.order = 0
                     this.plaintextHexRow.style.order = 0
+                    //change label
+                    this.plaintextHexLabel.innerHTML =  this.controller.locale.getLocaleText("plaintextHexadecimalLabel")
                     // disabled second field
                     this.mode = "ascii"
                     this.plaintextHexadecimalField.disabled = true;

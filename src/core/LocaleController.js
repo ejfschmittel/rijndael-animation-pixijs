@@ -29,6 +29,10 @@ class LocaleController{
 
         this.updatePIXILocale();
         this.updateHTMLLocale();
+
+        // redraw
+        this.controller.onResize();
+
     }
 
     bindPixiReference(pageID, key, element){

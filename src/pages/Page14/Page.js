@@ -89,24 +89,24 @@ class Page14 extends AnimationPage{
         subBytesText.anchor.set(1, .5)
         const Rcon4Text = new PIXI.Text("RconFourLabel")
        
-        const textInitial = new PIXI.Text("textIntro", { wordWrap: true,wordWrapWidth: 160, fontSize: 14})
+        const textInitial = new PIXI.Text("textIntro", { breakWords: true, wordWrap: true,wordWrapWidth: 160, fontSize: 12})
         this.bindPageLocale("textIntro", textInitial)
         textInitial.anchor.set(1, 0)
 
         // create texts
-        const sText = new PIXI.Text("text", { wordWrap: true,wordWrapWidth: 160, fontSize: 14})
+        const sText = new PIXI.Text("text", { breakWords: true, wordWrap: true,wordWrapWidth: 160, fontSize: 12})
         this.bindPageLocale("text", sText)
         sText.anchor.set(1, 0)
      
-        const aText = new PIXI.Text("textA", { wordWrap: true,wordWrapWidth: 160, fontSize: 14})
+        const aText = new PIXI.Text("textA", { breakWords: true, wordWrap: true,wordWrapWidth: 160, fontSize: 12})
         this.bindPageLocale("textA", aText)
         aText.anchor.set(1, 0)
 
-        const bText = new PIXI.Text("textB", { wordWrap: true,wordWrapWidth: 160, fontSize: 14})
+        const bText = new PIXI.Text("textB", { breakWords: true, wordWrap: true,wordWrapWidth: 160, fontSize: 12})
         this.bindPageLocale("textB", bText)
         bText.anchor.set(1, 0)
 
-        const textXor = new PIXI.Text("textXOR", { wordWrap: true,wordWrapWidth: 160, fontSize: 14})
+        const textXor = new PIXI.Text("textXOR", { breakWords: true, wordWrap: true,wordWrapWidth: 160, fontSize: 12})
         this.bindPageLocale("textXOR", textXor)
         textXor.anchor.set(1, 0)
 
