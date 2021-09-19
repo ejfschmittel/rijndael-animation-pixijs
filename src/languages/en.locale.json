@@ -207,10 +207,11 @@
         "RconFourLabel": "Rcon(4)",
 
         "textIntro": "The expanded key can be seen as an array of 32-bit words (columns), numbered from 0 to 43. The first four columns are filled with the given cipher key",
-        "text": "Words in positions that are multiples of 4 (W4, W8, ..., W40) are calculated by:",
-        "textA": "a) Applying the RotWord and SubBytes transformation to the previous word wi-1.",
-        "textB": "b) Adding (XOR) this result to the word 4 positions earlier wi-4, plus a round constant Rcon.",
-        "textXOR": "The remaining 32-bit words wi, are calculated by adding (XOR) the previous word wi-1with the word 4 positions earlier Wi-4",
+        "text": "Words in positions that are multiples of 4 (W<sub>4</sub>, W<sub>8</sub>, ..., W<sub>40</sub>) are calculated by:",
+        "textA": "a) Applying the RotWord and SubBytes transformation to the previous word w<sub>i-1</sub>.",
+        "textB": "b) Adding (XOR) this result to the word 4 positions earlier w<sub>i-4</sub>, plus a round constant Rcon.",
+        "textXOR": "The remaining 32-bit words w<sub>i</sub>, are calculated by adding (XOR) the previous word w<sub>i-1</sub> with the word 4 positions earlier W<sub>i-4</sub>",
+
 
         "cipherKeyLabel": "Cipher key",
         "roundKeyOneLabel": "Round key 1",

@@ -89,7 +89,7 @@ class Page14 extends AnimationPage{
         subBytesText.anchor.set(1, .5)
         const Rcon4Text = new PIXI.Text("RconFourLabel")
        
-        const textInitial = new PIXI.Text("textIntro", { breakWords: true, wordWrap: true,wordWrapWidth: 160, fontSize: 12})
+        /*const textInitial = new PIXI.Text("textIntro", { breakWords: true, wordWrap: true,wordWrapWidth: 160, fontSize: 12})
         this.bindPageLocale("textIntro", textInitial)
         textInitial.anchor.set(1, 0)
 
@@ -108,7 +108,38 @@ class Page14 extends AnimationPage{
 
         const textXor = new PIXI.Text("textXOR", { breakWords: true, wordWrap: true,wordWrapWidth: 160, fontSize: 12})
         this.bindPageLocale("textXOR", textXor)
-        textXor.anchor.set(1, 0)
+        textXor.anchor.set(1, 0)*/
+        const screenContainer = document.getElementById("rijndael-animation-screen")
+
+     
+
+        const createPixiText = (localeKey, id) => {
+            const text = document.createElement("div")
+            text.innerHTML = this.controller.locale.getCurrentLocaleObj()[this.id][localeKey]
+            text.classList.add("pixi-text")
+            text.dataset.lang= this.id + "." + localeKey
+            text.id = id;
+            return text;
+        }
+
+        const textInitial = createPixiText("textIntro", "page-14-text-intro")
+        const container = document.createElement("div")
+        const sText = createPixiText("text", "page-14-text-s")
+        const aText = createPixiText("textA", "page-14-text-a")
+        const bText = createPixiText("textB", "page-14-text-b")
+        container.classList.add("pixi-text", "pixi-text-container")
+        container.appendChild(sText)
+        container.appendChild(aText)
+        container.appendChild(bText)
+        const textXor = createPixiText("textXOR", "page-14-text-xor")
+        textXor.classList.add("pixi-text-container")
+        textInitial.classList.add("pixi-text-container")
+        screenContainer.appendChild(container)
+        screenContainer.appendChild(textInitial)
+        screenContainer.appendChild(textXor)
+
+        
+
 
         // create sbox
         const sbox = new SBox();
@@ -182,8 +213,8 @@ class Page14 extends AnimationPage{
             addSymbol2,
             roundOneKeyText, roundTwoKeyText, cipherKeyText, roundThreeKeyText, roundTenKeyText,
             rotWordText, sboxText,subBytesText,
-            textXor,
-            textInitial, sText, aText, bText
+            //textXor,
+            //textInitial, sText, aText, bText
             
         })
 
@@ -209,7 +240,9 @@ class Page14 extends AnimationPage{
             finalGridMovables,
             subBytesMovables, rconMovables, primaryGrids, secondaryGrids, 
             pgOneMovablesTranform, pgOneMovablesOg, pgTwoMovablesOg, 
-            pgTwoMovablesTranform, pgThreeMovablesOg, pgThreeMovablesTranform})
+            pgTwoMovablesTranform, pgThreeMovablesOg, pgThreeMovablesTranform,
+            textXor, sText, aText, bText, textInitial
+        })
     }
 
     drawPage(defines){
@@ -385,7 +418,7 @@ class Page14 extends AnimationPage{
           
 
         // position info texts
-        const {textXor, aText, bText, sText, textInitial} = this.globalComponents
+       /* const {textXor, aText, bText, sText, textInitial} = this.globalComponents
         const {xorTextPos, sTextStylesPos, initialTextPos} = defines;
         textXor.position.set(xorTextPos.x, xorTextPos.y)
 
@@ -393,7 +426,7 @@ class Page14 extends AnimationPage{
         textInitial.position.set(initialTextPos.x,initialTextPos.y)
         sText.position.set(sTextStylesPos.x, sTextStylesPos.y)
         aText.position.set(sText.x, sText.y + sText.height)
-        bText.position.set(sText.x, aText.y + aText.height)
+        bText.position.set(sText.x, aText.y + aText.height)*/
     }
 
     redrawRoundKeyLabel(label, labelStyles, referenceGrid, baseGridStyles){   

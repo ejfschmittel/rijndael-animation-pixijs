@@ -141,11 +141,15 @@ class Page14Timline extends AnimationPageTimeline{
         tl.set([
             addSymbol, addSymbol2, equalsSymbol, cipherKeyText, sbox, 
             subBytesText, roundOneKeyText, roundTwoKeyText, 
-            sText, aText, bText, textInitial, textXor,
+            
             rotWordText, sboxText,
             roundThreeKeyText,
             roundTenKeyText,
         ], {pixi: {alpha: 0}})
+
+        tl.set([
+            sText, aText, bText, textInitial, textXor,
+        ], {opacity: 0})
   
 
       
@@ -181,13 +185,14 @@ class Page14Timline extends AnimationPageTimeline{
         
         // first box
         if(!this.page.shouldHide){
-            tl.to(textXor,{pixi: {alpha: 1}})
+            console.log("show xor text")
+            tl.to(textXor,{opacity: 1})
         }
         
         tl.add(this.moveXL(4, pgOneMovablesTranform, pgTwoMovablesTranform, pgTwoMovablesOg))
         tl.add(this.moveXL(5, pgOneMovablesTranform, pgTwoMovablesTranform, pgTwoMovablesOg))
         tl.add(this.moveXL(6, pgOneMovablesTranform, pgTwoMovablesTranform, pgTwoMovablesOg))
-        tl.to(textXor,{pixi: {alpha: 0}})
+        tl.to(textXor,{opacity: 0})
 
         // second iteration
         if(!this.page.shouldHide){
@@ -205,12 +210,12 @@ class Page14Timline extends AnimationPageTimeline{
 
         // reveal round key 3
         if(!this.page.shouldHide){
-            tl.to([ cipherKeyText,roundOneKeyText,roundTwoKeyText], {pixi: {alpha: 1}})
-            tl.to([...pgFourMovablesOg.movables, roundThreeKeyText], {pixi: {alpha: 1}});
+            tl.to([ cipherKeyText,roundOneKeyText,/*roundTwoKeyText*/], {pixi: {alpha: 1}})
+            tl.to([...pgFourMovablesOg.movables, /*roundThreeKeyText*/], {pixi: {alpha: 1}});
             tl.to(rconMovables.getCol(2), {pixi: {alpha: 0}}, "<");
         }else{
             tl.to([ cipherKeyText,roundOneKeyText], {pixi: {alpha: 1}})
-            tl.to([...pgThreeMovablesOg.movables, roundTwoKeyText], {pixi: {alpha: 1}});
+            tl.to([...pgThreeMovablesOg.movables, /*roundTwoKeyText*/], {pixi: {alpha: 1}});
             tl.to(rconMovables.getCol(1), {pixi: {alpha: 0}}, "<");
         }
 
@@ -324,7 +329,7 @@ class Page14Timline extends AnimationPageTimeline{
         tl.set(equalsSymbol, {pixi: {...this.getSecondaryGridBounds(8)}})
         
         if(!this.page.shouldHide){
-            tl.to(textInitial, {pixi: {alpha: 1}})
+            tl.to(textInitial, {opacity: 1})
         }
      
         
@@ -332,11 +337,11 @@ class Page14Timline extends AnimationPageTimeline{
         // move down and shift col
         const bounds = addTwoLanding[0].getBounds();
         tl.to(rotWordText, {pixi: {x: bounds.x + 50, y: bounds.y + 30 }, duration: .001, delay: 2} )
-        tl.to(textInitial, {pixi: {alpha: 0}})
+        tl.to(textInitial, {opacity: 0})
         tl.add(this.moveGroup(lastColMovables, addTwoLanding, {duration: 1}))
         tl.to([rotWordText], {pixi: {alpha: 1}})
         if(!this.page.shouldHide){
-            tl.to([aText, sText], {pixi: {alpha: 1}}, "<")
+            tl.to([aText, sText], {opacity:1}, "<")
         }
         tl.add(this.shiftColumn(lastColMovables, addTwoLanding, {}))
         tl.to(rotWordText, {pixi: {alpha: 0}})
@@ -356,7 +361,7 @@ class Page14Timline extends AnimationPageTimeline{
         tl.add(this.moveGroup(rconColMovables, addThreeLanding, {duration: 1}))
        
         if(!this.page.shouldHide){
-            tl.to(bText, {pixi: {alpha: 1}})
+            tl.to(bText, {opacity: 1})
         }
         tl.to(addSymbol2, {pixi: {alpha: 1}})
         tl.to(equalsSymbol, {pixi: {alpha: 1}})
@@ -372,7 +377,7 @@ class Page14Timline extends AnimationPageTimeline{
 
         // hide equation
         tl.to([addSymbol, addSymbol2, equalsSymbol], {pixi: {alpha: 0}})
-        tl.to([sText, aText, bText], {pixi: {alpha: 0}})
+        tl.to([sText, aText, bText], {opacity: 0})
         tl.to([...lastColMovables, ...firstColMovables, ...rconColMovables, ...subBytesMovables.movables], {pixi: {alpha: 0}})
 
         // move last col back
@@ -471,7 +476,7 @@ class Page14Timline extends AnimationPageTimeline{
 
         // hide equation
         tl.to([addSymbol, addSymbol2, equalsSymbol], {pixi: {alpha: 0}})
-        tl.to([sText, aText, bText], {pixi: {alpha: 0}})
+        tl.to([sText, aText, bText], {opacity: 0})
         tl.to([...lastColMovables, ...firstColMovables, ...rconColMovables, ...subBytesMovables.movables], {pixi: {alpha: 0}})
 
         // move last col back

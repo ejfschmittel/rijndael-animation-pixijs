@@ -186,3 +186,30 @@ html,body{
         align-items: center;
     }
 }
+
+.pixi-text{
+  
+}
+
+.pixi-text-container{
+    z-index: 3;
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    max-width: 200px;
+    font-size: .9rem;
+
+    & > div{
+        margin-bottom: .2rem;
+    }
+
+    & > div:not(:first-child){
+        padding-left: 1rem;
+    }
+
+    
+}
+
+#page-14-text-intro{
+   
+}

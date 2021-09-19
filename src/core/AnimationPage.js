@@ -109,7 +109,6 @@ class AnimationPage extends PIXI.Container{
     }
 
     getDefines(){
-
         const defaultDefines = this.responsivesByLabel[this.DEFAULT_RESPONSIVE_LABEL].getDefines()
         let defines = {...defaultDefines};
 

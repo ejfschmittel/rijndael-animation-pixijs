@@ -206,11 +206,11 @@
         "RconFourLabel": "Rcon(4)",
 
 
-        "textIntro": "Der expandierte Schlüssel kann als Vektor von 32-Bit-Worten (Spalten) betrachtet werden. Die Indizes der Spalten Wi laufen von 0 bis 43. Die ersten vier Spalten werden mit dem gegebenen Hauptschlüssel gefüllt.",
-        "text": "Die Worte auf durch 4 teilbaren Positionen (W4, W8,...,W40) werden folgendermaßen berechnet:",
-        "textA": "a) Anwenden der Funktion RotWord und der Transformation SubBytes auf das vorausgehende Wort Wi-1.",
-        "textB": "b) Mit der XOR-Funktion das erste Ergebnis mit dem Vorgängerwort wi-4 verknüpfen. Danach die XOR-Funktion auf das folgende Ergebnis und auf Elemente der Rundenkonstante Rcon anwenden",
-        "textXOR": "Die restlichen 32-Bit-Worte wi werden berechnet, indem das jeweilige Vorgängerwort Wi-1XOR-verknüpft wird mit dem Wort Wi-4 vier Positonen vorher.",
+        "textIntro": "Der expandierte Schlüssel kann als Vektor von 32-Bit-Worten (Spalten) betrachtet werden. Die Indizes der Spalten W<sub>i</sub> laufen von 0 bis 43. Die ersten vier Spalten werden mit dem gegebenen Hauptschlüssel gefüllt.",
+        "text": "Die Worte auf durch 4 teilbaren Positionen (W<sub>4</sub>, W<sub>8</sub>,...,W<sub>40</sub>) werden folgendermaßen berechnet:",
+        "textA": "a) Anwenden der Funktion RotWord und der Transformation SubBytes auf das vorausgehende Wort W<sub>i-1</sub>.",
+        "textB": "b) Mit der XOR-Funktion das erste Ergebnis mit dem Vorgängerwort w<sub>i-4</sub> verknüpfen. Danach die XOR-Funktion auf das folgende Ergebnis und auf Elemente der Rundenkonstante Rcon anwenden",
+        "textXOR": "Die restlichen 32-Bit-Worte w<sub>i</sub> werden berechnet, indem das jeweilige Vorgängerwort W<sub>i-1</sub> XOR-verknüpft wird mit dem Wort W<sub>i-4</sub> vier Positonen vorher.",
 
         "cipherKeyLabel": "Hauptschlüssel",
         "roundKeyOneLabel": "Rundenschlüssel 1",

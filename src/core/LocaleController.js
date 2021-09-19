@@ -86,12 +86,35 @@ class LocaleController{
         const containers = document.querySelectorAll(".ui > div")
         for(let i = 1; i < containers.length; i++){
             const container = containers[i]
+           
             this.updateHTMLLocaleByContainer(container, this.getCurrentLocaleObj())
         } 
+
+        this.updatePixiHTMLLocale()
+
+    }
+
+    updatePixiHTMLLocale(){
+        const screen = document.getElementById("rijndael-animation-screen")
+        const languageNodes = screen.querySelectorAll("[data-lang]")
+
+        const locale = this.getCurrentLocaleObj()
+
+        languageNodes.forEach(element => {
+            const langDataKey = element.dataset["lang"]
+
+            const [pageID, langKey] = langDataKey.split(".")
+            console.log(pageID)
+            console.log(langKey)
+            console.log(locale[pageID][langKey])
+
+            element.innerHTML = locale[pageID][langKey]
+        })
     }
 
     updateHTMLLocaleByContainer(container, locale){
         const languageNodes = container.querySelectorAll("[data-lang]")
+
         languageNodes.forEach(element => {
             const langDataKey = element.dataset["lang"]
             if(langDataKey in locale){
