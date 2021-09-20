@@ -210,8 +210,8 @@ class Page14Timline extends AnimationPageTimeline{
 
         // reveal round key 3
         if(!this.page.shouldHide){
-            tl.to([ cipherKeyText,roundOneKeyText,/*roundTwoKeyText*/], {pixi: {alpha: 1}})
-            tl.to([...pgFourMovablesOg.movables, /*roundThreeKeyText*/], {pixi: {alpha: 1}});
+            tl.to([ cipherKeyText,roundOneKeyText,roundTwoKeyText], {pixi: {alpha: 1}})
+            tl.to([...pgFourMovablesOg.movables, roundThreeKeyText], {pixi: {alpha: 1}});
             tl.to(rconMovables.getCol(2), {pixi: {alpha: 0}}, "<");
         }else{
             tl.to([ cipherKeyText,roundOneKeyText], {pixi: {alpha: 1}})

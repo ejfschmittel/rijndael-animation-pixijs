@@ -37,7 +37,7 @@ class AnimationPage extends PIXI.Container{
 
         this.timeline = null;
 
-        this.interactiveChildren = false;
+        this.interactiveChildren = true;   
     }
 
     addPermanent(obj){
@@ -109,7 +109,8 @@ class AnimationPage extends PIXI.Container{
     }
 
     getDefines(){
-        const defaultDefines = this.responsivesByLabel[this.DEFAULT_RESPONSIVE_LABEL].getDefines()
+      
+        const defaultDefines =  this.responsivesByLabel[this.DEFAULT_RESPONSIVE_LABEL] ? this.responsivesByLabel[this.DEFAULT_RESPONSIVE_LABEL].getDefines() : {};
         let defines = {...defaultDefines};
 
         // find correct responsive

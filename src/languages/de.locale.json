@@ -87,7 +87,9 @@
 
     "page-14-title": "Seite 14: Schlüsselplan",
     "page-14-info": "<p>Der Schlüsselplan ist das Mittel, mit dem der Hauptschlüssel in einen Satz von Rundschlüsseln erweitert wird. Dies geschieht vor dem Verschlüsselungs-/Entschlüsselungsprozess. Die Anzahl der resultierenden Rundenschlüssel-Bits ist gleich der Blocklänge multipliziert mit der Anzahl der Runden plus eins (hier 128 Bit * 11 = 1408 Rundenschlüssel-Bits).</p><p>Zur Erinnerung: Nb = Anzahl der Wörter im Nachrichtenblock, Nk = Anzahl der Wörter im Hauptschlüssel.</p><p>Dieser erweiterte Schlüssel ist ein Array von 4-Byte-Wörtern (W). Die ersten Nb Wörter werden mit dem Hauptschlüssel gefüllt. Die folgenden Wörter werden dann rekursiv durch Wörter mit kleineren Indizes definiert.</p><p>Die genauen Operationen, die dafür verwendet werden, hängen vom Wert von Nk ab. Es gibt zwei Gruppen von Operationen, eine für Nk ≤ 6 und eine für Nk > 6.</p><p>Jedes Wort, das auf den Hauptschlüssel folgt, wird durch eine XOR-Verknüpfung des vorherigen Wortes W[i-1] und des Wortes, das Nk Positionen vor W[i-Nk] liegt, erzeugt.</p><p>Für Wörter an Positionen, die ein Vielfaches von Nk sind, wird vor der XOR-Verknüpfung eine Transformation auf W[i-1] angewendet. Zusätzlich wird eine Rundungskonstante (Rcon) XORiert.</p><p>Die Transformation von W[i-1] besteht aus einer zyklischen Verschiebung der Bytes im Wort (RotByte), gefolgt von einem Tabellennachschlag auf alle vier Bytes des Wortes (SubBytes).</p><p>Der individuelle Rundenschlüssel (i) kann dann durch Auswahl des Unterarrays W[Nb * i] bis W[Nb * (i+1)] definiert werden.</p>",
-
+    
+    "page-15-title": "Page 15: Finish Card",
+    "page-15-info": "Restart the animation from the given",
 
     "page-1": {
         "titlePartOne": "Rijndael",

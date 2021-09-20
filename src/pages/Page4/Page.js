@@ -18,11 +18,15 @@ class Page4 extends AnimationPage{
         this.registerResponsive("max-768", ResponsiveMax768)
         this.registerResponsive("max-425", ResponsiveMax425)
    
+        this.interactiveChildren = true;
     }
 
 
     create(defines){
         const background = this.createBackground();
+
+        console.log(background.on)
+ 
           
         const circledChar = new CircledText("A", {fontSize: 30, fill: 0xffffff}, {radius: 30,borderColor: 0xffffff})
 

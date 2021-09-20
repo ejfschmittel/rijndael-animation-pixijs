@@ -15,6 +15,7 @@ import Page11 from "./pages/Page11/Page"
 import Page12 from "./pages/Page12/Page"
 import Page13 from "./pages/Page13/Page"
 import Page14 from "./pages/Page14/Page"
+import Page15 from "./pages/Page15/Page"
 
 
 const SETTINGS = {
@@ -47,6 +48,7 @@ class RijndaelAnimation extends AnimationController {
         this.registerAnimationPage(Page12, "page-12")
         this.registerAnimationPage(Page13, "page-13")
         this.registerAnimationPage(Page14, "page-14")
+        this.registerAnimationPage(Page15, "page-15")
    
  
         this.buildTimeline()

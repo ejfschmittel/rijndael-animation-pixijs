@@ -76,9 +76,18 @@ class AnimationController{
         // add stage to canvas
         this.container.appendChild(this.app.view)
 
+       
+
         // enable touch scaling 
-        this.app.renderer.plugins.interaction.autoPreventDefault = false;
-        this.app.renderer.view.style.touchAction = 'auto';
+        //this.app.renderer.plugins.interaction.autoPreventDefault = false;
+        //this.app.renderer.view.style.touchAction = 'auto';
+
+
+      
+
+        this.app.stage.interactiveChildren = true;
+
+
 
      
                 

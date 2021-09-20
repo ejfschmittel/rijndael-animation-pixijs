@@ -188,7 +188,8 @@ html,body{
 }
 
 .pixi-text{
-  
+  user-select: none;
+  opacity: 0;
 }
 
 .pixi-text-container{
@@ -198,6 +199,8 @@ html,body{
     top: 50%;
     max-width: 200px;
     font-size: .9rem;
+    user-select: none;
+ 
 
     & > div{
         margin-bottom: .2rem;
