@@ -1,18 +1,14 @@
 {
-
     "playButtonTooltip": "Play / pause",
     "jumpForwardsTooltip": "Jump forwards",
     "jumpBackwardsTooltip": "Jump backwards",
     "settingsButtonTooltip": "Settings",
     "settingsCloseBtn": "Close",
 
+
     "infoButtLabel": "Info",
     "navigationButtonLabel": "Navigation",
     "formButtonLabel": "Input",
-
-    "finishOverlayBackToEncryption": "View encryption process again",
-    "finishOverlayBackToKeySchedule": "View key schedule again",
-    "finishOverlayBackToStart": "Restart animation",
 
     "settingsTitle": "Settings",
     "settingsThemeLabel": "Theme:",
@@ -39,7 +35,7 @@
     "plaintextHexadecimalLabelTwo": "Plaintext (input in hex)",
     "keyLabel": "Key (input in hex)",
     "outputLabel": "Ciphertext (output in hex)",
-
+    
     "encryptButtonLabel": "Encrypt",
     "formErrorMessage": "Key must consist of 32 hexadecimal chars.",
     "formErrorPlaintextNotEmpty": "The input must not be empty.",
@@ -118,8 +114,7 @@
         "text": "Performing the encryption of the given plaintext block in the initial round, the 9 main rounds, and the final round (using all 4 different transformations in the main rounds)."
     },
 
-
-     "page-5": {
+    "page-5": {
         "title": "Encryption Process",
         "titleInitialRound": "initial round",
         "titleMainRounds": "9 main rounds",
@@ -139,7 +134,7 @@
         "round": "Round"
     },
 
-     "page-6": {
+    "page-6": {
         "title": "The 4 types of encryption transformations",
         "labelone": "1 - SubBytes",
         "labelTwo": "2 - ShiftRows",
@@ -160,7 +155,7 @@
         "rotateTextTwo": "rotate over 2 bytes",
         "rotateTextThree": "rotate over 3 bytes"
     },
-      
+    
     "page-9": {
         "title": "3 - MixColumns",
         "text": "The 4 numbers of each column are modulo multiplied by a given matrix in Rijndael's Galois field.",
@@ -173,7 +168,7 @@
         "roundKeyText": "Produced as round key 1 during the key schedule – see page 14"
     },
 
-     "page-11": {
+    "page-11": {
         "introText": "The 4 transformations are applied to the state for 9 more rounds. The final round does not include the MixColumns transformation.",
         "roundLabel": "Start of round",
         "subBytesLabel": "After SubBytes",
@@ -222,7 +217,7 @@
         "textIntro": "The expanded key can be seen as an array of 32-bit words (columns W<sub>i</sub>), numbered from 0 to 43. The first four columns are filled with the given cipher key.",
         "text": "Words in positions that are multiples of 4 (W<sub>4</sub>, W<sub>8</sub>, ..., W<sub>40</sub>) are calculated by:",
         "textA": "a) Applying the function RotWord and transformation SubBytes to the previous word W<sub>i-1</sub>.",
-        "textB": "b) Adding (XOR) this result to the word 4 positions earlier w<sub>i-4</sub>, plus a round constant Rcon.",
+        "textB": "b) Adding (XOR) this result to the word 4 positions earlier W<sub>i-4</sub>, plus a round constant Rcon.",
         "textXOR": "The remaining 32-bit words W<sub>i</sub>, are calculated by adding (XOR) the previous word W<sub>i-1</sub> with the word 4 positions earlier W<sub>i-4</sub>",
 
         "cipherKeyLabel": "Cipher key",
@@ -231,4 +226,13 @@
         "roundKeyThreeLabel": "Round key 3",
         "roundKeyTenLabel": "Round key 10"
     },
+
+    "page-15": {
+        "finishOverlayBackToEncryption": "View encryption process again",
+        "finishOverlayBackToKeySchedule": "View key schedule again",
+        "finishOverlayBackToStart": "Restart animation",
+
+        "encryptionTitle": "Page 4: A) Encryption Process",
+        "keyScheduleTitle":  "Page 13: B) Key Schedule"
+    }
 }
