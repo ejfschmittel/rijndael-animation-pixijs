@@ -8,6 +8,7 @@ class Page2Timline extends AnimationPageTimeline{
     constructor(animationPage){
         super(animationPage)
      
+        this.FADE_OUT_DELAY = 0;
     }
 
     createAnimationMain(){      

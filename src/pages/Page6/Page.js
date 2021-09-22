@@ -28,12 +28,12 @@ class Page4 extends AnimationPage{
         title.anchor.set(.5, .5)
 
         const container = new PIXI.Container();
-        const labelSubBytes = new SlowTextBox("labelOne")
+        const labelSubBytes = new SlowTextBox("labelone")
         const labelShiftRows = new SlowTextBox("labelTwo")
         const labelMixColumns = new SlowTextBox("labelThree")
         const labelAddRoundKey = new SlowTextBox("labelFour")
 
-        this.bindPageLocale("labelOne", labelSubBytes.text)
+        this.bindPageLocale("labelone", labelSubBytes.text)
         this.bindPageLocale("labelTwo", labelShiftRows.text)
         this.bindPageLocale("labelThree", labelMixColumns.text)
         this.bindPageLocale("labelFour", labelAddRoundKey.text)
