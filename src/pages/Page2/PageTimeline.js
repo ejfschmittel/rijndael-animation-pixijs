@@ -11,6 +11,15 @@ class Page2Timline extends AnimationPageTimeline{
         this.FADE_OUT_DELAY = 0;
     }
 
+
+    createPreFadeIn(){
+        const {centerBox, arrowTopContainer, arrowBotContainer, arrowLeftContainer} = this.getGlobalComponents();
+        const tl = this.getPreFadeInTimeline();
+        tl.set(centerBox, {pixi: {scale: 1}})
+        tl.set([arrowBotContainer, arrowLeftContainer, arrowTopContainer], {pixi: {alpha: 1}, duration: .3})
+        return tl;
+    }
+
     createAnimationMain(){      
         const {arrowTop, arrowBottom, arrowLeft} = this.getGlobalComponents();
         const binaryStrings = generatRandomBinaryStrings(20, 8)
