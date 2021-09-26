@@ -215,7 +215,7 @@ class Page14Timline extends AnimationPageTimeline{
             tl.to(rconMovables.getCol(2), {pixi: {alpha: 0}}, "<");
         }else{
             tl.to([ cipherKeyText,roundOneKeyText], {pixi: {alpha: 1}})
-            tl.to([...pgThreeMovablesOg.movables, /*roundTwoKeyText*/], {pixi: {alpha: 1}});
+            tl.to([...pgThreeMovablesOg.movables, roundTwoKeyText], {pixi: {alpha: 1}});
             tl.to(rconMovables.getCol(1), {pixi: {alpha: 0}}, "<");
         }
 
