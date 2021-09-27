@@ -79,15 +79,20 @@ class Page7Timline extends AnimationPageTimeline{
         tl.to(stateMovables.get(0,0), {pixi: {alpha: 0}}, "move-back+=0")
 
 
-        for(let i = 0; i < resultMovables.movables.length; i++){
-            const cell = resultMovables.movables[i] 
+        for(let i = 1; i < stateMovables.movables.length; i++){
+            const cell = stateMovables.movables[i] 
+            const revealedCell = resultMovables.movables[i]
+            console.log(cell.text.text)
             const cellX = hexStringToInt(cell.text.text[0])
             const cellY = hexStringToInt(cell.text.text[1])
 
+            console.log(cellX, cellY)
             const sBoxCell = sbox.grid.get(cellX, cellY)
+          
+            console.log(sBoxCell.text.text)
 
             tl.to(sBoxCell.getBackground(), {pixi: {tint: sboxBackgroundHighlightColor}, duration: .1, delay: .5} )
-            tl.to(cell, {pixi: {alpha: 1}, duration: .1}, "<")
+            tl.to(revealedCell, {pixi: {alpha: 1}, duration: .1}, "<")
             tl.to(sBoxCell.getBackground(), {pixi: {tint: sboxBackgroundColor}, duration: .1, delay: .3} )
         }
 
