@@ -32,6 +32,7 @@ class ResponsiveMax768 extends AnimationPageResponsives{
 
         defines.roundLabelTextStyles = {
             ...defines.roundLabelTextStyles,
+            width: this.getWidth(20), 
             fontSize:12
         }
 
