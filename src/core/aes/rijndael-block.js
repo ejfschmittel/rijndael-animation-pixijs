@@ -89,7 +89,6 @@ class RijndaelBlock {
           for (let j = 0; j < blockSize; j++)
             ciphertext[start + j] = encrypted[j];
         }
-        console.log(allInfo)
         break;
 
       case 'cbc':

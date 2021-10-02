@@ -13,16 +13,22 @@ class Page1Timline extends AnimationPageTimeline{
         const {
             textRijndael,
             textCipher,
-            subtitle
+            subtitle,
+            introText,
         } = this.getGlobalComponents()
 
         const obj = {val: 0}
         const tl = gsap.timeline()
         tl.to(obj, {val: 1, duration: .0001})
         tl.set([...textRijndael.chars, ...textCipher.chars, subtitle], {pixi: {alpha: 0}})
+        tl.set([introText], {pixi: {alpha: 1}})
 
         return tl;
     }
+
+
+
+
 
     createAnimationMain(){
 
@@ -30,9 +36,13 @@ class Page1Timline extends AnimationPageTimeline{
             textRijndael,
             textCipher,
             subtitle,
+            introText
         } = this.getGlobalComponents()
-
+        const obj = {val: 0}
         const tl = gsap.timeline();
+        tl.to(obj, {val: 1, duration: .0001})
+        tl.to([introText], {pixi: {alpha: 0}})
+        
         tl.to([...textRijndael.chars, ...textCipher.chars], {pixi: {
             scale: 3,
          

@@ -94,7 +94,9 @@
     "page-1": {
         "titlePartOne": "Rijndael",
         "titlePartTwo": "Verschlüsselung",
-        "text": "In der Animation wurde sowohl für den Datenblock als auch für den Schlüssel eine Länge von 128 Bit genommen"
+        "text": "In der Animation wurde sowohl für den Datenblock als auch für den Schlüssel eine Länge von 128 Bit genommen",
+        "introTitle": "Intro",
+        "introText": "Drücken Sie auf Play, um die Animation zu starten."
     },
     "page-2": {
         "boxText": "Rijndael-Verschlüsseler",

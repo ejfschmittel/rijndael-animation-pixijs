@@ -89,7 +89,9 @@
     "page-1": {
         "titlePartOne": "Rijndael",
         "titlePartTwo": "Cipher",
-        "text": "The animation uses a 128 bit size for both the data block and the key"
+        "text": "The animation uses a 128 bit size for both the data block and the key",
+        "introTitle": "Intro",
+        "introText": "Press play to start the animation."
     },
 
     "page-2": {

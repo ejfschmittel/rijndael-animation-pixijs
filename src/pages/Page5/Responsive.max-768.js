@@ -14,15 +14,26 @@ class ResponsiveMax768 extends AnimationPageResponsives{
     getDefines(defines){
        
         defines.counterStyles = {
-            ... defines.counterStyles,
+            ...defines.counterStyles,
             width: 59,
             height: 40,
             position: {
                 x:  this.getWidth(80),
-                y: this.getHeight(90)
+                y: this.getHeight(96)
             },
         }
 
+
+
+        defines.sectionTitleStyles = {
+            ...defines.sectionTitleStyles,
+            fontSize: 20,
+        }
+
+        defines.roundLabelTextStyles = {
+            ...defines.roundLabelTextStyles,
+            fontSize:12
+        }
 
         return defines;
     }

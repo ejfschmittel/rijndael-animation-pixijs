@@ -53,9 +53,7 @@ class Page3 extends AnimationPage{
         textLeft.anchor.set(.5, 0)
 
         const circleLeft = new CircledText("A", {fontSize: 30, fill: 0xffffff},  {radius: 30,borderColor: 0xffffff})
-        circleLeft.addListener("click", () => {
-            console.log("A clicked")
-        })
+
 
         // right side (key)
         const subtitleRight = new PIXIText("subtitleRight")

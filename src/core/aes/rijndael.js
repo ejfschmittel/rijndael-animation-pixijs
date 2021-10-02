@@ -61,14 +61,19 @@ class Rijndael {
         // 1. Rotate 8 bit left
         // 2. Apply S-box on every byte
         // 3. First byte ^= RCON[rconIndex]
+
+        
+
         temp = [
-          SBOX[temp[1]] ^ RCON[rconIndex],
+          SBOX[temp[1]],
           SBOX[temp[2]],
           SBOX[temp[3]],
           SBOX[temp[0]],
         ];
-
         firstBytes.push(...temp.slice())
+        temp[0] = temp[0] ^ RCON[rconIndex]
+
+        
 
         // Use next RCON
         rconIndex++;

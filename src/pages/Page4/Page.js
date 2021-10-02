@@ -24,10 +24,7 @@ class Page4 extends AnimationPage{
 
     create(defines){
         const background = this.createBackground();
-
-        console.log(background.on)
  
-          
         const circledChar = new CircledText("A", {fontSize: 30, fill: 0xffffff}, {radius: 30,borderColor: 0xffffff})
 
         // title

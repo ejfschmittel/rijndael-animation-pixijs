@@ -40,7 +40,7 @@ class ResponsiveMax425 extends AnimationPageResponsives{
         
         defines.sectionTitleStyles = {
             ...defines.sectionTitleStyles, 
-            fontSize: 20,
+            fontSize: 16,
         }
 
         return defines;

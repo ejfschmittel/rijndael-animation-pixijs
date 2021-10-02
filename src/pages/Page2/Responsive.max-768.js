@@ -16,7 +16,6 @@ class ResponsiveMax768 extends AnimationPageResponsives{
     }
 
     getDefines(defines){
-        console.log("768")
         defines.textBoxStyles = {
             ...defines.textBoxStyles,
             x: this.getWidth(70),

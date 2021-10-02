@@ -37,15 +37,22 @@ class Page1 extends AnimationPage{
         container.addChild(textRijndael, textCipher)
 
 
+        const introTitle = new PIXI.Text("testeasfdasdf", {fill: 0xffffff, wordWrap: true, wordWrapWidth: 320, fontSize: 30})
+        this.bindPageLocale("introTitle", introTitle)
+        const introText = new PIXI.Text("test 2", {fill: 0xffffff, wordWrap: true, wordWrapWidth: 320, fontSize: 18})
+        this.bindPageLocale("introText", introText)
+        const containerIntro = new Component();
+        container.addChild(introText)
+
         //this.addPermanent({background, container})
-        this.addToGlobalComponents({textRijndael,textCipher})
-        this.addPermanent({background, subtitle, container})
+        this.addToGlobalComponents({textRijndael,textCipher, introTitle, introText})
+        this.addPermanent({background, subtitle, container, containerIntro})
     }
 
 
     drawPage(defines){
 
-        const {background, container, textCipher, textRijndael, subtitle} = this.globalComponents;
+        const {background, container, textCipher, textRijndael, subtitle, containerIntro, introText, introTitle} = this.globalComponents;
 
         const {backgroundStyles, containerPos} = defines
 
@@ -62,10 +69,22 @@ class Page1 extends AnimationPage{
         container.position.set(containerPos.x, containerPos.y)
         container.pivot.set(container.width / 2, container.height)
 
+
+
         // subtitle
         const {subtitleStyles} = defines
         this.updateFontStyle(subtitle, subtitleStyles)
         subtitle.position.set(subtitleStyles.position.x, container.y + container.height)
+
+        //intro
+        introTitle.position.set(container.width / 2, 0)
+        introTitle.pivot.set(introTitle.width / 2, 0)
+
+        introText.position.set(container.width / 2, introTitle.height *2)
+        introText.pivot.set(introText.width / 2, 0)
+
+        containerIntro.position.set(containerPos.x, containerPos.y)
+        containerIntro.pivot.set(container.width / 2, container.height)
 
     }
 }

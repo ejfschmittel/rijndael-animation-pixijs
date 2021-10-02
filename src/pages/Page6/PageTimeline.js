@@ -12,7 +12,7 @@ class Page6Timline extends AnimationPageTimeline{
     createPreFadeIn(){ 
         const {container, title} = this.getGlobalComponents();
         const tl = this.getPreFadeInTimeline();
-        tl.set([title, container], {pixi: {alpha: 0}})
+        tl.set([container], {pixi: {alpha: 0}})
         return tl;
     }
 

@@ -89,26 +89,7 @@ class Page14 extends AnimationPage{
         subBytesText.anchor.set(1, .5)
         const Rcon4Text = new PIXI.Text("RconFourLabel")
        
-        /*const textInitial = new PIXI.Text("textIntro", { breakWords: true, wordWrap: true,wordWrapWidth: 160, fontSize: 12})
-        this.bindPageLocale("textIntro", textInitial)
-        textInitial.anchor.set(1, 0)
 
-        // create texts
-        const sText = new PIXI.Text("text", { breakWords: true, wordWrap: true,wordWrapWidth: 160, fontSize: 12})
-        this.bindPageLocale("text", sText)
-        sText.anchor.set(1, 0)
-     
-        const aText = new PIXI.Text("textA", { breakWords: true, wordWrap: true,wordWrapWidth: 160, fontSize: 12})
-        this.bindPageLocale("textA", aText)
-        aText.anchor.set(1, 0)
-
-        const bText = new PIXI.Text("textB", { breakWords: true, wordWrap: true,wordWrapWidth: 160, fontSize: 12})
-        this.bindPageLocale("textB", bText)
-        bText.anchor.set(1, 0)
-
-        const textXor = new PIXI.Text("textXOR", { breakWords: true, wordWrap: true,wordWrapWidth: 160, fontSize: 12})
-        this.bindPageLocale("textXOR", textXor)
-        textXor.anchor.set(1, 0)*/
         const screenContainer = document.getElementById("rijndael-animation-screen")
 
      
@@ -166,10 +147,14 @@ class Page14 extends AnimationPage{
         this.subscribeTo("key-1", pgTwoMovablesOg.movables)
         this.subscribeTo("key-1", pgTwoMovablesTranform.movables)
 
+      
+
         const pgThreeMovablesOg = primaryGridThree.createMovables();
         const pgThreeMovablesTranform = primaryGridThree.createMovables();
         this.subscribeTo("key-2", pgThreeMovablesOg.movables)
         this.subscribeTo("key-2", pgThreeMovablesTranform.movables)
+
+          // replace first column of first 
 
         const pgFourMovablesOg = primaryGridFour.createMovables();
         this.subscribeTo("key-3", pgFourMovablesOg.movables)
