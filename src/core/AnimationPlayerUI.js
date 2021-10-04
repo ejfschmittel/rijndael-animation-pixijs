@@ -153,7 +153,7 @@ class AnimationPlayerUI{
 
         this.speedInput.addEventListener("input", (e) => {
             this.animationSpeed = e.target.value / 100;
-            this.speedOutput.innerHTML = `(${this.animationSpeed.toFixed(1)})`;
+            this.speedOutput.innerHTML = `&nbsp;(${this.animationSpeed.toFixed(1)})`;
         })
 
 
