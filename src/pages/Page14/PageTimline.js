@@ -148,7 +148,7 @@ class Page14Timline extends AnimationPageTimeline{
         ], {pixi: {alpha: 0}})
 
         tl.set([
-            sText, aText, bText, textInitial, textXor,
+      textInitial, textXor,
         ], {opacity: 0})
   
 
@@ -339,6 +339,7 @@ class Page14Timline extends AnimationPageTimeline{
         tl.to(textInitial, {opacity: 0})
         tl.add(this.moveGroup(lastColMovables, addTwoLanding, {duration: 1}))
         tl.to([rotWordText], {pixi: {alpha: 1}})
+
         if(!this.page.shouldHide){
             tl.to([aText, sText], {opacity:1}, "<")
         }

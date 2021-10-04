@@ -43,7 +43,7 @@ class Page1 extends AnimationPage{
 
         const introTitle = new PIXI.Text("testeasfdasdf", {fill: 0xffffff, wordWrap: true, wordWrapWidth: 320, fontSize: 30})
         this.bindPageLocale("introTitle", introTitle)
-        const introText = new PIXI.Text("test 2", {fill: 0xffffff, wordWrap: true, wordWrapWidth: 320, fontSize: 18})
+        const introText = new PIXI.Text("test 2", {fill: 0xffffff, wordWrap: true, wordWrapWidth: 300, fontSize: 16})
         this.bindPageLocale("introText", introText)
         const containerIntro = new Component();
         containerIntro.addChild(introText)
