@@ -193,12 +193,17 @@
                 <h3 class="settings__title" data-lang="settingsTitle">Settings</h3>
                 <div class="settings__section">
                     <div class="settings__section-input-wrapper">
-                    <label  class="settings__section-label" data-lang="settingsThemeLabel">Theme:</label>
+                    <div class="settings__section-label">
+                        <label  class="settings__section-label" data-lang="settingsSpeedLabel">Speed:</label>
+                        <output id="rijndael-animation-speed-output">(1.0)</output>
+                    </div>
+
+                    <input type="range" class="settings__section-input" id="rijndael-animation-speed-select" value="100" max="400" min="50" step="10"/>
               
-                    <select  class="settings__section-input"  id="rijndael-animation-theme-select">
-                        <!--<option value="default" data-lang="themeOptionStandard">default</option>
-                        <option value="test" data-lang="themeOptionTest">test</option>-->
-                    </select>
+                    <!-- <select  class="settings__section-input"  id="rijndael-animation-theme-select">
+                       <option value="default" data-lang="themeOptionStandard">default</option>
+                        <option value="test" data-lang="themeOptionTest">test</option>
+                    </select>-->
                     </div>
                 </div>
     

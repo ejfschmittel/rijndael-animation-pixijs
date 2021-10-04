@@ -24,7 +24,7 @@ class ThemeController{
             return {...prev, [theme.name]: theme}
         },{})
 
-        this.initThemeSelect();
+        //this.initThemeSelect();
     }
 
     setTheme(themeName){

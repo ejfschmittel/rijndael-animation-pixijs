@@ -95,7 +95,9 @@ class Page10Timline extends AnimationPageTimeline{
         tl.add(this.moveGroup(resultMovables.getCol(0), columnResult.cells, {duration: .0001}))
 
 
+        tl.set(stateMovables.getCol(0), {pixi: {zIndex: 5}});
         tl.add(this.moveGroup(stateMovables.getCol(0), columnLanding1.cells,{duration: 1.5}))
+        
         tl.add(this.moveGroup(roundKeyMovables.getCol(0), columnLanding2.cells, {duration: 1.5}))
 
 

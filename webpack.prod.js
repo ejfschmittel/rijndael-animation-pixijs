@@ -1,6 +1,6 @@
 var path = require("path")
 const common = require("./webpack.common");
-
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { merge } = require('webpack-merge');
 var HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -12,6 +12,7 @@ module.exports = merge(common, {
         path: path.resolve(__dirname, "dist")
     },
     plugins: [
+        new CleanWebpackPlugin(),
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output
             // both options are optional
@@ -27,6 +28,7 @@ module.exports = merge(common, {
             filename: "frame.html",
             template: "./src/frame.html"
         }),
+      
     ],
     optimization: {
            splitChunks: {
@@ -42,4 +44,4 @@ module.exports = merge(common, {
          },
    
 
-})
+}) 

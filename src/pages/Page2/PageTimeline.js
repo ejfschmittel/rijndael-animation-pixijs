@@ -16,7 +16,7 @@ class Page2Timline extends AnimationPageTimeline{
         const {centerBox, arrowTopContainer, arrowBotContainer, arrowLeftContainer} = this.getGlobalComponents();
         const tl = this.getPreFadeInTimeline();
         tl.set(centerBox, {pixi: {scale: 1}})
-        tl.set([arrowBotContainer, arrowLeftContainer, arrowTopContainer], {pixi: {alpha: 1}, duration: .3})
+        tl.set([arrowBotContainer, arrowLeftContainer, arrowTopContainer], {pixi: {alpha: 1}})
         return tl;
     }
 

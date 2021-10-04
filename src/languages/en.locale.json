@@ -12,6 +12,7 @@
 
     "settingsTitle": "Settings",
     "settingsThemeLabel": "Theme:",
+    "settingsSpeedLabel": "Animation speed",
     "settingsJumpLabel": "Jump duration (seconds)",
     "settingsLanguageLabel": "Language",
 

@@ -524,6 +524,10 @@
 }
 
 
+#rijndael-animation-speed-select{
+    padding: 0;
+}
+
 .settings{
     background: #fff;
     width: 100%;
@@ -596,6 +600,8 @@
             width: 100%;
         }
     }
+
+    
 
     &__section-label{
         min-width: 14rem;

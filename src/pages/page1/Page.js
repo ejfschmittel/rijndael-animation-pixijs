@@ -14,8 +14,12 @@ class Page1 extends AnimationPage{
 
         this.timeline = new PageTimeline(this);
         this.registerResponsive("default", DefaultResponsives) 
+
+        this.FADE_IN_DURATION = .00001;
     }
 
+
+    
 
     create(defines){
         const {baseTextStyles} = defines
@@ -42,7 +46,9 @@ class Page1 extends AnimationPage{
         const introText = new PIXI.Text("test 2", {fill: 0xffffff, wordWrap: true, wordWrapWidth: 320, fontSize: 18})
         this.bindPageLocale("introText", introText)
         const containerIntro = new Component();
-        container.addChild(introText)
+        containerIntro.addChild(introText)
+
+       
 
         //this.addPermanent({background, container})
         this.addToGlobalComponents({textRijndael,textCipher, introTitle, introText})

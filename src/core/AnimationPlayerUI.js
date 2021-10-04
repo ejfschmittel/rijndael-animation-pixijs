@@ -1,4 +1,4 @@
-import {debounce, updateContainerLocale} from "../utils/utils"
+import {debounce} from "../utils/utils"
 
 
 const CONTAINER_ID = "rijndael-animation-ui"
@@ -27,6 +27,8 @@ const INFO_TEXT_CONTAINER_ID ="rijndael-animation-info"
 const LANG_SELECT_INPUT_ID = "rijndael-animation-lang-select";
 const THEME_SELECT_INPUT_ID = "rijndael-animation-theme-select";
 const JUMP_STEP_INPUT_ID = "rijndael-animation-jump-step-input";
+const SPEED_INPUT_ID = "rijndael-animation-speed-select";
+const SPEED_OUTPUT_ID = "rijndael-animation-speed-output"
 
 
 const OVERLAY_CLASS = ".ui-container"
@@ -42,6 +44,8 @@ class AnimationPlayerUI{
         this.bodyRef = document.querySelector("body")
 
         this.container = document.getElementById(CONTAINER_ID)
+
+        this.animationSpeed = 1.0;
 
         this.playBtn = document.getElementById(PLAY_BTN_ID);
         this.forwardsBtn = document.getElementById(FORWARDS_BTN_ID);
@@ -63,6 +67,8 @@ class AnimationPlayerUI{
         this.themeSelect = document.getElementById(THEME_SELECT_INPUT_ID)
         this.langSelect = document.getElementById(LANG_SELECT_INPUT_ID)
         this.jumpStepInput = document.getElementById(JUMP_STEP_INPUT_ID)
+        this.speedInput = document.getElementById(SPEED_INPUT_ID)
+        this.speedOutput = document.getElementById(SPEED_OUTPUT_ID)
         
         this.pageInfoTexts = []
 
@@ -135,6 +141,21 @@ class AnimationPlayerUI{
         })
 
 
+        this.speedInput.addEventListener("change", (e) => {
+            console.log(e.target.value)
+
+            this.animationSpeed = e.target.value / 100;
+            
+            // update timeline speed
+            this.controller.timeline.setTimeScale(this.animationSpeed)
+        
+        })
+
+        this.speedInput.addEventListener("input", (e) => {
+            this.animationSpeed = e.target.value / 100;
+            this.speedOutput.innerHTML = `(${this.animationSpeed.toFixed(1)})`;
+        })
+
 
         this.jumpStepInput.addEventListener("input", (e) => {
 
@@ -161,15 +182,7 @@ class AnimationPlayerUI{
        
     }
 
-    updatePlayerLocale(){
-        const containers = document.querySelectorAll(".ui > div")
-        for(let i = 1; i < containers.length; i++){
-            const container = containers[i]
-            updateContainerLocale(container, this.controller.getLocale())
-        }   
-    }
 
- 
 
 
     getMenuItemTemplate = (index) => {

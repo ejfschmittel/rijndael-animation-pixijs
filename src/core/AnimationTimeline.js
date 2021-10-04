@@ -276,6 +276,14 @@ class AnimationTimeline{
          })
         // show timeline completed overlay
         this.tl.to(this.animationCompletedScreen, {delay: 3, display: "flex", duration: .00001})
+
+
+       
+      
+    }
+
+    setTimeScale(val){
+        this.tl.timeScale(val)
     }
 
 

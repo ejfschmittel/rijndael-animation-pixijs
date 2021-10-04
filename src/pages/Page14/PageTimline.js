@@ -185,7 +185,6 @@ class Page14Timline extends AnimationPageTimeline{
         
         // first box
         if(!this.page.shouldHide){
-            console.log("show xor text")
             tl.to(textXor,{opacity: 1})
         }
         

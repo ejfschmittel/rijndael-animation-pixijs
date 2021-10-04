@@ -25,6 +25,8 @@ class Page10 extends AnimationPage{
         this.registerResponsive("max-768", ResponsiveMax768)
         this.registerResponsive("max-425", ResponsiveMax425)
        // this.registerResponsive("max-375", ResponsiveMax375)
+
+       this.sortableChildren = true;
     }
 
 
@@ -38,6 +40,8 @@ class Page10 extends AnimationPage{
         const stateGrid = new Grid(4,4,{},{})
         const stateMovables = stateGrid.createMovables();
         const resultMovables = stateGrid.createMovables();
+
+      
 
         const roundKeyGrid = new Grid(4,4, {}, {})
         const roundKeyMovables = roundKeyGrid.createMovables();

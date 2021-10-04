@@ -246,7 +246,6 @@ class RijndaelFormController{
             outputString += hexadecimals.join("")
           
         })
-        console.log(outputString)
         return outputString
     }
 }
